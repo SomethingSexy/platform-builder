@@ -12,8 +12,8 @@ import write from './utils/write';
 const history = createMemoryHistory();
 
 const indexHTML = fs.readFileSync(__dirname + '/index.html').toString();
-// const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
-// const styles = fs.readFileSync(__dirname + '/assets/styles.css');
+const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
+const styles = fs.readFileSync(__dirname + '/../public/styles/styles.css');
 const htmlRegex = /¡HTML!/;
 
 // const renderApp = (req, token, cb) => {
@@ -66,6 +66,8 @@ const app = http.createServer((req, res) => {
     console.log(location);
     console.log(routes);
     match({routes, location}, (error, redirectLocation, renderProps) => {
+      // I think at this point we could add custom data to the renderProps to pass
+      // to our components
       if (redirectLocation) {
         res.redirect(301, redirectLocation.pathname + redirectLocation.search);
       } else if (error) {

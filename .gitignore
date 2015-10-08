@@ -27,3 +27,6 @@ build/Release
 node_modules
 # JSPM Depedency directory
 jspm_packages
+
+# App Files 
+public/js/main.js

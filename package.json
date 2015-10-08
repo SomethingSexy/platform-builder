@@ -29,9 +29,10 @@
     "babel": "^5.8.21"
   },
   "jspm": {
-    "directories": {},
     "dependencies": {
+      "events": "npm:events@^1.0.2",
       "react": "npm:react@^0.14.0",
+      "react-dom": "npm:react@^0.14.0",
       "react-router": "npm:react-router@^1.0.0-rc1"
     },
     "devDependencies": {
