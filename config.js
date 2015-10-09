@@ -17,6 +17,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "core-js": "npm:core-js@1.2.1",
     "events": "npm:events@1.1.0",
+    "history": "npm:history@1.12.3",
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react@0.14.0",
     "react-router": "npm:react-router@1.0.0-rc3",
