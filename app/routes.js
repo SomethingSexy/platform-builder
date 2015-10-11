@@ -4,7 +4,8 @@ import Root from './handlers/root';
 import Dashboard from './handlers/dashboard';
 import About from './handlers/about';
 import Build from './handlers/build/index';
-import Platform from './handlers/build/platform';
+import BuildPlatform from './handlers/build/platform';
+import Platform from './handlers/platform/index';
 
 export default {
   path: '/',
@@ -15,13 +16,19 @@ export default {
     { path: 'build',
       component: Build,
       childRoutes: [
-        { path: 'platform', component: Platform },
+        { path: 'platform', component: BuildPlatform }
         // { path: 'messages/:id',
         //   onEnter: function (nextState, replaceState) {
         //     replaceState(null, '/messages/' + nextState.params.id)
         //   }
         // }
       ]
+    },
+    { path: 'platform',
+      component: Platform
+      // childRoutes: [
+      //   { path: 'platform', component: Platform }
+      // ]
     }
   ]
 };
