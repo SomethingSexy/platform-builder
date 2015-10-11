@@ -17,9 +17,9 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "core-js": "npm:core-js@1.2.1",
     "events": "npm:events@1.1.0",
-    "history": "npm:history@1.12.3",
+    "history": "npm:history@1.12.4",
     "react": "npm:react@0.14.0",
-    "react-dom": "npm:react@0.14.0",
+    "react-dom": "npm:react-dom@0.14.0",
     "react-router": "npm:react-router@1.0.0-rc3",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -99,6 +99,14 @@ System.config({
       "qs": "npm:qs@4.0.0",
       "warning": "npm:warning@2.1.0"
     },
+    "npm:history@1.12.4": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "deep-equal": "npm:deep-equal@1.0.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "invariant": "npm:invariant@2.1.1",
+      "qs": "npm:qs@4.0.0",
+      "warning": "npm:warning@2.1.0"
+    },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
@@ -133,6 +141,9 @@ System.config({
     "npm:promise@7.0.4": {
       "asap": "npm:asap@2.0.3",
       "fs": "github:jspm/nodelibs-fs@0.1.2"
+    },
+    "npm:react-dom@0.14.0": {
+      "react": "npm:react@0.14.0"
     },
     "npm:react-router@1.0.0-rc3": {
       "history": "npm:history@1.12.3",

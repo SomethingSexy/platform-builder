@@ -6,6 +6,7 @@ export default React.createClass({
   render() {
     return (
       <div>
+        <h2>Build a new </h2>
         {this.props.children}
       </div>
     );

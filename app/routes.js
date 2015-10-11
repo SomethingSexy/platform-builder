@@ -3,8 +3,8 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 import Root from './handlers/root';
 import Dashboard from './handlers/dashboard';
 import About from './handlers/about';
-import Build from './handlers/build';
-import Platform from './handlers/platform';
+import Build from './handlers/build/index';
+import Platform from './handlers/build/platform';
 
 export default {
   path: '/',
