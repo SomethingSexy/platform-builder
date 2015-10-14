@@ -1,20 +1,17 @@
-import React from 'react';
-import { Router, Route, Link } from 'react-router';
+import React, {Component} from 'react';
 import PlatformForm from '../../components/platform/PlatformForm';
 
 // not sure what this will all do yet but
-export default React.createClass({
+class PlatformHandler extends Component {
   render() {
     return (
       <div>
         <h2>Create a new platform</h2>
-        <form>
-          <PlatformForm />
-
-        </form>
-
+        <PlatformForm />
         {this.props.children}
       </div>
     );
   }
-});
+}
+
+export default PlatformHandler;

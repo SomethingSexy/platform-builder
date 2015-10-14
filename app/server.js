@@ -2,12 +2,15 @@ import http from 'http';
 import fs from 'fs';
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { RoutingContext, match} from 'react-router';
+import {Router, RoutingContext, match} from 'react-router';
 import { renderToString } from 'react-dom/server';
+import configureStore from './stores/index';
 import Cookies from 'cookies';
 import uuid from 'uuid';
 import routes from './routes';
 import write from './utils/write';
+import { Provider } from 'react-redux';
+import thenify from 'thenify';
 
 const history = createMemoryHistory();
 
@@ -15,40 +18,6 @@ const indexHTML = fs.readFileSync(__dirname + '/index.html').toString();
 const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
 const styles = fs.readFileSync(__dirname + '/../public/styles/styles.css');
 const htmlRegex = /¡HTML!/;
-
-// const renderApp = (req, token, cb) => {
-//   const path = req.url;
-//   const htmlRegex = /¡HTML!/;
-//   const dataRegex = /¡DATA!/;
-
-//   const router = Router.create({
-//     routes: getRoutes(token),
-//     location: path,
-//     onAbort: (redirect) => {
-//       cb({redirect});
-//     },
-//     onError: (err) => {
-//       console.log('Routing Error');
-//       console.log(err);
-//     }
-//   });
-
-//   router.run((Handler, state) => {
-//     if (state.routes[0].name === 'not-found') {
-//       let html = React.renderToStaticMarkup(<Handler/>);
-//       cb({notFound: true}, html);
-//       return;
-//     }
-//     // fetchData(token, state).then((data) => {
-//     // let clientHandoff = { token, data: cache.clean(token) };
-//     let html = React.renderToString(<Handler data={data} />);
-//     let output = indexHTML.
-//        replace(htmlRegex, html).
-//        // replace(dataRegex, JSON.stringify(clientHandoff));
-//     cb(null, output, token);
-//     // });
-//   });
-// };
 
 const app = http.createServer((req, res) => {
   const cookies = new Cookies(req, res);
@@ -65,6 +34,10 @@ const app = http.createServer((req, res) => {
     const location = history.createLocation(req.url);
     console.log(location);
     console.log(routes);
+    let initialState = {};
+    const store = configureStore(initialState);
+
+
     match({routes, location}, (error, redirectLocation, renderProps) => {
       // I think at this point we could add custom data to the renderProps to pass
       // to our components
@@ -76,7 +49,7 @@ const app = http.createServer((req, res) => {
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end();
       } else {
-        const html = renderToString(<RoutingContext {...renderProps}/>);
+        const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
         const output = indexHTML.
           replace(htmlRegex, html);
         write(output, 'text/html', res);

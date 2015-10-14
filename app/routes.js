@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link, IndexRoute } from 'react-router';
+import {IndexRoute, Route} from 'react-router';
 import Root from './handlers/root';
 import Dashboard from './handlers/dashboard';
 import About from './handlers/about';
@@ -33,4 +33,14 @@ export default {
   ]
 };
 
+// export default (
+//   <Route path="/" component={Root}>
+//     <IndexRoute component={Dashboard}/>
+//     <Route path="about" component={About}/>
+//     <Route path="build" component={Build}>
+//       <Route path="platform" component={BuildPlatform}/>
+//     </Route>
+//     <Route path="platform" component={Platform}/>
+//   </Route>
+// );
 

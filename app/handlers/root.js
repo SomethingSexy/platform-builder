@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router';
+import { Link } from 'react-router';
 
 // Then we delete a bunch of code from App and
 // add some <Link> elements...

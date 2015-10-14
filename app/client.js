@@ -3,6 +3,9 @@ import Router from 'react-router';
 import routes from './routes';
 import ReactDOM from 'react-dom';
 import {createHistory} from 'history';
-import { EventEmitter } from 'events';
+import configureStore from './stores/index';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<Router routes={routes} history={createHistory()} />, document.getElementById('app'));
+const store = configureStore(createHistory());
+
+ReactDOM.render( <Provider store={store}><Router routes={routes} history={createHistory()} /></Provider>, document.getElementById('app'));

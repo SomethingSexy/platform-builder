@@ -4,7 +4,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "gulp build && gulp watch"
+    "dev": "gulp build && gulp watch",
+    "postinstall": "jspm install"
   },
   "license": "MIT",
   "dependencies": {
@@ -15,14 +16,19 @@
     "react-dom": "^0.14.0",
     "history": "^1.12.3",
     "cookies": "0.5.0",
-    "uuid": "2.0.1"
+    "uuid": "2.0.1",
+    "react-redux": "3.1.0",
+    "isomorphic-fetch": "2.1.1",
+    "redux-thunk": "^1.0.0",
+    "redux-router": "^1.0.0-beta3",
+    "redux": "^3.0.2",
+    "thenify": "^3.1.0"
   },
   "devDependencies": {
     "gulp-babel": "^4.0.0",
     "gulp-concat": "^2.4.3",
     "gulp-watch": "^4.1.0",
     "run-sequence": "^1.0.2",
-    "jspm": "^0.16.2",
     "airbnb-style": "2.0.0",
     "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "^3.2.2",
@@ -33,9 +39,15 @@
     "dependencies": {
       "events": "npm:events@^1.0.2",
       "history": "npm:history@^1.12.3",
+      "isomorphic-fetch": "npm:isomorphic-fetch@2.1.1",
       "react": "npm:react@^0.14.0",
       "react-dom": "npm:react-dom@^0.14.0",
-      "react-router": "npm:react-router@^1.0.0-rc1"
+      "react-redux": "npm:react-redux@^3.1.0",
+      "react-router": "npm:react-router@^1.0.0-rc1",
+      "redux": "npm:redux@^3.0.2",
+      "redux-router": "npm:redux-router@^1.0.0-beta3",
+      "redux-thunk": "npm:redux-thunk@^1.0.0",
+      "thenify": "npm:thenify@^3.1.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.23",
