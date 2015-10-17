@@ -10,7 +10,7 @@ import uuid from 'uuid';
 import routes from './routes';
 import write from './utils/write';
 import { Provider } from 'react-redux';
-import thenify from 'thenify';
+import fetchComponentData from './utils/fetchComponentData';
 
 const history = createMemoryHistory();
 
@@ -18,6 +18,7 @@ const indexHTML = fs.readFileSync(__dirname + '/index.html').toString();
 const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
 const styles = fs.readFileSync(__dirname + '/../public/styles/styles.css');
 const htmlRegex = /¡HTML!/;
+const dataRegex = /¡DATA!/;
 
 const app = http.createServer((req, res) => {
   const cookies = new Cookies(req, res);
@@ -32,9 +33,7 @@ const app = http.createServer((req, res) => {
     return write(styles, 'text/css', res);
   default:
     const location = history.createLocation(req.url);
-    let initialState = {};
-    const store = configureStore(initialState);
-
+    const store = configureStore();
 
     match({routes, location}, (error, redirectLocation, renderProps) => {
       // I think at this point we could add custom data to the renderProps to pass
@@ -47,10 +46,15 @@ const app = http.createServer((req, res) => {
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end();
       } else {
-        const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
-        const output = indexHTML.
-          replace(htmlRegex, html);
-        write(output, 'text/html', res);
+        console.log(renderProps.components);
+        fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
+          const initialData = store.getState();
+          const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
+          const output = indexHTML.
+            replace(htmlRegex, html).
+            replace(dataRegex, JSON.stringify(initialData));
+          write(output, 'text/html', res);
+        });
       }
     });
   }
