@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import PlatformForm from '../../components/platform/PlatformForm';
 
 // not sure what this will all do yet but
 class PlatformHandler extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+
   render() {
     return (
       <div>
@@ -14,4 +20,4 @@ class PlatformHandler extends Component {
   }
 }
 
-export default PlatformHandler;
+export default connect()(PlatformHandler);
