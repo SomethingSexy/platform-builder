@@ -6,6 +6,6 @@ import {createHistory} from 'history';
 import configureStore from './stores/index';
 import { Provider } from 'react-redux';
 
-const store = configureStore({});
+const store = configureStore(window.__INITIAL_DATA__ || {});
 
 ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={createHistory()} /></Provider>, document.getElementById('app'));
