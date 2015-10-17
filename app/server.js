@@ -32,8 +32,6 @@ const app = http.createServer((req, res) => {
     return write(styles, 'text/css', res);
   default:
     const location = history.createLocation(req.url);
-    console.log(location);
-    console.log(routes);
     let initialState = {};
     const store = configureStore(initialState);
 

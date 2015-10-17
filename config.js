@@ -24,6 +24,7 @@ System.config({
     "react-redux": "npm:react-redux@3.1.0",
     "react-router": "npm:react-router@1.0.0-rc3",
     "redux": "npm:redux@3.0.2",
+    "redux-logger": "npm:redux-logger@2.0.4",
     "redux-router": "npm:redux-router@1.0.0-beta3",
     "redux-thunk": "npm:redux-thunk@1.0.0",
     "thenify": "npm:thenify@3.1.0",
@@ -241,6 +242,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31"
+    },
+    "npm:redux-logger@2.0.4": {
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:redux-router@1.0.0-beta3": {
       "deep-equal": "npm:deep-equal@1.0.1"
