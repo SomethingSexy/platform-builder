@@ -1,8 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import TextInput from '../common/form/TextInput';
 import Button from '../common/form/Button';
+import * as PlatformActions  from '../../actions/platform';
 
+
+// smart component, might want to organize this better 
 class PlatformForm extends Component {
+  static get propTypes() {
+    return {
+      dispatch: PropTypes.func.isRequired
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {value: 'Hello!'};
@@ -13,7 +22,7 @@ class PlatformForm extends Component {
     return (
       <form>
         <TextInput label="Name" onChange={this.handleNameChange} />
-        <Button text="Save" onButtonClick={this.handleSave} />
+        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </form>
     );
   }
@@ -24,10 +33,8 @@ class PlatformForm extends Component {
 
   handleSave(event) {
     console.log(event);
-
+    this.props.dispatch(PlatformActions.createPlatform({}));
   }
 }
-
-PlatformForm.propTypes = {};
 
 export default PlatformForm;
