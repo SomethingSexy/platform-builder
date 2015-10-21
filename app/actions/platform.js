@@ -73,10 +73,10 @@ function creatingPlatform(platform) {
   };
 }
 
-function createdPlatform(platform, json) {
+function createdPlatform(json) {
   return {
     type: CREATED_PLATFORM,
-    platform: json.data,
+    platform: json,
     receivedAt: Date.now()
   };
 }
@@ -84,12 +84,12 @@ function createdPlatform(platform, json) {
 function postPlatform(platform) {
   return dispatch => {
     dispatch(creatingPlatform(platform));
-    return fetch('/rest/platform', {
+    return fetch('/api/platform', {
       method: 'post',
       body: JSON.stringify(platform)
     })
-      .then(response => response.json())
-      .then(json => dispatch(createdPlatform(platform, json)));
+      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(json => dispatch(createdPlatform(json)));
   };
 }
 

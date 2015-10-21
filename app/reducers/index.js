@@ -12,41 +12,33 @@ import {
 //   }
 // }
 
-function posts(state = {
-  isFetching: false,
-  didInvalidate: false,
-  items: []
-}, action) {
+function posts(state = {}, action) {
   switch (action.type) {
-  // case INVALIDATE_REDDIT:
-  //   return Object.assign({}, state, {
-  //     didInvalidate: true
-  //   });
-  case CREATING_PLATFORM:
-    return Object.assign({}, state, {
-      isFetching: true,
-      didInvalidate: false
-    });
   case CREATED_PLATFORM:
     return Object.assign({}, state, {
       isFetching: false,
       didInvalidate: false,
-      items: action.posts,
       lastUpdated: action.receivedAt
-    });
+    }, action.platform);
   default:
     return state;
   }
 }
 
 // this is used to create the state shape
-function postsByReddit(state = { }, action) {
+// what gets return here is at the root of the store 
+// so postsByReddit: {
+//   'key' : {}
+//
+// }
+function platforms(state = { }, action) {
   switch (action.type) {
-  // case INVALIDATE_REDDIT:
   case CREATING_PLATFORM:
+    return state;
   case CREATED_PLATFORM:
+    console.log(action);
     return Object.assign({}, state, {
-      [action.reddit]: posts(state[action.reddit], action)
+      [action.platform.id]: posts(state[action.platform.id], action)
     });
   default:
     return state;
@@ -55,7 +47,7 @@ function postsByReddit(state = { }, action) {
 
 // state shape here would be {postsByReddit: {}}
 const rootReducer = combineReducers({
-  postsByReddit
+  platforms
 });
 
 export default rootReducer;

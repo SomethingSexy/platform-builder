@@ -27,20 +27,23 @@ const proxy = httpProxy.createProxyServer();
 
 const app = http.createServer((req, res) => {
   const cookies = new Cookies(req, res);
-  const token = cookies.get('token') || uuid();
+  const token = cookies.get('token') || uuid.v4();
   cookies.set('token', token, { maxAge: 30 * 24 * 60 * 60 });
 
   // something like this will probably stay
-  if (req.url.startsWith('/rest')) {
+  if (req.url.startsWith('/api')) {
     proxy.web(req, res, { target: 'http://localhost:9000' });
   } else {
     switch (req.url) {
     case '/js/main.js':
-      return write(mainJS, 'text/javascript', res);
+      write(mainJS, 'text/javascript', res);
+      break;
     case '/favicon.ico':
-      return write('haha', 'text/plain', res);
+      write('haha', 'text/plain', res);
+      break;
     case '/styles.css':
-      return write(styles, 'text/css', res);
+      write(styles, 'text/css', res);
+      break;
     default:
       const location = history.createLocation(req.url);
       const store = configureStore();
@@ -75,7 +78,25 @@ app.listen(process.env.PORT || 5000);
 
 // this is only temporary, we will create a true api server later
 const temp = http.createServer((req, res) => {
-  write(JSON.stringify({}), 'application/json', res);
+  switch (req.url) {
+  case '/api/platform':
+    if (req.method === 'POST') {
+      let data = '';
+
+      req.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      req.on('end', () => {
+        write(JSON.stringify(Object.assign({}, JSON.parse(data), {
+          id: uuid.v4()
+        })), 'application/json', res);
+      });
+    }
+    break;
+  default:
+
+  }
 });
 
 temp.listen(9000);
