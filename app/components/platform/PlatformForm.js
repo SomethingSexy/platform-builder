@@ -1,39 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import TextInput from '../common/form/TextInput';
+import Textarea from '../common/form/Textarea';
 import Button from '../common/form/Button';
-import * as PlatformActions  from '../../actions/platform';
 
-
-// smart component, might want to organize this better 
+// I think we are probably better making this a dumb component
 class PlatformForm extends Component {
   static get propTypes() {
     return {
-      dispatch: PropTypes.func.isRequired
+      handleSave: PropTypes.func.isRequired
     };
   }
 
   constructor(props) {
     super(props);
-    this.state = {value: 'Hello!'};
+    this.state = {};
   }
 
   render() {
-    const value = this.state.value;
     return (
       <form>
-        <TextInput label="Name" onChange={this.handleNameChange} />
+        <TextInput label="Name" onChange={this.handleNameChange.bind(this)} />
+        <Textarea label="Description" onChange={this.handleDescriptionChange.bind(this)} />
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </form>
     );
   }
 
-  handleNameChange(event) {
-    this.setState({name: event.target.value});
+  handleNameChange(value) {
+    this.setState({name: value});
+  }
+
+  handleDescriptionChange(value) {
+    this.setState({description: value});
   }
 
   handleSave(event) {
     console.log(event);
-    this.props.dispatch(PlatformActions.createPlatform({}));
+    this.props.handleSave(this.state);
   }
 }
 

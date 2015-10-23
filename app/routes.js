@@ -1,12 +1,15 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
-import Root from './handlers/root';
-import Dashboard from './handlers/dashboard';
-import About from './handlers/about';
-import Build from './handlers/build/index';
-import BuildPlatform from './handlers/build/platform';
-import Platform from './handlers/platform/index';
-
+import Root from './layouts/Root';
+import Dashboard from './layouts/Dashboard';
+import About from './layouts/About';
+import Build from './layouts/build/index';
+import BuildPlatform from './layouts/build/platform';
+import Platform from './layouts/Platform';
+import CreatePlatform from './views/platform/CreatePlatform';
+// routes should only interface with layouts
+// layouts will then interface with views which are smart components
+// views will have many dumb components  (maybe other views?)
 export default {
   path: '/',
   component: Root,
@@ -25,22 +28,11 @@ export default {
       ]
     },
     { path: 'platform',
-      component: Platform
+      component: Platform,
+      indexRoute: { component: CreatePlatform }
       // childRoutes: [
       //   { path: 'platform', component: Platform }
       // ]
     }
   ]
 };
-
-// export default (
-//   <Route path="/" component={Root}>
-//     <IndexRoute component={Dashboard}/>
-//     <Route path="about" component={About}/>
-//     <Route path="build" component={Build}>
-//       <Route path="platform" component={BuildPlatform}/>
-//     </Route>
-//     <Route path="platform" component={Platform}/>
-//   </Route>
-// );
-
