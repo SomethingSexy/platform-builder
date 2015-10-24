@@ -15,11 +15,9 @@ class CreatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
-  }
-
-  getInitialState() {
-    return {parts: []};
+    this.state = {
+      parts: []
+    };
   }
 
   render() {
@@ -31,14 +29,17 @@ class CreatePlatform extends Component {
           parts={this.state.parts}
           // onTodoClick={index =>
           //   dispatch(completeTodo(index))
-          // } 
+          // }
           />
       </div>
     );
   }
 
+  static get needs() {
+    return [PlatformActions.getCategories];
+  }
+
   handleSave(platform) {
-    console.log(platform);
     this.props.dispatch(PlatformActions.createPlatform(platform));
   }
 }

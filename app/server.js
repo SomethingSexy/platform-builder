@@ -1,4 +1,5 @@
 import http from 'http';
+import https from 'https';
 import fs from 'fs';
 import React from 'react';
 import { createMemoryHistory } from 'history';
@@ -24,6 +25,12 @@ const dataRegex = /¡DATA!/;
 // setup temporary proxy server
 const proxy = httpProxy.createProxyServer();
 
+// const options = {
+//   key: fs.readFileSync('key.pem'),
+//   cert: fs.readFileSync('cert.pem'),
+//   requestCert: false,
+//   rejectUnauthorized: false
+// };
 
 const app = http.createServer((req, res) => {
   const cookies = new Cookies(req, res);
@@ -55,18 +62,24 @@ const app = http.createServer((req, res) => {
           res.redirect(301, redirectLocation.pathname + redirectLocation.search);
         } else if (error) {
           res.send(500, error.message);
+          res.end();
         } else if (renderProps === null) {
           res.writeHead(404, { 'Content-Type': 'text/html' });
           res.end();
         } else {
-          console.log(renderProps.components);
           fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
             const initialData = store.getState();
+            console.log(initialData);
             const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
             const output = indexHTML.
               replace(htmlRegex, html).
               replace(dataRegex, JSON.stringify(initialData));
             write(output, 'text/html', res);
+          })
+          .catch((fetchError) => {
+            console.log('fetcherror ');
+            res.send(500, 'Fetch failed');
+            res.end();
           });
         }
       });
@@ -94,8 +107,14 @@ const temp = http.createServer((req, res) => {
       });
     }
     break;
+  case '/api/categories':
+    if (req.method === 'GET') {
+      write(JSON.stringify(['Firearm']), 'application/json', res);
+    }
+    break;
   default:
-
+    res.writeHead(404);
+    res.end();
   }
 });
 

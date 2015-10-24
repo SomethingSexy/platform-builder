@@ -9,7 +9,8 @@ const cs = createStore;
 // const finalCreateStore = compose(
 //   applyMiddleware(thunk)
 // )(createStore);
-const logger = createLogger();
+// pulled my hair out with this one, need to set node logger
+const logger = createLogger({logger: console});
 const createStoreWithMiddleware = applyMiddleware(thunk, logger)(cs);
 
 export default function configureStore(initialState) {
