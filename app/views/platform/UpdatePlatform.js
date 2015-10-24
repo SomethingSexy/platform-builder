@@ -1,8 +1,8 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
+import PlatformForm from '../../components/platform/PlatformForm';
 import * as PlatformActions  from '../../actions/platform';
-import * as CategoryActions  from '../../actions/categories';
-import Categories from '../../components/platform/Categories';
+import Parts from '../../components/platform/Parts';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -17,24 +17,28 @@ class CreatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      parts: []
+    };
   }
 
   render() {
     return (
       <div>
-        <p>Select what you are trying to create</p>
-        <Categories categories={this.props.categories} handleSelect={this.handleSelect.bind(this)}/>
+        <PlatformForm handleSave={this.handleSave.bind(this)} />
+        <h3>Parts</h3>
+        <Parts
+          parts={this.state.parts}
+          // onTodoClick={index =>
+          //   dispatch(completeTodo(index))
+          // }
+          />
       </div>
     );
   }
 
-  static get needs() {
-    return [CategoryActions.getCategories];
-  }
-
-  handleSelect(category) {
-    console.log(category);
+  handleSave(platform) {
+    this.props.dispatch(PlatformActions.createPlatform(platform));
   }
 }
 

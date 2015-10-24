@@ -109,7 +109,7 @@ const temp = http.createServer((req, res) => {
     break;
   case '/api/categories':
     if (req.method === 'GET') {
-      write(JSON.stringify(['Firearm']), 'application/json', res);
+      write(JSON.stringify([{id: 1, name: 'Firearm'}]), 'application/json', res);
     }
     break;
   default:
