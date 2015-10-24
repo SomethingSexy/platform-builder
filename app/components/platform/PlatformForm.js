@@ -13,6 +13,7 @@ class PlatformForm extends Component {
 
   constructor(props) {
     super(props);
+    // just a local state for storing the form data
     this.state = {};
   }
 
