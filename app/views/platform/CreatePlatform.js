@@ -2,6 +2,7 @@ import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import PlatformForm from '../../components/platform/PlatformForm';
 import * as PlatformActions  from '../../actions/platform';
+import * as CategoryActions  from '../../actions/categories';
 import Parts from '../../components/platform/Parts';
 
 // I think we want create an initial platform first so that whatever the user
