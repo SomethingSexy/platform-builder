@@ -8,4 +8,12 @@ import { Provider } from 'react-redux';
 
 const store = configureStore(window.__INITIAL_DATA__ || {});
 
-ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={createHistory()} /></Provider>, document.getElementById('app'));
+function createElement(Component, props) {
+  if (Component.populateStore) {
+    Component.populateStore(store, props);
+  }
+  console.log('createElement');
+  return React.createElement(Component, props);
+}
+
+ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={createHistory()} createElement={createElement} /></Provider>, document.getElementById('app'));
