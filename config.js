@@ -24,6 +24,7 @@ System.config({
     "react-redux": "npm:react-redux@3.1.0",
     "react-router": "npm:react-router@1.0.0-rc3",
     "redux": "npm:redux@3.0.2",
+    "redux-history-transitions": "npm:redux-history-transitions@1.0.0",
     "redux-logger": "npm:redux-logger@2.0.4",
     "redux-router": "npm:redux-router@1.0.0-beta3",
     "redux-thunk": "npm:redux-thunk@1.0.0",

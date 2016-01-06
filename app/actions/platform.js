@@ -78,7 +78,18 @@ function createdPlatform(json) {
   return {
     type: CREATED_PLATFORM,
     platform: json,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
+    meta: {
+      transition: (prevState, nextState, action) => ({
+        path: `/platform/${action.platform.id}/build`,
+        query: {
+          some: 'queryParam'
+        },
+        state: {
+          some: 'state'
+        }
+      })
+    }
   };
 }
 

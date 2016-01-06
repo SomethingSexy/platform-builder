@@ -5,15 +5,17 @@ import ReactDOM from 'react-dom';
 import {createHistory} from 'history';
 import configureStore from './stores/index';
 import { Provider } from 'react-redux';
+import fetchComponentData from './utils/fetchComponentData';
 
-const store = configureStore(window.__INITIAL_DATA__ || {});
+
+const history = createHistory();
+const store = configureStore(window.__INITIAL_DATA__ || {}, history);
 
 function createElement(Component, props) {
-  if (Component.populateStore) {
-    Component.populateStore(store, props);
+  if (Component.needs) {
+    fetchComponentData(store.dispatch, [Component], props);
   }
-  console.log('createElement');
   return React.createElement(Component, props);
 }
 
-ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={createHistory()} createElement={createElement} /></Provider>, document.getElementById('app'));
+ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={history} createElement={createElement} /></Provider>, document.getElementById('app'));

@@ -7,6 +7,7 @@ import Build from './layouts/build/index';
 import BuildPlatform from './layouts/build/platform';
 import Platform from './layouts/Platform';
 import CreatePlatform from './views/platform/CreatePlatform';
+import UpdatePlatform from './views/platform/UpdatePlatform';
 // routes should only interface with layouts
 // layouts will then interface with views which are smart components
 // views will have many dumb components  (maybe other views?)
@@ -29,10 +30,10 @@ export default {
     },
     { path: 'platform',
       component: Platform,
-      indexRoute: { component: CreatePlatform }
-      // childRoutes: [
-      //   { path: 'platform', component: Platform }
-      // ]
+      indexRoute: { component: CreatePlatform },
+      childRoutes: [
+        { path: ':platformId/build', component: UpdatePlatform }
+      ]
     }
   ]
 };
