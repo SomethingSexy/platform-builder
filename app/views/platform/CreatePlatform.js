@@ -40,7 +40,6 @@ class CreatePlatform extends Component {
   handleSelect(category) {
     console.log(category);
     this.props.dispatch(PlatformActions.createPlatform({category}));
-    console.log(this.props.store);
     // this.props.history.pushState(null, `/help`);
   }
 }
