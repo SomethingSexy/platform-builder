@@ -105,6 +105,21 @@ const temp = http.createServer((req, res) => {
           id: uuid.v4()
         })), 'application/json', res);
       });
+    } else if (req.method === 'PUT') {
+      let data = '';
+
+      req.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      req.on('end', () => {
+        write(JSON.stringify(Object.assign({}, JSON.parse(data), {
+   
+        })), 'application/json', res);
+      });
+    } else {
+      res.writeHead(404);
+      res.end();
     }
     break;
   case '/api/categories':

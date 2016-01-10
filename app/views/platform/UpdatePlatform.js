@@ -28,7 +28,7 @@ class CreatePlatform extends Component {
   render() {
     return (
       <div>
-        <PlatformForm handleSave={this.handleSave.bind(this)} />
+        <PlatformForm platform={this.props.platform} handleSave={this.handleSave.bind(this)} />
         <h3>Configuration</h3>
         <ConfigurationForm />
         <h4>Fields</h4>
@@ -46,7 +46,9 @@ class CreatePlatform extends Component {
   }
 
   handleSave(platform) {
-    this.props.dispatch(PlatformActions.createPlatform(platform));
+    // the platform is the data coming from the form, merge it with the current
+    // platform data we have
+    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.props.platform, platform)));
   }
 }
 

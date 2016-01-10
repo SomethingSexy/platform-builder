@@ -7,7 +7,8 @@ import Button from '../common/form/Button';
 class PlatformForm extends Component {
   static get propTypes() {
     return {
-      handleSave: PropTypes.func.isRequired
+      handleSave: PropTypes.func.isRequired,
+      platform: PropTypes.object.isRequired
     };
   }
 
@@ -20,6 +21,7 @@ class PlatformForm extends Component {
   render() {
     return (
       <form>
+        <div>{this.props.platform.category.name}</div>
         <TextInput label="Name" onChange={this.handleNameChange.bind(this)} />
         <Textarea label="Description" onChange={this.handleDescriptionChange.bind(this)} />
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />

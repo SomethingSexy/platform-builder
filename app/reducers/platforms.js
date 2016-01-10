@@ -1,10 +1,16 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM
 } from '../actions/platform';
 
-function posts(state = {}, action) {
+function platforms(state = {}, action) {
   switch (action.type) {
   case CREATED_PLATFORM:
+    return Object.assign({}, state, {
+      isFetching: false,
+      didInvalidate: false,
+      lastUpdated: action.receivedAt
+    }, action.platform);
+  case SAVED_PLATFORM:
     return Object.assign({}, state, {
       isFetching: false,
       didInvalidate: false,
@@ -27,7 +33,13 @@ export function platformsById(state = { }, action) {
     return state;
   case CREATED_PLATFORM:
     return Object.assign({}, state, {
-      [action.platform.id]: posts(state[action.platform.id], action)
+      [action.platform.id]: platforms(state[action.platform.id], action)
+    });
+  case SAVING_PLATFORM:
+    return state;
+  case SAVED_PLATFORM:
+    return Object.assign({}, state, {
+      [action.platform.id]: platforms(state[action.platform.id], action)
     });
   default:
     return state;

@@ -2,6 +2,8 @@ import fetch from 'isomorphic-fetch';
 
 export const CREATED_PLATFORM = 'CREATED_PLATFORM';
 export const CREATING_PLATFORM = 'CREATING_PLATFORM';
+export const SAVED_PLATFORM = 'SAVED_PLATFORM';
+export const SAVING_PLATFORM = 'SAVING_PLATFORM';
 export const FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
 
 function creatingPlatform(platform) {
@@ -11,10 +13,10 @@ function creatingPlatform(platform) {
   };
 }
 
-function createdPlatform(json) {
+function createdPlatform(platform) {
   return {
     type: CREATED_PLATFORM,
-    platform: json,
+    platform,
     receivedAt: Date.now(),
     meta: {
       transition: (prevState, nextState, action) => ({
@@ -27,6 +29,22 @@ function createdPlatform(json) {
         }
       })
     }
+  };
+}
+
+
+function savingPlatform(platform) {
+  return {
+    type: SAVING_PLATFORM,
+    platform
+  };
+}
+
+function savedPlatform(platform) {
+  return {
+    type: SAVED_PLATFORM,
+    platform,
+    receivedAt: Date.now()
   };
 }
 
@@ -50,6 +68,18 @@ function postPlatform(platform) {
   };
 }
 
+function putPlatform(platform) {
+  return dispatch => {
+    dispatch(savingPlatform(platform));
+    return fetch('/api/platform', {
+      method: 'put',
+      body: JSON.stringify(platform)
+    })
+      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(json => dispatch(savedPlatform(json)));
+  };
+}
+
 function fetchCategories() {
   return dispatch => {
     console.log('fetch');
@@ -65,6 +95,12 @@ function fetchCategories() {
 export function createPlatform(platform) {
   return (dispatch, getState) => {
     return dispatch(postPlatform(platform));
+  };
+}
+
+export function savePlatform(platform) {
+  return (dispatch, getState) => {
+    return dispatch(putPlatform(platform));
   };
 }
 
