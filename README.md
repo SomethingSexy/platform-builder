@@ -16,7 +16,8 @@ npm start
 
 go to
 
-```localhost:5000/index.html```
+```http://localhost:5000/index.html```
+
 
 # Organization
 
