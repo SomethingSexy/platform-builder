@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../common/form/TextInput';
-import Textarea from '../common/form/Textarea';
-import Button from '../common/form/Button';
+import Checkbox from '../common/form/Checkbox';
 
-// I think we are probably better making this a dumb component
-class PlatformForm extends Component {
+// This will handle standard "static" configuration that is supported by the app
+class ConfigurationForm extends Component {
   static get propTypes() {
     return {
       // handleSave: PropTypes.func.isRequired
@@ -20,10 +18,19 @@ class PlatformForm extends Component {
   render() {
     return (
       <form>
-
+        <Checkbox label="Allow company" value="true" selectedValue={this.state.showCompany} name="showCompany" onChange={this.handleConfigurationChange.bind(this)} />
+        <Checkbox label="Allow brands" value="true" selectedValue={this.state.showBrands} name="showBrands" onChange={this.handleConfigurationChange.bind(this)} />
+        <Checkbox label="Allow people" value="true" selectedValue={this.state.showPeople} name="showPeople" onChange={this.handleConfigurationChange.bind(this)} />
+        <Checkbox label="Allow tags" value="true" selectedValue={this.state.showTags} name="showTags" onChange={this.handleConfigurationChange.bind(this)} />
+        <Checkbox label="Allow photos" value="true" selectedValue={this.state.showPhotos} name="showPhotos" onChange={this.handleConfigurationChange.bind(this)} />
+        <Checkbox label="Allow transactions" value="true" selectedValue={this.state.showTransactions} name="showTransactions" onChange={this.handleConfigurationChange.bind(this)} />
       </form>
     );
   }
+
+  handleConfigurationChange(value, name) {
+    this.setState({[name]: value});
+  }
 }
 
-export default PlatformForm;
+export default ConfigurationForm;
