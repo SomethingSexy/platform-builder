@@ -19,6 +19,7 @@ System.config({
     "events": "npm:events@1.1.0",
     "history": "npm:history@1.12.4",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.1.1",
+    "merge": "npm:merge@1.2.0",
     "react": "npm:react@0.14.0",
     "react-dom": "npm:react-dom@0.14.0",
     "react-redux": "npm:react-redux@3.1.0",

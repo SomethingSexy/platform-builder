@@ -5,6 +5,8 @@ import * as PlatformActions  from '../../actions/platform';
 import Parts from '../../components/platform/Parts';
 import ConfigurationForm from '../../components/platform/ConfigurationForm';
 import ConfigurableFields from '../../components/platform/ConfigurableFields';
+import Button from '../../components/common/form/Button';
+import merge from 'merge';
 
 
 // I think we want create an initial platform first so that whatever the user
@@ -21,6 +23,7 @@ class CreatePlatform extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      platform: this.props.platform,
       parts: []
     };
   }
@@ -28,7 +31,7 @@ class CreatePlatform extends Component {
   render() {
     return (
       <div>
-        <PlatformForm platform={this.props.platform} handleSave={this.handleSave.bind(this)} />
+        <PlatformForm platform={this.state.platform} handleFormChange={this.handleFormChange.bind(this)} />
         <h3>Configuration</h3>
         <ConfigurationForm />
         <h4>Fields</h4>
@@ -41,14 +44,23 @@ class CreatePlatform extends Component {
           //   dispatch(completeTodo(index))
           // }
           />
+        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );
   }
 
-  handleSave(platform) {
+  handleFormChange(platform) {
+    this.setState((previousState, currentProps) => {
+      // this kind of works but it gives me platform:platform which then adds another "platform" layer
+      // return { platform: { ...previousState.platform, platform } };
+      return merge({}, previousState.platform, platform);
+    });
+  }
+
+  handleSave() {
     // the platform is the data coming from the form, merge it with the current
     // platform data we have
-    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.props.platform, platform)));
+    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state.platform)));
   }
 }
 
