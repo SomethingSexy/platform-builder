@@ -11,13 +11,9 @@
 
 ``` 
 npm install
-npm start 
+gulp build
+npm start
 ```
-
-go to
-
-```http://localhost:5000/index.html```
-
 
 # Organization
 
