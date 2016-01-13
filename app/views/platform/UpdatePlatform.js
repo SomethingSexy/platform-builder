@@ -22,16 +22,15 @@ class CreatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      platform: this.props.platform,
+    this.state = merge({}, this.props.platform, {
       parts: []
-    };
+    });
   }
 
   render() {
     return (
       <div>
-        <PlatformForm platform={this.state.platform} handleFormChange={this.handleFormChange.bind(this)} />
+        <PlatformForm platform={this.state} handleFormChange={this.handleFormChange.bind(this)} />
         <h3>Configuration</h3>
         <ConfigurationForm />
         <h4>Fields</h4>
@@ -60,7 +59,7 @@ class CreatePlatform extends Component {
   handleSave() {
     // the platform is the data coming from the form, merge it with the current
     // platform data we have
-    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state.platform)));
+    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state)));
   }
 }
 
