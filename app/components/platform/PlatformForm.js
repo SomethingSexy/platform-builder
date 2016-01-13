@@ -6,7 +6,7 @@ import Textarea from '../common/form/Textarea';
 class PlatformForm extends Component {
   static get propTypes() {
     return {
-      handleFormChange: PropTypes.func.isRequired,
+      onFormChange: PropTypes.func.isRequired,
       platform: PropTypes.object.isRequired
     };
   }
@@ -30,13 +30,13 @@ class PlatformForm extends Component {
   handleNameChange(value) {
     const name = {name: value};
     this.setState(name);
-    this.props.handleFormChange(name);
+    this.props.onFormChange(name);
   }
 
   handleDescriptionChange(value) {
     const description = {description: value};
     this.setState(description);
-    this.props.handleFormChange(description);
+    this.props.onFormChange(description);
   }
 }
 

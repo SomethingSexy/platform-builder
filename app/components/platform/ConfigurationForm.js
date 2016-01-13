@@ -5,7 +5,7 @@ import Checkbox from '../common/form/Checkbox';
 class ConfigurationForm extends Component {
   static get propTypes() {
     return {
-      // handleSave: PropTypes.func.isRequired
+      onConfigurationChange: PropTypes.func.isRequired
     };
   }
 
@@ -30,6 +30,7 @@ class ConfigurationForm extends Component {
 
   handleConfigurationChange(value, name) {
     this.setState({[name]: value});
+    this.props.onConfigurationChange({[name]: value});
   }
 }
 

@@ -4,7 +4,7 @@ import PlatformForm from '../../components/platform/PlatformForm';
 import * as PlatformActions  from '../../actions/platform';
 import Parts from '../../components/platform/Parts';
 import ConfigurationForm from '../../components/platform/ConfigurationForm';
-import ConfigurableFields from '../../components/platform/ConfigurableFields';
+import CustomFields from '../../components/platform/CustomFields';
 import Button from '../../components/common/form/Button';
 import merge from 'merge';
 
@@ -22,19 +22,20 @@ class CreatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    this.state = merge({}, this.props.platform, {
-      parts: []
-    });
+    this.state = merge({
+      parts: [],
+      configuration: { fields: []}
+    }, this.props.platform);
   }
 
   render() {
     return (
       <div>
-        <PlatformForm platform={this.state} handleFormChange={this.handleFormChange.bind(this)} />
+        <PlatformForm platform={this.state} onFormChange={this.handleFormChange.bind(this)} />
         <h3>Configuration</h3>
-        <ConfigurationForm />
-        <h4>Fields</h4>
-        <ConfigurableFields />
+        <ConfigurationForm onConfigurationChange={this.handleConfigurationChange.bind(this)}/>
+        <h4>Custom Fields</h4>
+        <CustomFields fields={this.state.configuration.fields} onFieldAdd={this.handleFieldAdd.bind(this)}/>
         <h3>Diagram</h3>
         <h4>Parts</h4>
         <Parts
@@ -48,11 +49,25 @@ class CreatePlatform extends Component {
     );
   }
 
+  handleFieldAdd(field) {
+
+  }
+
   handleFormChange(platform) {
     this.setState((previousState, currentProps) => {
       // this kind of works but it gives me platform:platform which then adds another "platform" layer
       // return { platform: { ...previousState.platform, platform } };
-      return merge({}, previousState.platform, platform);
+      return merge({}, previousState, platform);
+    });
+  }
+
+  handleConfigurationChange(config) {
+    this.setState((previousState, currentProps) => {
+      // this kind of works but it gives me platform:platform which then adds another "platform" layer
+      // return { platform: { ...previousState.platform, platform } };
+      return {
+        configuration: merge({}, previousState.configuration, config)
+      };
     });
   }
 
