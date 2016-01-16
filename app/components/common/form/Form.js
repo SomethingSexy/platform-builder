@@ -1,23 +1,27 @@
 import React, { Component, PropTypes } from 'react';
+import Button from './Button';
 
 class Form extends Component {
   static get propTypes() {
     return {
-      children: React.PropTypes.oneOfType([
-        PropTypes.arrayOf(React.PropTypes.node),
+      children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
-      ])
+      ]),
+      onSave: PropTypes.func.isRequired
     };
   }
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   getChildContext() {
     // bind the function on this because it seems to lose its context
     return {
       attachToForm: this.attachToForm.bind(this),
-      detachFromForm: this.detachFromForm.bind(this)
+      detachFromForm: this.detachFromForm.bind(this),
+      onFormFieldChange: this.handleFormFieldChange.bind(this)
     };
   }
 
@@ -31,7 +35,7 @@ class Form extends Component {
     return (
       <form>
         {this.props.children}
-        <button type="submit">Submit</button>
+        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </form>
     );
   }
@@ -63,16 +67,34 @@ class Form extends Component {
 
   detachFromForm(component) {
     delete this.inputs[component.props.name];
-    
-    // We of course have to delete the model property
-    // if the component is removed
-    delete this.model[component.props.name];
+  }
+
+  handleFormFieldChange(name, value) {
+    this.setState({[name]: value});
+    console.log(this.state);
+  }
+
+  handleSave(event) {
+    event.stopPropagation();
+    // need to validate
+    const isValid = true;
+
+    if (isValid) {
+      this.props.onSave(this.state);
+    } else {
+
+    }
+
+    // if valid call outside method
+
+    // else if not valid display errors
   }
 }
 
 Form.childContextTypes = {
   attachToForm: PropTypes.func.isRequired,
-  detachFromForm: PropTypes.func.isRequired
+  detachFromForm: PropTypes.func.isRequired,
+  onFormFieldChange: PropTypes.func.isRequired
 };
 
 export default Form;

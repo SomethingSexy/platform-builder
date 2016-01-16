@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 class Input extends Component {
   static get propTypes() {
     return {
+      name: PropTypes.string.isRequired,
+      onChange: PropTypes.func,
       validations: React.PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
@@ -23,11 +25,25 @@ class Input extends Component {
       this.context.detachFromForm(this); // Detaching if unmounting
     }
   }
+
+  handleChange(event) {
+    const value = event.target.value;
+    const name = this.props.name;
+    // onChange is not required but in case we need to process something outside
+    // of the form
+    if (this.props.onChange) {
+      this.props.onChange(name, value);
+    }
+
+    // trigger a change on the form
+    this.context.onFormFieldChange(name, value);
+  }
 }
 
 Input.contextTypes = {
   attachToForm: PropTypes.func.isRequired,
-  detachFromForm: PropTypes.func.isRequired
+  detachFromForm: PropTypes.func.isRequired,
+  onFormFieldChange: PropTypes.func.isRequired
 };
 
 export default Input;

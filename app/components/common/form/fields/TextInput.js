@@ -4,8 +4,6 @@ import Input from './Input.js';
 class TextInput extends Input {
   static get propTypes() {
     return Object.assign({
-      name: PropTypes.string.isRequired,
-      onChange: PropTypes.func.isRequired,
       label: PropTypes.string.isRequired,
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -28,10 +26,6 @@ class TextInput extends Input {
         <input type="text"  name={this.props.name} className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
       </div>
     );
-  }
-
-  handleChange(event) {
-    this.props.onChange(event.target.value);
   }
 }
 

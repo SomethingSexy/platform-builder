@@ -20,27 +20,15 @@ class AddCustomFieldOptions extends Component {
   render() {
     //        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
     return (
-      <Form>
-        <TextInput label="Label" name="label" onChange={this.handleLabelChange.bind(this)} validations={['isRequired']}/>
-        <TextInput label="Value" name="value" onChange={this.handleValueChange.bind(this)}/>
+      <Form onSave={this.handleSave.bind(this)}>
+        <TextInput label="Label" name="label" validations={['isRequired']}/>
+        <TextInput label="Value" name="value" />
       </Form>
     );
   }
 
-  handleLabelChange(label) {
-    this.setState({
-      label
-    });
-  }
-
-  handleValueChange(value) {
-    this.setState({
-      value
-    });
-  }
-
-  handleSave() {
-    this.props.onSave(this.state);
+  handleSave(form) {
+    console.log(form);
   }
 }
 
@@ -127,7 +115,7 @@ class AddCustomField extends Component { // eslint-disable-line react/no-multi-c
 
   handleTypeChange(type) {
     this.setState({
-      showAddOptions: selectedValue === 'select' ? true : false,
+      showAddOptions: type === 'select' ? true : false,
       type
     });
   }
