@@ -4,6 +4,7 @@ import Input from './Input.js';
 class TextInput extends Input {
   static get propTypes() {
     return Object.assign({
+      name: PropTypes.string.isRequired,
       onChange: PropTypes.func.isRequired,
       label: PropTypes.string.isRequired,
       value: React.PropTypes.oneOfType([
@@ -24,7 +25,7 @@ class TextInput extends Input {
     return (
       <div className ="form-group">
         <label htmlFor="">{this.props.label}</label>
-        <input type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
+        <input type="text"  name={this.props.name} className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
       </div>
     );
   }

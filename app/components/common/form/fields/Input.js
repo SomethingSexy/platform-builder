@@ -10,7 +10,25 @@ class Input extends Component {
     };
   }
 
+  componentWillMount() {
+    if (this.context.attachToForm) {
+      console.log('attachToForm');
+      this.context.attachToForm(this); // Attaching the component to the form
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.context.detachFromForm) {
+      console.log('detachFromForm');
+      this.context.detachFromForm(this); // Detaching if unmounting
+    }
+  }
 }
+
+Input.contextTypes = {
+  attachToForm: PropTypes.func.isRequired,
+  detachFromForm: PropTypes.func.isRequired
+};
 
 export default Input;
 

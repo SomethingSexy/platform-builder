@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextInput from '../common/form/fields/TextInput';
 import Textarea from '../common/form/fields/Textarea';
+import Form from '../common/form/Form';
 
 // I think we are probably better making this a dumb component
 class PlatformForm extends Component {
@@ -19,11 +20,11 @@ class PlatformForm extends Component {
 
   render() {
     return (
-      <form>
+      <Form>
         <div>{this.props.platform.category.name}</div>
-        <TextInput label="Name" onChange={this.handleNameChange.bind(this)} />
-        <Textarea label="Description" onChange={this.handleDescriptionChange.bind(this)} />
-      </form>
+        <TextInput name="name" label="Name" onChange={this.handleNameChange.bind(this)} />
+        <Textarea name="description" label="Description" onChange={this.handleDescriptionChange.bind(this)} />
+      </Form>
     );
   }
 

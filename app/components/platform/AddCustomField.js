@@ -21,8 +21,8 @@ class AddCustomFieldOptions extends Component {
     //        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
     return (
       <Form>
-        <TextInput label="Label" onChange={this.handleLabelChange.bind(this)} validations={['isRequired']}/>
-        <TextInput label="Value" onChange={this.handleValueChange.bind(this)}/>
+        <TextInput label="Label" name="label" onChange={this.handleLabelChange.bind(this)} validations={['isRequired']}/>
+        <TextInput label="Value" name="value" onChange={this.handleValueChange.bind(this)}/>
       </Form>
     );
   }
@@ -115,20 +115,20 @@ class AddCustomField extends Component { // eslint-disable-line react/no-multi-c
   render() {
     return (
       <div>
-        <form>
+        <Form>
           <legend>Custom Field</legend>
-          <Select label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
-          <TextInput label="Label" onChange={this.handleLabelChange.bind(this)}/>
-        </form>
+          <Select name="type" label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
+          <TextInput name="label" label="Label" onChange={this.handleLabelChange.bind(this)}/>
+        </Form>
         {this.state.showAddOptions ? <FieldOptions options={this.state.options}/> : null}
       </div>
     );
   }
 
-  handleTypeChange(selectedValue) {
+  handleTypeChange(type) {
     this.setState({
       showAddOptions: selectedValue === 'select' ? true : false,
-      type: selectedValue
+      type
     });
   }
 
