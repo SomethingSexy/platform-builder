@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CustomField from './CustomField';
 import AddCustomField from './AddCustomField';
+import Button from '../common/form/Button';
 
 // I think we are probably better making this a dumb component
 class CustomFields extends Component {
@@ -25,7 +26,7 @@ class CustomFields extends Component {
     return (
       <div>
         <h4>Fields</h4>
-        <button onClick={this.onClick.bind(this)}>Add Field</button>
+        <Button text="Add Field" onButtonClick={this.onClick.bind(this)} />
         <ul>
           {this.props.fields.map((result) => {
             return <CustomField key={result.id} data={result}/>;

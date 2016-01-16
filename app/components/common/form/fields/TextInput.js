@@ -1,6 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import Input from './Input.js';
 
-class TextInput extends Component {
+class TextInput extends Input {
+  static get propTypes() {
+    return Object.assign({
+      onChange: PropTypes.func.isRequired,
+      label: PropTypes.string.isRequired,
+      value: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number,
+        React.PropTypes.bool
+      ])
+    }, Input.propTypes);
+  }
+
   constructor(props) {
     super(props);
     this.state = props.value || {};
@@ -20,15 +33,5 @@ class TextInput extends Component {
     this.props.onChange(event.target.value);
   }
 }
-
-TextInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number,
-    React.PropTypes.bool
-  ])
-};
 
 export default TextInput;

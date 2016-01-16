@@ -11,9 +11,9 @@ class Select extends Component {
     return (
       <div className ="form-group">
         <label htmlFor="">{this.props.label}</label>
-        <select className="form-control">
+        <select className="form-control" value={this.props.value} onChange={this.handleChange.bind(this)}>
           {this.props.options.map((result) => {
-            return <option value={result.value}>{result.label}</option>;
+            return <option key={result.value} value={result.value}>{result.label}</option>;
           })}
         </select>
       </div>
