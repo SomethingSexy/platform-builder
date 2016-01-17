@@ -2,6 +2,7 @@ import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import PlatformForm from '../../components/platform/PlatformForm';
 import * as PlatformActions  from '../../actions/platform';
+import * as CategoryActions  from '../../actions/categories';
 import Parts from '../../components/platform/Parts';
 import ConfigurationForm from '../../components/platform/ConfigurationForm';
 import CustomFields from '../../components/platform/CustomFields';
@@ -47,6 +48,10 @@ class CreatePlatform extends Component {
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );
+  }
+
+  static get needs() {
+    return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
   }
 
   handleFieldAdd(field) {

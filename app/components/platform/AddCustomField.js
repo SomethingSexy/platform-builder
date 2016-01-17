@@ -21,7 +21,7 @@ class AddCustomFieldOptions extends Component {
     //        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
     return (
       <Form onSave={this.handleSave.bind(this)}>
-        <TextInput label="Label" name="label" validations={['isRequired']}/>
+        <TextInput label="Label" name="label" required/>
         <TextInput label="Value" name="value" />
       </Form>
     );

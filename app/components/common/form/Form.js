@@ -26,8 +26,10 @@ class Form extends Component {
   }
 
   componentWillMount() {
-    this.inputs = {}; // We create a map of traversed inputs
-    this.registerInputs(this.props.children); // We register inputs from the children
+    // Map of inputs on the form
+    this.inputs = {};
+    // now register all of the inputs for this form
+    this.registerInputs(this.props.children);
     console.log(this.inputs);
   }
 
@@ -77,7 +79,7 @@ class Form extends Component {
   handleSave(event) {
     event.stopPropagation();
     // need to validate
-    const isValid = true;
+    const isValid = this.validateForm();
 
     if (isValid) {
       this.props.onSave(this.state);
@@ -88,6 +90,24 @@ class Form extends Component {
     // if valid call outside method
 
     // else if not valid display errors
+  }
+
+  validateForm() {
+    // loop through all of our inputs, we need to validate each one
+    Object.keys(this.inputs).forEach((name) => {
+      // grab the component
+      const component = this.inputs[name];
+
+      // grab the value
+      const value = this.state[name];
+
+      // validate the value
+      this.validateField(component, value);
+    });
+  }
+
+  validateField(component, value) {
+
   }
 }
 

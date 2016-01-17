@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM
 } from '../actions/platform';
 
 function platforms(state = {}, action) {
@@ -11,6 +11,12 @@ function platforms(state = {}, action) {
       lastUpdated: action.receivedAt
     }, action.platform);
   case SAVED_PLATFORM:
+    return Object.assign({}, state, {
+      isFetching: false,
+      didInvalidate: false,
+      lastUpdated: action.receivedAt
+    }, action.platform);
+  case FETCHED_PLATFORM:
     return Object.assign({}, state, {
       isFetching: false,
       didInvalidate: false,
@@ -41,6 +47,10 @@ export function platformsById(state = { }, action) {
     return Object.assign({}, state, {
       [action.platform.id]: platforms(state[action.platform.id], action)
     });
+  case FETCHED_PLATFORM:
+    return Object.assign({}, state, {
+      [action.platform.id]: platforms(state[action.platform.id], action)
+    });
   default:
     return state;
   }
@@ -50,6 +60,8 @@ export function platformsById(state = { }, action) {
 export function workingPlatformId(state = {}, action) {
   switch (action.type) {
   case CREATED_PLATFORM:
+    return action.platform.id;
+  case FETCHED_PLATFORM:
     return action.platform.id;
   default:
     return state || null;

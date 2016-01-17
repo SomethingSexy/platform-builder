@@ -77,7 +77,7 @@ const app = http.createServer((req, res) => {
             write(output, 'text/html', res);
           })
           .catch((fetchError) => {
-            console.log('fetcherror ');
+            console.log('fetcherror ' + fetchError);
             res.send(500, 'Fetch failed');
             res.end();
           });
@@ -91,8 +91,9 @@ app.listen(process.env.PORT || 5000);
 
 // this is only temporary, we will create a true api server later
 const temp = http.createServer((req, res) => {
-  switch (req.url) {
-  case '/api/platform':
+  const url = req.url;
+  console.log(url);
+  if (url.indexOf('/api/platform') !== -1) {
     if (req.method === 'POST') {
       let data = '';
 
@@ -114,20 +115,29 @@ const temp = http.createServer((req, res) => {
 
       req.on('end', () => {
         write(JSON.stringify(Object.assign({}, JSON.parse(data), {
-   
+
         })), 'application/json', res);
       });
+    } else if (req.method === 'GET') {
+      write(JSON.stringify({
+        id: 'b5e74e81-1f28-455b-8944-4dd1ace4fc25',
+        category: {
+          id: 1, 
+          name: 'Firearm'
+        }
+      }), 'application/json', res);
     } else {
       res.writeHead(404);
       res.end();
     }
-    break;
-  case '/api/categories':
+  } else if (url.indexOf('/api/categories') !== -1) {
     if (req.method === 'GET') {
       write(JSON.stringify([{id: 1, name: 'Firearm'}]), 'application/json', res);
+    } else {
+      res.writeHead(404);
+      res.end();
     }
-    break;
-  default:
+  } else {
     res.writeHead(404);
     res.end();
   }
