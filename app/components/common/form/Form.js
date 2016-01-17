@@ -84,7 +84,7 @@ class Form extends Component {
     if (isValid) {
       this.props.onSave(this.state);
     } else {
-
+      console.log('Form is not valid')
     }
 
     // if valid call outside method
@@ -93,6 +93,7 @@ class Form extends Component {
   }
 
   validateForm() {
+    let isAllValid = true;
     // loop through all of our inputs, we need to validate each one
     Object.keys(this.inputs).forEach((name) => {
       // grab the component
@@ -102,12 +103,25 @@ class Form extends Component {
       const value = this.state[name];
 
       // validate the value
-      this.validateField(component, value);
+      const isValid = this.validateField(component, value);
+      // if isAllValid = true and isValid = false, then set to false
+      if (isAllValid && !isValid) {
+        isAllValid = false;
+      }
     });
+
+    return isAllValid;
   }
 
   validateField(component, value) {
+    let isValid = true;
+    if (component.required) {
+      if (typeof value === 'undefined' || value === '') {
+        isValid = false;
+      }
+    }
 
+    return isValid;
   }
 }
 

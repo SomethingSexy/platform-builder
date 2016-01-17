@@ -12,6 +12,12 @@ class Input extends Component {
     };
   }
 
+  constructor(props) {
+    super(props);
+
+    this.required = props.required ? true : false;
+  }
+
   componentWillMount() {
     if (this.context.attachToForm) {
       console.log('attachToForm');
