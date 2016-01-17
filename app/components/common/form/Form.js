@@ -84,7 +84,7 @@ class Form extends Component {
     if (isValid) {
       this.props.onSave(this.state);
     } else {
-      console.log('Form is not valid')
+      console.log('Form is not valid');
     }
 
     // if valid call outside method
@@ -118,6 +118,11 @@ class Form extends Component {
     if (component.required) {
       if (typeof value === 'undefined' || value === '') {
         isValid = false;
+        // TODO: PROBABLY shouldn't be doing this, maybe call method on component instead?
+        component.setState({
+          isValid: false,
+          errorMessage: 'This field is required' // TODO: pull this from someplace else
+        });
       }
     }
 

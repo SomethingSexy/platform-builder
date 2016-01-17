@@ -35,6 +35,11 @@ class Input extends Component {
   handleChange(event) {
     const value = event.target.value;
     const name = this.props.name;
+    // store the state in case we need it for future use
+    this.setState({
+      value
+    });
+
     // onChange is not required but in case we need to process something outside
     // of the form
     if (this.props.onChange) {

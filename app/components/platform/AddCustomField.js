@@ -18,17 +18,17 @@ class AddCustomFieldOptions extends Component {
   }
 
   render() {
-    //        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
     return (
       <Form onSave={this.handleSave.bind(this)}>
         <TextInput label="Label" name="label" required/>
-        <TextInput label="Value" name="value" />
+        <TextInput label="Value" name="value" required/>
       </Form>
     );
   }
 
   handleSave(form) {
     console.log(form);
+    this.props.onSave(form);
   }
 }
 
@@ -70,6 +70,9 @@ class FieldOptions extends Component { // eslint-disable-line react/no-multi-com
   handleSaveOption(option) {
     this.setState((previousState, currentState) => {
       return previousState.options.push(option);
+    });
+    this.setState({
+      showAdd: false
     });
   }
 }
