@@ -58,8 +58,8 @@ class FieldOptions extends Component { // eslint-disable-line react/no-multi-com
         <h5>Options</h5>
         <Button text="Add Option" onButtonClick={this.onClick.bind(this)} />
         <ul>
-          {this.state.options.map((result) => {
-            return <li><span>{result.label}</span> <span>{result.value}</span></li>;
+          {this.state.options.map((result, index) => {
+            return <li key={index}><span>{result.label}</span><span>{result.value}</span><span onClick={this.handleRemoveOption.bind(this, index)}>Remove</span></li>;
           })}
         </ul>
         {this.state.showAdd ? <AddCustomFieldOptions onSave={this.handleSaveOption.bind(this)}/> : null}
@@ -67,8 +67,14 @@ class FieldOptions extends Component { // eslint-disable-line react/no-multi-com
     );
   }
 
+  handleRemoveOption(index) {
+    this.setState((previousState) => {
+      return previousState.options.splice(index, 1);
+    });
+  }
+
   handleSaveOption(option) {
-    this.setState((previousState, currentState) => {
+    this.setState((previousState) => {
       return previousState.options.push(option);
     });
     this.setState({
