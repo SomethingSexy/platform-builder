@@ -108,6 +108,8 @@ export function savePlatform(platform) {
 
 export function fetchPlatform(params) {
   return (dispatch, getState) => {
+    // TODO: getState here, see if we laoded already, if so don't do anything
+    console.log(getState());
     return dispatch(getPlatform(params.platformId));
   };
 }
