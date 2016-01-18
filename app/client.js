@@ -13,7 +13,7 @@ const store = configureStore(window.__INITIAL_DATA__ || {}, history);
 
 function createElement(Component, props) {
   if (Component.needs) {
-    fetchComponentData(store.dispatch, [Component], props);
+    fetchComponentData(store.dispatch, [Component], props.params);
   }
   return React.createElement(Component, props);
 }
