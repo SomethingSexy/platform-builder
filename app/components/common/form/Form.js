@@ -73,7 +73,6 @@ class Form extends Component {
 
   handleFormFieldChange(name, value) {
     this.setState({[name]: value});
-    console.log(this.state);
   }
 
   handleSave(event) {

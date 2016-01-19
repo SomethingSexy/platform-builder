@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CustomField from './CustomField';
 import AddCustomField from './AddCustomField';
-import Button from '../common/form/Button';
+import Button from '../../common/form/Button';
 
 // I think we are probably better making this a dumb component
 class CustomFields extends Component {
@@ -18,6 +18,7 @@ class CustomFields extends Component {
     this.state = {};
   }
 
+  // handler for showing the add field section
   onClick() {
     this.setState({ showAdd: this.state.showAdd ? false : true });
   }
@@ -32,7 +33,7 @@ class CustomFields extends Component {
             return <CustomField key={result.id} data={result}/>;
           })}
         </ul>
-        { this.state.showAdd ? <AddCustomField /> : null }
+        { this.state.showAdd ? <AddCustomField onFieldAdd={this.props.onFieldAdd} /> : null }
       </div>
     );
   }

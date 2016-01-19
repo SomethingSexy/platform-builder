@@ -109,7 +109,14 @@ export function savePlatform(platform) {
 export function fetchPlatform(params) {
   return (dispatch, getState) => {
     // TODO: getState here, see if we laoded already, if so don't do anything
-    console.log(getState());
-    return dispatch(getPlatform(params.platformId));
+    // if it isn't invalidated, then don't fetch?
+    const state = getState();
+    let isFetch = true;
+
+    if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
+      isFetch = false;
+    }
+
+    return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
   };
 }
