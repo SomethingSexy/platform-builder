@@ -18,6 +18,7 @@ const history = createMemoryHistory();
 
 const indexHTML = fs.readFileSync(__dirname + '/index.html').toString();
 const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
+const mainCSS = fs.readFileSync(__dirname + '/../public/js/main.css');
 const styles = fs.readFileSync(__dirname + '/../public/styles/styles.css');
 const htmlRegex = /¡HTML!/;
 const dataRegex = /¡DATA!/;
@@ -44,6 +45,9 @@ const app = http.createServer((req, res) => {
     switch (req.url) {
     case '/js/main.js':
       write(mainJS, 'text/javascript', res);
+      break;
+    case '/js/main.css':
+      write(mainCSS, 'text/css', res);
       break;
     case '/favicon.ico':
       write('haha', 'text/plain', res);

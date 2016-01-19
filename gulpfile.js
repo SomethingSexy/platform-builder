@@ -14,7 +14,8 @@ gulp.task('build', function() {
   return builder.loadConfig('config.js')
     .then(function() {
       builder.config({
-        // baseURL: 'build'
+        separateCSS: true,
+        cssOptimize: false
       });
       return builder.buildStatic('app/client.js', 'public/js/main.js', {
         sourceMaps: false,
