@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../../common/form/Button';
 import AddCustomFieldOptions from './AddCustomFieldOptions';
+import update from 'react-addons-update';
 
 class FieldOptions extends Component {
   static get propTypes() {
@@ -39,21 +40,20 @@ class FieldOptions extends Component {
   }
 
   handleRemoveOption(index) {
-    this.setState((previousState) => {
-      return previousState.options.splice(index, 1);
+    this.setState({
+      options: update(this.state.options, {$splice: [[index, 1]]})
+    }, () => {
+      this.props.onUpdateOptions(this.state);
     });
-    this.props.onUpdateOptions(this.state);
   }
 
   handleSaveOption(option) {
-    this.setState((previousState) => {
-      return previousState.options.push(option);
-    });
     this.setState({
+      options: update(this.state.options, {$push: [option]}),
       showAdd: false
+    }, () => {
+      this.props.onUpdateOptions(this.state);
     });
-
-    this.props.onUpdateOptions(this.state);
   }
 }
 
