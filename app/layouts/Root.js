@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 export default React.createClass({
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>App</h1>
         {/* change the <a>s to <Link>s */}
         <ul>
