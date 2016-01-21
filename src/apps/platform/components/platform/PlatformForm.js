@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../common/form/fields/TextInput';
-import Textarea from '../common/form/fields/Textarea';
-import Form from '../common/form/Form';
+import TextInput from '../common/form/fields/TextInput.js';
+import Textarea from '../common/form/fields/Textarea.js';
+import Form from '../common/form/Form.js';
 
 // I think we are probably better making this a dumb component
 class PlatformForm extends Component {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Part from './Part';
+import Part from './Part.js';
 
 class Parts extends Component {
   static get propTypes() {

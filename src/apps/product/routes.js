@@ -1,5 +1,5 @@
-import Build from './layouts/index';
-import BuildPlatform from './layouts/platform';
+import Build from './layouts/index.js';
+import BuildPlatform from './layouts/platform.js';
 
 // routes should only interface with layouts
 // layouts will then interface with views which are smart components

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Category from './Category';
+import Category from './Category.js';
 
 class Categories extends Component {
   static get propTypes() {

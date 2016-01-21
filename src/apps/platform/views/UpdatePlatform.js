@@ -1,12 +1,12 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import PlatformForm from '../components/platform/PlatformForm';
-import * as PlatformActions  from '../actions/platform';
-import * as CategoryActions  from '../actions/categories';
-import Parts from '../components/platform/parts/Parts';
-import ConfigurationForm from '../components/platform/ConfigurationForm';
-import CustomFields from '../components/platform/fields/CustomFields';
-import Button from '../components/common/form/Button';
+import PlatformForm from '../components/platform/PlatformForm.js';
+import * as PlatformActions  from '../actions/platform.js';
+import * as CategoryActions  from '../actions/categories.js';
+import Parts from '../components/platform/parts/Parts.js';
+import ConfigurationForm from '../components/platform/ConfigurationForm.js';
+import CustomFields from '../components/platform/fields/CustomFields.js';
+import Button from '../components/common/form/Button.js';
 import merge from 'merge';
 import update from 'react-addons-update';
 

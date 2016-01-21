@@ -1,6 +1,6 @@
 import {
   FETCHED_CATEGOIRES
-} from '../actions/categories';
+} from '../actions/categories.js';
 
 function posts(state = {}, action) {
   switch (action.type) {

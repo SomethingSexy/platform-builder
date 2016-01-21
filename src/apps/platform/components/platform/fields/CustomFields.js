@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import CustomField from './CustomField';
-import AddCustomField from './AddCustomField';
-import Button from '../../common/form/Button';
+import CustomField from './CustomField.js';
+import AddCustomField from './AddCustomField.js';
+import Button from '../../common/form/Button.js';
 
 // I think we are probably better making this a dumb component
 class CustomFields extends Component {

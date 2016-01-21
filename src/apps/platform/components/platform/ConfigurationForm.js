@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Checkbox from '../common/form/fields/Checkbox';
+import Checkbox from '../common/form/fields/Checkbox.js';
 
 // This will handle standard "static" configuration that is supported by the app
 class ConfigurationForm extends Component {

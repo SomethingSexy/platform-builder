@@ -1,11 +1,9 @@
-import Root from './layouts/Root';
-import Dashboard from './layouts/Dashboard';
-import About from './layouts/About';
-import Platform from './layouts/Platform';
-import CreatePlatform from './views/CreatePlatform';
-import UpdatePlatform from './views/UpdatePlatform';
-import Build from '../product/layouts/index';
-import BuildPlatform from '../product/layouts/platform';
+import Root from './layouts/Root.js';
+import Dashboard from './layouts/Dashboard.js';
+import About from './layouts/About.js';
+import Platform from './layouts/Platform.js';
+import CreatePlatform from './views/CreatePlatform.js';
+import UpdatePlatform from './views/UpdatePlatform.js';
 // routes should only interface with layouts
 // layouts will then interface with views which are smart components
 // views will have many dumb components  (maybe other views?)

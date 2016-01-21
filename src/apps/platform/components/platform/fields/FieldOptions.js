@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../../common/form/Button';
-import AddCustomFieldOptions from './AddCustomFieldOptions';
+import Button from '../../common/form/Button.js';
+import AddCustomFieldOptions from './AddCustomFieldOptions.js';
 import update from 'react-addons-update';
 
 class FieldOptions extends Component {

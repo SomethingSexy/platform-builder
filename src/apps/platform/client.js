@@ -1,12 +1,12 @@
 import 'bootstrap/css/bootstrap.css!';
 import React from 'react';
 import Router from 'react-router';
-import routes from './routes';
+import routes from './routes.js';
 import ReactDOM from 'react-dom';
 import {createHistory} from 'history';
-import configureStore from './stores/index';
+import configureStore from './stores/index.js';
 import { Provider } from 'react-redux';
-import fetchComponentData from '../../utils/fetchComponentData';
+import fetchComponentData from '../../utils/fetchComponentData.js';
 
 
 const history = createHistory();

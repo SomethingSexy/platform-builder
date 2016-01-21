@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Select from '../../common/form/fields/Select';
-import TextInput from '../../common/form/fields/TextInput';
-import Form from '../../common/form/Form';
-import FieldOptions from './FieldOptions';
+import Select from '../../common/form/fields/Select.js';
+import TextInput from '../../common/form/fields/TextInput.js';
+import Form from '../../common/form/Form.js';
+import FieldOptions from './FieldOptions.js';
 
 const fieldTypes = [{
   label: '',
