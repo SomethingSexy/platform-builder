@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import {createHistory} from 'history';
 import configureStore from './stores/index';
 import { Provider } from 'react-redux';
-import fetchComponentData from './utils/fetchComponentData';
+import fetchComponentData from '../../utils/fetchComponentData';
 
 
 const history = createHistory();

@@ -10,7 +10,7 @@ export default React.createClass({
         <h1>App</h1>
         {/* change the <a>s to <Link>s */}
         <ul>
-          <li><Link to="/build/platform">Build</Link></li>
+          <li><a href="/build">Build</a></li>
           <li><Link to="/platform">Add Platform</Link></li>
         </ul>
 

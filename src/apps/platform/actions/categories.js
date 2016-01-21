@@ -23,6 +23,13 @@ function fetchCategories() {
 
 export function getCategories() {
   return (dispatch, getState) => {
-    return dispatch(fetchCategories());
+    const state = getState();
+    let isFetch = true;
+
+    if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
+      isFetch = false;
+    }
+
+    return isFetch ? dispatch(fetchCategories()) : Promise.resolve();
   };
 }

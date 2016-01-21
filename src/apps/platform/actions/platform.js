@@ -108,8 +108,6 @@ export function savePlatform(platform) {
 
 export function fetchPlatform(params) {
   return (dispatch, getState) => {
-    // TODO: getState here, see if we laoded already, if so don't do anything
-    // if it isn't invalidated, then don't fetch?
     const state = getState();
     let isFetch = true;
 

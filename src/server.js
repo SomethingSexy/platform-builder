@@ -5,10 +5,10 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import {Router, RoutingContext, match} from 'react-router';
 import { renderToString } from 'react-dom/server';
-import configureStore from './stores/index';
+import configureStore from './apps/platform/stores/index';
 import Cookies from 'cookies';
 import uuid from 'uuid';
-import routes from './routes';
+import routes from './apps/platform/routes';
 import write from './utils/write';
 import { Provider } from 'react-redux';
 import fetchComponentData from './utils/fetchComponentData';
@@ -16,9 +16,9 @@ import httpProxy from 'http-proxy';
 
 const history = createMemoryHistory();
 
-const indexHTML = fs.readFileSync(__dirname + '/index.html').toString();
-const mainJS = fs.readFileSync(__dirname + '/../public/js/main.js');
-const mainCSS = fs.readFileSync(__dirname + '/../public/js/main.css');
+const indexHTML = fs.readFileSync(__dirname + '/apps/platform/index.html').toString();
+const mainJS = fs.readFileSync(__dirname + '/../public/js/platform.js');
+const mainCSS = fs.readFileSync(__dirname + '/../public/js/platform.css');
 const styles = fs.readFileSync(__dirname + '/../public/styles/styles.css');
 const htmlRegex = /¡HTML!/;
 const dataRegex = /¡DATA!/;
@@ -43,10 +43,10 @@ const app = http.createServer((req, res) => {
     proxy.web(req, res, { target: 'http://localhost:9000' });
   } else {
     switch (req.url) {
-    case '/js/main.js':
+    case '/js/platform.js':
       write(mainJS, 'text/javascript', res);
       break;
-    case '/js/main.css':
+    case '/js/platform.css':
       write(mainCSS, 'text/css', res);
       break;
     case '/favicon.ico':
@@ -56,10 +56,20 @@ const app = http.createServer((req, res) => {
       write(styles, 'text/css', res);
       break;
     default:
+      // give the location we need to load
+      // the corret router and store
+      // if we don't load the exact same router file it seems to blow up on the checksum
       const location = history.createLocation(req.url);
       const store = configureStore();
-
+      console.log('---------location---------');
+      console.log(location);
+      console.log('---------routes---------');
+      console.log(routes);
       match({routes, location}, (error, redirectLocation, renderProps) => {
+        console.log('---------redirectLocation---------');
+        console.log(redirectLocation);
+        console.log('---------renderProps---------');
+        console.log(renderProps);
         // I think at this point we could add custom data to the renderProps to pass
         // to our components
         if (redirectLocation) {
@@ -73,6 +83,7 @@ const app = http.createServer((req, res) => {
         } else {
           fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
             const initialData = store.getState();
+            console.log('---------initialData---------');
             console.log(initialData);
             const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
             const output = indexHTML.
