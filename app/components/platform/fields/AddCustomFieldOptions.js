@@ -25,7 +25,6 @@ class AddCustomFieldOptions extends Component {
   }
 
   handleSave(form) {
-    console.log(form);
     this.props.onSave(form);
   }
 }

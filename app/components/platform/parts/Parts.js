@@ -10,11 +10,16 @@ class Parts extends Component {
 
   render() {
     return (
-      <ul>
-        {this.props.parts.map((result) => {
-          return <Part key={result.id} data={result}/>;
-        })}
-      </ul>
+      <div className="row">
+        <div className="col-md-12">
+          <h4>Parts</h4>
+          <ul>
+            {this.props.parts.map((result) => {
+              return <Part key={result.id} data={result}/>;
+            })}
+          </ul>
+        </div>
+      </div>
     );
   }
 }

@@ -27,15 +27,19 @@ class CustomFields extends Component {
     return (
       <div>
         <h4>Fields</h4>
-        <Button text="Add Field" onButtonClick={this.onClick.bind(this)} />
         <ul>
           {this.props.fields.map((result) => {
             return <CustomField key={result.id} data={result}/>;
           })}
         </ul>
-        { this.state.showAdd ? <AddCustomField onFieldAdd={this.props.onFieldAdd} /> : null }
+        <Button text="Add Field" onButtonClick={this.onClick.bind(this)} />
+        { this.state.showAdd ? <div className="row"><div className="col-md-11 col-md-offset-1"><AddCustomField onFieldAdd={this.handleFieldAdd.bind(this)} /></div></div> : null }
       </div>
     );
+  }
+
+  handleFieldAdd(field) {
+    this.props.onFieldAdd(field);
   }
 
 }

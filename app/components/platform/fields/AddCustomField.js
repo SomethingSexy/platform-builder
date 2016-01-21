@@ -18,7 +18,7 @@ const fieldTypes = [{
 class AddCustomField extends Component {
   static get propTypes() {
     return {
-      // onAddOption: PropTypes.func.isRequired
+      onFieldAdd: PropTypes.func.isRequired
     };
   }
 
@@ -50,15 +50,14 @@ class AddCustomField extends Component {
     });
   }
 
-  handleLabelChange(label) {
+  handleLabelChange(name, label) {
     this.setState({
       label
     });
   }
 
   handleSave() {
-    console.log('save field');
-    console.log(this.state);
+    this.props.onFieldAdd(Object.assign({}, this.state));
   }
 
   // this will only be used if select type is selected

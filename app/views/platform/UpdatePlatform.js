@@ -8,6 +8,7 @@ import ConfigurationForm from '../../components/platform/ConfigurationForm';
 import CustomFields from '../../components/platform/fields/CustomFields';
 import Button from '../../components/common/form/Button';
 import merge from 'merge';
+import update from 'react-addons-update';
 
 
 // I think we want create an initial platform first so that whatever the user
@@ -38,7 +39,6 @@ class CreatePlatform extends Component {
         <h4>Custom Fields</h4>
         <CustomFields fields={this.state.configuration.fields} onFieldAdd={this.handleFieldAdd.bind(this)}/>
         <h3>Diagram</h3>
-        <h4>Parts</h4>
         <Parts
           parts={this.state.parts}
           // onTodoClick={index =>
@@ -55,7 +55,12 @@ class CreatePlatform extends Component {
   }
 
   handleFieldAdd(field) {
-
+    console.log(field);
+    this.setState({
+      configuration: {
+        fields: update(this.state.configuration.fields, {$push: [field]})
+      }
+    });
   }
 
   handleFormChange(platform) {

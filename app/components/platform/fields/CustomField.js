@@ -9,7 +9,7 @@ class CustomField extends Component {
 
   render() {
     return (
-      <li>{this.props.data.name}</li>
+      <li><span>{this.props.data.type}</span><span>{this.props.data.label}</span></li>
     );
   }
 }

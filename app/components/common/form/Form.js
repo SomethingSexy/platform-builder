@@ -30,7 +30,6 @@ class Form extends Component {
     this.inputs = {};
     // now register all of the inputs for this form
     this.registerInputs(this.props.children);
-    console.log(this.inputs);
   }
 
   render() {
