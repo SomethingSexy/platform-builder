@@ -4,6 +4,7 @@ import Button from './Button';
 class Form extends Component {
   static get propTypes() {
     return {
+      showSaveButton: PropTypes.bool,
       children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
@@ -11,6 +12,13 @@ class Form extends Component {
       onSave: PropTypes.func.isRequired
     };
   }
+
+  static get defaultProps() {
+    return {
+      showSaveButton: true
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -36,7 +44,7 @@ class Form extends Component {
     return (
       <form>
         {this.props.children}
-        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
+        {this.props.showSaveButton ? <Button text="Save" onButtonClick={this.handleSave.bind(this)} /> : null }
       </form>
     );
   }

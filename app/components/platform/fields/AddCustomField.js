@@ -24,7 +24,6 @@ class AddCustomField extends Component {
 
   constructor(props) {
     super(props);
-    // just a local state for storing the form data
     this.state = {
       options: [] // if the field is a select, options will get stored here
     };
@@ -57,6 +56,9 @@ class AddCustomField extends Component {
   }
 
   handleSave() {
+    this.setState({
+      showAddOptions: false
+    });
     this.props.onFieldAdd(Object.assign({}, this.state));
   }
 

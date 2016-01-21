@@ -55,11 +55,12 @@ class CreatePlatform extends Component {
   }
 
   handleFieldAdd(field) {
-    console.log(field);
     this.setState({
       configuration: {
         fields: update(this.state.configuration.fields, {$push: [field]})
       }
+    }, () => {
+      this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state)));
     });
   }
 
