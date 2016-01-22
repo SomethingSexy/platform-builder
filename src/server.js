@@ -5,10 +5,10 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import {Router, RoutingContext, match} from 'react-router';
 import { renderToString } from 'react-dom/server';
-import configureStore from './apps/platform/stores/index';
+import platformStore from './apps/platform/stores/index';
 import Cookies from 'cookies';
 import uuid from 'uuid';
-import routes from './apps/platform/routes';
+import platformRoutes from './apps/platform/routes';
 import write from './utils/write';
 import { Provider } from 'react-redux';
 import fetchComponentData from './utils/fetchComponentData';
@@ -33,6 +33,40 @@ const proxy = httpProxy.createProxyServer();
 //   rejectUnauthorized: false
 // };
 
+function processAppRequest(req, res, location, store, routes) {
+  // give the location we need to load
+  // the corret router and store
+
+  // if we don't load the exact same router file it seems to blow up on the checksum
+  match({routes, location}, (error, redirectLocation, renderProps) => {
+    // I think at this point we could add custom data to the renderProps to pass
+    // to our components
+    if (redirectLocation) {
+      res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+    } else if (error) {
+      res.send(500, error.message);
+      res.end();
+    } else if (renderProps === null) {
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.end();
+    } else {
+      fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
+        const initialData = store.getState();
+        const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
+        const output = indexHTML.
+          replace(htmlRegex, html).
+          replace(dataRegex, JSON.stringify(initialData));
+        write(output, 'text/html', res);
+      })
+      .catch((fetchError) => {
+        console.log('fetcherror ' + fetchError);
+        res.send(500, 'Fetch failed');
+        res.end();
+      });
+    }
+  });
+}
+
 const app = http.createServer((req, res) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get('token') || uuid.v4();
@@ -56,48 +90,12 @@ const app = http.createServer((req, res) => {
       write(styles, 'text/css', res);
       break;
     default:
-      // give the location we need to load
-      // the corret router and store
-      // if we don't load the exact same router file it seems to blow up on the checksum
       const location = history.createLocation(req.url);
-      const store = configureStore();
-      console.log('---------location---------');
-      console.log(location);
-      console.log('---------routes---------');
-      console.log(routes);
-      match({routes, location}, (error, redirectLocation, renderProps) => {
-        console.log('---------redirectLocation---------');
-        console.log(redirectLocation);
-        console.log('---------renderProps---------');
-        console.log(renderProps);
-        // I think at this point we could add custom data to the renderProps to pass
-        // to our components
-        if (redirectLocation) {
-          res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-        } else if (error) {
-          res.send(500, error.message);
-          res.end();
-        } else if (renderProps === null) {
-          res.writeHead(404, { 'Content-Type': 'text/html' });
-          res.end();
-        } else {
-          fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(() => {
-            const initialData = store.getState();
-            console.log('---------initialData---------');
-            console.log(initialData);
-            const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
-            const output = indexHTML.
-              replace(htmlRegex, html).
-              replace(dataRegex, JSON.stringify(initialData));
-            write(output, 'text/html', res);
-          })
-          .catch((fetchError) => {
-            console.log('fetcherror ' + fetchError);
-            res.send(500, 'Fetch failed');
-            res.end();
-          });
-        }
-      });
+      // given platform route, we know we are going to load the platform app
+      if (location.pathname.indexOf('/platform') !== -1) {
+        const store = platformStore();
+        processAppRequest(req, res, location, store, platformRoutes);
+      }
     }
   }
 });
@@ -137,7 +135,7 @@ const temp = http.createServer((req, res) => {
       write(JSON.stringify({
         id: 'b5e74e81-1f28-455b-8944-4dd1ace4fc25',
         category: {
-          id: 1, 
+          id: 1,
           name: 'Firearm'
         }
       }), 'application/json', res);
