@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../../common/form/fields/TextInput.js';
-import Form from '../../common/form/Form.js';
+import TextInput from '../../../../../common/components/form/fields/TextInput.js';
+import Form from '../../../../../common/components/form/Form.js';
 
 class AddCustomFieldOptions extends Component {
   static get propTypes() {

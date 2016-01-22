@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../../common/form/Button.js';
+import Button from '../../../../../common/components/Button.js';
 import AddCustomFieldOptions from './AddCustomFieldOptions.js';
 import update from 'react-addons-update';
 

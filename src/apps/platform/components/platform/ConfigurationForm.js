@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Checkbox from '../common/form/fields/Checkbox.js';
+import Checkboxes from '../../../../common/components/form/fields/Checkboxes.js';
 
 // This will handle standard "static" configuration that is supported by the app
 class ConfigurationForm extends Component {
@@ -16,15 +16,39 @@ class ConfigurationForm extends Component {
   }
 
   render() {
+    const checkboxes = [{
+      label: 'Allow company',
+      value: 'true',
+      selectedValue: this.state.showCompany,
+      name: 'showCompany'
+    }, {
+      label: 'Allow brands',
+      value: 'true',
+      selectedValue: this.state.showBrands,
+      name: 'showBrands'
+    }, {
+      label: 'Allow people',
+      value: 'true',
+      selectedValue: this.state.showPeople,
+      name: 'showPeople'
+    }, {
+      label: 'Allow tags',
+      value: 'true',
+      selectedValue: this.state.showTags,
+      name: 'showTags'
+    }, {
+      label: 'Allow photos',
+      value: 'true',
+      selectedValue: this.state.showPhotos,
+      name: 'showPhotos'
+    }, {
+      label: 'Allow transactions',
+      value: 'true',
+      selectedValue: this.state.showTransactions,
+      name: 'showTransactions'
+    }];
     return (
-      <form>
-        <Checkbox label="Allow company" value="true" selectedValue={this.state.showCompany} name="showCompany" onChange={this.handleConfigurationChange.bind(this)} />
-        <Checkbox label="Allow brands" value="true" selectedValue={this.state.showBrands} name="showBrands" onChange={this.handleConfigurationChange.bind(this)} />
-        <Checkbox label="Allow people" value="true" selectedValue={this.state.showPeople} name="showPeople" onChange={this.handleConfigurationChange.bind(this)} />
-        <Checkbox label="Allow tags" value="true" selectedValue={this.state.showTags} name="showTags" onChange={this.handleConfigurationChange.bind(this)} />
-        <Checkbox label="Allow photos" value="true" selectedValue={this.state.showPhotos} name="showPhotos" onChange={this.handleConfigurationChange.bind(this)} />
-        <Checkbox label="Allow transactions" value="true" selectedValue={this.state.showTransactions} name="showTransactions" onChange={this.handleConfigurationChange.bind(this)} />
-      </form>
+      <Checkboxes label="Configuration" checkboxes={checkboxes} onChange={this.handleConfigurationChange.bind(this)}/>
     );
   }
 
