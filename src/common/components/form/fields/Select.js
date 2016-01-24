@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Input from './Input.js';
 
 class Select extends Input {
@@ -25,7 +25,7 @@ class Select extends Input {
       <div className ="form-group row">
         <label className="col-sm-2 form-control-label" htmlFor="">{this.props.label}</label>
         <div className="col-sm-10">
-          <select className="form-control" value={this.props.value} onChange={this.handleChange.bind(this)}>
+          <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange.bind(this)}>
             {this.props.options.map((result) => {
               return <option key={result.value} value={result.value}>{result.label}</option>;
             })}

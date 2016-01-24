@@ -6,7 +6,6 @@ import CreatePlatform from './views/CreatePlatform.js';
 import UpdatePlatform from './views/UpdatePlatform.js';
 // routes should only interface with layouts
 // layouts will then interface with views which are smart components
-// views will have many dumb components  (maybe other views?)
 export default {
   path: '/',
   component: Root,

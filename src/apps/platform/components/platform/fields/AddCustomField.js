@@ -3,6 +3,7 @@ import Select from '../../../../../common/components/form/fields/Select.js';
 import TextInput from '../../../../../common/components/form/fields/TextInput.js';
 import AddCustomFieldOptions from './AddCustomFieldOptions.js';
 import Button from '../../../../../common/components/Button.js';
+import repeatable from '../../../../../common/components/form/Repeatable.js';
 import update from 'react-addons-update';
 
 const fieldTypes = [{
@@ -19,7 +20,6 @@ const fieldTypes = [{
 class AddCustomField extends Component {
   static get propTypes() {
     return {
-      index: PropTypes.number,
       field: PropTypes.string
     };
   }
@@ -32,16 +32,16 @@ class AddCustomField extends Component {
   }
 
   render() {
-    const customFieldKey = this.props.field + '[' + this.props.index + ']';
-    const typeName = customFieldKey + '.type';
-    const labelName = customFieldKey + '.label';
+    const typeName = this.props.field + '.type';
+    const labelName = this.props.field + '.label';
+    const optionsField = this.props.field + '.options';
     return (
       <div>
         <legend>Custom Field</legend>
         <Select name={typeName} label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
         <TextInput name={labelName} label="Label" />
         {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddField.bind(this)} /> : null}
-        {this.state.showAddOptions ? this.state.options.map((result, index) => { return <AddCustomFieldOptions key={index} index={index} field={customFieldKey + '.options'} {...result} />; }) : null}
+        {this.state.showAddOptions ? this.state.options.map((result, index) => { return <AddCustomFieldOptions key={index} index={index} field={optionsField} {...result} />; }) : null}
       </div>
     );
   }
@@ -59,4 +59,4 @@ class AddCustomField extends Component {
   }
 }
 
-export default AddCustomField;
+export default repeatable(AddCustomField);

@@ -4,9 +4,8 @@ import About from './apps/platform/layouts/About';
 import platformRoutes from './apps/platform/routes';
 import productRoutes from './apps/product/routes';
 
-// routes should only interface with layouts
-// layouts will then interface with views which are smart components
-// views will have many dumb components  (maybe other views?)
+// TODO: This is currently not being used but could in the future.
+// Instead each app has its own routes and server.js is pulling those in as necessary
 export default {
   path: '/',
   component: Root,
