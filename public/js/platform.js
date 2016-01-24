@@ -3384,8 +3384,6 @@ $__System.register('38', ['33', '34', '35', '36', '37', 'd'], function (_export)
 $__System.register('39', ['32', '33', '34', '35', '36', '38', 'd', '3a', '3b'], function (_export) {
   var connect, _get, _inherits, _createClass, _classCallCheck, Categories, React, Component, PropTypes, PlatformActions, CategoryActions, CreatePlatform;
 
-  // this.props.history.pushState(null, `/help`);
-
   function select(state) {
     return {
       categories: state.categories.categories
@@ -3429,7 +3427,8 @@ $__System.register('39', ['32', '33', '34', '35', '36', '38', 'd', '3a', '3b'], 
           get: function get() {
             return {
               dispatch: PropTypes.func.isRequired,
-              history: PropTypes.object.isRequired
+              history: PropTypes.object.isRequired,
+              categories: PropTypes.array.isRequired
             };
           }
         }]);
@@ -3464,7 +3463,6 @@ $__System.register('39', ['32', '33', '34', '35', '36', '38', 'd', '3a', '3b'], 
 
           // handles selecting the category that this new platform will be added too
           value: function handleSelect(category) {
-            console.log(category);
             this.props.dispatch(PlatformActions.createPlatform({ category: category }));
           }
         }], [{
@@ -3660,7 +3658,6 @@ $__System.register('40', ['33', '34', '35', '36', '41', 'd', '3c', '3f'], functi
           key: 'propTypes',
           get: function get() {
             return {
-              onFormChange: PropTypes.func.isRequired,
               platform: PropTypes.object.isRequired
             };
           }
@@ -3685,18 +3682,6 @@ $__System.register('40', ['33', '34', '35', '36', '41', 'd', '3c', '3f'], functi
               React.createElement(Textarea, { name: 'description', label: 'Description' })
             );
           }
-
-          // handleNameChange(value) {
-          //   const name = {name: value};
-          //   this.setState(name);
-          //   this.props.onFormChange(name);
-          // }
-
-          // handleDescriptionChange(value) {
-          //   const description = {description: value};
-          //   this.setState(description);
-          //   this.props.onFormChange(description);
-          // }
         }]);
 
         return PlatformForm;
@@ -3900,9 +3885,7 @@ $__System.register('45', ['33', '34', '35', '36', '43', '46', 'd'], function (_e
         _createClass(ConfigurationForm, null, [{
           key: 'propTypes',
           get: function get() {
-            return {
-              onConfigurationChange: PropTypes.func.isRequired
-            };
+            return {};
           }
         }]);
 
@@ -3954,7 +3937,6 @@ $__System.register('45', ['33', '34', '35', '36', '43', '46', 'd'], function (_e
           key: 'handleConfigurationChange',
           value: function handleConfigurationChange(value, name) {
             this.setState(_defineProperty({}, name, value));
-            this.props.onConfigurationChange(_defineProperty({}, name, value));
           }
         }]);
 
@@ -4237,7 +4219,7 @@ $__System.register('41', ['33', '34', '35', '36', '3e', 'd', '3d'], function (_e
               ),
               React.createElement(
                 'div',
-                { className: 'col-sm-10' },
+                { className: 'col-sm-2' },
                 React.createElement('input', { type: 'text', name: this.props.name, className: 'form-control', id: '', placeholder: '', value: this.state.value, onChange: this.handleChange.bind(this) }),
                 !this.state.isValid ? React.createElement(
                   'span',
@@ -4285,9 +4267,7 @@ $__System.register('48', ['33', '34', '35', '36', '41', 'd'], function (_export)
         _createClass(AddCustomFieldOptions, null, [{
           key: 'propTypes',
           get: function get() {
-            return {
-              onSave: PropTypes.func.isRequired
-            };
+            return {};
           }
         }]);
 
@@ -4309,11 +4289,6 @@ $__System.register('48', ['33', '34', '35', '36', '41', 'd'], function (_export)
               React.createElement(TextInput, { label: 'Value', name: 'value', required: true })
             );
           }
-        }, {
-          key: 'handleSave',
-          value: function handleSave(form) {
-            this.props.onSave(form);
-          }
         }]);
 
         return AddCustomFieldOptions;
@@ -4324,8 +4299,8 @@ $__System.register('48', ['33', '34', '35', '36', '41', 'd'], function (_export)
   };
 });
 
-$__System.register('49', ['33', '34', '35', '36', '41', '44', '47', '48', '3e', 'd', '4a', '4b'], function (_export) {
-  var _get, _inherits, _createClass, _classCallCheck, TextInput, _extends, Select, AddCustomFieldOptions, _Object$assign, React, Component, PropTypes, Button, update, fieldTypes, AddCustomField;
+$__System.register('49', ['33', '34', '35', '36', '41', '44', '47', '48', 'd', '4a', '4b'], function (_export) {
+  var _get, _inherits, _createClass, _classCallCheck, TextInput, _extends, Select, AddCustomFieldOptions, React, Component, PropTypes, Button, update, fieldTypes, AddCustomField;
 
   return {
     setters: [function (_) {
@@ -4344,8 +4319,6 @@ $__System.register('49', ['33', '34', '35', '36', '41', '44', '47', '48', '3e', 
       Select = _6['default'];
     }, function (_8) {
       AddCustomFieldOptions = _8['default'];
-    }, function (_e) {
-      _Object$assign = _e['default'];
     }, function (_d) {
       React = _d['default'];
       Component = _d.Component;
@@ -4376,7 +4349,6 @@ $__System.register('49', ['33', '34', '35', '36', '41', '44', '47', '48', '3e', 
           key: 'propTypes',
           get: function get() {
             return {
-              onFieldAdd: PropTypes.func.isRequired,
               index: PropTypes.number,
               field: PropTypes.string
             };
@@ -4420,14 +4392,6 @@ $__System.register('49', ['33', '34', '35', '36', '41', '44', '47', '48', '3e', 
             this.setState({
               showAddOptions: value === 'select' ? true : false
             });
-          }
-        }, {
-          key: 'handleSave',
-          value: function handleSave() {
-            this.setState({
-              showAddOptions: false
-            });
-            this.props.onFieldAdd(_Object$assign({}, this.state));
           }
         }, {
           key: 'handleAddField',
@@ -5492,7 +5456,7 @@ $__System.register('6e', ['33', '34', '35', '36', '59', '69', '3e', 'd', '4a', '
 });
 
 $__System.register('6f', ['32', '33', '34', '35', '36', '40', '44', '45', '49', '3e', 'd', '3a', '3b', '4a', '4d', '4b', '6e'], function (_export) {
-  var connect, _get, _inherits, _createClass, _classCallCheck, PlatformForm, _extends, ConfigurationForm, AddCustomField, _Object$assign, React, Component, PropTypes, PlatformActions, CategoryActions, Button, merge, update, Form, CreatePlatform;
+  var connect, _get, _inherits, _createClass, _classCallCheck, PlatformForm, _extends, ConfigurationForm, AddCustomField, _Object$assign, React, Component, PropTypes, PlatformActions, CategoryActions, Button, merge, update, Form, UpdatePlatform;
 
   function select(state) {
     return {
@@ -5550,10 +5514,10 @@ $__System.register('6f', ['32', '33', '34', '35', '36', '40', '44', '45', '49', 
       // import CustomFields from '../components/platform/fields/CustomFields.js';
       'use strict';
 
-      CreatePlatform = (function (_Component) {
-        _inherits(CreatePlatform, _Component);
+      UpdatePlatform = (function (_Component) {
+        _inherits(UpdatePlatform, _Component);
 
-        _createClass(CreatePlatform, null, [{
+        _createClass(UpdatePlatform, null, [{
           key: 'propTypes',
           get: function get() {
             return {
@@ -5564,17 +5528,17 @@ $__System.register('6f', ['32', '33', '34', '35', '36', '40', '44', '45', '49', 
           }
         }]);
 
-        function CreatePlatform(props) {
-          _classCallCheck(this, CreatePlatform);
+        function UpdatePlatform(props) {
+          _classCallCheck(this, UpdatePlatform);
 
-          _get(Object.getPrototypeOf(CreatePlatform.prototype), 'constructor', this).call(this, props);
+          _get(Object.getPrototypeOf(UpdatePlatform.prototype), 'constructor', this).call(this, props);
           this.state = merge({
             parts: [],
             configuration: { fields: [] }
           }, this.props.platform);
         }
 
-        _createClass(CreatePlatform, [{
+        _createClass(UpdatePlatform, [{
           key: 'render',
           value: function render() {
             // For the model, we really only need to set the deep properties and arrays.  If I create
@@ -5661,10 +5625,10 @@ $__System.register('6f', ['32', '33', '34', '35', '36', '40', '44', '45', '49', 
           }
         }]);
 
-        return CreatePlatform;
+        return UpdatePlatform;
       })(Component);
 
-      _export('default', connect(select)(CreatePlatform));
+      _export('default', connect(select)(UpdatePlatform));
     }
   };
 });

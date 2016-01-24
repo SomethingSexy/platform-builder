@@ -32,7 +32,7 @@ class TextInput extends Input {
     return (
       <div className ={className}>
         <label className="col-sm-2 form-control-label" htmlFor="">{this.props.label}</label>
-        <div className="col-sm-10">
+        <div className="col-sm-2">
           <input type="text"  name={this.props.name} className ="form-control" id="" placeholder="" value={this.state.value} onChange={this.handleChange.bind(this)} />
           {!this.state.isValid ? <span id="helpBlock2" className="help-block">{this.state.errorMessage}</span> : null }
         </div>

@@ -4,9 +4,7 @@ import TextInput from '../../../../../common/components/form/fields/TextInput.js
 
 class AddCustomFieldOptions extends Component {
   static get propTypes() {
-    return {
-      onSave: PropTypes.func.isRequired
-    };
+    return {};
   }
 
   constructor(props) {
@@ -22,10 +20,6 @@ class AddCustomFieldOptions extends Component {
         <TextInput label="Value" name="value" required/>
       </div>
     );
-  }
-
-  handleSave(form) {
-    this.props.onSave(form);
   }
 }
 

@@ -19,7 +19,6 @@ const fieldTypes = [{
 class AddCustomField extends Component {
   static get propTypes() {
     return {
-      onFieldAdd: PropTypes.func.isRequired,
       index: PropTypes.number,
       field: PropTypes.string
     };
@@ -51,13 +50,6 @@ class AddCustomField extends Component {
     this.setState({
       showAddOptions: value === 'select' ? true : false
     });
-  }
-
-  handleSave() {
-    this.setState({
-      showAddOptions: false
-    });
-    this.props.onFieldAdd(Object.assign({}, this.state));
   }
 
   handleAddField() {

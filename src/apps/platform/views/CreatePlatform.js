@@ -10,7 +10,8 @@ class CreatePlatform extends Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func.isRequired,
-      history: PropTypes.object.isRequired
+      history: PropTypes.object.isRequired,
+      categories: PropTypes.array.isRequired
     };
   }
 
@@ -38,9 +39,7 @@ class CreatePlatform extends Component {
 
   // handles selecting the category that this new platform will be added too
   handleSelect(category) {
-    console.log(category);
     this.props.dispatch(PlatformActions.createPlatform({category}));
-    // this.props.history.pushState(null, `/help`);
   }
 }
 

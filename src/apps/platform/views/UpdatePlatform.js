@@ -15,7 +15,7 @@ import Form from '../../../common/components/form/Form.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
-class CreatePlatform extends Component {
+class UpdatePlatform extends Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func.isRequired,
@@ -121,4 +121,4 @@ function select(state) {
 
 
 // not sure what this would all need yet
-export default connect(select)(CreatePlatform);
+export default connect(select)(UpdatePlatform);
