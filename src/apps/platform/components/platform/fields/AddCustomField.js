@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Select from '../../../../../common/components/form/fields/Select.js';
 import TextInput from '../../../../../common/components/form/fields/TextInput.js';
-import Form from '../../../../../common/components/form/Form.js';
-import FieldOptions from './FieldOptions.js';
+import AddCustomFieldOptions from './AddCustomFieldOptions.js';
+import Button from '../../../../../common/components/Button.js';
+import update from 'react-addons-update';
 
 const fieldTypes = [{
   label: '',
@@ -18,7 +19,9 @@ const fieldTypes = [{
 class AddCustomField extends Component {
   static get propTypes() {
     return {
-      onFieldAdd: PropTypes.func.isRequired
+      onFieldAdd: PropTypes.func.isRequired,
+      index: PropTypes.number,
+      field: PropTypes.string
     };
   }
 
@@ -30,28 +33,23 @@ class AddCustomField extends Component {
   }
 
   render() {
+    const customFieldKey = this.props.field + '[' + this.props.index + ']';
+    const typeName = customFieldKey + '.type';
+    const labelName = customFieldKey + '.label';
     return (
       <div>
-        <Form onSave={this.handleSave.bind(this)}>
-          <legend>Custom Field</legend>
-          <Select name="type" label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
-          <TextInput name="label" label="Label" onChange={this.handleLabelChange.bind(this)}/>
-        </Form>
-        {this.state.showAddOptions ? <FieldOptions onUpdateOptions={this.handleUpdateOptions.bind(this)} options={this.state.options}/> : null}
+        <legend>Custom Field</legend>
+        <Select name={typeName} label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
+        <TextInput name={labelName} label="Label" />
+        {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddField.bind(this)} /> : null}
+        {this.state.showAddOptions ? this.state.options.map((result, index) => { return <AddCustomFieldOptions key={index} index={index} field={customFieldKey + '.options'} {...result} />; }) : null}
       </div>
     );
   }
 
-  handleTypeChange(type) {
+  handleTypeChange(name, value) {
     this.setState({
-      showAddOptions: type === 'select' ? true : false,
-      type
-    });
-  }
-
-  handleLabelChange(name, label) {
-    this.setState({
-      label
+      showAddOptions: value === 'select' ? true : false
     });
   }
 
@@ -62,10 +60,9 @@ class AddCustomField extends Component {
     this.props.onFieldAdd(Object.assign({}, this.state));
   }
 
-  // this will only be used if select type is selected
-  handleUpdateOptions(options) {
-    this.setState(() => {
-      return options;
+  handleAddField() {
+    this.setState({
+      options: update(this.state.options, {$push: [{}]})
     });
   }
 }

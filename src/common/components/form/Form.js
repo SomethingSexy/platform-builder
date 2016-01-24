@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button.js';
+import _get from 'lodash.get';
+import _set from 'lodash.set';
 
 class Form extends Component {
   static get propTypes() {
@@ -9,7 +11,8 @@ class Form extends Component {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
       ]),
-      onSave: PropTypes.func.isRequired
+      onSave: PropTypes.func.isRequired,
+      model: PropTypes.object
     };
   }
 
@@ -22,6 +25,9 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    if (props.model) {
+      this.model = Object.assign({}, props.model);
+    }
   }
 
   getChildContext() {
@@ -36,6 +42,7 @@ class Form extends Component {
   componentWillMount() {
     // Map of inputs on the form
     this.inputs = {};
+
     // now register all of the inputs for this form
     this.registerInputs(this.props.children);
   }
@@ -79,7 +86,8 @@ class Form extends Component {
   }
 
   handleFormFieldChange(name, value) {
-    this.setState({[name]: value});
+    _set(this.model, name, value);
+    // this.setState({[name]: value});
   }
 
   handleSave(event) {
@@ -88,7 +96,7 @@ class Form extends Component {
     const isValid = this.validateForm();
 
     if (isValid) {
-      this.props.onSave(this.state);
+      this.props.onSave(this.model);
     } else {
       console.log('Form is not valid');
     }

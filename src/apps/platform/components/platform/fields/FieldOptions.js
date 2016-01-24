@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../../../../../common/components/Button.js';
 import AddCustomFieldOptions from './AddCustomFieldOptions.js';
 import update from 'react-addons-update';
 
@@ -28,7 +27,6 @@ class FieldOptions extends Component {
     return (
       <div>
         <h5>Options</h5>
-        <Button text="Add Option" onButtonClick={this.onClick.bind(this)} />
         <ul>
           {this.state.options.map((result, index) => {
             return <li key={index}><span>{result.label}</span><span>{result.value}</span><span onClick={this.handleRemoveOption.bind(this, index)}>Remove</span></li>;

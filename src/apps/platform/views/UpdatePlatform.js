@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import PlatformForm from '../components/platform/PlatformForm.js';
 import * as PlatformActions  from '../actions/platform.js';
 import * as CategoryActions  from '../actions/categories.js';
-import Parts from '../components/platform/parts/Parts.js';
+// import Parts from '../components/platform/parts/Parts.js';
 import ConfigurationForm from '../components/platform/ConfigurationForm.js';
-import CustomFields from '../components/platform/fields/CustomFields.js';
+// import CustomFields from '../components/platform/fields/CustomFields.js';
+import AddCustomField from '../components/platform/fields/AddCustomField';
 import Button from '../../../common/components/Button.js';
 import merge from 'merge';
 import update from 'react-addons-update';
@@ -32,10 +33,17 @@ class CreatePlatform extends Component {
   }
 
   render() {
+    // For the model, we really only need to set the deep properties and arrays.  If I create
+    // a multi-component (what AddcustomField would be) or some sort of deepComponent, than that
+    // could set the model as it gets created
     return (
-      <Form onSave={this.handleSave.bind(this)}>
+      <Form onSave={this.handleSave.bind(this)} model={ {configuration: {fields: []}} }>
         <PlatformForm platform={this.state} />
         <ConfigurationForm platform={this.state}/>
+        <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
+          {this.state.configuration.fields.map((result, index) => {
+            return <AddCustomField key={index} index={index} field="configuration.fields" {...result} />;
+          })}
       </Form>
     );
   }
@@ -60,15 +68,23 @@ class CreatePlatform extends Component {
     return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
   }
 
-  handleFieldAdd(field) {
+  handleAddField() {
     this.setState({
       configuration: {
-        fields: update(this.state.configuration.fields, {$push: [field]})
+        fields: update(this.state.configuration.fields, {$push: [{}]})
       }
-    }, () => {
-      this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state)));
     });
   }
+
+  // handleFieldAdd(field) {
+  //   this.setState({
+  //     configuration: {
+  //       fields: update(this.state.configuration.fields, {$push: [field]})
+  //     }
+  //   }, () => {
+  //     this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, this.state)));
+  //   });
+  // }
 
   // handleFormChange(platform) {
   //   this.setState((previousState, currentProps) => {

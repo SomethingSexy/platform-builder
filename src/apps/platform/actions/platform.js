@@ -74,7 +74,7 @@ function postPlatform(platform) {
 function putPlatform(platform) {
   return dispatch => {
     dispatch(savingPlatform(platform));
-    return fetch('/api/platform', {
+    return fetch('/api/platform/' + platform.id, {
       method: 'put',
       body: JSON.stringify(platform)
     })

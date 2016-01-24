@@ -22,6 +22,8 @@ System.config({
     "events": "npm:events@1.0.2",
     "history": "npm:history@1.12.4",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.1.1",
+    "lodash.get": "npm:lodash.get@4.0.0",
+    "lodash.set": "npm:lodash.set@4.0.0",
     "merge": "npm:merge@1.2.0",
     "react": "npm:react@0.14.0",
     "react-addons-update": "npm:react-addons-update@0.14.6",
@@ -220,6 +222,15 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "source-map": "npm:source-map@0.1.31"
+    },
+    "npm:lodash._baseset@4.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:lodash.get@4.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:lodash.set@4.0.0": {
+      "lodash._baseset": "npm:lodash._baseset@4.0.0"
     },
     "npm:loose-envify@1.0.0": {
       "js-tokens": "npm:js-tokens@1.0.1",
