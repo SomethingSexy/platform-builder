@@ -37,9 +37,11 @@ class AddCustomField extends Component {
     const optionsField = this.props.field + '.options';
     return (
       <div>
-        <legend>Custom Field</legend>
-        <Select name={typeName} label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
-        <TextInput name={labelName} label="Label" />
+        <fieldset className="form-inline">
+          <legend>Custom Field</legend>
+          <Select name={typeName} label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
+          <TextInput name={labelName} label="Label"/>
+        </fieldset>
         {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddField.bind(this)} /> : null}
         {this.state.showAddOptions ? this.state.options.map((result, index) => { return <AddCustomFieldOptions key={index} index={index} field={optionsField} {...result} />; }) : null}
       </div>

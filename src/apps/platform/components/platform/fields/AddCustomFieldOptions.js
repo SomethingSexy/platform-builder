@@ -20,10 +20,10 @@ class AddCustomFieldOptions extends Component {
     const valueName = this.props.field + '.type';
     const labelName = this.props.field + '.label';
     return (
-      <div>
+      <fieldset className="form-inline">
         <TextInput label="Label" name={labelName} required/>
         <TextInput label="Value" name={valueName} required/>
-      </div>
+      </fieldset>
     );
   }
 }

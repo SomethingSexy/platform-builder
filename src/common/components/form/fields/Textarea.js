@@ -21,11 +21,9 @@ class Textarea extends Input {
   render() {
     const value = this.state.value;
     return (
-      <div className ="form-group row">
-        <label className="col-sm-2 form-control-label" htmlFor="">{this.props.label}</label>
-        <div className="col-sm-10">
-          <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
-        </div>
+      <div className ="form-group">
+        <label htmlFor="">{this.props.label}</label>
+        <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
       </div>
     );
   }

@@ -16,22 +16,31 @@ class Select extends Input {
 
   constructor(props) {
     super(props);
-    this.state = props.value || {};
+    this.state = {
+      isValid: true,
+      errorMessage: '',
+      value: props.value || ''
+    };
   }
 
   render() {
+    let className = 'form-group';
+
+    if (!this.state.isValid) {
+      className += ' has-error';
+    }
+
     const value = this.state.value;
+
     return (
-      <div className ="form-group row">
-        <label className="col-sm-2 form-control-label" htmlFor="">{this.props.label}</label>
-        <div className="col-sm-10">
-          <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange.bind(this)}>
-            {this.props.options.map((result) => {
-              return <option key={result.value} value={result.value}>{result.label}</option>;
-            })}
-          </select>
-        </div>
-      </div>
+      <fieldset className={className}>
+        <label htmlFor="">{this.props.label}</label>
+        <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange.bind(this)}>
+          {this.props.options.map((result) => {
+            return <option key={result.value} value={result.value}>{result.label}</option>;
+          })}
+        </select>
+      </fieldset>
     );
   }
 }

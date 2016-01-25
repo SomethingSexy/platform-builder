@@ -3529,17 +3529,13 @@ $__System.register('3c', ['33', '34', '35', '36', '3e', 'd', '3d'], function (_e
             var value = this.state.value;
             return React.createElement(
               'div',
-              { className: 'form-group row' },
+              { className: 'form-group' },
               React.createElement(
                 'label',
-                { className: 'col-sm-2 form-control-label', htmlFor: '' },
+                { htmlFor: '' },
                 this.props.label
               ),
-              React.createElement(
-                'div',
-                { className: 'col-sm-10' },
-                React.createElement('textarea', { type: 'email', className: 'form-control', id: '', placeholder: '', value: value, onChange: this.handleChange.bind(this) })
-              )
+              React.createElement('textarea', { type: 'email', className: 'form-control', id: '', placeholder: '', value: value, onChange: this.handleChange.bind(this) })
             );
           }
         }]);
@@ -3596,20 +3592,16 @@ $__System.register("3f", ["33", "34", "35", "36", "d"], function (_export) {
           value: function render() {
             return React.createElement(
               "div",
-              { className: "form-group row" },
+              { className: "form-group" },
               React.createElement(
                 "label",
-                { className: "col-sm-2 form-control-label" },
+                null,
                 this.props.label
               ),
               React.createElement(
-                "div",
-                { className: "col-sm-10" },
-                React.createElement(
-                  "p",
-                  { className: "form-control-static" },
-                  this.props.value
-                )
+                "p",
+                { className: "form-control-static" },
+                this.props.value
               )
             );
           }
@@ -3822,20 +3814,16 @@ $__System.register('43', ['33', '34', '35', '36', '42', '44', 'd'], function (_e
             var _this = this;
 
             return React.createElement(
-              'div',
-              { className: 'form-group row' },
+              'fieldset',
+              { className: 'form-group' },
               React.createElement(
-                'label',
-                { className: 'col-sm-2' },
+                'legend',
+                null,
                 this.props.label
               ),
-              React.createElement(
-                'div',
-                { className: 'col-sm-10' },
-                this.props.checkboxes.map(function (result) {
-                  return React.createElement(Checkbox, _extends({ key: result.name }, result, { onchange: _this.handleChange.bind(_this) }));
-                })
-              )
+              this.props.checkboxes.map(function (result) {
+                return React.createElement(Checkbox, _extends({ key: result.name }, result, { onchange: _this.handleChange.bind(_this) }));
+              })
             );
           }
         }, {
@@ -3989,35 +3977,42 @@ $__System.register('47', ['33', '34', '35', '36', '3e', 'd', '3d'], function (_e
           _classCallCheck(this, Select);
 
           _get(Object.getPrototypeOf(Select.prototype), 'constructor', this).call(this, props);
-          this.state = props.value || {};
+          this.state = {
+            isValid: true,
+            errorMessage: '',
+            value: props.value || ''
+          };
         }
 
         _createClass(Select, [{
           key: 'render',
           value: function render() {
+            var className = 'form-group';
+
+            if (!this.state.isValid) {
+              className += ' has-error';
+            }
+
             var value = this.state.value;
+
             return React.createElement(
-              'div',
-              { className: 'form-group row' },
+              'fieldset',
+              { className: className },
               React.createElement(
                 'label',
-                { className: 'col-sm-2 form-control-label', htmlFor: '' },
+                { htmlFor: '' },
                 this.props.label
               ),
               React.createElement(
-                'div',
-                { className: 'col-sm-10' },
-                React.createElement(
-                  'select',
-                  { name: this.props.name, className: 'form-control', value: value, onChange: this.handleChange.bind(this) },
-                  this.props.options.map(function (result) {
-                    return React.createElement(
-                      'option',
-                      { key: result.value, value: result.value },
-                      result.label
-                    );
-                  })
-                )
+                'select',
+                { name: this.props.name, className: 'form-control', value: value, onChange: this.handleChange.bind(this) },
+                this.props.options.map(function (result) {
+                  return React.createElement(
+                    'option',
+                    { key: result.value, value: result.value },
+                    result.label
+                  );
+                })
               )
             );
           }
@@ -4060,7 +4055,8 @@ $__System.register('3d', ['33', '34', '35', '36', 'd'], function (_export) {
             return {
               name: PropTypes.string.isRequired,
               onChange: PropTypes.func,
-              validations: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+              validations: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+              inline: PropTypes.bool
             };
           }
         }]);
@@ -4110,6 +4106,13 @@ $__System.register('3d', ['33', '34', '35', '36', 'd'], function (_export) {
 
             // trigger a change on the form
             this.context.onFormFieldChange(name, value);
+          }
+        }], [{
+          key: 'defaultProps',
+          get: function get() {
+            return {
+              inline: false
+            };
           }
         }]);
 
@@ -4177,30 +4180,26 @@ $__System.register('41', ['33', '34', '35', '36', '3e', 'd', '3d'], function (_e
         _createClass(TextInput, [{
           key: 'render',
           value: function render() {
-            var className = 'form-group row';
+            var className = 'form-group';
 
             if (!this.state.isValid) {
               className += ' has-error';
             }
 
             return React.createElement(
-              'div',
+              'fieldset',
               { className: className },
               React.createElement(
                 'label',
-                { className: 'col-sm-2 form-control-label', htmlFor: '' },
+                { htmlFor: '' },
                 this.props.label
               ),
-              React.createElement(
-                'div',
-                { className: 'col-sm-2' },
-                React.createElement('input', { type: 'text', name: this.props.name, className: 'form-control', id: '', placeholder: '', value: this.state.value, onChange: this.handleChange.bind(this) }),
-                !this.state.isValid ? React.createElement(
-                  'span',
-                  { id: 'helpBlock2', className: 'help-block' },
-                  this.state.errorMessage
-                ) : null
-              )
+              React.createElement('input', { type: 'text', name: this.props.name, className: 'form-control', id: '', placeholder: '', value: this.state.value, onChange: this.handleChange.bind(this) }),
+              !this.state.isValid ? React.createElement(
+                'span',
+                { id: 'helpBlock2', className: 'help-block' },
+                this.state.errorMessage
+              ) : null
             );
           }
         }]);
@@ -4263,8 +4262,8 @@ $__System.register('48', ['33', '34', '35', '36', '41', '49', 'd'], function (_e
             var valueName = this.props.field + '.type';
             var labelName = this.props.field + '.label';
             return React.createElement(
-              'div',
-              null,
+              'fieldset',
+              { className: 'form-inline' },
               React.createElement(TextInput, { label: 'Label', name: labelName, required: true }),
               React.createElement(TextInput, { label: 'Value', name: valueName, required: true })
             );
@@ -4440,12 +4439,16 @@ $__System.register('4a', ['33', '34', '35', '36', '41', '44', '47', '48', '49', 
               'div',
               null,
               React.createElement(
-                'legend',
-                null,
-                'Custom Field'
+                'fieldset',
+                { className: 'form-inline' },
+                React.createElement(
+                  'legend',
+                  null,
+                  'Custom Field'
+                ),
+                React.createElement(Select, { name: typeName, label: 'Type', onChange: this.handleTypeChange.bind(this), options: fieldTypes }),
+                React.createElement(TextInput, { name: labelName, label: 'Label' })
               ),
-              React.createElement(Select, { name: typeName, label: 'Type', onChange: this.handleTypeChange.bind(this), options: fieldTypes }),
-              React.createElement(TextInput, { name: labelName, label: 'Label' }),
               this.state.showAddOptions ? React.createElement(Button, { text: 'Add Option', onButtonClick: this.handleAddField.bind(this) }) : null,
               this.state.showAddOptions ? this.state.options.map(function (result, index) {
                 return React.createElement(AddCustomFieldOptions, _extends({ key: index, index: index, field: optionsField }, result));

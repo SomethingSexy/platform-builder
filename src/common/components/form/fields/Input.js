@@ -8,7 +8,8 @@ class Input extends Component {
       validations: React.PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
-      ])
+      ]),
+      inline: PropTypes.bool
     };
   }
 
@@ -16,6 +17,12 @@ class Input extends Component {
     super(props);
 
     this.required = props.required ? true : false;
+  }
+
+  static get defaultProps() {
+    return {
+      inline: false
+    };
   }
 
   componentWillMount() {

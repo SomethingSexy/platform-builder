@@ -18,11 +18,9 @@ class StaticField extends Component {
 
   render() {
     return (
-      <div className="form-group row">
-        <label className="col-sm-2 form-control-label">{this.props.label}</label>
-        <div className="col-sm-10">
-          <p className="form-control-static">{this.props.value}</p>
-        </div>
+      <div className="form-group">
+        <label>{this.props.label}</label>
+        <p className="form-control-static">{this.props.value}</p>
       </div>
     );
   }

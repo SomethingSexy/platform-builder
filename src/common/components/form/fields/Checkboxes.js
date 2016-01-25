@@ -16,15 +16,12 @@ class Checkboxes extends Component {
 
   render() {
     return (
-      <div className="form-group row">
-        <label className="col-sm-2">{this.props.label}</label>
-        <div className="col-sm-10">
-          {this.props.checkboxes.map((result) => {
-            return <Checkbox key={result.name} {...result} onchange={this.handleChange.bind(this)}/>;
-          })}
-        </div>
-      </div>
-
+      <fieldset className="form-group">
+        <legend>{this.props.label}</legend>
+        {this.props.checkboxes.map((result) => {
+          return <Checkbox key={result.name} {...result} onchange={this.handleChange.bind(this)}/>;
+        })}
+      </fieldset>
     );
   }
 
