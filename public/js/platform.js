@@ -4415,7 +4415,8 @@ $__System.register('4a', ['33', '34', '35', '36', '41', '44', '47', '48', '49', 
           key: 'propTypes',
           get: function get() {
             return {
-              field: PropTypes.string
+              field: PropTypes.string.isRequired,
+              index: PropTypes.number.isRequired
             };
           }
         }]);
@@ -4444,7 +4445,7 @@ $__System.register('4a', ['33', '34', '35', '36', '41', '44', '47', '48', '49', 
                 React.createElement(
                   'legend',
                   null,
-                  'Custom Field'
+                  'Custom Field #' + (this.props.index + 1)
                 ),
                 React.createElement(Select, { name: typeName, label: 'Type', onChange: this.handleTypeChange.bind(this), options: fieldTypes }),
                 React.createElement(TextInput, { name: labelName, label: 'Label' })
@@ -5479,7 +5480,7 @@ $__System.register('6f', ['33', '34', '35', '36', '3e', '5a', 'd', '4b', '6a', '
               var component = _this2.inputs[name];
 
               // grab the value
-              var value = _this2.state[name];
+              var value = _get(_this2.model, name);
 
               // validate the value
               var isValid = _this2.validateField(component, value);

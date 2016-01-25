@@ -114,7 +114,7 @@ class Form extends Component {
       const component = this.inputs[name];
 
       // grab the value
-      const value = this.state[name];
+      const value = _get(this.model, name);
 
       // validate the value
       const isValid = this.validateField(component, value);

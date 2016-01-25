@@ -20,7 +20,8 @@ const fieldTypes = [{
 class AddCustomField extends Component {
   static get propTypes() {
     return {
-      field: PropTypes.string
+      field: PropTypes.string.isRequired,
+      index: PropTypes.number.isRequired
     };
   }
 
@@ -38,7 +39,7 @@ class AddCustomField extends Component {
     return (
       <div>
         <fieldset className="form-inline">
-          <legend>Custom Field</legend>
+          <legend>{'Custom Field #' + (this.props.index + 1)}</legend>
           <Select name={typeName} label="Type" onChange={this.handleTypeChange.bind(this)} options={fieldTypes}/>
           <TextInput name={labelName} label="Label"/>
         </fieldset>
