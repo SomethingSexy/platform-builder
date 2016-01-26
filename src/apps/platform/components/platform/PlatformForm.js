@@ -6,7 +6,6 @@ import Checkboxes from '../../../../common/components/form/fields/Checkboxes.js'
 import Button from '../../../../common/components/Button.js';
 import AddCustomField from './fields/AddCustomField';
 import form from '../../../../common/components/form/Form.js';
-import merge from 'merge';
 import update from 'react-addons-update';
 
 const model = {configuration: {fields: []}};
@@ -16,6 +15,7 @@ class PlatformForm extends Component {
     return {
       form: PropTypes.object.isRequired,
       addField: PropTypes.func.isRequired,
+      removeField: PropTypes.func.isRequired,
       validate: PropTypes.func.isRequired,
       onSave: PropTypes.func.isRequired
     };
@@ -70,7 +70,7 @@ class PlatformForm extends Component {
         <h3>Custom Fields</h3>
         <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
         {this.props.form.configuration.fields.map((result, index) => {
-          return <AddCustomField key={index} index={index} field="configuration.fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} {...result} />;
+          return <AddCustomField key={result._id} index={index} field="configuration.fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
         })}
         <h3>Diagram</h3>
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
@@ -83,11 +83,7 @@ class PlatformForm extends Component {
   }
 
   handleRemoveField(index) {
-    this.setState({
-      configuration: {
-        fields: update(this.state.configuration.fields, {$splice: [[index, 1]]})
-      }
-    });
+    this.props.removeField('configuration.fields', index);
   }
 
   handleSave(event) {

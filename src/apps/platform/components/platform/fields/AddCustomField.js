@@ -4,7 +4,6 @@ import TextInput from '../../../../../common/components/form/fields/TextInput.js
 import AddCustomFieldOptions from './AddCustomFieldOptions.js';
 import Button from '../../../../../common/components/Button.js';
 import repeatable from '../../../../../common/components/form/Repeatable.js';
-import update from 'react-addons-update';
 
 const fieldTypes = [{
   label: '',
@@ -24,7 +23,8 @@ class AddCustomField extends Component {
       index: PropTypes.number.isRequired,
       onRemove: PropTypes.func.isRequired,
       addField: PropTypes.func.isRequired,
-      options: PropTypes.array.isRequired
+      options: PropTypes.array.isRequired,
+      removeField: PropTypes.func.isRequired
     };
   }
 
@@ -48,7 +48,7 @@ class AddCustomField extends Component {
           <Button text="Remove" onButtonClick={this.props.onRemove}  />
         </fieldset>
         {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddOption.bind(this)} /> : null}
-        {this.state.showAddOptions ? this.props.options.map((result, index) => { return <AddCustomFieldOptions key={index} index={index} field={optionsField} onRemove={this.handleRemoveOption.bind(this, index)} {...result} />; }) : null}
+        {this.state.showAddOptions ? this.props.options.map((result, index) => { return <AddCustomFieldOptions key={result._id} index={index} field={optionsField} onRemove={this.handleRemoveOption.bind(this, index)} {...result} />; }) : null}
       </div>
     );
   }
@@ -60,13 +60,11 @@ class AddCustomField extends Component {
   }
 
   handleAddOption() {
-    this.props.addField(this.props.field + '.options', {})
+    this.props.addField(this.props.field + '.options', {});
   }
 
   handleRemoveOption(index) {
-    this.setState({
-      options: update(this.state.options, {$splice: [[index, 1]]})
-    });
+    this.props.removeField(this.props.field + '.options', index);
   }
 }
 

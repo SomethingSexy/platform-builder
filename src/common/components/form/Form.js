@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _get from 'lodash.get';
 import _set from 'lodash.set';
+import uuid from 'uuid';
 
 export default (ComposedComponent, options) => {
   class Form extends Component {
@@ -49,15 +50,9 @@ export default (ComposedComponent, options) => {
     render() {
       return (
         <form>
-          <ComposedComponent {...this.props} form={this.model} validate={this.validate.bind(this)} addField={this.addField.bind(this)} />
+          <ComposedComponent {...this.props} form={this.model} validate={this.validate.bind(this)} addField={this.addField.bind(this)} removeField={this.removeField.bind(this)} />
         </form>
       );
-    }
-
-    addField(name, field) {
-      const addTo = _get(this.model, name);
-      addTo.push(field);
-      this.forceUpdate();
     }
 
     registerInputs(children) {
@@ -91,6 +86,21 @@ export default (ComposedComponent, options) => {
 
     handleFormFieldChange(name, value) {
       _set(this.model, name, value);
+      this.forceUpdate();
+    }
+
+    addField(name, field) {
+      if (field && !field.id) {
+        field._id = uuid.v4();
+      }
+      const addTo = _get(this.model, name);
+      addTo.push(field);
+      this.forceUpdate();
+    }
+
+    removeField(name, index) {
+      const addTo = _get(this.model, name);
+      addTo.splice(index, 1);
       this.forceUpdate();
     }
 

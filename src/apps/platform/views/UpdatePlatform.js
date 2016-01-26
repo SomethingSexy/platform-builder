@@ -32,7 +32,6 @@ class UpdatePlatform extends Component {
   }
 
   handleSave(model) {
-    console.log(model);
     // the platform is the data coming from the form, merge it with the current
     // platform data we have
     this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
