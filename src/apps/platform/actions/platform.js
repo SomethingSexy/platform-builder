@@ -64,6 +64,9 @@ function postPlatform(platform) {
     dispatch(creatingPlatform(platform));
     return fetch('/api/platform', {
       method: 'post',
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
       body: JSON.stringify(platform)
     })
       .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)

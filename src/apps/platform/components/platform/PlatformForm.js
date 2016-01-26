@@ -6,7 +6,6 @@ import Checkboxes from '../../../../common/components/form/fields/Checkboxes.js'
 import Button from '../../../../common/components/Button.js';
 import AddCustomField from './fields/AddCustomField';
 import form from '../../../../common/components/form/Form.js';
-import update from 'react-addons-update';
 
 const model = {configuration: {fields: []}};
 
