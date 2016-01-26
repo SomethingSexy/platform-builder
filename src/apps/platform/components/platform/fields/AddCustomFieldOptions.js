@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import TextInput from '../../../../../common/components/form/fields/TextInput.js';
 import repeatable from '../../../../../common/components/form/Repeatable.js';
+import Button from '../../../../../common/components/Button.js';
 
 
 class AddCustomFieldOptions extends Component {
   static get propTypes() {
     return {
-      field: PropTypes.string
+      field: PropTypes.string,
+      index: PropTypes.number.isRequired,
+      onRemove: PropTypes.func.isRequired
     };
   }
 
@@ -23,6 +26,7 @@ class AddCustomFieldOptions extends Component {
       <fieldset className="form-inline">
         <TextInput label="Label" name={labelName} required/>
         <TextInput label="Value" name={valueName} required/>
+        <Button text="Remove" onButtonClick={this.props.onRemove}  />
       </fieldset>
     );
   }

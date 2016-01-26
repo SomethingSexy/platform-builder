@@ -21,10 +21,10 @@ class Textarea extends Input {
   render() {
     const value = this.state.value;
     return (
-      <div className ="form-group">
+      <fieldset className ="form-group">
         <label htmlFor="">{this.props.label}</label>
         <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
-      </div>
+      </fieldset>
     );
   }
 }
