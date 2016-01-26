@@ -7757,8 +7757,6 @@ $__System.register('3a', ['90', '91'], function (_export) {
   }
 
   function fetchedPlatform(platform) {
-    console.log('fetchedPlatform action');
-    console.log(platform);
     return {
       type: FETCHED_PLATFORM,
       platform: platform,
@@ -7772,7 +7770,7 @@ $__System.register('3a', ['90', '91'], function (_export) {
       return fetch('/api/platform', {
         method: 'post',
         headers: new Headers({
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         }),
         body: JSON.stringify(platform)
       }).then(function (response) {
@@ -7789,6 +7787,9 @@ $__System.register('3a', ['90', '91'], function (_export) {
       dispatch(savingPlatform(platform));
       return fetch('/api/platform/' + platform.id, {
         method: 'put',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
         body: JSON.stringify(platform)
       }).then(function (response) {
         return response.json();

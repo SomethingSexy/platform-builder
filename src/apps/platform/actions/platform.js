@@ -49,8 +49,6 @@ function savedPlatform(platform) {
 }
 
 function fetchedPlatform(platform) {
-  console.log('fetchedPlatform action');
-  console.log(platform);
   return {
     type: FETCHED_PLATFORM,
     platform,
@@ -65,7 +63,7 @@ function postPlatform(platform) {
     return fetch('/api/platform', {
       method: 'post',
       headers: new Headers({
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }),
       body: JSON.stringify(platform)
     })
@@ -79,6 +77,9 @@ function putPlatform(platform) {
     dispatch(savingPlatform(platform));
     return fetch('/api/platform/' + platform.id, {
       method: 'put',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
       body: JSON.stringify(platform)
     })
       .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)

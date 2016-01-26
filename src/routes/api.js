@@ -29,7 +29,36 @@ export default (app) => {
       ctx.body = { message: err.message };
       ctx.status = err.status || 500;
     }
-  });  
+  });
+
+  router.put('/api/platform/:id', async (ctx, next) => {
+    try {
+      await next(); // next is now a function
+      console.log(ctx);
+      ctx.body = Object.assign({}, ctx.request.body);
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
+
+  router.get('/api/platform/:id', async (ctx, next) => {
+    try {
+      await next(); // next is now a function
+      ctx.body = Object.assign({}, {
+        id: ctx.params.id,
+        category: {
+          id: 1,
+          name: 'Firearm'
+        }
+      });
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
 
   return router.routes();
 };
