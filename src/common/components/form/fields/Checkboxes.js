@@ -6,7 +6,7 @@ class Checkboxes extends Component {
     return {
       label: PropTypes.string,
       checkboxes: PropTypes.array.isRequired,
-      onChange: PropTypes.func.isRequired
+      onChange: PropTypes.func
     };
   }
 
@@ -19,14 +19,16 @@ class Checkboxes extends Component {
       <fieldset className="form-group">
         <legend>{this.props.label}</legend>
         {this.props.checkboxes.map((result) => {
-          return <Checkbox key={result.name} {...result} onchange={this.handleChange.bind(this)}/>;
+          return <Checkbox key={result.name} {...result} onChange={this.handleChange.bind(this)}/>;
         })}
       </fieldset>
     );
   }
 
   handleChange(value, name) {
-    this.props.onChange(value, name);
+    if (this.props.onChange) {
+      this.props.onChange(value, name);
+    }
   }
 }
 

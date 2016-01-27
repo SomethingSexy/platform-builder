@@ -1,12 +1,10 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import PlatformForm from '../components/platform/PlatformForm.js';
 import * as PlatformActions  from '../actions/platform.js';
 import * as CategoryActions  from '../actions/categories.js';
+import { Link } from 'react-router';
 
-// I think we want create an initial platform first so that whatever the user
-// does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
-class UpdatePlatform extends Component {
+class CreatePart extends Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func.isRequired,
@@ -23,9 +21,10 @@ class UpdatePlatform extends Component {
   }
 
   render() {
+    const returnLink = '/platform/' + this.props.platform.id + '/build';
     return (
       <div>
-        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} onClickAddNewPart={this.handleClickAddNewPart.bind(this)} />
+        <h3>Create New Part</h3><Link to={returnLink}>Return to Platform</Link>
       </div>
     );
   }
@@ -53,4 +52,4 @@ function select(state) {
 }
 
 // not sure what this would all need yet
-export default connect(select)(UpdatePlatform);
+export default connect(select)(CreatePart);

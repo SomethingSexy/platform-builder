@@ -13,11 +13,8 @@ class Parts extends Component {
       <div className="row">
         <div className="col-md-12">
           <h4>Parts</h4>
-          <ul>
-            {this.props.parts.map((result) => {
-              return <Part key={result.id} data={result}/>;
-            })}
-          </ul>
+          {this.props.parts.length === 0 ? <p>No parts have been added.</p> : null}
+          {this.props.parts.length > 0 ?  <ul> {this.props.parts.map((result) => { return <Part key={result.id} data={result}/>; })} </ul> : null}
         </div>
       </div>
     );

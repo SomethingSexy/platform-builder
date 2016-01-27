@@ -13,7 +13,6 @@ const dataRegex = /¡DATA!/;
 export default function processAppRequest(req, res, url, store, routes) {
   return new Promise((resolve, reject) => {
     const history = createMemoryHistory();
-    console.log(url);
     const location = history.createLocation(url);
     // give the location we need to load
     // the corret router and store
@@ -38,7 +37,6 @@ export default function processAppRequest(req, res, url, store, routes) {
           const output = indexHTML.
             replace(htmlRegex, html).
             replace(dataRegex, JSON.stringify(initialData));
-          console.log(output);
           // write(output, 'text/html', res);
           resolve(output);
         })

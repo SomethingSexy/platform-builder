@@ -6,8 +6,16 @@ import Checkboxes from '../../../../common/components/form/fields/Checkboxes.js'
 import Button from '../../../../common/components/Button.js';
 import AddCustomField from './fields/AddCustomField';
 import form from '../../../../common/components/form/Form.js';
+import Parts from './parts/Parts.js';
+import { Link } from 'react-router';
 
-const model = {configuration: {fields: []}};
+const model = {
+  configuration: {
+    fields: []
+  },
+  parts: [],
+  partGroups: []
+};
 
 class PlatformForm extends Component {
   static get propTypes() {
@@ -16,7 +24,8 @@ class PlatformForm extends Component {
       addField: PropTypes.func.isRequired,
       removeField: PropTypes.func.isRequired,
       validate: PropTypes.func.isRequired,
-      onSave: PropTypes.func.isRequired
+      onSave: PropTypes.func.isRequired,
+      onClickAddNewPart: PropTypes.func.isRequired
     };
   }
   // For the model, we really only need to set the deep properties and arrays.  If I create
@@ -58,8 +67,13 @@ class PlatformForm extends Component {
       value: 'true',
       selectedValue: this.props.form.showTransactions,
       name: 'showTransactions'
+    }, {
+      label: 'Allow additional parts',
+      value: 'true',
+      selectedValue: this.props.form.allowAdditionalParts,
+      name: 'allowAdditionalParts'
     }];
-
+    const createPartLink = '/platform/' + this.props.form.id + '/part';
     return (
       <div>
         <Static label="Category" value={this.props.form.category.name}/>
@@ -72,9 +86,16 @@ class PlatformForm extends Component {
           return <AddCustomField key={result._id} index={index} field="configuration.fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
         })}
         <h3>Diagram</h3>
+        <Link to={createPartLink}>Create New Part</Link>
+        <Parts parts={this.props.form.parts}/>
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );
+  }
+
+  handleAddNewPart(event) {
+    event.stopPropagation();
+    this.props.onClickAddNewPart();
   }
 
   handleAddField() {
