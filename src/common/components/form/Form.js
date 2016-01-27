@@ -22,7 +22,6 @@ export default (ComposedComponent, options) => {
     }
 
     constructor(props) {
-      console.log(props);
       super(props);
       this.state = {};
       if (options.model) {

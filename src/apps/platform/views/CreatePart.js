@@ -1,5 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
+import AddPartForm from '../components/platform/parts/AddPartForm.js'; 
 import * as PlatformActions  from '../actions/platform.js';
 import * as CategoryActions  from '../actions/categories.js';
 import { Link } from 'react-router';
@@ -24,7 +25,9 @@ class CreatePart extends Component {
     const returnLink = '/platform/' + this.props.platform.id + '/build';
     return (
       <div>
-        <h3>Create New Part</h3><Link to={returnLink}>Return to Platform</Link>
+        <h3>Create New Part</h3>
+        <Link to={returnLink}>Return to Platform</Link>
+        <AddPartForm />
       </div>
     );
   }
