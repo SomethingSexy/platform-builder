@@ -1,6 +1,6 @@
 import fs from 'fs';
 import React from 'react';
-import { RoutingContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
 import fetchComponentData from './fetchComponentData.js';
 import { renderToString } from 'react-dom/server';
@@ -33,7 +33,7 @@ export default function processAppRequest(req, res, url, store, routes) {
         return fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
           const initialData = store.getState();
-          const html = renderToString(<Provider store={store}><RoutingContext {...renderProps}/></Provider>);
+          const html = renderToString(<Provider store={store}><RouterContext {...renderProps}/></Provider>);
           const output = indexHTML.
             replace(htmlRegex, html).
             replace(dataRegex, JSON.stringify(initialData));

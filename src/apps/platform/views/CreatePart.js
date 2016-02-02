@@ -34,9 +34,7 @@ class CreatePart extends Component {
   }
 
   handleSave(model) {
-    // the platform is the data coming from the form, merge it with the current
-    // platform data we have
-    // this.props.dispatch(PartActions.savePlatform(Object.assign({}, model)));
+    this.props.dispatch(PartActions.createPart(Object.assign({}, model)));
     console.log(model);
   }
 }

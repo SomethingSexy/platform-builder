@@ -17,18 +17,18 @@ function createdPart(part) {
   return {
     type: CREATED_PART,
     part,
-    receivedAt: Date.now()
-    // meta: {
-    //   transition: (prevState, nextState, action) => ({
-    //     path: `/platform/${action.part.id}/build`,
-    //     query: {
-    //       some: 'queryParam'
-    //     },
-    //     state: {
-    //       some: 'state'
-    //     }
-    //   })
-    // }
+    receivedAt: Date.now(),
+    meta: {
+      transition: (prevState, nextState, action) => ({
+        path: `/platform/${action.part.createdPlatformId}/build`
+        // query: {
+        //   some: 'queryParam'
+        // },
+        // state: {
+        //   some: 'state'
+        // }
+      })
+    }
   };
 }
 
@@ -110,7 +110,7 @@ export function savePart(part) {
   };
 }
 
-export function fetchPlatform(params) {
+export function fetchPart(params) {
   return (dispatch, getState) => {
     const state = getState();
     let isFetch = true;

@@ -15,15 +15,26 @@ class Textarea extends Input {
 
   constructor(props) {
     super(props);
-    this.state = props.value || {};
+    this.state = {
+      isValid: true,
+      errorMessage: '',
+      value: props.value || ''
+    };
   }
 
   render() {
     const value = this.state.value;
+    let className = 'form-group';
+
+    if (!this.state.isValid) {
+      className += ' has-error';
+    }
+
     return (
-      <fieldset className ="form-group">
+      <fieldset className={className}>
         <label htmlFor="">{this.props.label}</label>
         <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
+        {!this.state.isValid ? <span id="helpBlock2" className="help-block">{this.state.errorMessage}</span> : null }
       </fieldset>
     );
   }

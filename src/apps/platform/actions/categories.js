@@ -12,7 +12,7 @@ function fetchedCategories(json) {
 
 function fetchCategories() {
   return dispatch => {
-    return fetch('http://localhost:5000/api/categories')
+    return fetch(new Request('http://localhost:5000/api/categories')) // was getting an issue when needed to loaded categories later, so switched to new Request()
       .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
       .then(json => dispatch(fetchedCategories(json))) // TODO: This last peice does not work on server because of need for window?
       .catch(error => {

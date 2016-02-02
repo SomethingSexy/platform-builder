@@ -27,8 +27,8 @@ class AddPartForm extends Component {
   render() {
     return (
       <div>
-        <TextInput name="name" label="Name" />
-        <Textarea name="description" label="Description" />
+        <TextInput name="name" label="Name" required/>
+        <Textarea name="description" label="Description" required/>
         <h3>Custom Fields</h3>
         <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
         {this.props.form.fields.map((result, index) => {
