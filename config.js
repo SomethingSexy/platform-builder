@@ -1,12 +1,13 @@
 System.config({
   defaultJSExtensions: true,
-  transpiler: "babel",
-  babelOptions: {
-    "optional": [
-      "runtime",
-      "optimisation.modules.system"
-    ]
-  },
+  // don't need these right now, doing it all ahead a time
+  // transpiler: "babel",
+  // babelOptions: {
+  //   "optional": [
+  //     "runtime",
+  //     "optimisation.modules.system"
+  //   ]
+  // },
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
