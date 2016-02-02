@@ -17,7 +17,7 @@ gulp.task('build', function() {
         separateCSS: true,
         cssOptimize: false
       });
-      return builder.buildStatic('src/apps/platform/client.js', 'public/js/platform.js', {
+      return builder.buildStatic('dist/apps/platform/client.js', 'public/js/platform.js', {
         sourceMaps: false,
         minify: false,
         mangle: false

@@ -29,3 +29,4 @@ node_modules
 jspm_packages
 
 # App Files 
+dist
