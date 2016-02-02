@@ -70,7 +70,7 @@ export default (ComposedComponent, options) => {
         if (child.props && child.props.children) {
           this.registerInputs(child.props.children);
         }
-      }.bind(this));
+      });
     }
 
     // All methods defined are bound to the component by React JS, so it is safe to use "this"
