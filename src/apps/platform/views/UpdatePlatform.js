@@ -17,25 +17,18 @@ class UpdatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showCreateNewPart: false
-    };
   }
 
   render() {
     return (
       <div>
-        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} onClickAddNewPart={this.handleClickAddNewPart.bind(this)} />
+        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} />
       </div>
     );
   }
 
   static get needs() {
     return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
-  }
-
-  handleClickAddNewPart() {
-    this.setState({showCreateNewPart: true});
   }
 
   handleSave(model) {

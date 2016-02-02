@@ -1,24 +1,21 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import AddPartForm from '../components/platform/parts/AddPartForm.js'; 
+import AddPartForm from '../components/platform/parts/AddPartForm.js';
 import * as PlatformActions  from '../actions/platform.js';
-import * as CategoryActions  from '../actions/categories.js';
+import * as PartActions  from '../actions/part.js';
 import { Link } from 'react-router';
 
 class CreatePart extends Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func.isRequired,
-      categories: PropTypes.array.isRequired,
-      platform: PropTypes.object.isRequired
+      platform: PropTypes.object.isRequired,
+      part: PropTypes.object.isRequired
     };
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      showCreateNewPart: false
-    };
   }
 
   render() {
@@ -27,30 +24,30 @@ class CreatePart extends Component {
       <div>
         <h3>Create New Part</h3>
         <Link to={returnLink}>Return to Platform</Link>
-        <AddPartForm />
+        <AddPartForm form={this.props.part} onSave={this.handleSave.bind(this)} />
       </div>
     );
   }
 
   static get needs() {
-    return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
-  }
-
-  handleClickAddNewPart() {
-    this.setState({showCreateNewPart: true});
+    return [PlatformActions.fetchPlatform];
   }
 
   handleSave(model) {
     // the platform is the data coming from the form, merge it with the current
     // platform data we have
-    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
+    // this.props.dispatch(PartActions.savePlatform(Object.assign({}, model)));
+    console.log(model);
   }
 }
 
 function select(state) {
   return {
-    categories: state.categories.categories,
-    platform: state.platformsById[state.workingPlatformId]
+    platform: state.platformsById[state.workingPlatformId],
+    // something like this?
+    part: {
+      createdPlatformId: state.workingPlatformId
+    }
   };
 }
 

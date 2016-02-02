@@ -24,8 +24,7 @@ class PlatformForm extends Component {
       addField: PropTypes.func.isRequired,
       removeField: PropTypes.func.isRequired,
       validate: PropTypes.func.isRequired,
-      onSave: PropTypes.func.isRequired,
-      onClickAddNewPart: PropTypes.func.isRequired
+      onSave: PropTypes.func.isRequired
     };
   }
   // For the model, we really only need to set the deep properties and arrays.  If I create
@@ -91,11 +90,6 @@ class PlatformForm extends Component {
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );
-  }
-
-  handleAddNewPart(event) {
-    event.stopPropagation();
-    this.props.onClickAddNewPart();
   }
 
   handleAddField() {
