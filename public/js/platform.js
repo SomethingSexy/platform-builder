@@ -887,21 +887,28 @@ $__System.registerDynamic("14", ["4", "13"], true, function($__require, exports,
     _createClass(Parts, [{
       key: 'render',
       value: function render() {
-        return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), this.props.parts.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, this.props.parts.length > 0 ? _react2.default.createElement('ul', null, ' ', this.props.parts.map(function(result) {
+        var _this2 = this;
+        var partsToRender = this.props.partIds.map(function(id) {
+          return _this2.props.parts[id];
+        });
+        return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), partsToRender.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, partsToRender.length > 0 ? _react2.default.createElement('ul', null, ' ', partsToRender.map(function(result) {
           return _react2.default.createElement(_Part2.default, {
             key: result.id,
             data: result
           });
         }), ' ') : null));
       }
-    }], [{
-      key: 'propTypes',
-      get: function get() {
-        return {parts: _react.PropTypes.array.isRequired};
-      }
     }]);
     return Parts;
   }(_react.Component);
+  Parts.propTypes = {
+    parts: _react.PropTypes.object.isRequired,
+    partIds: _react.PropTypes.array.isRequired
+  };
+  Parts.defaultProps = {
+    parts: {},
+    partIds: []
+  };
   exports.default = Parts;
   global.define = __define;
   return module.exports;
@@ -1005,7 +1012,8 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
           addField: _react.PropTypes.func.isRequired,
           removeField: _react.PropTypes.func.isRequired,
           validate: _react.PropTypes.func.isRequired,
-          onSave: _react.PropTypes.func.isRequired
+          onSave: _react.PropTypes.func.isRequired,
+          parts: _react.PropTypes.object.isRequired
         };
       }
     }]);
@@ -1078,7 +1086,10 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
             addField: _this2.props.addField,
             removeField: _this2.props.removeField
           }, result));
-        }), _react2.default.createElement('h3', null, 'Diagram'), _react2.default.createElement(_reactRouter.Link, {to: createPartLink}, 'Create New Part'), _react2.default.createElement(_Parts2.default, {parts: this.props.form.parts}), _react2.default.createElement(_Button2.default, {
+        }), _react2.default.createElement('h3', null, 'Diagram'), _react2.default.createElement(_reactRouter.Link, {to: createPartLink}, 'Create New Part'), _react2.default.createElement(_Parts2.default, {
+          partIds: this.props.form.parts,
+          parts: this.props.parts
+        }), _react2.default.createElement(_Button2.default, {
           text: 'Save',
           onButtonClick: this.handleSave.bind(this)
         }));
@@ -1194,7 +1205,8 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
         return {
           dispatch: _react.PropTypes.func.isRequired,
           categories: _react.PropTypes.array.isRequired,
-          platform: _react.PropTypes.object.isRequired
+          platform: _react.PropTypes.object.isRequired,
+          parts: _react.PropTypes.object.isRequired
         };
       }
     }]);
@@ -1207,7 +1219,8 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
       value: function render() {
         return _react2.default.createElement('div', null, _react2.default.createElement(_PlatformForm2.default, {
           form: this.props.platform,
-          onSave: this.handleSave.bind(this)
+          onSave: this.handleSave.bind(this),
+          parts: this.props.parts
         }));
       }
     }, {
@@ -1226,7 +1239,8 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
   function select(state) {
     return {
       categories: state.categories.categories,
-      platform: state.platformsById[state.workingPlatformId]
+      platform: state.platformsById[state.workingPlatformId],
+      parts: state.partsById
     };
   }
   exports.default = (0, _reactRedux.connect)(select)(UpdatePlatform);
@@ -3402,7 +3416,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("35", ["d"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3412,6 +3426,7 @@ $__System.registerDynamic("35", ["d"], true, function($__require, exports, modul
   exports.platformsById = platformsById;
   exports.workingPlatformId = workingPlatformId;
   var _platform = $__require('d');
+  var _part = $__require('2b');
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -3447,6 +3462,12 @@ $__System.registerDynamic("35", ["d"], true, function($__require, exports, modul
           didInvalidate: false,
           lastUpdated: action.receivedAt
         }, action.platform);
+      case _part.CREATED_PART:
+        if (!state.parts) {
+          state.parts = [];
+        }
+        state.parts.push(action.part.id);
+        return state;
       default:
         return state;
     }
@@ -3465,6 +3486,9 @@ $__System.registerDynamic("35", ["d"], true, function($__require, exports, modul
         return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
       case _platform.FETCHED_PLATFORM:
         return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _part.CREATED_PART:
+        var platformId = action.part.createdPlatformId;
+        return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
       default:
         return state;
     }

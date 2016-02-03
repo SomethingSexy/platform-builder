@@ -24,7 +24,8 @@ class PlatformForm extends Component {
       addField: PropTypes.func.isRequired,
       removeField: PropTypes.func.isRequired,
       validate: PropTypes.func.isRequired,
-      onSave: PropTypes.func.isRequired
+      onSave: PropTypes.func.isRequired,
+      parts: PropTypes.object.isRequired
     };
   }
   // For the model, we really only need to set the deep properties and arrays.  If I create
@@ -86,7 +87,7 @@ class PlatformForm extends Component {
         })}
         <h3>Diagram</h3>
         <Link to={createPartLink}>Create New Part</Link>
-        <Parts parts={this.props.form.parts}/>
+        <Parts partIds={this.props.form.parts} parts={this.props.parts}/>
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );

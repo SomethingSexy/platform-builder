@@ -2,19 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import Part from './Part.js';
 
 class Parts extends Component {
-  static get propTypes() {
-    return {
-      parts: PropTypes.array.isRequired
-    };
-  }
+  static propTypes = {
+    parts: PropTypes.object.isRequired,
+    partIds: PropTypes.array.isRequired
+  };
+
+  static defaultProps = {
+    parts: {},
+    partIds: []
+  };
 
   render() {
+    const partsToRender = this.props.partIds.map(id => this.props.parts[id]);
+
     return (
       <div className="row">
         <div className="col-md-12">
           <h4>Parts</h4>
-          {this.props.parts.length === 0 ? <p>No parts have been added.</p> : null}
-          {this.props.parts.length > 0 ?  <ul> {this.props.parts.map((result) => { return <Part key={result.id} data={result}/>; })} </ul> : null}
+          {partsToRender.length === 0 ? <p>No parts have been added.</p> : null}
+          {partsToRender.length > 0 ?  <ul> {partsToRender.map((result) => { return <Part key={result.id} data={result}/>; })} </ul> : null}
         </div>
       </div>
     );

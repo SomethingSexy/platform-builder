@@ -11,7 +11,8 @@ class UpdatePlatform extends Component {
     return {
       dispatch: PropTypes.func.isRequired,
       categories: PropTypes.array.isRequired,
-      platform: PropTypes.object.isRequired
+      platform: PropTypes.object.isRequired,
+      parts: PropTypes.object.isRequired
     };
   }
 
@@ -22,7 +23,7 @@ class UpdatePlatform extends Component {
   render() {
     return (
       <div>
-        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} />
+        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} parts={this.props.parts} />
       </div>
     );
   }
@@ -41,7 +42,8 @@ class UpdatePlatform extends Component {
 function select(state) {
   return {
     categories: state.categories.categories,
-    platform: state.platformsById[state.workingPlatformId]
+    platform: state.platformsById[state.workingPlatformId],
+    parts: state.partsById
   };
 }
 

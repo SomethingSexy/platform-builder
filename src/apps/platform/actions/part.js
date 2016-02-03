@@ -21,12 +21,6 @@ function createdPart(part) {
     meta: {
       transition: (prevState, nextState, action) => ({
         path: `/platform/${action.part.createdPlatformId}/build`
-        // query: {
-        //   some: 'queryParam'
-        // },
-        // state: {
-        //   some: 'state'
-        // }
       })
     }
   };
@@ -67,7 +61,7 @@ function postPart(part) {
       }),
       body: JSON.stringify(part)
     })
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(response => response.json())
       .then(json => dispatch(createdPart(json)));
   };
 }
@@ -82,7 +76,7 @@ function putPart(part) {
       }),
       body: JSON.stringify(part)
     })
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(response => response.json())
       .then(json => dispatch(savedPart(json)));
   };
 }

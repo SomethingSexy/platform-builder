@@ -1,6 +1,7 @@
 import {
   CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM
 } from '../actions/platform.js';
+import { CREATED_PART } from '../actions/part.js';
 
 function platforms(state = {}, action) {
   switch (action.type) {
@@ -22,6 +23,13 @@ function platforms(state = {}, action) {
       didInvalidate: false,
       lastUpdated: action.receivedAt
     }, action.platform);
+  case CREATED_PART:
+    // when a part is created we need to add it to the list of parts
+    if (!state.parts) {
+      state.parts = [];
+    }
+    state.parts.push(action.part.id);
+    return state;
   default:
     return state;
   }
@@ -50,6 +58,11 @@ export function platformsById(state = { }, action) {
   case FETCHED_PLATFORM:
     return Object.assign({}, state, {
       [action.platform.id]: platforms(state[action.platform.id], action)
+    });
+  case CREATED_PART:
+    const platformId = action.part.createdPlatformId;
+    return Object.assign({}, state, {
+      [platformId]: platforms(state[platformId], action)
     });
   default:
     return state;
