@@ -4,7 +4,7 @@ import {
 
 function parts(state = {}, action) {
   switch (action.type) {
-  case CREATING_PART:
+  case CREATED_PART:
     return Object.assign({}, state, {
       isFetching: false,
       didInvalidate: false,

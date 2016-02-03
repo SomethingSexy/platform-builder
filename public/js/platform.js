@@ -1,5 +1,3 @@
-"format global";
-
 !function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in p||(p[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==v.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=p[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(v.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=p[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return x[e]||(x[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},r.name);t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=p[s],v=x[s];v?l=v.exports:c&&!c.declarative?l=c.esModule:c?(d(c),v=c.module,l=v.exports):l=f(s),v&&v.importers?(v.importers.push(t),t.dependencies.push(v)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=p[e];if(t)t.declarative?c(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=f(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=p[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){if(r===e)return r;var t={};if("object"==typeof r||"function"==typeof r)if(g){var n;for(var o in r)(n=Object.getOwnPropertyDescriptor(r,o))&&h(t,o,n)}else{var a=r&&r.hasOwnProperty;for(var o in r)(!a||r.hasOwnProperty(o))&&(t[o]=r[o])}return t["default"]=r,h(t,"__useDefault",{value:!0}),t}function c(r,t){var n=p[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==v.call(t,u)&&(p[u]?c(u,t):f(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function f(e){if(D[e])return D[e];if("@node/"==e.substr(0,6))return y(e.substr(6));var r=p[e];if(!r)throw"Module "+e+" not present.";return a(e),c(e,[]),p[e]=void 0,r.declarative&&h(r.module.exports,"__esModule",{value:!0}),D[e]=r.declarative?r.module.exports:r.esModule}var p={},v=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},g=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(m){g=!1}var h;!function(){try{Object.defineProperty({},"a",{})&&(h=Object.defineProperty)}catch(e){h=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var x={},y="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,D={"@empty":{}};return function(e,n,o){return function(a){a(function(a){for(var u={_nodeRequire:y,register:r,registerDynamic:t,get:f,set:function(e,r){D[e]=r},newModule:function(e){return e}},d=0;d<n.length;d++)(function(e,r){r&&r.__esModule?D[e]=r:D[e]=s(r)})(n[d],arguments[d]);o(u);var i=f(e[0]);if(e.length>1)for(var d=1;d<e.length;d++)f(e[d]);return i.__useDefault?i["default"]:i})}}}("undefined"!=typeof self?self:global)
 
 (["1"], [], function($__System) {
@@ -7,1153 +5,1342 @@
 !function(){var t=$__System;if("undefined"!=typeof window&&"undefined"!=typeof document&&window.location)var s=location.protocol+"//"+location.hostname+(location.port?":"+location.port:"");t.set("@@cjs-helpers",t.newModule({getPathVars:function(t){var n,o=t.lastIndexOf("!");n=-1!=o?t.substr(0,o):t;var e=n.split("/");return e.pop(),e=e.join("/"),"file:///"==n.substr(0,8)?(n=n.substr(7),e=e.substr(7),isWindows&&(n=n.substr(1),e=e.substr(1))):s&&n.substr(0,s.length)===s&&(n=n.substr(s.length),e=e.substr(s.length)),{filename:n,dirname:e}}}))}();
 $__System.register("2", [], function() { return { setters: [], execute: function() {} } });
 
-$__System.register('3', ['4', '5'], function (_export) {
-
-  // Then we delete a bunch of code from App and
-  // add some <Link> elements...
-  'use strict';
-
-  var React, Link;
-  return {
-    setters: [function (_) {
-      React = _['default'];
-    }, function (_2) {
-      Link = _2.Link;
-    }],
-    execute: function () {
-      _export('default', React.createClass({
-        displayName: 'Root',
-
-        render: function render() {
-          return React.createElement(
-            'div',
-            { className: 'container' },
-            React.createElement(
-              'h1',
-              null,
-              'App'
-            ),
-            React.createElement(
-              'ul',
-              null,
-              React.createElement(
-                'li',
-                null,
-                React.createElement(
-                  'a',
-                  { href: '/build' },
-                  'Build'
-                )
-              ),
-              React.createElement(
-                'li',
-                null,
-                React.createElement(
-                  Link,
-                  { to: '/platform' },
-                  'Add Platform'
-                )
-              )
-            ),
-            this.props.children
-          );
-        }
-      }));
-    }
-  };
-});
-/* change the <a>s to <Link>s */ /*
-                                  next we replace `<Child>` with `this.props.children`
-                                  the router will figure out the children for us
-                                 */
-
-$__System.register('6', ['4'], function (_export) {
-  'use strict';
-
-  var React;
-  return {
-    setters: [function (_) {
-      React = _['default'];
-    }],
-    execute: function () {
-      _export('default', React.createClass({
-        displayName: 'Dashboard',
-
-        render: function render() {
-          return React.createElement(
-            'div',
-            null,
-            'Welcome to the app!'
-          );
-        }
-      }));
-    }
-  };
-});
-
-$__System.register('7', ['4'], function (_export) {
-  'use strict';
-
-  var React;
-  return {
-    setters: [function (_) {
-      React = _['default'];
-    }],
-    execute: function () {
-      _export('default', React.createClass({
-        displayName: 'About',
-
-        render: function render() {
-          return React.createElement(
-            'h3',
-            null,
-            'About'
-          );
-        }
-      }));
-    }
-  };
-});
-
-$__System.register('8', ['4', '9', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, connect, _get, _inherits, _createClass, _classCallCheck, PlatformHandler;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_2) {
-      connect = _2.connect;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-
-      // not sure what this will all do yet but
-      'use strict';
-
-      PlatformHandler = (function (_Component) {
-        _inherits(PlatformHandler, _Component);
-
-        _createClass(PlatformHandler, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              dispatch: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        function PlatformHandler(props) {
-          _classCallCheck(this, PlatformHandler);
-
-          _get(Object.getPrototypeOf(PlatformHandler.prototype), 'constructor', this).call(this, props);
-        }
-
-        _createClass(PlatformHandler, [{
-          key: 'render',
-          value: function render() {
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(
-                'h2',
-                null,
-                'Create a new platform'
-              ),
-              this.props.children
-            );
-          }
-        }]);
-
-        return PlatformHandler;
-      })(Component);
-
-      _export('default', connect()(PlatformHandler));
-    }
-  };
-});
-
-$__System.register('e', ['4', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, Category;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Category = (function (_Component) {
-        _inherits(Category, _Component);
-
-        function Category() {
-          _classCallCheck(this, Category);
-
-          _get(Object.getPrototypeOf(Category.prototype), 'constructor', this).apply(this, arguments);
-        }
-
-        _createClass(Category, [{
-          key: 'render',
-          value: function render() {
-            return React.createElement(
-              'li',
-              { onClick: this.props.onClick },
-              this.props.category.name
-            );
-          }
-        }], [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              category: PropTypes.object.isRequired,
-              onClick: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        return Category;
-      })(Component);
-
-      _export('default', Category);
-    }
-  };
-});
-
-$__System.register('f', ['4', 'a', 'b', 'c', 'd', 'e'], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, Category, Categories;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_e) {
-      Category = _e['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Categories = (function (_Component) {
-        _inherits(Categories, _Component);
-
-        function Categories() {
-          _classCallCheck(this, Categories);
-
-          _get(Object.getPrototypeOf(Categories.prototype), 'constructor', this).apply(this, arguments);
-        }
-
-        _createClass(Categories, [{
-          key: 'render',
-          value: function render() {
-            var _this = this;
-
-            return React.createElement(
-              'ul',
-              null,
-              this.props.categories.map(function (result) {
-                return React.createElement(Category, { key: result.id, category: result, onClick: function () {
-                    return _this.props.handleSelect(result);
-                  } });
-              })
-            );
-          }
-        }], [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              categories: PropTypes.array.isRequired,
-              handleSelect: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        return Categories;
-      })(Component);
-
-      _export('default', Categories);
-    }
-  };
-});
-
-$__System.register('10', ['4', '9', '11', '12', 'a', 'b', 'c', 'd', 'f'], function (_export) {
-  var React, Component, PropTypes, connect, PlatformActions, CategoryActions, _get, _inherits, _createClass, _classCallCheck, Categories, CreatePlatform;
-
-  function select(state) {
-    return {
-      categories: state.categories.categories
-    };
+$__System.registerDynamic("3", ["4", "5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRouter = $__require('5');
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
   }
+  exports.default = _react2.default.createClass({render: function render() {
+      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/build'}, 'Build')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/platform'}, 'Add Platform'))), this.props.children);
+    }});
+  global.define = __define;
+  return module.exports;
+});
 
-  // not sure what this would all need yet
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_2) {
-      connect = _2.connect;
-    }, function (_3) {
-      PlatformActions = _3;
-    }, function (_4) {
-      CategoryActions = _4;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_f) {
-      Categories = _f['default'];
-    }],
-    execute: function () {
+$__System.registerDynamic("6", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  exports.default = _react2.default.createClass({render: function render() {
+      return _react2.default.createElement('div', null, 'Welcome to the app!');
+    }});
+  global.define = __define;
+  return module.exports;
+});
 
-      // I think we want create an initial platform first so that whatever the user
-      // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
-      'use strict';
+$__System.registerDynamic("7", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  exports.default = _react2.default.createClass({render: function render() {
+      return _react2.default.createElement('h3', null, 'About');
+    }});
+  global.define = __define;
+  return module.exports;
+});
 
-      CreatePlatform = (function (_Component) {
-        _inherits(CreatePlatform, _Component);
+$__System.registerDynamic("8", ["4", "9"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var PlatformHandler = function(_Component) {
+    _inherits(PlatformHandler, _Component);
+    _createClass(PlatformHandler, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {dispatch: _react.PropTypes.func.isRequired};
+      }
+    }]);
+    function PlatformHandler(props) {
+      _classCallCheck(this, PlatformHandler);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformHandler).call(this, props));
+    }
+    _createClass(PlatformHandler, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Create a new platform'), this.props.children);
+      }
+    }]);
+    return PlatformHandler;
+  }(_react.Component);
+  exports.default = (0, _reactRedux.connect)()(PlatformHandler);
+  global.define = __define;
+  return module.exports;
+});
 
-        _createClass(CreatePlatform, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              dispatch: PropTypes.func.isRequired,
-              history: PropTypes.object.isRequired,
-              categories: PropTypes.array.isRequired
-            };
-          }
-        }]);
+$__System.registerDynamic("a", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Category = function(_Component) {
+    _inherits(Category, _Component);
+    function Category() {
+      _classCallCheck(this, Category);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Category).apply(this, arguments));
+    }
+    _createClass(Category, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('li', {onClick: this.props.onClick}, this.props.category.name);
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          category: _react.PropTypes.object.isRequired,
+          onClick: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    return Category;
+  }(_react.Component);
+  exports.default = Category;
+  global.define = __define;
+  return module.exports;
+});
 
-        function CreatePlatform(props) {
-          _classCallCheck(this, CreatePlatform);
-
-          _get(Object.getPrototypeOf(CreatePlatform.prototype), 'constructor', this).call(this, props);
-          this.state = {};
-        }
-
-        _createClass(CreatePlatform, [{
-          key: 'render',
-          value: function render() {
-            if (!this.props.categories) {
-              return null;
+$__System.registerDynamic("b", ["4", "a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Category = $__require('a');
+  var _Category2 = _interopRequireDefault(_Category);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Categories = function(_Component) {
+    _inherits(Categories, _Component);
+    function Categories() {
+      _classCallCheck(this, Categories);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Categories).apply(this, arguments));
+    }
+    _createClass(Categories, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement('ul', null, this.props.categories.map(function(result) {
+          return _react2.default.createElement(_Category2.default, {
+            key: result.id,
+            category: result,
+            onClick: function onClick() {
+              return _this2.props.handleSelect(result);
             }
-
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(
-                'p',
-                null,
-                'Select what you are trying to create'
-              ),
-              React.createElement(Categories, { categories: this.props.categories, handleSelect: this.handleSelect.bind(this) })
-            );
-          }
-        }, {
-          key: 'handleSelect',
-
-          // handles selecting the category that this new platform will be added too
-          value: function handleSelect(category) {
-            this.props.dispatch(PlatformActions.createPlatform({ category: category }));
-          }
-        }], [{
-          key: 'needs',
-          get: function get() {
-            return [CategoryActions.getCategories];
-          }
-        }]);
-
-        return CreatePlatform;
-      })(Component);
-
-      _export('default', connect(select)(CreatePlatform));
-    }
-  };
+          });
+        }));
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          categories: _react.PropTypes.array.isRequired,
+          handleSelect: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    return Categories;
+  }(_react.Component);
+  exports.default = Categories;
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register("13", ["4", "a", "b", "c", "d"], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, StaticField;
-
-  return {
-    setters: [function (_) {
-      React = _["default"];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a["default"];
-    }, function (_b) {
-      _inherits = _b["default"];
-    }, function (_c) {
-      _createClass = _c["default"];
-    }, function (_d) {
-      _classCallCheck = _d["default"];
-    }],
-    execute: function () {
-      "use strict";
-
-      StaticField = (function (_Component) {
-        _inherits(StaticField, _Component);
-
-        _createClass(StaticField, null, [{
-          key: "propTypes",
-          get: function get() {
-            return {
-              label: PropTypes.string.isRequired,
-              value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool])
-            };
-          }
-        }]);
-
-        function StaticField(props) {
-          _classCallCheck(this, StaticField);
-
-          _get(Object.getPrototypeOf(StaticField.prototype), "constructor", this).call(this, props);
+$__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  var _platform = $__require('d');
+  var PlatformActions = _interopRequireWildcard(_platform);
+  var _categories = $__require('e');
+  var CategoryActions = _interopRequireWildcard(_categories);
+  var _Categories = $__require('b');
+  var _Categories2 = _interopRequireDefault(_Categories);
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key))
+            newObj[key] = obj[key];
         }
-
-        _createClass(StaticField, [{
-          key: "render",
-          value: function render() {
-            return React.createElement(
-              "div",
-              { className: "form-group" },
-              React.createElement(
-                "label",
-                null,
-                this.props.label
-              ),
-              React.createElement(
-                "p",
-                { className: "form-control-static" },
-                this.props.value
-              )
-            );
-          }
-        }]);
-
-        return StaticField;
-      })(Component);
-
-      _export("default", StaticField);
+      }
+      newObj.default = obj;
+      return newObj;
     }
-  };
-});
-
-$__System.register('14', ['4', '15', '16', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, PropTypes, Input, _Object$assign, _get, _inherits, _createClass, _classCallCheck, Checkbox;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      Input = _3['default'];
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Checkbox = (function (_Input) {
-        _inherits(Checkbox, _Input);
-
-        _createClass(Checkbox, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return _Object$assign({
-              label: PropTypes.string.isRequired,
-              selectedValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool]),
-              value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool])
-            }, Input.propTypes);
-          }
-        }]);
-
-        function Checkbox(props) {
-          _classCallCheck(this, Checkbox);
-
-          _get(Object.getPrototypeOf(Checkbox.prototype), 'constructor', this).call(this, props);
-          this.state = {
-            isValid: true,
-            errorMessage: '',
-            value: props.selectedValue || ''
-          };
+  }
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var CreatePlatform = function(_Component) {
+    _inherits(CreatePlatform, _Component);
+    _createClass(CreatePlatform, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          dispatch: _react.PropTypes.func.isRequired,
+          history: _react.PropTypes.object.isRequired,
+          categories: _react.PropTypes.array.isRequired
+        };
+      }
+    }]);
+    function CreatePlatform(props) {
+      _classCallCheck(this, CreatePlatform);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CreatePlatform).call(this, props));
+      _this.state = {};
+      return _this;
+    }
+    _createClass(CreatePlatform, [{
+      key: 'render',
+      value: function render() {
+        if (!this.props.categories) {
+          return null;
         }
-
-        _createClass(Checkbox, [{
-          key: 'getValue',
-          value: function getValue(event) {
-            return event.target.checked === true ? this.props.value : undefined;
-          }
-        }, {
-          key: 'render',
-          value: function render() {
-            var value = this.state.value;
-            var checked = this.props.value === value ? 'checked' : '';
-            var name = this.props.name;
-            return React.createElement(
-              'div',
-              { className: 'checkbox' },
-              React.createElement(
-                'label',
-                null,
-                React.createElement('input', { type: 'checkbox', name: name, checked: checked, value: value, onChange: this.handleChange.bind(this) }),
-                this.props.label
-              )
-            );
-          }
-        }]);
-
-        return Checkbox;
-      })(Input);
-
-      _export('default', Checkbox);
-    }
-  };
+        return _react2.default.createElement('div', null, _react2.default.createElement('p', null, 'Select what you are trying to create'), _react2.default.createElement(_Categories2.default, {
+          categories: this.props.categories,
+          handleSelect: this.handleSelect.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleSelect',
+      value: function handleSelect(category) {
+        this.props.dispatch(PlatformActions.createPlatform({category: category}));
+      }
+    }], [{
+      key: 'needs',
+      get: function get() {
+        return [CategoryActions.getCategories];
+      }
+    }]);
+    return CreatePlatform;
+  }(_react.Component);
+  function select(state) {
+    return {categories: state.categories.categories};
+  }
+  exports.default = (0, _reactRedux.connect)(select)(CreatePlatform);
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('17', ['4', '14', '18', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, Checkbox, _extends, _get, _inherits, _createClass, _classCallCheck, Checkboxes;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      Checkbox = _3['default'];
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Checkboxes = (function (_Component) {
-        _inherits(Checkboxes, _Component);
-
-        _createClass(Checkboxes, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              label: PropTypes.string,
-              checkboxes: PropTypes.array.isRequired,
-              onChange: PropTypes.func
-            };
-          }
-        }]);
-
-        function Checkboxes(props) {
-          _classCallCheck(this, Checkboxes);
-
-          _get(Object.getPrototypeOf(Checkboxes.prototype), 'constructor', this).call(this, props);
-        }
-
-        _createClass(Checkboxes, [{
-          key: 'render',
-          value: function render() {
-            var _this = this;
-
-            return React.createElement(
-              'fieldset',
-              { className: 'form-group' },
-              React.createElement(
-                'legend',
-                null,
-                this.props.label
-              ),
-              this.props.checkboxes.map(function (result) {
-                return React.createElement(Checkbox, _extends({ key: result.name }, result, { onChange: _this.handleChange.bind(_this) }));
-              })
-            );
-          }
-        }, {
-          key: 'handleChange',
-          value: function handleChange(value, name) {
-            if (this.props.onChange) {
-              this.props.onChange(value, name);
-            }
-          }
-        }]);
-
-        return Checkboxes;
-      })(Component);
-
-      _export('default', Checkboxes);
+$__System.registerDynamic("f", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
     }
-  };
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var StaticField = function(_Component) {
+    _inherits(StaticField, _Component);
+    _createClass(StaticField, null, [{
+      key: "propTypes",
+      get: function get() {
+        return {
+          label: _react.PropTypes.string.isRequired,
+          value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number, _react2.default.PropTypes.bool])
+        };
+      }
+    }]);
+    function StaticField(props) {
+      _classCallCheck(this, StaticField);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(StaticField).call(this, props));
+    }
+    _createClass(StaticField, [{
+      key: "render",
+      value: function render() {
+        return _react2.default.createElement("div", {className: "form-group"}, _react2.default.createElement("label", null, this.props.label), _react2.default.createElement("p", {className: "form-control-static"}, this.props.value));
+      }
+    }]);
+    return StaticField;
+  }(_react.Component);
+  exports.default = StaticField;
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('19', ['4', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, Part;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Part = (function (_Component) {
-        _inherits(Part, _Component);
-
-        function Part() {
-          _classCallCheck(this, Part);
-
-          _get(Object.getPrototypeOf(Part.prototype), 'constructor', this).apply(this, arguments);
-        }
-
-        _createClass(Part, [{
-          key: 'render',
-          value: function render() {
-            return React.createElement(
-              'li',
-              null,
-              this.props.data.name
-            );
-          }
-        }], [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              data: PropTypes.object.isRequired
-            };
-          }
-        }]);
-
-        return Part;
-      })(Component);
-
-      _export('default', Part);
+$__System.registerDynamic("10", ["4", "11"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
     }
-  };
-});
-
-$__System.register('1a', ['4', '19', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, Part, _get, _inherits, _createClass, _classCallCheck, Parts;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_2) {
-      Part = _2['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Parts = (function (_Component) {
-        _inherits(Parts, _Component);
-
-        function Parts() {
-          _classCallCheck(this, Parts);
-
-          _get(Object.getPrototypeOf(Parts.prototype), 'constructor', this).apply(this, arguments);
-        }
-
-        _createClass(Parts, [{
-          key: 'render',
-          value: function render() {
-            return React.createElement(
-              'div',
-              { className: 'row' },
-              React.createElement(
-                'div',
-                { className: 'col-md-12' },
-                React.createElement(
-                  'h4',
-                  null,
-                  'Parts'
-                ),
-                this.props.parts.length === 0 ? React.createElement(
-                  'p',
-                  null,
-                  'No parts have been added.'
-                ) : null,
-                this.props.parts.length > 0 ? React.createElement(
-                  'ul',
-                  null,
-                  ' ',
-                  this.props.parts.map(function (result) {
-                    return React.createElement(Part, { key: result.id, data: result });
-                  }),
-                  ' '
-                ) : null
-              )
-            );
-          }
-        }], [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              parts: PropTypes.array.isRequired
-            };
-          }
-        }]);
-
-        return Parts;
-      })(Component);
-
-      _export('default', Parts);
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Input2 = $__require('11');
+  var _Input3 = _interopRequireDefault(_Input2);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-  };
-});
-
-$__System.register('1b', ['4', '5', '13', '17', '18', '20', 'a', 'b', 'c', 'd', '1c', '1d', '1e', '1f', '1a'], function (_export) {
-  var React, Component, PropTypes, Link, Static, Checkboxes, _extends, form, _get, _inherits, _createClass, _classCallCheck, TextInput, Textarea, Button, AddCustomField, Parts, model, PlatformForm;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_6) {
-      Link = _6.Link;
-    }, function (_3) {
-      Static = _3['default'];
-    }, function (_4) {
-      Checkboxes = _4['default'];
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_5) {
-      form = _5['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_c2) {
-      TextInput = _c2['default'];
-    }, function (_d2) {
-      Textarea = _d2['default'];
-    }, function (_e) {
-      Button = _e['default'];
-    }, function (_f) {
-      AddCustomField = _f['default'];
-    }, function (_a2) {
-      Parts = _a2['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      model = {
-        configuration: {
-          fields: []
-        },
-        parts: [],
-        partGroups: []
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Checkbox = function(_Input) {
+    _inherits(Checkbox, _Input);
+    _createClass(Checkbox, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return Object.assign({
+          label: _react.PropTypes.string.isRequired,
+          selectedValue: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
+          value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number, _react2.default.PropTypes.bool])
+        }, _Input3.default.propTypes);
+      }
+    }]);
+    function Checkbox(props) {
+      _classCallCheck(this, Checkbox);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Checkbox).call(this, props));
+      _this.state = {
+        isValid: true,
+        errorMessage: '',
+        value: props.selectedValue || ''
       };
-
-      PlatformForm = (function (_Component) {
-        _inherits(PlatformForm, _Component);
-
-        _createClass(PlatformForm, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              form: PropTypes.object.isRequired,
-              addField: PropTypes.func.isRequired,
-              removeField: PropTypes.func.isRequired,
-              validate: PropTypes.func.isRequired,
-              onSave: PropTypes.func.isRequired
-            };
-          }
-
-          // For the model, we really only need to set the deep properties and arrays.  If I create
-          // a multi-component (what AddcustomField would be) or some sort of deepComponent, than that
-          // could set the model as it gets created
-          // TODO: I will probably need to end up generating unique ids for the fields, parts, otherwise figure out the best way to update/remove server-side
-        }]);
-
-        function PlatformForm(props) {
-          _classCallCheck(this, PlatformForm);
-
-          _get(Object.getPrototypeOf(PlatformForm.prototype), 'constructor', this).call(this, props);
-        }
-
-        _createClass(PlatformForm, [{
-          key: 'render',
-          value: function render() {
-            var _this = this;
-
-            var checkboxes = [{
-              label: 'Allow company',
-              value: 'true',
-              selectedValue: this.props.form.showCompany,
-              name: 'showCompany'
-            }, {
-              label: 'Allow brands',
-              value: 'true',
-              selectedValue: this.props.form.showBrands,
-              name: 'showBrands'
-            }, {
-              label: 'Allow people',
-              value: 'true',
-              selectedValue: this.props.form.showPeople,
-              name: 'showPeople'
-            }, {
-              label: 'Allow tags',
-              value: 'true',
-              selectedValue: this.props.form.showTags,
-              name: 'showTags'
-            }, {
-              label: 'Allow photos',
-              value: 'true',
-              selectedValue: this.props.form.showPhotos,
-              name: 'showPhotos'
-            }, {
-              label: 'Allow transactions',
-              value: 'true',
-              selectedValue: this.props.form.showTransactions,
-              name: 'showTransactions'
-            }, {
-              label: 'Allow additional parts',
-              value: 'true',
-              selectedValue: this.props.form.allowAdditionalParts,
-              name: 'allowAdditionalParts'
-            }];
-            var createPartLink = '/platform/' + this.props.form.id + '/part';
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(Static, { label: 'Category', value: this.props.form.category.name }),
-              React.createElement(TextInput, { name: 'name', label: 'Name' }),
-              React.createElement(Textarea, { name: 'description', label: 'Description' }),
-              React.createElement(Checkboxes, { label: 'Configuration', checkboxes: checkboxes }),
-              React.createElement(
-                'h3',
-                null,
-                'Custom Fields'
-              ),
-              React.createElement(Button, { text: 'Add Field', onButtonClick: this.handleAddField.bind(this) }),
-              this.props.form.configuration.fields.map(function (result, index) {
-                return React.createElement(AddCustomField, _extends({ key: result._id, index: index, field: 'configuration.fields', onRemove: _this.handleRemoveField.bind(_this, index), addField: _this.props.addField, removeField: _this.props.removeField }, result));
-              }),
-              React.createElement(
-                'h3',
-                null,
-                'Diagram'
-              ),
-              React.createElement(
-                Link,
-                { to: createPartLink },
-                'Create New Part'
-              ),
-              React.createElement(Parts, { parts: this.props.form.parts }),
-              React.createElement(Button, { text: 'Save', onButtonClick: this.handleSave.bind(this) })
-            );
-          }
-        }, {
-          key: 'handleAddField',
-          value: function handleAddField() {
-            this.props.addField('configuration.fields', { options: [] });
-          }
-        }, {
-          key: 'handleRemoveField',
-          value: function handleRemoveField(index) {
-            this.props.removeField('configuration.fields', index);
-          }
-        }, {
-          key: 'handleSave',
-          value: function handleSave(event) {
-            var _this2 = this;
-
-            // PROBABLY not the best way to do this but it will work for now
-            this.props.validate(event, function (data) {
-              _this2.props.onSave(data);
-            });
-          }
-        }]);
-
-        return PlatformForm;
-      })(Component);
-
-      _export('default', form(PlatformForm, {
-        model: model
-      }));
+      return _this;
     }
-  };
+    _createClass(Checkbox, [{
+      key: 'getValue',
+      value: function getValue(event) {
+        return event.target.checked === true ? this.props.value : undefined;
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var value = this.state.value;
+        var checked = this.props.value === value ? 'checked' : '';
+        var name = this.props.name;
+        return _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {
+          type: 'checkbox',
+          name: name,
+          checked: checked,
+          value: value,
+          onChange: this.handleChange.bind(this)
+        }), this.props.label));
+      }
+    }]);
+    return Checkbox;
+  }(_Input3.default);
+  exports.default = Checkbox;
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('21', ['4', '9', '11', '12', '16', 'a', 'b', 'c', 'd', '1b'], function (_export) {
-  var React, Component, PropTypes, connect, PlatformActions, CategoryActions, _Object$assign, _get, _inherits, _createClass, _classCallCheck, PlatformForm, UpdatePlatform;
+$__System.registerDynamic("12", ["4", "10"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Checkbox = $__require('10');
+  var _Checkbox2 = _interopRequireDefault(_Checkbox);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Checkboxes = function(_Component) {
+    _inherits(Checkboxes, _Component);
+    _createClass(Checkboxes, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          label: _react.PropTypes.string,
+          checkboxes: _react.PropTypes.array.isRequired,
+          onChange: _react.PropTypes.func
+        };
+      }
+    }]);
+    function Checkboxes(props) {
+      _classCallCheck(this, Checkboxes);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Checkboxes).call(this, props));
+    }
+    _createClass(Checkboxes, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('legend', null, this.props.label), this.props.checkboxes.map(function(result) {
+          return _react2.default.createElement(_Checkbox2.default, _extends({key: result.name}, result, {onChange: _this2.handleChange.bind(_this2)}));
+        }));
+      }
+    }, {
+      key: 'handleChange',
+      value: function handleChange(value, name) {
+        if (this.props.onChange) {
+          this.props.onChange(value, name);
+        }
+      }
+    }]);
+    return Checkboxes;
+  }(_react.Component);
+  exports.default = Checkboxes;
+  global.define = __define;
+  return module.exports;
+});
 
+$__System.registerDynamic("13", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Part = function(_Component) {
+    _inherits(Part, _Component);
+    function Part() {
+      _classCallCheck(this, Part);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Part).apply(this, arguments));
+    }
+    _createClass(Part, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('li', null, this.props.data.name);
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {data: _react.PropTypes.object.isRequired};
+      }
+    }]);
+    return Part;
+  }(_react.Component);
+  exports.default = Part;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14", ["4", "13"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Part = $__require('13');
+  var _Part2 = _interopRequireDefault(_Part);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Parts = function(_Component) {
+    _inherits(Parts, _Component);
+    function Parts() {
+      _classCallCheck(this, Parts);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Parts).apply(this, arguments));
+    }
+    _createClass(Parts, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), this.props.parts.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, this.props.parts.length > 0 ? _react2.default.createElement('ul', null, ' ', this.props.parts.map(function(result) {
+          return _react2.default.createElement(_Part2.default, {
+            key: result.id,
+            data: result
+          });
+        }), ' ') : null));
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {parts: _react.PropTypes.array.isRequired};
+      }
+    }]);
+    return Parts;
+  }(_react.Component);
+  exports.default = Parts;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "14", "5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _TextInput = $__require('16');
+  var _TextInput2 = _interopRequireDefault(_TextInput);
+  var _Textarea = $__require('17');
+  var _Textarea2 = _interopRequireDefault(_Textarea);
+  var _Static = $__require('f');
+  var _Static2 = _interopRequireDefault(_Static);
+  var _Checkboxes = $__require('12');
+  var _Checkboxes2 = _interopRequireDefault(_Checkboxes);
+  var _Button = $__require('18');
+  var _Button2 = _interopRequireDefault(_Button);
+  var _AddCustomField = $__require('19');
+  var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
+  var _Form = $__require('1a');
+  var _Form2 = _interopRequireDefault(_Form);
+  var _Parts = $__require('14');
+  var _Parts2 = _interopRequireDefault(_Parts);
+  var _reactRouter = $__require('5');
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var model = {
+    configuration: {fields: []},
+    parts: [],
+    partGroups: []
+  };
+  var PlatformForm = function(_Component) {
+    _inherits(PlatformForm, _Component);
+    _createClass(PlatformForm, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          form: _react.PropTypes.object.isRequired,
+          addField: _react.PropTypes.func.isRequired,
+          removeField: _react.PropTypes.func.isRequired,
+          validate: _react.PropTypes.func.isRequired,
+          onSave: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    function PlatformForm(props) {
+      _classCallCheck(this, PlatformForm);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformForm).call(this, props));
+    }
+    _createClass(PlatformForm, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        var checkboxes = [{
+          label: 'Allow company',
+          value: 'true',
+          selectedValue: this.props.form.showCompany,
+          name: 'showCompany'
+        }, {
+          label: 'Allow brands',
+          value: 'true',
+          selectedValue: this.props.form.showBrands,
+          name: 'showBrands'
+        }, {
+          label: 'Allow people',
+          value: 'true',
+          selectedValue: this.props.form.showPeople,
+          name: 'showPeople'
+        }, {
+          label: 'Allow tags',
+          value: 'true',
+          selectedValue: this.props.form.showTags,
+          name: 'showTags'
+        }, {
+          label: 'Allow photos',
+          value: 'true',
+          selectedValue: this.props.form.showPhotos,
+          name: 'showPhotos'
+        }, {
+          label: 'Allow transactions',
+          value: 'true',
+          selectedValue: this.props.form.showTransactions,
+          name: 'showTransactions'
+        }, {
+          label: 'Allow additional parts',
+          value: 'true',
+          selectedValue: this.props.form.allowAdditionalParts,
+          name: 'allowAdditionalParts'
+        }];
+        var createPartLink = '/platform/' + this.props.form.id + '/part';
+        return _react2.default.createElement('div', null, _react2.default.createElement(_Static2.default, {
+          label: 'Category',
+          value: this.props.form.category.name
+        }), _react2.default.createElement(_TextInput2.default, {
+          name: 'name',
+          label: 'Name'
+        }), _react2.default.createElement(_Textarea2.default, {
+          name: 'description',
+          label: 'Description'
+        }), _react2.default.createElement(_Checkboxes2.default, {
+          label: 'Configuration',
+          checkboxes: checkboxes
+        }), _react2.default.createElement('h3', null, 'Custom Fields'), _react2.default.createElement(_Button2.default, {
+          text: 'Add Field',
+          onButtonClick: this.handleAddField.bind(this)
+        }), this.props.form.configuration.fields.map(function(result, index) {
+          return _react2.default.createElement(_AddCustomField2.default, _extends({
+            key: result._id,
+            index: index,
+            field: 'configuration.fields',
+            onRemove: _this2.handleRemoveField.bind(_this2, index),
+            addField: _this2.props.addField,
+            removeField: _this2.props.removeField
+          }, result));
+        }), _react2.default.createElement('h3', null, 'Diagram'), _react2.default.createElement(_reactRouter.Link, {to: createPartLink}, 'Create New Part'), _react2.default.createElement(_Parts2.default, {parts: this.props.form.parts}), _react2.default.createElement(_Button2.default, {
+          text: 'Save',
+          onButtonClick: this.handleSave.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleAddField',
+      value: function handleAddField() {
+        this.props.addField('configuration.fields', {options: []});
+      }
+    }, {
+      key: 'handleRemoveField',
+      value: function handleRemoveField(index) {
+        this.props.removeField('configuration.fields', index);
+      }
+    }, {
+      key: 'handleSave',
+      value: function handleSave(event) {
+        var _this3 = this;
+        this.props.validate(event, function(data) {
+          _this3.props.onSave(data);
+        });
+      }
+    }]);
+    return PlatformForm;
+  }(_react.Component);
+  exports.default = (0, _Form2.default)(PlatformForm, {model: model});
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  var _PlatformForm = $__require('15');
+  var _PlatformForm2 = _interopRequireDefault(_PlatformForm);
+  var _platform = $__require('d');
+  var PlatformActions = _interopRequireWildcard(_platform);
+  var _categories = $__require('e');
+  var CategoryActions = _interopRequireWildcard(_categories);
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key))
+            newObj[key] = obj[key];
+        }
+      }
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var UpdatePlatform = function(_Component) {
+    _inherits(UpdatePlatform, _Component);
+    _createClass(UpdatePlatform, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          dispatch: _react.PropTypes.func.isRequired,
+          categories: _react.PropTypes.array.isRequired,
+          platform: _react.PropTypes.object.isRequired
+        };
+      }
+    }]);
+    function UpdatePlatform(props) {
+      _classCallCheck(this, UpdatePlatform);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(UpdatePlatform).call(this, props));
+    }
+    _createClass(UpdatePlatform, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('div', null, _react2.default.createElement(_PlatformForm2.default, {
+          form: this.props.platform,
+          onSave: this.handleSave.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleSave',
+      value: function handleSave(model) {
+        this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
+      }
+    }], [{
+      key: 'needs',
+      get: function get() {
+        return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
+      }
+    }]);
+    return UpdatePlatform;
+  }(_react.Component);
   function select(state) {
     return {
       categories: state.categories.categories,
       platform: state.platformsById[state.workingPlatformId]
     };
   }
-
-  // not sure what this would all need yet
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      connect = _3.connect;
-    }, function (_4) {
-      PlatformActions = _4;
-    }, function (_5) {
-      CategoryActions = _5;
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_b2) {
-      PlatformForm = _b2['default'];
-    }],
-    execute: function () {
-
-      // I think we want create an initial platform first so that whatever the user
-      // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
-      'use strict';
-
-      UpdatePlatform = (function (_Component) {
-        _inherits(UpdatePlatform, _Component);
-
-        _createClass(UpdatePlatform, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              dispatch: PropTypes.func.isRequired,
-              categories: PropTypes.array.isRequired,
-              platform: PropTypes.object.isRequired
-            };
-          }
-        }]);
-
-        function UpdatePlatform(props) {
-          _classCallCheck(this, UpdatePlatform);
-
-          _get(Object.getPrototypeOf(UpdatePlatform.prototype), 'constructor', this).call(this, props);
-        }
-
-        _createClass(UpdatePlatform, [{
-          key: 'render',
-          value: function render() {
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(PlatformForm, { form: this.props.platform, onSave: this.handleSave.bind(this) })
-            );
-          }
-        }, {
-          key: 'handleSave',
-          value: function handleSave(model) {
-            // the platform is the data coming from the form, merge it with the current
-            // platform data we have
-            this.props.dispatch(PlatformActions.savePlatform(_Object$assign({}, model)));
-          }
-        }], [{
-          key: 'needs',
-          get: function get() {
-            return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
-          }
-        }]);
-
-        return UpdatePlatform;
-      })(Component);
-
-      _export('default', connect(select)(UpdatePlatform));
-    }
-  };
+  exports.default = (0, _reactRedux.connect)(select)(UpdatePlatform);
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('1d', ['4', '15', '16', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, PropTypes, Input, _Object$assign, _get, _inherits, _createClass, _classCallCheck, Textarea;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      Input = _3['default'];
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Textarea = (function (_Input) {
-        _inherits(Textarea, _Input);
-
-        _createClass(Textarea, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return _Object$assign({
-              label: PropTypes.string.isRequired,
-              value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool])
-            }, Input.propTypes);
-          }
-        }]);
-
-        function Textarea(props) {
-          _classCallCheck(this, Textarea);
-
-          _get(Object.getPrototypeOf(Textarea.prototype), 'constructor', this).call(this, props);
-          this.state = {
-            isValid: true,
-            errorMessage: '',
-            value: props.value || ''
-          };
-        }
-
-        _createClass(Textarea, [{
-          key: 'render',
-          value: function render() {
-            var value = this.state.value;
-            var className = 'form-group';
-
-            if (!this.state.isValid) {
-              className += ' has-error';
-            }
-
-            return React.createElement(
-              'fieldset',
-              { className: className },
-              React.createElement(
-                'label',
-                { htmlFor: '' },
-                this.props.label
-              ),
-              React.createElement('textarea', { type: 'email', className: 'form-control', id: '', placeholder: '', value: value, onChange: this.handleChange.bind(this) }),
-              !this.state.isValid ? React.createElement(
-                'span',
-                { id: 'helpBlock2', className: 'help-block' },
-                this.state.errorMessage
-              ) : null
-            );
-          }
-        }]);
-
-        return Textarea;
-      })(Input);
-
-      _export('default', Textarea);
-    }
-  };
-});
-
-$__System.registerDynamic("22", ["23", "24"], true, function($__require, exports, module) {
+$__System.registerDynamic("17", ["4", "11"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toObject = $__require('23');
-  $__require('24')('keys', function($keys) {
-    return function keys(it) {
-      return $keys(toObject(it));
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
     };
-  });
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Input2 = $__require('11');
+  var _Input3 = _interopRequireDefault(_Input2);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Textarea = function(_Input) {
+    _inherits(Textarea, _Input);
+    _createClass(Textarea, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return Object.assign({
+          label: _react.PropTypes.string.isRequired,
+          value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number, _react2.default.PropTypes.bool])
+        }, _Input3.default.propTypes);
+      }
+    }]);
+    function Textarea(props) {
+      _classCallCheck(this, Textarea);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Textarea).call(this, props));
+      _this.state = {
+        isValid: true,
+        errorMessage: '',
+        value: props.value || ''
+      };
+      return _this;
+    }
+    _createClass(Textarea, [{
+      key: 'render',
+      value: function render() {
+        var value = this.state.value;
+        var className = 'form-group';
+        if (!this.state.isValid) {
+          className += ' has-error';
+        }
+        return _react2.default.createElement('fieldset', {className: className}, _react2.default.createElement('label', {htmlFor: ''}, this.props.label), _react2.default.createElement('textarea', {
+          type: 'email',
+          className: 'form-control',
+          id: '',
+          placeholder: '',
+          value: value,
+          onChange: this.handleChange.bind(this)
+        }), !this.state.isValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, this.state.errorMessage) : null);
+      }
+    }]);
+    return Textarea;
+  }(_Input3.default);
+  exports.default = Textarea;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("25", ["22", "26"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('22');
-  module.exports = $__require('26').Object.keys;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("27", ["25"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('25'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("28", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("1c", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1220,22 +1407,22 @@ $__System.registerDynamic("28", ["29"], true, function($__require, exports, modu
       return result === undefined ? defaultValue : result;
     }
     module.exports = get;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2a", ["28"], true, function($__require, exports, module) {
+$__System.registerDynamic("1e", ["1c"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('28');
+  module.exports = $__require('1c');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("1f", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1333,27 +1520,27 @@ $__System.registerDynamic("2b", ["29"], true, function($__require, exports, modu
       return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
     }
     module.exports = baseSet;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("20", ["1f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('2b');
+  module.exports = $__require('1f');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["2c"], true, function($__require, exports, module) {
+$__System.registerDynamic("21", ["20"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var baseSet = $__require('2c');
+  var baseSet = $__require('20');
   function set(object, path, value) {
     return object == null ? object : baseSet(object, path, value);
   }
@@ -1362,17 +1549,17 @@ $__System.registerDynamic("2d", ["2c"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("2e", ["2d"], true, function($__require, exports, module) {
+$__System.registerDynamic("22", ["21"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('2d');
+  module.exports = $__require('21');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("23", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1402,12 +1589,12 @@ $__System.registerDynamic("2f", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("30", ["2f"], true, function($__require, exports, module) {
+$__System.registerDynamic("24", ["23"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _rng = $__require('2f');
+  var _rng = $__require('23');
   var _byteToHex = [];
   var _hexToByte = {};
   for (var i = 0; i < 256; i++) {
@@ -1504,851 +1691,34 @@ $__System.registerDynamic("30", ["2f"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["30"], true, function($__require, exports, module) {
+$__System.registerDynamic("25", ["24"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('30');
+  module.exports = $__require('24');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('20', ['4', '16', '18', '27', '31', 'a', 'b', 'c', 'd', '2a', '2e'], function (_export) {
-  var React, Component, PropTypes, _Object$assign, _extends, _Object$keys, uuid, _get2, _inherits, _createClass, _classCallCheck, _get, _set;
-
-  return {
-    setters: [function (_4) {
-      React = _4['default'];
-      Component = _4.Component;
-      PropTypes = _4.PropTypes;
-    }, function (_2) {
-      _Object$assign = _2['default'];
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_3) {
-      _Object$keys = _3['default'];
-    }, function (_5) {
-      uuid = _5['default'];
-    }, function (_a) {
-      _get2 = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_a2) {
-      _get = _a2['default'];
-    }, function (_e) {
-      _set = _e['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('default', function (ComposedComponent, options) {
-        var Form = (function (_Component) {
-          _inherits(Form, _Component);
-
-          _createClass(Form, null, [{
-            key: 'propTypes',
-            get: function get() {
-              return {
-                children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-                form: PropTypes.object
-              };
-            }
-          }, {
-            key: 'defaultProps',
-            get: function get() {
-              return {
-                showSaveButton: true
-              };
-            }
-          }]);
-
-          function Form(props) {
-            _classCallCheck(this, Form);
-
-            _get2(Object.getPrototypeOf(Form.prototype), 'constructor', this).call(this, props);
-            this.state = {};
-            if (options.model) {
-              this.model = _Object$assign({}, options.model, this.props.form);
-            }
-          }
-
-          _createClass(Form, [{
-            key: 'getChildContext',
-            value: function getChildContext() {
-              // bind the function on this because it seems to lose its context
-              return {
-                attachToForm: this.attachToForm.bind(this),
-                detachFromForm: this.detachFromForm.bind(this),
-                onFormFieldChange: this.handleFormFieldChange.bind(this)
-              };
-            }
-          }, {
-            key: 'componentWillMount',
-            value: function componentWillMount() {
-              // Map of inputs on the form
-              this.inputs = {};
-
-              // now register all of the inputs for this form
-              this.registerInputs(this.props.children);
-            }
-          }, {
-            key: 'render',
-            value: function render() {
-              return React.createElement(
-                'form',
-                null,
-                React.createElement(ComposedComponent, _extends({}, this.props, { form: this.model, validate: this.validate.bind(this), addField: this.addField.bind(this), removeField: this.removeField.bind(this) }))
-              );
-            }
-          }, {
-            key: 'registerInputs',
-            value: function registerInputs(children) {
-              var _this = this;
-
-              // A React helper for traversing children
-              React.Children.forEach(children, (function (child) {
-                // We do a simple check for "name" on the child, which indicates it is an input.
-                // You might consider doing a better check though
-                if (child.props && child.props.name) {}
-                // We attach a method for the input to register itself to the form
-                // child.props.attachToForm = this.attachToForm;
-                // We attach a method for the input to detach itself from the form
-                // child.props.detachFromForm = this.detachFromForm;
-
-                // If the child has its own children, traverse through them also...
-                // in the search for inputs
-                if (child.props && child.props.children) {
-                  _this.registerInputs(child.props.children);
-                }
-              }).bind(this));
-            }
-
-            // All methods defined are bound to the component by React JS, so it is safe to use "this"
-            // even though we did not bind it. We add the input component to our inputs map
-          }, {
-            key: 'attachToForm',
-            value: function attachToForm(component) {
-              this.inputs[component.props.name] = component;
-            }
-          }, {
-            key: 'detachFromForm',
-            value: function detachFromForm(component) {
-              delete this.inputs[component.props.name];
-            }
-          }, {
-            key: 'handleFormFieldChange',
-            value: function handleFormFieldChange(name, value) {
-              _set(this.model, name, value);
-              this.forceUpdate();
-            }
-          }, {
-            key: 'addField',
-            value: function addField(name, field) {
-              if (field && !field.id) {
-                field._id = uuid.v4();
-              }
-              var addTo = _get(this.model, name);
-              addTo.push(field);
-              this.forceUpdate();
-            }
-          }, {
-            key: 'removeField',
-            value: function removeField(name, index) {
-              var addTo = _get(this.model, name);
-              addTo.splice(index, 1);
-              this.forceUpdate();
-            }
-          }, {
-            key: 'validate',
-            value: function validate(event, onValid) {
-              event.stopPropagation();
-              // need to validate
-              var isValid = this.validateForm();
-
-              if (isValid) {
-                onValid(this.model);
-              } else {
-                console.log('Form is not valid');
-              }
-
-              // if valid call outside method
-
-              // else if not valid display errors
-            }
-          }, {
-            key: 'validateForm',
-            value: function validateForm() {
-              var _this2 = this;
-
-              var isAllValid = true;
-              // loop through all of our inputs, we need to validate each one
-              _Object$keys(this.inputs).forEach(function (name) {
-                // grab the component
-                var component = _this2.inputs[name];
-
-                // grab the value
-                var value = _get(_this2.model, name);
-
-                // validate the value
-                var isValid = _this2.validateField(component, value);
-                // if isAllValid = true and isValid = false, then set to false
-                if (isAllValid && !isValid) {
-                  isAllValid = false;
-                }
-              });
-
-              return isAllValid;
-            }
-          }, {
-            key: 'validateField',
-            value: function validateField(component, value) {
-              var isValid = true;
-              if (component.required) {
-                if (typeof value === 'undefined' || value === '') {
-                  isValid = false;
-                  // TODO: PROBABLY shouldn't be doing this, maybe call method on component instead?
-                  component.setState({
-                    isValid: false,
-                    errorMessage: 'This field is required' // TODO: pull this from someplace else
-                  });
-                }
-              }
-
-              return isValid;
-            }
-          }]);
-
-          return Form;
-        })(Component);
-
-        Form.childContextTypes = {
-          attachToForm: PropTypes.func.isRequired,
-          detachFromForm: PropTypes.func.isRequired,
-          onFormFieldChange: PropTypes.func.isRequired
-        };
-
-        return Form;
-      });
-    }
-  };
-});
-
-$__System.register('32', ['4', '15', '16', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, PropTypes, Input, _Object$assign, _get, _inherits, _createClass, _classCallCheck, Select;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      Input = _3['default'];
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Select = (function (_Input) {
-        _inherits(Select, _Input);
-
-        _createClass(Select, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return _Object$assign({
-              label: PropTypes.string.isRequired,
-              value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-              options: PropTypes.array.isRequired
-            }, Input.propTypes);
-          }
-        }]);
-
-        function Select(props) {
-          _classCallCheck(this, Select);
-
-          _get(Object.getPrototypeOf(Select.prototype), 'constructor', this).call(this, props);
-          this.state = {
-            isValid: true,
-            errorMessage: '',
-            value: props.value || ''
-          };
-        }
-
-        _createClass(Select, [{
-          key: 'render',
-          value: function render() {
-            var className = 'form-group';
-
-            if (!this.state.isValid) {
-              className += ' has-error';
-            }
-
-            var value = this.state.value;
-
-            return React.createElement(
-              'fieldset',
-              { className: className },
-              React.createElement(
-                'label',
-                { htmlFor: '' },
-                this.props.label
-              ),
-              React.createElement(
-                'select',
-                { name: this.props.name, className: 'form-control', value: value, onChange: this.handleChange.bind(this) },
-                this.props.options.map(function (result) {
-                  return React.createElement(
-                    'option',
-                    { key: result.value, value: result.value },
-                    result.label
-                  );
-                })
-              )
-            );
-          }
-        }]);
-
-        return Select;
-      })(Input);
-
-      _export('default', Select);
-    }
-  };
-});
-
-$__System.register('15', ['4', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, Input;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      Input = (function (_Component) {
-        _inherits(Input, _Component);
-
-        _createClass(Input, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              name: PropTypes.string.isRequired,
-              onChange: PropTypes.func,
-              validations: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-              inline: PropTypes.bool
-            };
-          }
-        }]);
-
-        function Input(props) {
-          _classCallCheck(this, Input);
-
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, props);
-
-          this.required = props.required ? true : false;
-        }
-
-        _createClass(Input, [{
-          key: 'componentWillMount',
-          value: function componentWillMount() {
-            if (this.context.attachToForm) {
-              this.context.attachToForm(this); // Attaching the component to the form
-            }
-          }
-        }, {
-          key: 'componentWillUnmount',
-          value: function componentWillUnmount() {
-            if (this.context.detachFromForm) {
-              this.context.detachFromForm(this); // Detaching if unmounting
-            }
-          }
-        }, {
-          key: 'getValue',
-          value: function getValue(event) {
-            return event.target.value;
-          }
-        }, {
-          key: 'handleChange',
-          value: function handleChange(event) {
-            var value = this.getValue(event);
-            var name = this.props.name;
-            // store the state in case we need it for future use
-            this.setState({
-              value: value
-            });
-
-            // onChange is not required but in case we need to process something outside
-            // of the form
-            if (this.props.onChange) {
-              this.props.onChange(name, value);
-            }
-
-            // trigger a change on the form
-            this.context.onFormFieldChange(name, value);
-          }
-        }], [{
-          key: 'defaultProps',
-          get: function get() {
-            return {
-              inline: false
-            };
-          }
-        }]);
-
-        return Input;
-      })(Component);
-
-      Input.contextTypes = {
-        attachToForm: PropTypes.func.isRequired,
-        detachFromForm: PropTypes.func.isRequired,
-        onFormFieldChange: PropTypes.func.isRequired
-      };
-
-      _export('default', Input);
-    }
-  };
-});
-
-$__System.register('1c', ['4', '15', '16', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, PropTypes, Input, _Object$assign, _get, _inherits, _createClass, _classCallCheck, TextInput;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      PropTypes = _2.PropTypes;
-    }, function (_3) {
-      Input = _3['default'];
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      TextInput = (function (_Input) {
-        _inherits(TextInput, _Input);
-
-        _createClass(TextInput, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return _Object$assign({
-              label: PropTypes.string.isRequired,
-              value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool])
-            }, Input.propTypes);
-          }
-        }]);
-
-        function TextInput(props) {
-          _classCallCheck(this, TextInput);
-
-          _get(Object.getPrototypeOf(TextInput.prototype), 'constructor', this).call(this, props);
-          this.state = {
-            isValid: true,
-            errorMessage: '',
-            value: props.value || ''
-          };
-        }
-
-        _createClass(TextInput, [{
-          key: 'render',
-          value: function render() {
-            var className = 'form-group';
-
-            if (!this.state.isValid) {
-              className += ' has-error';
-            }
-
-            return React.createElement(
-              'fieldset',
-              { className: className },
-              React.createElement(
-                'label',
-                { htmlFor: '' },
-                this.props.label
-              ),
-              React.createElement('input', { type: 'text', name: this.props.name, className: 'form-control', id: '', placeholder: '', value: this.state.value, onChange: this.handleChange.bind(this) }),
-              !this.state.isValid ? React.createElement(
-                'span',
-                { id: 'helpBlock2', className: 'help-block' },
-                this.state.errorMessage
-              ) : null
-            );
-          }
-        }]);
-
-        return TextInput;
-      })(Input);
-
-      _export('default', TextInput);
-    }
-  };
-});
-
-$__System.register('33', ['4', '34', 'a', 'b', 'c', 'd', '1c', '1e'], function (_export) {
-  var React, Component, PropTypes, repeatable, _get, _inherits, _createClass, _classCallCheck, TextInput, Button, AddCustomFieldOptions;
-
-  return {
-    setters: [function (_) {
-      React = _['default'];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_2) {
-      repeatable = _2['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_c2) {
-      TextInput = _c2['default'];
-    }, function (_e) {
-      Button = _e['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      AddCustomFieldOptions = (function (_Component) {
-        _inherits(AddCustomFieldOptions, _Component);
-
-        _createClass(AddCustomFieldOptions, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              field: PropTypes.string,
-              index: PropTypes.number.isRequired,
-              onRemove: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        function AddCustomFieldOptions(props) {
-          _classCallCheck(this, AddCustomFieldOptions);
-
-          _get(Object.getPrototypeOf(AddCustomFieldOptions.prototype), 'constructor', this).call(this, props);
-          // just a local state for storing the form data
-          this.state = {};
-        }
-
-        _createClass(AddCustomFieldOptions, [{
-          key: 'render',
-          value: function render() {
-            var valueName = this.props.field + '.type';
-            var labelName = this.props.field + '.label';
-            return React.createElement(
-              'fieldset',
-              { className: 'form-inline' },
-              React.createElement(TextInput, { label: 'Label', name: labelName, required: true }),
-              React.createElement(TextInput, { label: 'Value', name: valueName, required: true }),
-              React.createElement(Button, { text: 'Remove', onButtonClick: this.props.onRemove })
-            );
-          }
-        }]);
-
-        return AddCustomFieldOptions;
-      })(Component);
-
-      _export('default', repeatable(AddCustomFieldOptions));
-    }
-  };
-});
-
-$__System.register("1e", ["4", "a", "b", "c", "d"], function (_export) {
-  var React, Component, PropTypes, _get, _inherits, _createClass, _classCallCheck, Button;
-
-  return {
-    setters: [function (_) {
-      React = _["default"];
-      Component = _.Component;
-      PropTypes = _.PropTypes;
-    }, function (_a) {
-      _get = _a["default"];
-    }, function (_b) {
-      _inherits = _b["default"];
-    }, function (_c) {
-      _createClass = _c["default"];
-    }, function (_d) {
-      _classCallCheck = _d["default"];
-    }],
-    execute: function () {
-      "use strict";
-
-      Button = (function (_Component) {
-        _inherits(Button, _Component);
-
-        function Button(props) {
-          _classCallCheck(this, Button);
-
-          _get(Object.getPrototypeOf(Button.prototype), "constructor", this).call(this, props);
-        }
-
-        _createClass(Button, [{
-          key: "render",
-          value: function render() {
-            var _this = this;
-
-            return React.createElement(
-              "button",
-              { type: "button", className: "btn btn-default", onClick: function (e) {
-                  return _this.handleClick(e);
-                } },
-              this.props.text
-            );
-          }
-        }, {
-          key: "handleClick",
-          value: function handleClick(event) {
-            this.props.onButtonClick(event);
-          }
-        }]);
-
-        return Button;
-      })(Component);
-
-      Button.propTypes = {
-        onButtonClick: PropTypes.func.isRequired,
-        text: PropTypes.string.isRequired
-      };
-
-      _export("default", Button);
-    }
-  };
-});
-
-$__System.registerDynamic("24", ["35", "26", "36"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $export = $__require('35'),
-      core = $__require('26'),
-      fails = $__require('36');
-  module.exports = function(KEY, exec) {
-    var fn = (core.Object || {})[KEY] || Object[KEY],
-        exp = {};
-    exp[KEY] = exec(fn);
-    $export($export.S + $export.F * fails(function() {
-      fn(1);
-    }), 'Object', exp);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("37", ["38", "24"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toIObject = $__require('38');
-  $__require('24')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
-    return function getOwnPropertyDescriptor(it, key) {
-      return $getOwnPropertyDescriptor(toIObject(it), key);
-    };
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("39", ["3a", "37"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a');
-  $__require('37');
-  module.exports = function getOwnPropertyDescriptor(it, key) {
-    return $.getDesc(it, key);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3b", ["39"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('39'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("a", ["3b"], true, function($__require, exports, module) {
+$__System.registerDynamic("1a", ["4", "1e", "22", "25"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _Object$getOwnPropertyDescriptor = $__require('3b')["default"];
-  exports["default"] = function get(_x, _x2, _x3) {
-    var _again = true;
-    _function: while (_again) {
-      var object = _x,
-          property = _x2,
-          receiver = _x3;
-      _again = false;
-      if (object === null)
-        object = Function.prototype;
-      var desc = _Object$getOwnPropertyDescriptor(object, property);
-      if (desc === undefined) {
-        var parent = Object.getPrototypeOf(object);
-        if (parent === null) {
-          return undefined;
-        } else {
-          _x = parent;
-          _x2 = property;
-          _x3 = receiver;
-          _again = true;
-          desc = parent = undefined;
-          continue _function;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
         }
-      } else if ("value" in desc) {
-        return desc.value;
-      } else {
-        var getter = desc.get;
-        if (getter === undefined) {
-          return undefined;
-        }
-        return getter.call(receiver);
       }
     }
+    return target;
   };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3c", ["3a"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a');
-  module.exports = function create(P, D) {
-    return $.create(P, D);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3d", ["3c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('3c'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3e", ["35", "3f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $export = $__require('35');
-  $export($export.S, 'Object', {setPrototypeOf: $__require('3f').set});
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("40", ["3e", "26"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('3e');
-  module.exports = $__require('26').Object.setPrototypeOf;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("41", ["40"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('40'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("b", ["3d", "41"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$create = $__require('3d')["default"];
-  var _Object$setPrototypeOf = $__require('41')["default"];
-  exports["default"] = function(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-    subClass.prototype = _Object$create(superClass && superClass.prototype, {constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }});
-    if (superClass)
-      _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("c", ["42"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$defineProperty = $__require('42')["default"];
-  exports["default"] = (function() {
+  var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
         var descriptor = props[i];
@@ -2356,7 +1726,7 @@ $__System.registerDynamic("c", ["42"], true, function($__require, exports, modul
         descriptor.configurable = true;
         if ("value" in descriptor)
           descriptor.writable = true;
-        _Object$defineProperty(target, descriptor.key, descriptor);
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
     }
     return function(Constructor, protoProps, staticProps) {
@@ -2366,3052 +1736,729 @@ $__System.registerDynamic("c", ["42"], true, function($__require, exports, modul
         defineProperties(Constructor, staticProps);
       return Constructor;
     };
-  })();
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("d", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports["default"] = function(instance, Constructor) {
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _lodash = $__require('1e');
+  var _lodash2 = _interopRequireDefault(_lodash);
+  var _lodash3 = $__require('22');
+  var _lodash4 = _interopRequireDefault(_lodash3);
+  var _uuid = $__require('25');
+  var _uuid2 = _interopRequireDefault(_uuid);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("18", ["16"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$assign = $__require('16')["default"];
-  exports["default"] = _Object$assign || function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.register('34', ['4', '18', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, _extends, _get, _inherits, _createClass, _classCallCheck;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('default', function (ComposedComponent) {
-        var RepeatableComponent = (function (_Component) {
-          _inherits(RepeatableComponent, _Component);
-
-          _createClass(RepeatableComponent, null, [{
-            key: 'propTypes',
-            get: function get() {
-              return {
-                index: PropTypes.number.isRequired,
-                field: PropTypes.string.isRequired
-              };
-            }
-          }]);
-
-          function RepeatableComponent(props) {
-            _classCallCheck(this, RepeatableComponent);
-
-            _get(Object.getPrototypeOf(RepeatableComponent.prototype), 'constructor', this).call(this, props);
-          }
-
-          _createClass(RepeatableComponent, [{
-            key: 'componentDidMount',
-            value: function componentDidMount() {}
-          }, {
-            key: 'render',
-            value: function render() {
-              var field = this.props.field + '[' + this.props.index + ']';
-              return React.createElement(ComposedComponent, _extends({}, this.props, { field: field }));
-            }
-          }]);
-
-          return RepeatableComponent;
-        })(Component);
-
-        return RepeatableComponent;
-      });
-    }
-  };
-});
-
-$__System.register('1f', ['4', '18', '32', '33', '34', 'a', 'b', 'c', 'd', '1c', '1e'], function (_export) {
-  var React, Component, PropTypes, _extends, Select, AddCustomFieldOptions, repeatable, _get, _inherits, _createClass, _classCallCheck, TextInput, Button, fieldTypes, AddCustomField;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_3) {
-      Select = _3['default'];
-    }, function (_4) {
-      AddCustomFieldOptions = _4['default'];
-    }, function (_5) {
-      repeatable = _5['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_c2) {
-      TextInput = _c2['default'];
-    }, function (_e) {
-      Button = _e['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      fieldTypes = [{
-        label: '',
-        value: ''
-      }, {
-        label: 'Select',
-        value: 'select'
-      }, {
-        label: 'Textbox',
-        value: 'text'
-      }];
-
-      AddCustomField = (function (_Component) {
-        _inherits(AddCustomField, _Component);
-
-        _createClass(AddCustomField, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              field: PropTypes.string.isRequired,
-              index: PropTypes.number.isRequired,
-              onRemove: PropTypes.func.isRequired,
-              addField: PropTypes.func.isRequired,
-              options: PropTypes.array.isRequired,
-              removeField: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        function AddCustomField(props) {
-          _classCallCheck(this, AddCustomField);
-
-          _get(Object.getPrototypeOf(AddCustomField.prototype), 'constructor', this).call(this, props);
-          this.state = {
-            showAddOptions: false
-          };
-        }
-
-        _createClass(AddCustomField, [{
-          key: 'render',
-          value: function render() {
-            var _this = this;
-
-            var typeName = this.props.field + '.type';
-            var labelName = this.props.field + '.label';
-            var optionsField = this.props.field + '.options';
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(
-                'fieldset',
-                { className: 'form-inline' },
-                React.createElement(
-                  'legend',
-                  null,
-                  'Custom Field #' + (this.props.index + 1)
-                ),
-                React.createElement(Select, { name: typeName, label: 'Type', onChange: this.handleTypeChange.bind(this), options: fieldTypes }),
-                React.createElement(TextInput, { name: labelName, label: 'Label' }),
-                React.createElement(Button, { text: 'Remove', onButtonClick: this.props.onRemove })
-              ),
-              this.state.showAddOptions ? React.createElement(Button, { text: 'Add Option', onButtonClick: this.handleAddOption.bind(this) }) : null,
-              this.state.showAddOptions ? this.props.options.map(function (result, index) {
-                return React.createElement(AddCustomFieldOptions, _extends({ key: result._id, index: index, field: optionsField, onRemove: _this.handleRemoveOption.bind(_this, index) }, result));
-              }) : null
-            );
-          }
-        }, {
-          key: 'handleTypeChange',
-          value: function handleTypeChange(name, value) {
-            this.setState({
-              showAddOptions: value === 'select' ? true : false
-            });
-          }
-        }, {
-          key: 'handleAddOption',
-          value: function handleAddOption() {
-            this.props.addField(this.props.field + '.options', {});
-          }
-        }, {
-          key: 'handleRemoveOption',
-          value: function handleRemoveOption(index) {
-            this.props.removeField(this.props.field + '.options', index);
-          }
-        }]);
-
-        return AddCustomField;
-      })(Component);
-
-      _export('default', repeatable(AddCustomField));
-    }
-  };
-});
-
-$__System.register('43', ['4', '18', '20', 'a', 'b', 'c', 'd', '1c', '1d', '1e', '1f'], function (_export) {
-  var React, Component, PropTypes, _extends, form, _get, _inherits, _createClass, _classCallCheck, TextInput, Textarea, Button, AddCustomField, model, AddPartForm;
-
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_) {
-      _extends = _['default'];
-    }, function (_3) {
-      form = _3['default'];
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }, function (_c2) {
-      TextInput = _c2['default'];
-    }, function (_d2) {
-      Textarea = _d2['default'];
-    }, function (_e) {
-      Button = _e['default'];
-    }, function (_f) {
-      AddCustomField = _f['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      model = {
-        name: '',
-        description: '',
-        type: '',
-        fields: [],
-        createdPlatformId: ''
-      };
-
-      AddPartForm = (function (_Component) {
-        _inherits(AddPartForm, _Component);
-
-        function AddPartForm() {
-          _classCallCheck(this, AddPartForm);
-
-          _get(Object.getPrototypeOf(AddPartForm.prototype), 'constructor', this).apply(this, arguments);
-        }
-
-        _createClass(AddPartForm, [{
-          key: 'render',
-          value: function render() {
-            var _this = this;
-
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(TextInput, { name: 'name', label: 'Name', required: true }),
-              React.createElement(Textarea, { name: 'description', label: 'Description', required: true }),
-              React.createElement(
-                'h3',
-                null,
-                'Custom Fields'
-              ),
-              React.createElement(Button, { text: 'Add Field', onButtonClick: this.handleAddField.bind(this) }),
-              this.props.form.fields.map(function (result, index) {
-                return React.createElement(AddCustomField, _extends({ key: result._id, index: index, field: 'fields', onRemove: _this.handleRemoveField.bind(_this, index), addField: _this.props.addField, removeField: _this.props.removeField }, result));
-              }),
-              React.createElement(Button, { text: 'Save', onButtonClick: this.handleSave.bind(this) })
-            );
-          }
-        }, {
-          key: 'handleAddField',
-          value: function handleAddField() {
-            this.props.addField('fields', { options: [] });
-          }
-        }, {
-          key: 'handleRemoveField',
-          value: function handleRemoveField(index) {
-            this.props.removeField('fields', index);
-          }
-        }, {
-          key: 'handleSave',
-          value: function handleSave(event) {
-            var _this2 = this;
-
-            // PROBABLY not the best way to do this but it will work for now
-            this.props.validate(event, function (data) {
-              _this2.props.onSave(data);
-            });
-          }
-        }], [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              addField: PropTypes.func.isRequired,
-              removeField: PropTypes.func.isRequired,
-              form: PropTypes.object.isRequired,
-              validate: PropTypes.func.isRequired,
-              onSave: PropTypes.func.isRequired
-            };
-          }
-        }]);
-
-        return AddPartForm;
-      })(Component);
-
-      _export('default', form(AddPartForm, {
-        model: model
-      }));
-    }
-  };
-});
-
-$__System.registerDynamic("44", ["4b", "4c", "4", "45", "46", "47", "48", "49", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    function _objectWithoutProperties(obj, keys) {
-      var target = {};
-      for (var i in obj) {
-        if (keys.indexOf(i) >= 0)
-          continue;
-        if (!Object.prototype.hasOwnProperty.call(obj, i))
-          continue;
-        target[i] = obj[i];
-      }
-      return target;
-    }
-    var _historyLibCreateHashHistory = $__require('4b');
-    var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
-    var _historyLibUseQueries = $__require('4c');
-    var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _createTransitionManager = $__require('45');
-    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-    var _PropTypes = $__require('46');
-    var _RouterContext = $__require('47');
-    var _RouterContext2 = _interopRequireDefault(_RouterContext);
-    var _RouteUtils = $__require('48');
-    var _RouterUtils = $__require('49');
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    function isDeprecatedHistory(history) {
-      return !history || !history.__v2_compatible__;
-    }
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var func = _React$PropTypes.func;
-    var object = _React$PropTypes.object;
-    var Router = _react2['default'].createClass({
-      displayName: 'Router',
-      propTypes: {
-        history: object,
-        children: _PropTypes.routes,
-        routes: _PropTypes.routes,
-        render: func,
-        createElement: func,
-        onError: func,
-        onUpdate: func
-      },
-      getDefaultProps: function getDefaultProps() {
-        return {render: function render(props) {
-            return _react2['default'].createElement(_RouterContext2['default'], props);
-          }};
-      },
-      getInitialState: function getInitialState() {
-        var _props = this.props;
-        var location = _props.location;
-        var routes = _props.routes;
-        var params = _props.params;
-        var components = _props.components;
-        return {
-          location: location,
-          routes: routes,
-          params: params,
-          components: components
-        };
-      },
-      handleError: function handleError(error) {
-        if (this.props.onError) {
-          this.props.onError.call(this, error);
-        } else {
-          throw error;
-        }
-      },
-      componentWillMount: function componentWillMount() {
-        var _this = this;
-        var history = this.props.history;
-        var _props2 = this.props;
-        var routes = _props2.routes;
-        var children = _props2.children;
-        var _props3 = this.props;
-        var parseQueryString = _props3.parseQueryString;
-        var stringifyQuery = _props3.stringifyQuery;
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](!(parseQueryString || stringifyQuery), '`parseQueryString` and `stringifyQuery` are deprecated. Please create a custom history. http://tiny.cc/router-customquerystring') : undefined;
-        if (isDeprecatedHistory(history)) {
-          history = this.wrapDeprecatedHistory(history);
-        }
-        var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes || children));
-        this._unlisten = transitionManager.listen(function(error, state) {
-          if (error) {
-            _this.handleError(error);
-          } else {
-            _this.setState(state, _this.props.onUpdate);
-          }
-        });
-        this.router = _RouterUtils.createRouterObject(history, transitionManager);
-        this.history = _RouterUtils.createRoutingHistory(history, transitionManager);
-      },
-      wrapDeprecatedHistory: function wrapDeprecatedHistory(history) {
-        var _props4 = this.props;
-        var parseQueryString = _props4.parseQueryString;
-        var stringifyQuery = _props4.stringifyQuery;
-        var createHistory = undefined;
-        if (history) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'It appears you have provided a deprecated history object to `<Router/>`, please use a history provided by ' + 'React Router with `import { browserHistory } from \'react-router\'` or `import { hashHistory } from \'react-router\'`. ' + 'If you are using a custom history please create it with `useRouterHistory`, see http://tiny.cc/router-usinghistory for details.') : undefined;
-          createHistory = function() {
-            return history;
-          };
-        } else {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`Router` no longer defaults the history prop to hash history. Please use the `hashHistory` singleton instead. http://tiny.cc/router-defaulthistory') : undefined;
-          createHistory = _historyLibCreateHashHistory2['default'];
-        }
-        return _historyLibUseQueries2['default'](createHistory)({
-          parseQueryString: parseQueryString,
-          stringifyQuery: stringifyQuery
-        });
-      },
-      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
-        process.env.NODE_ENV !== 'production' ? _warning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
-      },
-      componentWillUnmount: function componentWillUnmount() {
-        if (this._unlisten)
-          this._unlisten();
-      },
-      render: function render() {
-        var _state = this.state;
-        var location = _state.location;
-        var routes = _state.routes;
-        var params = _state.params;
-        var components = _state.components;
-        var _props5 = this.props;
-        var createElement = _props5.createElement;
-        var render = _props5.render;
-        var props = _objectWithoutProperties(_props5, ['createElement', 'render']);
-        if (location == null)
-          return null;
-        Object.keys(Router.propTypes).forEach(function(propType) {
-          return delete props[propType];
-        });
-        return render(_extends({}, props, {
-          history: this.history,
-          router: this.router,
-          location: location,
-          routes: routes,
-          params: params,
-          components: components,
-          createElement: createElement
-        }));
-      }
-    });
-    exports['default'] = Router;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4d", ["4", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    function _objectWithoutProperties(obj, keys) {
-      var target = {};
-      for (var i in obj) {
-        if (keys.indexOf(i) >= 0)
-          continue;
-        if (!Object.prototype.hasOwnProperty.call(obj, i))
-          continue;
-        target[i] = obj[i];
-      }
-      return target;
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var bool = _React$PropTypes.bool;
-    var object = _React$PropTypes.object;
-    var string = _React$PropTypes.string;
-    var func = _React$PropTypes.func;
-    var oneOfType = _React$PropTypes.oneOfType;
-    function isLeftClickEvent(event) {
-      return event.button === 0;
-    }
-    function isModifiedEvent(event) {
-      return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-    }
-    function isEmptyObject(object) {
-      for (var p in object) {
-        if (object.hasOwnProperty(p))
-          return false;
-      }
-      return true;
-    }
-    function createLocationDescriptor(_ref) {
-      var to = _ref.to;
-      var query = _ref.query;
-      var hash = _ref.hash;
-      var state = _ref.state;
-      if (typeof to !== 'object') {
-        return {
-          pathname: to,
-          query: query,
-          hash: hash,
-          state: state
-        };
-      } else {
-        return _extends({
-          query: query,
-          hash: hash,
-          state: state
-        }, to);
-      }
-    }
-    var Link = _react2['default'].createClass({
-      displayName: 'Link',
-      contextTypes: {router: object},
-      propTypes: {
-        to: oneOfType([string, object]).isRequired,
-        query: object,
-        hash: string,
-        state: object,
-        activeStyle: object,
-        activeClassName: string,
-        onlyActiveOnIndex: bool.isRequired,
-        onClick: func
-      },
-      getDefaultProps: function getDefaultProps() {
-        return {
-          onlyActiveOnIndex: false,
-          className: '',
-          style: {}
-        };
-      },
-      handleClick: function handleClick(event) {
-        var allowTransition = true;
-        if (this.props.onClick)
-          this.props.onClick(event);
-        if (isModifiedEvent(event) || !isLeftClickEvent(event))
-          return;
-        if (event.defaultPrevented === true)
-          allowTransition = false;
-        if (this.props.target) {
-          if (!allowTransition)
-            event.preventDefault();
-          return;
-        }
-        event.preventDefault();
-        if (allowTransition) {
-          var _props = this.props;
-          var state = _props.state;
-          var to = _props.to;
-          var query = _props.query;
-          var hash = _props.hash;
-          var _location = createLocationDescriptor({
-            to: to,
-            query: query,
-            hash: hash,
-            state: state
-          });
-          this.context.router.push(_location);
-        }
-      },
-      render: function render() {
-        var _props2 = this.props;
-        var to = _props2.to;
-        var query = _props2.query;
-        var hash = _props2.hash;
-        var state = _props2.state;
-        var activeClassName = _props2.activeClassName;
-        var activeStyle = _props2.activeStyle;
-        var onlyActiveOnIndex = _props2.onlyActiveOnIndex;
-        var props = _objectWithoutProperties(_props2, ['to', 'query', 'hash', 'state', 'activeClassName', 'activeStyle', 'onlyActiveOnIndex']);
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](!(query || hash || state), 'the `query`, `hash`, and `state` props on `<Link>` are deprecated, use `<Link to={{ pathname, query, hash, state }}/>. http://tiny.cc/router-isActivedeprecated') : undefined;
-        var router = this.context.router;
-        if (router) {
-          var loc = createLocationDescriptor({
-            to: to,
-            query: query,
-            hash: hash,
-            state: state
-          });
-          props.href = router.createHref(loc);
-          if (activeClassName || activeStyle != null && !isEmptyObject(activeStyle)) {
-            if (router.isActive(loc, onlyActiveOnIndex)) {
-              if (activeClassName)
-                props.className += props.className === '' ? activeClassName : ' ' + activeClassName;
-              if (activeStyle)
-                props.style = _extends({}, props.style, activeStyle);
-            }
-          }
-        }
-        return _react2['default'].createElement('a', _extends({}, props, {onClick: this.handleClick}));
-      }
-    });
-    exports['default'] = Link;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4e", ["4", "4d"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  var _extends = Object.assign || function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
   }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  exports.default = function(ComposedComponent, options) {
+    var Form = function(_Component) {
+      _inherits(Form, _Component);
+      _createClass(Form, null, [{
+        key: 'propTypes',
+        get: function get() {
+          return {
+            children: _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(_react.PropTypes.node), _react.PropTypes.node]),
+            form: _react.PropTypes.object
+          };
+        }
+      }, {
+        key: 'defaultProps',
+        get: function get() {
+          return {showSaveButton: true};
+        }
+      }]);
+      function Form(props) {
+        _classCallCheck(this, Form);
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Form).call(this, props));
+        _this.state = {};
+        if (options.model) {
+          _this.model = Object.assign({}, options.model, _this.props.form);
+        }
+        return _this;
+      }
+      _createClass(Form, [{
+        key: 'getChildContext',
+        value: function getChildContext() {
+          return {
+            attachToForm: this.attachToForm.bind(this),
+            detachFromForm: this.detachFromForm.bind(this),
+            onFormFieldChange: this.handleFormFieldChange.bind(this)
+          };
+        }
+      }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+          this.inputs = {};
+          this.registerInputs(this.props.children);
+        }
+      }, {
+        key: 'render',
+        value: function render() {
+          return _react2.default.createElement('form', null, _react2.default.createElement(ComposedComponent, _extends({}, this.props, {
+            form: this.model,
+            validate: this.validate.bind(this),
+            addField: this.addField.bind(this),
+            removeField: this.removeField.bind(this)
+          })));
+        }
+      }, {
+        key: 'registerInputs',
+        value: function registerInputs(children) {
+          var _this2 = this;
+          _react2.default.Children.forEach(children, function(child) {
+            if (child.props && child.props.name) {}
+            if (child.props && child.props.children) {
+              _this2.registerInputs(child.props.children);
+            }
+          });
+        }
+      }, {
+        key: 'attachToForm',
+        value: function attachToForm(component) {
+          this.inputs[component.props.name] = component;
+        }
+      }, {
+        key: 'detachFromForm',
+        value: function detachFromForm(component) {
+          delete this.inputs[component.props.name];
+        }
+      }, {
+        key: 'handleFormFieldChange',
+        value: function handleFormFieldChange(name, value) {
+          (0, _lodash4.default)(this.model, name, value);
+          this.forceUpdate();
+        }
+      }, {
+        key: 'addField',
+        value: function addField(name, field) {
+          if (field && !field.id) {
+            field._id = _uuid2.default.v4();
+          }
+          var addTo = (0, _lodash2.default)(this.model, name);
+          addTo.push(field);
+          this.forceUpdate();
+        }
+      }, {
+        key: 'removeField',
+        value: function removeField(name, index) {
+          var addTo = (0, _lodash2.default)(this.model, name);
+          addTo.splice(index, 1);
+          this.forceUpdate();
+        }
+      }, {
+        key: 'validate',
+        value: function validate(event, onValid) {
+          event.stopPropagation();
+          var isValid = this.validateForm();
+          if (isValid) {
+            onValid(this.model);
+          } else {
+            console.log('Form is not valid');
+          }
+        }
+      }, {
+        key: 'validateForm',
+        value: function validateForm() {
+          var _this3 = this;
+          var isAllValid = true;
+          Object.keys(this.inputs).forEach(function(name) {
+            var component = _this3.inputs[name];
+            var value = (0, _lodash2.default)(_this3.model, name);
+            var isValid = _this3.validateField(component, value);
+            if (isAllValid && !isValid) {
+              isAllValid = false;
+            }
+          });
+          return isAllValid;
+        }
+      }, {
+        key: 'validateField',
+        value: function validateField(component, value) {
+          var isValid = true;
+          if (component.required) {
+            if (typeof value === 'undefined' || value === '') {
+              isValid = false;
+              component.setState({
+                isValid: false,
+                errorMessage: 'This field is required'
+              });
+            }
+          }
+          return isValid;
+        }
+      }]);
+      return Form;
+    }(_react.Component);
+    Form.childContextTypes = {
+      attachToForm: _react.PropTypes.func.isRequired,
+      detachFromForm: _react.PropTypes.func.isRequired,
+      onFormFieldChange: _react.PropTypes.func.isRequired
+    };
+    return Form;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("26", ["4", "11"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Link = $__require('4d');
-  var _Link2 = _interopRequireDefault(_Link);
-  var IndexLink = _react2['default'].createClass({
-    displayName: 'IndexLink',
-    render: function render() {
-      return _react2['default'].createElement(_Link2['default'], _extends({}, this.props, {onlyActiveOnIndex: true}));
-    }
-  });
-  exports['default'] = IndexLink;
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4f", ["4", "4a", "51", "50", "46", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _Redirect = $__require('50');
-    var _Redirect2 = _interopRequireDefault(_Redirect);
-    var _PropTypes = $__require('46');
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var string = _React$PropTypes.string;
-    var object = _React$PropTypes.object;
-    var IndexRedirect = _react2['default'].createClass({
-      displayName: 'IndexRedirect',
-      statics: {createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
-          if (parentRoute) {
-            parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
-          } else {
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
-          }
-        }},
-      propTypes: {
-        to: string.isRequired,
-        query: object,
-        state: object,
-        onEnter: _PropTypes.falsy,
-        children: _PropTypes.falsy
-      },
-      render: function render() {
-        !false ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRedirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
-      }
-    });
-    exports['default'] = IndexRedirect;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("52", ["4", "4a", "51", "48", "46", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _RouteUtils = $__require('48');
-    var _PropTypes = $__require('46');
-    var func = _react2['default'].PropTypes.func;
-    var IndexRoute = _react2['default'].createClass({
-      displayName: 'IndexRoute',
-      statics: {createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
-          if (parentRoute) {
-            parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
-          } else {
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
-          }
-        }},
-      propTypes: {
-        path: _PropTypes.falsy,
-        component: _PropTypes.component,
-        components: _PropTypes.components,
-        getComponent: func,
-        getComponents: func
-      },
-      render: function render() {
-        !false ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRoute> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
-      }
-    });
-    exports['default'] = IndexRoute;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("50", ["4", "51", "48", "53", "46", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _RouteUtils = $__require('48');
-    var _PatternUtils = $__require('53');
-    var _PropTypes = $__require('46');
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var string = _React$PropTypes.string;
-    var object = _React$PropTypes.object;
-    var Redirect = _react2['default'].createClass({
-      displayName: 'Redirect',
-      statics: {
-        createRouteFromReactElement: function createRouteFromReactElement(element) {
-          var route = _RouteUtils.createRouteFromReactElement(element);
-          if (route.from)
-            route.path = route.from;
-          route.onEnter = function(nextState, replace) {
-            var location = nextState.location;
-            var params = nextState.params;
-            var pathname = undefined;
-            if (route.to.charAt(0) === '/') {
-              pathname = _PatternUtils.formatPattern(route.to, params);
-            } else if (!route.to) {
-              pathname = location.pathname;
-            } else {
-              var routeIndex = nextState.routes.indexOf(route);
-              var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
-              var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
-              pathname = _PatternUtils.formatPattern(pattern, params);
-            }
-            replace({
-              pathname: pathname,
-              query: route.query || location.query,
-              state: route.state || location.state
-            });
-          };
-          return route;
-        },
-        getRoutePattern: function getRoutePattern(routes, routeIndex) {
-          var parentPattern = '';
-          for (var i = routeIndex; i >= 0; i--) {
-            var route = routes[i];
-            var pattern = route.path || '';
-            parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
-            if (pattern.indexOf('/') === 0)
-              break;
-          }
-          return '/' + parentPattern;
-        }
-      },
-      propTypes: {
-        path: string,
-        from: string,
-        to: string.isRequired,
-        query: object,
-        state: object,
-        onEnter: _PropTypes.falsy,
-        children: _PropTypes.falsy
-      },
-      render: function render() {
-        !false ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Redirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
-      }
-    });
-    exports['default'] = Redirect;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("54", ["4", "51", "48", "46", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _RouteUtils = $__require('48');
-    var _PropTypes = $__require('46');
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var string = _React$PropTypes.string;
-    var func = _React$PropTypes.func;
-    var Route = _react2['default'].createClass({
-      displayName: 'Route',
-      statics: {createRouteFromReactElement: _RouteUtils.createRouteFromReactElement},
-      propTypes: {
-        path: string,
-        component: _PropTypes.component,
-        components: _PropTypes.components,
-        getComponent: func,
-        getComponents: func
-      },
-      render: function render() {
-        !false ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Route> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
-      }
-    });
-    exports['default'] = Route;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("55", ["4a", "46", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _PropTypes = $__require('46');
-    var History = {
-      contextTypes: {history: _PropTypes.history},
-      componentWillMount: function componentWillMount() {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'the `History` mixin is deprecated, please access `context.router` with your own `contextTypes`. http://tiny.cc/router-historymixin') : undefined;
-        this.history = this.context.history;
-      }
-    };
-    exports['default'] = History;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("56", ["4a", "4", "51", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var object = _react2['default'].PropTypes.object;
-    var Lifecycle = {
-      contextTypes: {
-        history: object.isRequired,
-        route: object
-      },
-      propTypes: {route: object},
-      componentDidMount: function componentDidMount() {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'the `Lifecycle` mixin is deprecated, please use `context.router.setRouteLeaveHook(route, hook)`. http://tiny.cc/router-lifecyclemixin') : undefined;
-        !this.routerWillLeave ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin requires you to define a routerWillLeave method') : _invariant2['default'](false) : undefined;
-        var route = this.props.route || this.context.route;
-        !route ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin must be used on either a) a <Route component> or ' + 'b) a descendant of a <Route component> that uses the RouteContext mixin') : _invariant2['default'](false) : undefined;
-        this._unlistenBeforeLeavingRoute = this.context.history.listenBeforeLeavingRoute(route, this.routerWillLeave);
-      },
-      componentWillUnmount: function componentWillUnmount() {
-        if (this._unlistenBeforeLeavingRoute)
-          this._unlistenBeforeLeavingRoute();
-      }
-    };
-    exports['default'] = Lifecycle;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("57", ["4a", "4", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var object = _react2['default'].PropTypes.object;
-    var RouteContext = {
-      propTypes: {route: object.isRequired},
-      childContextTypes: {route: object.isRequired},
-      getChildContext: function getChildContext() {
-        return {route: this.props.route};
-      },
-      componentWillMount: function componentWillMount() {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
-      }
-    };
-    exports['default'] = RouteContext;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("58", ["4c", "45", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    function _objectWithoutProperties(obj, keys) {
-      var target = {};
-      for (var i in obj) {
-        if (keys.indexOf(i) >= 0)
-          continue;
-        if (!Object.prototype.hasOwnProperty.call(obj, i))
-          continue;
-        target[i] = obj[i];
-      }
-      return target;
-    }
-    var _historyLibUseQueries = $__require('4c');
-    var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
-    var _createTransitionManager = $__require('45');
-    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    function useRoutes(createHistory) {
-      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`useRoutes` is deprecated. Please use `createTransitionManager` instead.') : undefined;
-      return function() {
-        var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-        var routes = _ref.routes;
-        var options = _objectWithoutProperties(_ref, ['routes']);
-        var history = _historyLibUseQueries2['default'](createHistory)(options);
-        var transitionManager = _createTransitionManager2['default'](history, routes);
-        return _extends({}, history, transitionManager);
-      };
-    }
-    exports['default'] = useRoutes;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("59", ["53"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  var _PatternUtils = $__require('53');
-  function getRouteParams(route, params) {
-    var routeParams = {};
-    if (!route.path)
-      return routeParams;
-    var paramNames = _PatternUtils.getParamNames(route.path);
-    for (var p in params) {
-      if (params.hasOwnProperty(p) && paramNames.indexOf(p) !== -1)
-        routeParams[p] = params[p];
-    }
-    return routeParams;
-  }
-  exports['default'] = getRouteParams;
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("47", ["51", "4", "5a", "59", "48", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _deprecateObjectProperties = $__require('5a');
-    var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
-    var _getRouteParams = $__require('59');
-    var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
-    var _RouteUtils = $__require('48');
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _React$PropTypes = _react2['default'].PropTypes;
-    var array = _React$PropTypes.array;
-    var func = _React$PropTypes.func;
-    var object = _React$PropTypes.object;
-    var RouterContext = _react2['default'].createClass({
-      displayName: 'RouterContext',
-      propTypes: {
-        history: object,
-        router: object.isRequired,
-        location: object.isRequired,
-        routes: array.isRequired,
-        params: object.isRequired,
-        components: array.isRequired,
-        createElement: func.isRequired
-      },
-      getDefaultProps: function getDefaultProps() {
-        return {createElement: _react2['default'].createElement};
-      },
-      childContextTypes: {
-        history: object,
-        location: object.isRequired,
-        router: object.isRequired
-      },
-      getChildContext: function getChildContext() {
-        var _props = this.props;
-        var router = _props.router;
-        var history = _props.history;
-        var location = _props.location;
-        if (!router) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`<RouterContext>` expects a `router` rather than a `history`') : undefined;
-          router = _extends({}, history, {setRouteLeaveHook: history.listenBeforeLeavingRoute});
-          delete router.listenBeforeLeavingRoute;
-        }
-        if (process.env.NODE_ENV !== 'production') {
-          location = _deprecateObjectProperties2['default'](location, '`context.location` is deprecated, please use a route component\'s `props.location` instead. http://tiny.cc/router-accessinglocation');
-        }
-        return {
-          history: history,
-          location: location,
-          router: router
-        };
-      },
-      createElement: function createElement(component, props) {
-        return component == null ? null : this.props.createElement(component, props);
-      },
-      render: function render() {
-        var _this = this;
-        var _props2 = this.props;
-        var history = _props2.history;
-        var location = _props2.location;
-        var routes = _props2.routes;
-        var params = _props2.params;
-        var components = _props2.components;
-        var element = null;
-        if (components) {
-          element = components.reduceRight(function(element, components, index) {
-            if (components == null)
-              return element;
-            var route = routes[index];
-            var routeParams = _getRouteParams2['default'](route, params);
-            var props = {
-              history: history,
-              location: location,
-              params: params,
-              route: route,
-              routeParams: routeParams,
-              routes: routes
-            };
-            if (_RouteUtils.isReactChildren(element)) {
-              props.children = element;
-            } else if (element) {
-              for (var prop in element) {
-                if (element.hasOwnProperty(prop))
-                  props[prop] = element[prop];
-              }
-            }
-            if (typeof components === 'object') {
-              var elements = {};
-              for (var key in components) {
-                if (components.hasOwnProperty(key)) {
-                  elements[key] = _this.createElement(components[key], _extends({key: key}, props));
-                }
-              }
-              return elements;
-            }
-            return _this.createElement(components, props);
-          }, element);
-        }
-        !(element === null || element === false || _react2['default'].isValidElement(element)) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The root route must render a single element') : _invariant2['default'](false) : undefined;
-        return element;
-      }
-    });
-    exports['default'] = RouterContext;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5b", ["4", "47", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _RouterContext = $__require('47');
-    var _RouterContext2 = _interopRequireDefault(_RouterContext);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var RoutingContext = _react2['default'].createClass({
-      displayName: 'RoutingContext',
-      componentWillMount: function componentWillMount() {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from \'react-router\'`. http://tiny.cc/router-routercontext') : undefined;
-      },
-      render: function render() {
-        return _react2['default'].createElement(_RouterContext2['default'], this.props);
-      }
-    });
-    exports['default'] = RoutingContext;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("46", ["4"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports.falsy = falsy;
-  var _react = $__require('4');
-  var func = _react.PropTypes.func;
-  var object = _react.PropTypes.object;
-  var arrayOf = _react.PropTypes.arrayOf;
-  var oneOfType = _react.PropTypes.oneOfType;
-  var element = _react.PropTypes.element;
-  var shape = _react.PropTypes.shape;
-  var string = _react.PropTypes.string;
-  function falsy(props, propName, componentName) {
-    if (props[propName])
-      return new Error('<' + componentName + '> should not have a "' + propName + '" prop');
-  }
-  var history = shape({
-    listen: func.isRequired,
-    pushState: func.isRequired,
-    replaceState: func.isRequired,
-    go: func.isRequired
-  });
-  exports.history = history;
-  var location = shape({
-    pathname: string.isRequired,
-    search: string.isRequired,
-    state: object,
-    action: string.isRequired,
-    key: string
-  });
-  exports.location = location;
-  var component = oneOfType([func, string]);
-  exports.component = component;
-  var components = oneOfType([component, object]);
-  exports.components = components;
-  var route = oneOfType([object, element]);
-  exports.route = route;
-  var routes = oneOfType([route, arrayOf(route)]);
-  exports.routes = routes;
-  exports['default'] = {
-    falsy: falsy,
-    history: history,
-    location: location,
-    component: component,
-    components: components,
-    route: route
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5c", ["53"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  var _PatternUtils = $__require('53');
-  function routeParamsChanged(route, prevState, nextState) {
-    if (!route.path)
-      return false;
-    var paramNames = _PatternUtils.getParamNames(route.path);
-    return paramNames.some(function(paramName) {
-      return prevState.params[paramName] !== nextState.params[paramName];
-    });
-  }
-  function computeChangedRoutes(prevState, nextState) {
-    var prevRoutes = prevState && prevState.routes;
-    var nextRoutes = nextState.routes;
-    var leaveRoutes = undefined,
-        enterRoutes = undefined;
-    if (prevRoutes) {
-      leaveRoutes = prevRoutes.filter(function(route) {
-        return nextRoutes.indexOf(route) === -1 || routeParamsChanged(route, prevState, nextState);
-      });
-      leaveRoutes.reverse();
-      enterRoutes = nextRoutes.filter(function(route) {
-        return prevRoutes.indexOf(route) === -1 || leaveRoutes.indexOf(route) !== -1;
-      });
-    } else {
-      leaveRoutes = [];
-      enterRoutes = nextRoutes;
-    }
-    return {
-      leaveRoutes: leaveRoutes,
-      enterRoutes: enterRoutes
-    };
-  }
-  exports['default'] = computeChangedRoutes;
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5d", ["5e", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    exports.runEnterHooks = runEnterHooks;
-    exports.runLeaveHooks = runLeaveHooks;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _AsyncUtils = $__require('5e');
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    function createEnterHook(hook, route) {
-      return function(a, b, callback) {
-        hook.apply(route, arguments);
-        if (hook.length < 3) {
-          callback();
-        }
-      };
-    }
-    function getEnterHooks(routes) {
-      return routes.reduce(function(hooks, route) {
-        if (route.onEnter)
-          hooks.push(createEnterHook(route.onEnter, route));
-        return hooks;
-      }, []);
-    }
-    function runEnterHooks(routes, nextState, callback) {
-      var hooks = getEnterHooks(routes);
-      if (!hooks.length) {
-        callback();
-        return;
-      }
-      var redirectInfo = undefined;
-      function replace(location, deprecatedPathname, deprecatedQuery) {
-        if (deprecatedPathname) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`replaceState(state, pathname, query) is deprecated; use `replace(location)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
-          redirectInfo = {
-            pathname: deprecatedPathname,
-            query: deprecatedQuery,
-            state: location
-          };
-          return;
-        }
-        redirectInfo = location;
-      }
-      _AsyncUtils.loopAsync(hooks.length, function(index, next, done) {
-        hooks[index](nextState, replace, function(error) {
-          if (error || redirectInfo) {
-            done(error, redirectInfo);
-          } else {
-            next();
-          }
-        });
-      }, callback);
-    }
-    function runLeaveHooks(routes) {
-      for (var i = 0,
-          len = routes.length; i < len; ++i) {
-        if (routes[i].onLeave)
-          routes[i].onLeave.call(routes[i]);
-      }
-    }
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5f", ["53"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = isActive;
-  var _PatternUtils = $__require('53');
-  function deepEqual(a, b) {
-    if (a == b)
-      return true;
-    if (a == null || b == null)
-      return false;
-    if (Array.isArray(a)) {
-      return Array.isArray(b) && a.length === b.length && a.every(function(item, index) {
-        return deepEqual(item, b[index]);
-      });
-    }
-    if (typeof a === 'object') {
-      for (var p in a) {
-        if (!a.hasOwnProperty(p)) {
-          continue;
-        }
-        if (a[p] === undefined) {
-          if (b[p] !== undefined) {
-            return false;
-          }
-        } else if (!b.hasOwnProperty(p)) {
-          return false;
-        } else if (!deepEqual(a[p], b[p])) {
-          return false;
-        }
-      }
-      return true;
-    }
-    return String(a) === String(b);
-  }
-  function paramsAreActive(paramNames, paramValues, activeParams) {
-    return paramNames.every(function(paramName, index) {
-      return String(paramValues[index]) === String(activeParams[paramName]);
-    });
-  }
-  function getMatchingRouteIndex(pathname, activeRoutes, activeParams) {
-    var remainingPathname = pathname,
-        paramNames = [],
-        paramValues = [];
-    for (var i = 0,
-        len = activeRoutes.length; i < len; ++i) {
-      var route = activeRoutes[i];
-      var pattern = route.path || '';
-      if (pattern.charAt(0) === '/') {
-        remainingPathname = pathname;
-        paramNames = [];
-        paramValues = [];
-      }
-      if (remainingPathname !== null) {
-        var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
-        remainingPathname = matched.remainingPathname;
-        paramNames = [].concat(paramNames, matched.paramNames);
-        paramValues = [].concat(paramValues, matched.paramValues);
-      }
-      if (remainingPathname === '' && route.path && paramsAreActive(paramNames, paramValues, activeParams))
-        return i;
-    }
-    return null;
-  }
-  function routeIsActive(pathname, routes, params, indexOnly) {
-    var i = getMatchingRouteIndex(pathname, routes, params);
-    if (i === null) {
-      return false;
-    } else if (!indexOnly) {
-      return true;
-    }
-    return routes.slice(i + 1).every(function(route) {
-      return !route.path;
-    });
-  }
-  function queryIsActive(query, activeQuery) {
-    if (activeQuery == null)
-      return query == null;
-    if (query == null)
-      return true;
-    return deepEqual(query, activeQuery);
-  }
-  function isActive(_ref, indexOnly, currentLocation, routes, params) {
-    var pathname = _ref.pathname;
-    var query = _ref.query;
-    if (currentLocation == null)
-      return false;
-    if (!routeIsActive(pathname, routes, params, indexOnly))
-      return false;
-    return queryIsActive(query, currentLocation.query);
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("60", ["5e"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  var _AsyncUtils = $__require('5e');
-  function getComponentsForRoute(location, route, callback) {
-    if (route.component || route.components) {
-      callback(null, route.component || route.components);
-    } else if (route.getComponent) {
-      route.getComponent(location, callback);
-    } else if (route.getComponents) {
-      route.getComponents(location, callback);
-    } else {
-      callback();
-    }
-  }
-  function getComponents(nextState, callback) {
-    _AsyncUtils.mapAsync(nextState.routes, function(route, index, callback) {
-      getComponentsForRoute(nextState.location, route, callback);
-    }, callback);
-  }
-  exports['default'] = getComponents;
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5e", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports.loopAsync = loopAsync;
-  exports.mapAsync = mapAsync;
-  function loopAsync(turns, work, callback) {
-    var currentTurn = 0,
-        isDone = false;
-    function done() {
-      isDone = true;
-      callback.apply(this, arguments);
-    }
-    function next() {
-      if (isDone)
-        return;
-      if (currentTurn < turns) {
-        work.call(this, currentTurn++, next, done);
-      } else {
-        done.apply(this, arguments);
-      }
-    }
-    next();
-  }
-  function mapAsync(array, work, callback) {
-    var length = array.length;
-    var values = [];
-    if (length === 0)
-      return callback(null, values);
-    var isDone = false,
-        doneCount = 0;
-    function done(index, error, value) {
-      if (isDone)
-        return;
-      if (error) {
-        isDone = true;
-        callback(error);
-      } else {
-        values[index] = value;
-        isDone = ++doneCount === length;
-        if (isDone)
-          callback(null, values);
-      }
-    }
-    array.forEach(function(item, index) {
-      work(item, index, function(error, value) {
-        done(index, error, value);
-      });
-    });
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("61", ["4a", "5e", "53", "48", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _AsyncUtils = $__require('5e');
-    var _PatternUtils = $__require('53');
-    var _RouteUtils = $__require('48');
-    function getChildRoutes(route, location, callback) {
-      if (route.childRoutes) {
-        callback(null, route.childRoutes);
-      } else if (route.getChildRoutes) {
-        route.getChildRoutes(location, function(error, childRoutes) {
-          callback(error, !error && _RouteUtils.createRoutes(childRoutes));
-        });
-      } else {
-        callback();
-      }
-    }
-    function getIndexRoute(route, location, callback) {
-      if (route.indexRoute) {
-        callback(null, route.indexRoute);
-      } else if (route.getIndexRoute) {
-        route.getIndexRoute(location, function(error, indexRoute) {
-          callback(error, !error && _RouteUtils.createRoutes(indexRoute)[0]);
-        });
-      } else if (route.childRoutes) {
-        (function() {
-          var pathless = route.childRoutes.filter(function(obj) {
-            return !obj.hasOwnProperty('path');
-          });
-          _AsyncUtils.loopAsync(pathless.length, function(index, next, done) {
-            getIndexRoute(pathless[index], location, function(error, indexRoute) {
-              if (error || indexRoute) {
-                var routes = [pathless[index]].concat(Array.isArray(indexRoute) ? indexRoute : [indexRoute]);
-                done(error, routes);
-              } else {
-                next();
-              }
-            });
-          }, function(err, routes) {
-            callback(null, routes);
-          });
-        })();
-      } else {
-        callback();
-      }
-    }
-    function assignParams(params, paramNames, paramValues) {
-      return paramNames.reduce(function(params, paramName, index) {
-        var paramValue = paramValues && paramValues[index];
-        if (Array.isArray(params[paramName])) {
-          params[paramName].push(paramValue);
-        } else if (paramName in params) {
-          params[paramName] = [params[paramName], paramValue];
-        } else {
-          params[paramName] = paramValue;
-        }
-        return params;
-      }, params);
-    }
-    function createParams(paramNames, paramValues) {
-      return assignParams({}, paramNames, paramValues);
-    }
-    function matchRouteDeep(route, location, remainingPathname, paramNames, paramValues, callback) {
-      var pattern = route.path || '';
-      if (pattern.charAt(0) === '/') {
-        remainingPathname = location.pathname;
-        paramNames = [];
-        paramValues = [];
-      }
-      if (remainingPathname !== null) {
-        var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
-        remainingPathname = matched.remainingPathname;
-        paramNames = [].concat(paramNames, matched.paramNames);
-        paramValues = [].concat(paramValues, matched.paramValues);
-        if (remainingPathname === '' && route.path) {
-          var _ret2 = (function() {
-            var match = {
-              routes: [route],
-              params: createParams(paramNames, paramValues)
-            };
-            getIndexRoute(route, location, function(error, indexRoute) {
-              if (error) {
-                callback(error);
-              } else {
-                if (Array.isArray(indexRoute)) {
-                  var _match$routes;
-                  process.env.NODE_ENV !== 'production' ? _warning2['default'](indexRoute.every(function(route) {
-                    return !route.path;
-                  }), 'Index routes should not have paths') : undefined;
-                  (_match$routes = match.routes).push.apply(_match$routes, indexRoute);
-                } else if (indexRoute) {
-                  process.env.NODE_ENV !== 'production' ? _warning2['default'](!indexRoute.path, 'Index routes should not have paths') : undefined;
-                  match.routes.push(indexRoute);
-                }
-                callback(null, match);
-              }
-            });
-            return {v: undefined};
-          })();
-          if (typeof _ret2 === 'object')
-            return _ret2.v;
-        }
-      }
-      if (remainingPathname != null || route.childRoutes) {
-        getChildRoutes(route, location, function(error, childRoutes) {
-          if (error) {
-            callback(error);
-          } else if (childRoutes) {
-            matchRoutes(childRoutes, location, function(error, match) {
-              if (error) {
-                callback(error);
-              } else if (match) {
-                match.routes.unshift(route);
-                callback(null, match);
-              } else {
-                callback();
-              }
-            }, remainingPathname, paramNames, paramValues);
-          } else {
-            callback();
-          }
-        });
-      } else {
-        callback();
-      }
-    }
-    function matchRoutes(routes, location, callback) {
-      var remainingPathname = arguments.length <= 3 || arguments[3] === undefined ? location.pathname : arguments[3];
-      var paramNames = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
-      var paramValues = arguments.length <= 5 || arguments[5] === undefined ? [] : arguments[5];
-      return (function() {
-        _AsyncUtils.loopAsync(routes.length, function(index, next, done) {
-          matchRouteDeep(routes[index], location, remainingPathname, paramNames, paramValues, function(error, match) {
-            if (error || match) {
-              done(error, match);
-            } else {
-              next();
-            }
-          });
-        }, callback);
-      })();
-    }
-    exports['default'] = matchRoutes;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("45", ["4a", "62", "5c", "5d", "5f", "60", "61", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    exports['default'] = createTransitionManager;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _historyLibActions = $__require('62');
-    var _computeChangedRoutes2 = $__require('5c');
-    var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
-    var _TransitionUtils = $__require('5d');
-    var _isActive2 = $__require('5f');
-    var _isActive3 = _interopRequireDefault(_isActive2);
-    var _getComponents = $__require('60');
-    var _getComponents2 = _interopRequireDefault(_getComponents);
-    var _matchRoutes = $__require('61');
-    var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
-    function hasAnyProperties(object) {
-      for (var p in object) {
-        if (object.hasOwnProperty(p))
-          return true;
-      }
-      return false;
-    }
-    function createTransitionManager(history, routes) {
-      var state = {};
-      function isActive(location) {
-        var indexOnlyOrDeprecatedQuery = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-        var deprecatedIndexOnly = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-        var indexOnly = undefined;
-        if (indexOnlyOrDeprecatedQuery && indexOnlyOrDeprecatedQuery !== true || deprecatedIndexOnly !== null) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '`isActive(pathname, query, indexOnly) is deprecated; use `isActive(location, indexOnly)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
-          location = {
-            pathname: location,
-            query: indexOnlyOrDeprecatedQuery
-          };
-          indexOnly = deprecatedIndexOnly || false;
-        } else {
-          if (typeof location === 'string') {
-            location = {pathname: location};
-          }
-          indexOnly = indexOnlyOrDeprecatedQuery;
-        }
-        return _isActive3['default'](location, indexOnly, state.location, state.routes, state.params);
-      }
-      function createLocationFromRedirectInfo(location) {
-        return history.createLocation(location, _historyLibActions.REPLACE);
-      }
-      var partialNextState = undefined;
-      function match(location, callback) {
-        if (partialNextState && partialNextState.location === location) {
-          finishMatch(partialNextState, callback);
-        } else {
-          _matchRoutes2['default'](routes, location, function(error, nextState) {
-            if (error) {
-              callback(error);
-            } else if (nextState) {
-              finishMatch(_extends({}, nextState, {location: location}), callback);
-            } else {
-              callback();
-            }
-          });
-        }
-      }
-      function finishMatch(nextState, callback) {
-        var _computeChangedRoutes = _computeChangedRoutes3['default'](state, nextState);
-        var leaveRoutes = _computeChangedRoutes.leaveRoutes;
-        var enterRoutes = _computeChangedRoutes.enterRoutes;
-        _TransitionUtils.runLeaveHooks(leaveRoutes);
-        leaveRoutes.forEach(removeListenBeforeHooksForRoute);
-        _TransitionUtils.runEnterHooks(enterRoutes, nextState, function(error, redirectInfo) {
-          if (error) {
-            callback(error);
-          } else if (redirectInfo) {
-            callback(null, createLocationFromRedirectInfo(redirectInfo));
-          } else {
-            _getComponents2['default'](nextState, function(error, components) {
-              if (error) {
-                callback(error);
-              } else {
-                callback(null, null, state = _extends({}, nextState, {components: components}));
-              }
-            });
-          }
-        });
-      }
-      var RouteGuid = 1;
-      function getRouteID(route) {
-        var create = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
-        return route.__id__ || create && (route.__id__ = RouteGuid++);
-      }
-      var RouteHooks = {};
-      function getRouteHooksForRoutes(routes) {
-        return routes.reduce(function(hooks, route) {
-          hooks.push.apply(hooks, RouteHooks[getRouteID(route)]);
-          return hooks;
-        }, []);
-      }
-      function transitionHook(location, callback) {
-        _matchRoutes2['default'](routes, location, function(error, nextState) {
-          if (nextState == null) {
-            callback();
-            return;
-          }
-          partialNextState = _extends({}, nextState, {location: location});
-          var hooks = getRouteHooksForRoutes(_computeChangedRoutes3['default'](state, partialNextState).leaveRoutes);
-          var result = undefined;
-          for (var i = 0,
-              len = hooks.length; result == null && i < len; ++i) {
-            result = hooks[i](location);
-          }
-          callback(result);
-        });
-      }
-      function beforeUnloadHook() {
-        if (state.routes) {
-          var hooks = getRouteHooksForRoutes(state.routes);
-          var message = undefined;
-          for (var i = 0,
-              len = hooks.length; typeof message !== 'string' && i < len; ++i) {
-            message = hooks[i]();
-          }
-          return message;
-        }
-      }
-      var unlistenBefore = undefined,
-          unlistenBeforeUnload = undefined;
-      function removeListenBeforeHooksForRoute(route) {
-        var routeID = getRouteID(route, false);
-        if (!routeID) {
-          return;
-        }
-        delete RouteHooks[routeID];
-        if (!hasAnyProperties(RouteHooks)) {
-          if (unlistenBefore) {
-            unlistenBefore();
-            unlistenBefore = null;
-          }
-          if (unlistenBeforeUnload) {
-            unlistenBeforeUnload();
-            unlistenBeforeUnload = null;
-          }
-        }
-      }
-      function listenBeforeLeavingRoute(route, hook) {
-        var routeID = getRouteID(route);
-        var hooks = RouteHooks[routeID];
-        if (!hooks) {
-          var thereWereNoRouteHooks = !hasAnyProperties(RouteHooks);
-          RouteHooks[routeID] = [hook];
-          if (thereWereNoRouteHooks) {
-            unlistenBefore = history.listenBefore(transitionHook);
-            if (history.listenBeforeUnload)
-              unlistenBeforeUnload = history.listenBeforeUnload(beforeUnloadHook);
-          }
-        } else {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'adding multiple leave hooks for the same route is deprecated; manage multiple confirmations in your own code instead') : undefined;
-          if (hooks.indexOf(hook) === -1) {
-            hooks.push(hook);
-          }
-        }
-        return function() {
-          var hooks = RouteHooks[routeID];
-          if (hooks) {
-            var newHooks = hooks.filter(function(item) {
-              return item !== hook;
-            });
-            if (newHooks.length === 0) {
-              removeListenBeforeHooksForRoute(route);
-            } else {
-              RouteHooks[routeID] = newHooks;
-            }
-          }
-        };
-      }
-      function listen(listener) {
-        return history.listen(function(location) {
-          if (state.location === location) {
-            listener(null, state);
-          } else {
-            match(location, function(error, redirectLocation, nextState) {
-              if (error) {
-                listener(error);
-              } else if (redirectLocation) {
-                history.transitionTo(redirectLocation);
-              } else if (nextState) {
-                listener(null, nextState);
-              } else {
-                process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'Location "%s" did not match any routes', location.pathname + location.search + location.hash) : undefined;
-              }
-            });
-          }
-        });
-      }
-      return {
-        isActive: isActive,
-        match: match,
-        listenBeforeLeavingRoute: listenBeforeLeavingRoute,
-        listen: listen
-      };
-    }
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("48", ["4", "4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    exports.isReactChildren = isReactChildren;
-    exports.createRouteFromReactElement = createRouteFromReactElement;
-    exports.createRoutesFromReactChildren = createRoutesFromReactChildren;
-    exports.createRoutes = createRoutes;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _react = $__require('4');
-    var _react2 = _interopRequireDefault(_react);
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    function isValidChild(object) {
-      return object == null || _react2['default'].isValidElement(object);
-    }
-    function isReactChildren(object) {
-      return isValidChild(object) || Array.isArray(object) && object.every(isValidChild);
-    }
-    function checkPropTypes(componentName, propTypes, props) {
-      componentName = componentName || 'UnknownComponent';
-      for (var propName in propTypes) {
-        if (propTypes.hasOwnProperty(propName)) {
-          var error = propTypes[propName](props, propName, componentName);
-          if (error instanceof Error)
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, error.message) : undefined;
-        }
-      }
-    }
-    function createRoute(defaultProps, props) {
-      return _extends({}, defaultProps, props);
-    }
-    function createRouteFromReactElement(element) {
-      var type = element.type;
-      var route = createRoute(type.defaultProps, element.props);
-      if (type.propTypes)
-        checkPropTypes(type.displayName || type.name, type.propTypes, route);
-      if (route.children) {
-        var childRoutes = createRoutesFromReactChildren(route.children, route);
-        if (childRoutes.length)
-          route.childRoutes = childRoutes;
-        delete route.children;
-      }
-      return route;
-    }
-    function createRoutesFromReactChildren(children, parentRoute) {
-      var routes = [];
-      _react2['default'].Children.forEach(children, function(element) {
-        if (_react2['default'].isValidElement(element)) {
-          if (element.type.createRouteFromReactElement) {
-            var route = element.type.createRouteFromReactElement(element, parentRoute);
-            if (route)
-              routes.push(route);
-          } else {
-            routes.push(createRouteFromReactElement(element));
-          }
-        }
-      });
-      return routes;
-    }
-    function createRoutes(routes) {
-      if (isReactChildren(routes)) {
-        routes = createRoutesFromReactChildren(routes);
-      } else if (routes && !Array.isArray(routes)) {
-        routes = [routes];
-      }
-      return routes;
-    }
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4a", ["63", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    exports['default'] = routerWarning;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    function routerWarning(falseToWarn, message) {
-      message = '[react-router] ' + message;
-      for (var _len = arguments.length,
-          args = Array(_len > 2 ? _len - 2 : 0),
-          _key = 2; _key < _len; _key++) {
-        args[_key - 2] = arguments[_key];
-      }
-      process.env.NODE_ENV !== 'production' ? _warning2['default'].apply(undefined, [falseToWarn, message].concat(args)) : undefined;
-    }
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5a", ["4a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    exports['default'] = deprecateObjectProperties;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('4a');
-    var _warning2 = _interopRequireDefault(_warning);
-    var useMembrane = false;
-    if (process.env.NODE_ENV !== 'production') {
-      try {
-        if (Object.defineProperty({}, 'x', {get: function get() {
-            return true;
-          }}).x) {
-          useMembrane = true;
-        }
-      } catch (e) {}
-    }
-    function deprecateObjectProperties(object, message) {
-      if (!useMembrane)
-        return object;
-      var membrane = {};
-      var _loop = function(prop) {
-        if (typeof object[prop] === 'function') {
-          membrane[prop] = function() {
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, message) : undefined;
-            return object[prop].apply(object, arguments);
-          };
-        } else {
-          Object.defineProperty(membrane, prop, {
-            configurable: false,
-            enumerable: false,
-            get: function get() {
-              process.env.NODE_ENV !== 'production' ? _warning2['default'](false, message) : undefined;
-              return object[prop];
-            }
-          });
-        }
-      };
-      for (var prop in object) {
-        _loop(prop);
-      }
-      return membrane;
-    }
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("49", ["5a", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    exports.createRouterObject = createRouterObject;
-    exports.createRoutingHistory = createRoutingHistory;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _deprecateObjectProperties = $__require('5a');
-    var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
-    function createRouterObject(history, transitionManager) {
-      return _extends({}, history, {
-        setRouteLeaveHook: transitionManager.listenBeforeLeavingRoute,
-        isActive: transitionManager.isActive
-      });
-    }
-    function createRoutingHistory(history, transitionManager) {
-      history = _extends({}, history, transitionManager);
-      if (process.env.NODE_ENV !== 'production') {
-        history = _deprecateObjectProperties2['default'](history, '`props.history` and `context.history` are deprecated. Please use `context.router`. http://tiny.cc/router-contextchanges');
-      }
-      return history;
-    }
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("64", ["51", "65", "45", "48", "49", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    function _objectWithoutProperties(obj, keys) {
-      var target = {};
-      for (var i in obj) {
-        if (keys.indexOf(i) >= 0)
-          continue;
-        if (!Object.prototype.hasOwnProperty.call(obj, i))
-          continue;
-        target[i] = obj[i];
-      }
-      return target;
-    }
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _createMemoryHistory = $__require('65');
-    var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
-    var _createTransitionManager = $__require('45');
-    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-    var _RouteUtils = $__require('48');
-    var _RouterUtils = $__require('49');
-    function match(_ref, callback) {
-      var history = _ref.history;
-      var routes = _ref.routes;
-      var location = _ref.location;
-      var options = _objectWithoutProperties(_ref, ['history', 'routes', 'location']);
-      !location ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'match needs a location') : _invariant2['default'](false) : undefined;
-      history = history ? history : _createMemoryHistory2['default'](options);
-      var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes));
-      if (typeof location === 'string')
-        location = history.createLocation(location);
-      var router = _RouterUtils.createRouterObject(history, transitionManager);
-      history = _RouterUtils.createRoutingHistory(history, transitionManager);
-      transitionManager.match(location, function(error, redirectLocation, nextState) {
-        callback(error, redirectLocation, nextState && _extends({}, nextState, {
-          history: history,
-          router: router
-        }));
-      });
-    }
-    exports['default'] = match;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("53", ["51", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    exports.compilePattern = compilePattern;
-    exports.matchPattern = matchPattern;
-    exports.getParamNames = getParamNames;
-    exports.getParams = getParams;
-    exports.formatPattern = formatPattern;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-    function escapeSource(string) {
-      return escapeRegExp(string).replace(/\/+/g, '/+');
-    }
-    function _compilePattern(pattern) {
-      var regexpSource = '';
-      var paramNames = [];
-      var tokens = [];
-      var match = undefined,
-          lastIndex = 0,
-          matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)/g;
-      while (match = matcher.exec(pattern)) {
-        if (match.index !== lastIndex) {
-          tokens.push(pattern.slice(lastIndex, match.index));
-          regexpSource += escapeSource(pattern.slice(lastIndex, match.index));
-        }
-        if (match[1]) {
-          regexpSource += '([^/?#]+)';
-          paramNames.push(match[1]);
-        } else if (match[0] === '**') {
-          regexpSource += '([\\s\\S]*)';
-          paramNames.push('splat');
-        } else if (match[0] === '*') {
-          regexpSource += '([\\s\\S]*?)';
-          paramNames.push('splat');
-        } else if (match[0] === '(') {
-          regexpSource += '(?:';
-        } else if (match[0] === ')') {
-          regexpSource += ')?';
-        }
-        tokens.push(match[0]);
-        lastIndex = matcher.lastIndex;
-      }
-      if (lastIndex !== pattern.length) {
-        tokens.push(pattern.slice(lastIndex, pattern.length));
-        regexpSource += escapeSource(pattern.slice(lastIndex, pattern.length));
-      }
-      return {
-        pattern: pattern,
-        regexpSource: regexpSource,
-        paramNames: paramNames,
-        tokens: tokens
-      };
-    }
-    var CompiledPatternsCache = {};
-    function compilePattern(pattern) {
-      if (!(pattern in CompiledPatternsCache))
-        CompiledPatternsCache[pattern] = _compilePattern(pattern);
-      return CompiledPatternsCache[pattern];
-    }
-    function matchPattern(pattern, pathname) {
-      if (pattern.charAt(0) !== '/') {
-        pattern = '/' + pattern;
-      }
-      if (pathname.charAt(0) !== '/') {
-        pathname = '/' + pathname;
-      }
-      var _compilePattern2 = compilePattern(pattern);
-      var regexpSource = _compilePattern2.regexpSource;
-      var paramNames = _compilePattern2.paramNames;
-      var tokens = _compilePattern2.tokens;
-      regexpSource += '/*';
-      var captureRemaining = tokens[tokens.length - 1] !== '*';
-      if (captureRemaining) {
-        regexpSource += '([\\s\\S]*?)';
-      }
-      var match = pathname.match(new RegExp('^' + regexpSource + '$', 'i'));
-      var remainingPathname = undefined,
-          paramValues = undefined;
-      if (match != null) {
-        if (captureRemaining) {
-          remainingPathname = match.pop();
-          var matchedPath = match[0].substr(0, match[0].length - remainingPathname.length);
-          if (remainingPathname && matchedPath.charAt(matchedPath.length - 1) !== '/') {
-            return {
-              remainingPathname: null,
-              paramNames: paramNames,
-              paramValues: null
-            };
-          }
-        } else {
-          remainingPathname = '';
-        }
-        paramValues = match.slice(1).map(function(v) {
-          return v != null ? decodeURIComponent(v) : v;
-        });
-      } else {
-        remainingPathname = paramValues = null;
-      }
-      return {
-        remainingPathname: remainingPathname,
-        paramNames: paramNames,
-        paramValues: paramValues
-      };
-    }
-    function getParamNames(pattern) {
-      return compilePattern(pattern).paramNames;
-    }
-    function getParams(pattern, pathname) {
-      var _matchPattern = matchPattern(pattern, pathname);
-      var paramNames = _matchPattern.paramNames;
-      var paramValues = _matchPattern.paramValues;
-      if (paramValues != null) {
-        return paramNames.reduce(function(memo, paramName, index) {
-          memo[paramName] = paramValues[index];
-          return memo;
-        }, {});
-      }
-      return null;
-    }
-    function formatPattern(pattern, params) {
-      params = params || {};
-      var _compilePattern3 = compilePattern(pattern);
-      var tokens = _compilePattern3.tokens;
-      var parenCount = 0,
-          pathname = '',
-          splatIndex = 0;
-      var token = undefined,
-          paramName = undefined,
-          paramValue = undefined;
-      for (var i = 0,
-          len = tokens.length; i < len; ++i) {
-        token = tokens[i];
-        if (token === '*' || token === '**') {
-          paramValue = Array.isArray(params.splat) ? params.splat[splatIndex++] : params.splat;
-          !(paramValue != null || parenCount > 0) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Missing splat #%s for path "%s"', splatIndex, pattern) : _invariant2['default'](false) : undefined;
-          if (paramValue != null)
-            pathname += encodeURI(paramValue);
-        } else if (token === '(') {
-          parenCount += 1;
-        } else if (token === ')') {
-          parenCount -= 1;
-        } else if (token.charAt(0) === ':') {
-          paramName = token.substring(1);
-          paramValue = params[paramName];
-          !(paramValue != null || parenCount > 0) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Missing "%s" parameter for path "%s"', paramName, pattern) : _invariant2['default'](false) : undefined;
-          if (paramValue != null)
-            pathname += encodeURIComponent(paramValue);
-        } else {
-          pathname += token;
-        }
-      }
-      return pathname.replace(/\/+/g, '/');
-    }
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("66", ["51", "62", "67", "68", "69", "6a", "6b", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _Actions = $__require('62');
-    var _ExecutionEnvironment = $__require('67');
-    var _DOMUtils = $__require('68');
-    var _DOMStateStorage = $__require('69');
-    var _createDOMHistory = $__require('6a');
-    var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    function createBrowserHistory() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Browser history needs a DOM') : _invariant2['default'](false) : undefined;
-      var forceRefresh = options.forceRefresh;
-      var isSupported = _DOMUtils.supportsHistory();
-      var useRefresh = !isSupported || forceRefresh;
-      function getCurrentLocation(historyState) {
-        historyState = historyState || window.history.state || {};
-        var path = _DOMUtils.getWindowPath();
-        var _historyState = historyState;
-        var key = _historyState.key;
-        var state = undefined;
-        if (key) {
-          state = _DOMStateStorage.readState(key);
-        } else {
-          state = null;
-          key = history.createKey();
-          if (isSupported)
-            window.history.replaceState(_extends({}, historyState, {key: key}), null, path);
-        }
-        var location = _parsePath2['default'](path);
-        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
-      }
-      function startPopStateListener(_ref) {
-        var transitionTo = _ref.transitionTo;
-        function popStateListener(event) {
-          if (event.state === undefined)
-            return;
-          transitionTo(getCurrentLocation(event.state));
-        }
-        _DOMUtils.addEventListener(window, 'popstate', popStateListener);
-        return function() {
-          _DOMUtils.removeEventListener(window, 'popstate', popStateListener);
-        };
-      }
-      function finishTransition(location) {
-        var basename = location.basename;
-        var pathname = location.pathname;
-        var search = location.search;
-        var hash = location.hash;
-        var state = location.state;
-        var action = location.action;
-        var key = location.key;
-        if (action === _Actions.POP)
-          return;
-        _DOMStateStorage.saveState(key, state);
-        var path = (basename || '') + pathname + search + hash;
-        var historyState = {key: key};
-        if (action === _Actions.PUSH) {
-          if (useRefresh) {
-            window.location.href = path;
-            return false;
-          } else {
-            window.history.pushState(historyState, null, path);
-          }
-        } else {
-          if (useRefresh) {
-            window.location.replace(path);
-            return false;
-          } else {
-            window.history.replaceState(historyState, null, path);
-          }
-        }
-      }
-      var history = _createDOMHistory2['default'](_extends({}, options, {
-        getCurrentLocation: getCurrentLocation,
-        finishTransition: finishTransition,
-        saveState: _DOMStateStorage.saveState
-      }));
-      var listenerCount = 0,
-          stopPopStateListener = undefined;
-      function listenBefore(listener) {
-        if (++listenerCount === 1)
-          stopPopStateListener = startPopStateListener(history);
-        var unlisten = history.listenBefore(listener);
-        return function() {
-          unlisten();
-          if (--listenerCount === 0)
-            stopPopStateListener();
-        };
-      }
-      function listen(listener) {
-        if (++listenerCount === 1)
-          stopPopStateListener = startPopStateListener(history);
-        var unlisten = history.listen(listener);
-        return function() {
-          unlisten();
-          if (--listenerCount === 0)
-            stopPopStateListener();
-        };
-      }
-      function registerTransitionHook(hook) {
-        if (++listenerCount === 1)
-          stopPopStateListener = startPopStateListener(history);
-        history.registerTransitionHook(hook);
-      }
-      function unregisterTransitionHook(hook) {
-        history.unregisterTransitionHook(hook);
-        if (--listenerCount === 0)
-          stopPopStateListener();
-      }
-      return _extends({}, history, {
-        listenBefore: listenBefore,
-        listen: listen,
-        registerTransitionHook: registerTransitionHook,
-        unregisterTransitionHook: unregisterTransitionHook
-      });
-    }
-    exports['default'] = createBrowserHistory;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6c", ["66", "6d"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
+  var _Input2 = $__require('11');
+  var _Input3 = _interopRequireDefault(_Input2);
   function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
+    return obj && obj.__esModule ? obj : {default: obj};
   }
-  var _historyLibCreateBrowserHistory = $__require('66');
-  var _historyLibCreateBrowserHistory2 = _interopRequireDefault(_historyLibCreateBrowserHistory);
-  var _createRouterHistory = $__require('6d');
-  var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
-  exports['default'] = _createRouterHistory2['default'](_historyLibCreateBrowserHistory2['default']);
-  module.exports = exports['default'];
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Select = function(_Input) {
+    _inherits(Select, _Input);
+    _createClass(Select, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return Object.assign({
+          label: _react.PropTypes.string.isRequired,
+          value: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number, _react.PropTypes.bool]),
+          options: _react.PropTypes.array.isRequired
+        }, _Input3.default.propTypes);
+      }
+    }]);
+    function Select(props) {
+      _classCallCheck(this, Select);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Select).call(this, props));
+      _this.state = {
+        isValid: true,
+        errorMessage: '',
+        value: props.value || ''
+      };
+      return _this;
+    }
+    _createClass(Select, [{
+      key: 'render',
+      value: function render() {
+        var className = 'form-group';
+        if (!this.state.isValid) {
+          className += ' has-error';
+        }
+        var value = this.state.value;
+        return _react2.default.createElement('fieldset', {className: className}, _react2.default.createElement('label', {htmlFor: ''}, this.props.label), _react2.default.createElement('select', {
+          name: this.props.name,
+          className: 'form-control',
+          value: value,
+          onChange: this.handleChange.bind(this)
+        }, this.props.options.map(function(result) {
+          return _react2.default.createElement('option', {
+            key: result.value,
+            value: result.value
+          }, result.label);
+        })));
+      }
+    }]);
+    return Select;
+  }(_Input3.default);
+  exports.default = Select;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("69", ["63", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    exports.saveState = saveState;
-    exports.readState = readState;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var KeyPrefix = '@@History/';
-    var QuotaExceededError = 'QuotaExceededError';
-    var SecurityError = 'SecurityError';
-    function createKey(key) {
-      return KeyPrefix + key;
-    }
-    function saveState(key, state) {
-      try {
-        if (state == null) {
-          window.sessionStorage.removeItem(createKey(key));
-        } else {
-          window.sessionStorage.setItem(createKey(key), JSON.stringify(state));
-        }
-      } catch (error) {
-        if (error.name === SecurityError) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available due to security settings') : undefined;
-          return;
-        }
-        if (error.name === QuotaExceededError && window.sessionStorage.length === 0) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode') : undefined;
-          return;
-        }
-        throw error;
-      }
-    }
-    function readState(key) {
-      var json = undefined;
-      try {
-        json = window.sessionStorage.getItem(createKey(key));
-      } catch (error) {
-        if (error.name === SecurityError) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to read state; sessionStorage is not available due to security settings') : undefined;
-          return null;
-        }
-      }
-      if (json) {
-        try {
-          return JSON.parse(json);
-        } catch (error) {}
-      }
-      return null;
-    }
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("68", [], true, function($__require, exports, module) {
+$__System.registerDynamic("11", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  exports.__esModule = true;
-  exports.addEventListener = addEventListener;
-  exports.removeEventListener = removeEventListener;
-  exports.getHashPath = getHashPath;
-  exports.replaceHashPath = replaceHashPath;
-  exports.getWindowPath = getWindowPath;
-  exports.go = go;
-  exports.getUserConfirmation = getUserConfirmation;
-  exports.supportsHistory = supportsHistory;
-  exports.supportsGoWithoutReloadUsingHash = supportsGoWithoutReloadUsingHash;
-  function addEventListener(node, event, listener) {
-    if (node.addEventListener) {
-      node.addEventListener(event, listener, false);
-    } else {
-      node.attachEvent('on' + event, listener);
-    }
-  }
-  function removeEventListener(node, event, listener) {
-    if (node.removeEventListener) {
-      node.removeEventListener(event, listener, false);
-    } else {
-      node.detachEvent('on' + event, listener);
-    }
-  }
-  function getHashPath() {
-    return window.location.href.split('#')[1] || '';
-  }
-  function replaceHashPath(path) {
-    window.location.replace(window.location.pathname + window.location.search + '#' + path);
-  }
-  function getWindowPath() {
-    return window.location.pathname + window.location.search + window.location.hash;
-  }
-  function go(n) {
-    if (n)
-      window.history.go(n);
-  }
-  function getUserConfirmation(message, callback) {
-    callback(window.confirm(message));
-  }
-  function supportsHistory() {
-    var ua = navigator.userAgent;
-    if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
-      return false;
-    }
-    if (ua.indexOf('CriOS') !== -1) {
-      return false;
-    }
-    return window.history && 'pushState' in window.history;
-  }
-  function supportsGoWithoutReloadUsingHash() {
-    var ua = navigator.userAgent;
-    return ua.indexOf('Firefox') === -1;
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6a", ["51", "67", "68", "6e", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
-      return target;
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
     };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _ExecutionEnvironment = $__require('67');
-    var _DOMUtils = $__require('68');
-    var _createHistory = $__require('6e');
-    var _createHistory2 = _interopRequireDefault(_createHistory);
-    function createDOMHistory(options) {
-      var history = _createHistory2['default'](_extends({getUserConfirmation: _DOMUtils.getUserConfirmation}, options, {go: _DOMUtils.go}));
-      function listen(listener) {
-        !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'DOM history needs a DOM') : _invariant2['default'](false) : undefined;
-        return history.listen(listener);
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Input = function(_Component) {
+    _inherits(Input, _Component);
+    _createClass(Input, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          name: _react.PropTypes.string.isRequired,
+          onChange: _react.PropTypes.func,
+          validations: _react2.default.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array]),
+          inline: _react.PropTypes.bool
+        };
       }
-      return _extends({}, history, {listen: listen});
+    }]);
+    function Input(props) {
+      _classCallCheck(this, Input);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this, props));
+      _this.required = props.required ? true : false;
+      return _this;
     }
-    exports['default'] = createDOMHistory;
-    module.exports = exports['default'];
-  })($__require('29'));
+    _createClass(Input, [{
+      key: 'componentWillMount',
+      value: function componentWillMount() {
+        if (this.context.attachToForm) {
+          this.context.attachToForm(this);
+        }
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        if (this.context.detachFromForm) {
+          this.context.detachFromForm(this);
+        }
+      }
+    }, {
+      key: 'getValue',
+      value: function getValue(event) {
+        return event.target.value;
+      }
+    }, {
+      key: 'handleChange',
+      value: function handleChange(event) {
+        var value = this.getValue(event);
+        var name = this.props.name;
+        this.setState({value: value});
+        if (this.props.onChange) {
+          this.props.onChange(name, value);
+        }
+        this.context.onFormFieldChange(name, value);
+      }
+    }], [{
+      key: 'defaultProps',
+      get: function get() {
+        return {inline: false};
+      }
+    }]);
+    return Input;
+  }(_react.Component);
+  Input.contextTypes = {
+    attachToForm: _react.PropTypes.func.isRequired,
+    detachFromForm: _react.PropTypes.func.isRequired,
+    onFormFieldChange: _react.PropTypes.func.isRequired
+  };
+  exports.default = Input;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4b", ["63", "51", "62", "67", "68", "69", "6a", "6b", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("16", ["4", "11"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
-      return target;
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
     };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Input2 = $__require('11');
+  var _Input3 = _interopRequireDefault(_Input2);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _Actions = $__require('62');
-    var _ExecutionEnvironment = $__require('67');
-    var _DOMUtils = $__require('68');
-    var _DOMStateStorage = $__require('69');
-    var _createDOMHistory = $__require('6a');
-    var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    function isAbsolutePath(path) {
-      return typeof path === 'string' && path.charAt(0) === '/';
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-    function ensureSlash() {
-      var path = _DOMUtils.getHashPath();
-      if (isAbsolutePath(path))
-        return true;
-      _DOMUtils.replaceHashPath('/' + path);
-      return false;
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
     }
-    function addQueryStringValueToPath(path, key, value) {
-      return path + (path.indexOf('?') === -1 ? '?' : '&') + (key + '=' + value);
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var TextInput = function(_Input) {
+    _inherits(TextInput, _Input);
+    _createClass(TextInput, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return Object.assign({
+          label: _react.PropTypes.string.isRequired,
+          value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number, _react2.default.PropTypes.bool])
+        }, _Input3.default.propTypes);
+      }
+    }]);
+    function TextInput(props) {
+      _classCallCheck(this, TextInput);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TextInput).call(this, props));
+      _this.state = {
+        isValid: true,
+        errorMessage: '',
+        value: props.value || ''
+      };
+      return _this;
     }
-    function stripQueryStringValueFromPath(path, key) {
-      return path.replace(new RegExp('[?&]?' + key + '=[a-zA-Z0-9]+'), '');
-    }
-    function getQueryStringValueFromPath(path, key) {
-      var match = path.match(new RegExp('\\?.*?\\b' + key + '=(.+?)\\b'));
-      return match && match[1];
-    }
-    var DefaultQueryKey = '_k';
-    function createHashHistory() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
-      var queryKey = options.queryKey;
-      if (queryKey === undefined || !!queryKey)
-        queryKey = typeof queryKey === 'string' ? queryKey : DefaultQueryKey;
-      function getCurrentLocation() {
-        var path = _DOMUtils.getHashPath();
-        var key = undefined,
-            state = undefined;
-        if (queryKey) {
-          key = getQueryStringValueFromPath(path, queryKey);
-          path = stripQueryStringValueFromPath(path, queryKey);
-          if (key) {
-            state = _DOMStateStorage.readState(key);
-          } else {
-            state = null;
-            key = history.createKey();
-            _DOMUtils.replaceHashPath(addQueryStringValueToPath(path, queryKey, key));
-          }
-        } else {
-          key = state = null;
+    _createClass(TextInput, [{
+      key: 'render',
+      value: function render() {
+        var className = 'form-group';
+        if (!this.state.isValid) {
+          className += ' has-error';
         }
-        var location = _parsePath2['default'](path);
-        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
+        return _react2.default.createElement('fieldset', {className: className}, _react2.default.createElement('label', {htmlFor: ''}, this.props.label), _react2.default.createElement('input', {
+          type: 'text',
+          name: this.props.name,
+          className: 'form-control',
+          id: '',
+          placeholder: '',
+          value: this.state.value,
+          onChange: this.handleChange.bind(this)
+        }), !this.state.isValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, this.state.errorMessage) : null);
       }
-      function startHashChangeListener(_ref) {
-        var transitionTo = _ref.transitionTo;
-        function hashChangeListener() {
-          if (!ensureSlash())
-            return;
-          transitionTo(getCurrentLocation());
-        }
-        ensureSlash();
-        _DOMUtils.addEventListener(window, 'hashchange', hashChangeListener);
-        return function() {
-          _DOMUtils.removeEventListener(window, 'hashchange', hashChangeListener);
-        };
-      }
-      function finishTransition(location) {
-        var basename = location.basename;
-        var pathname = location.pathname;
-        var search = location.search;
-        var state = location.state;
-        var action = location.action;
-        var key = location.key;
-        if (action === _Actions.POP)
-          return;
-        var path = (basename || '') + pathname + search;
-        if (queryKey) {
-          path = addQueryStringValueToPath(path, queryKey, key);
-          _DOMStateStorage.saveState(key, state);
-        } else {
-          location.key = location.state = null;
-        }
-        var currentHash = _DOMUtils.getHashPath();
-        if (action === _Actions.PUSH) {
-          if (currentHash !== path) {
-            window.location.hash = path;
-          } else {
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
-          }
-        } else if (currentHash !== path) {
-          _DOMUtils.replaceHashPath(path);
-        }
-      }
-      var history = _createDOMHistory2['default'](_extends({}, options, {
-        getCurrentLocation: getCurrentLocation,
-        finishTransition: finishTransition,
-        saveState: _DOMStateStorage.saveState
-      }));
-      var listenerCount = 0,
-          stopHashChangeListener = undefined;
-      function listenBefore(listener) {
-        if (++listenerCount === 1)
-          stopHashChangeListener = startHashChangeListener(history);
-        var unlisten = history.listenBefore(listener);
-        return function() {
-          unlisten();
-          if (--listenerCount === 0)
-            stopHashChangeListener();
-        };
-      }
-      function listen(listener) {
-        if (++listenerCount === 1)
-          stopHashChangeListener = startHashChangeListener(history);
-        var unlisten = history.listen(listener);
-        return function() {
-          unlisten();
-          if (--listenerCount === 0)
-            stopHashChangeListener();
-        };
-      }
-      function push(location) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-        history.push(location);
-      }
-      function replace(location) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-        history.replace(location);
-      }
-      var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
-      function go(n) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
-        history.go(n);
-      }
-      function createHref(path) {
-        return '#' + history.createHref(path);
-      }
-      function registerTransitionHook(hook) {
-        if (++listenerCount === 1)
-          stopHashChangeListener = startHashChangeListener(history);
-        history.registerTransitionHook(hook);
-      }
-      function unregisterTransitionHook(hook) {
-        history.unregisterTransitionHook(hook);
-        if (--listenerCount === 0)
-          stopHashChangeListener();
-      }
-      function pushState(state, path) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-        history.pushState(state, path);
-      }
-      function replaceState(state, path) {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-        history.replaceState(state, path);
-      }
-      return _extends({}, history, {
-        listenBefore: listenBefore,
-        listen: listen,
-        push: push,
-        replace: replace,
-        go: go,
-        createHref: createHref,
-        registerTransitionHook: registerTransitionHook,
-        unregisterTransitionHook: unregisterTransitionHook,
-        pushState: pushState,
-        replaceState: replaceState
-      });
-    }
-    exports['default'] = createHashHistory;
-    module.exports = exports['default'];
-  })($__require('29'));
+    }]);
+    return TextInput;
+  }(_Input3.default);
+  exports.default = TextInput;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("67", [], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["4", "16", "28", "18"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  exports.__esModule = true;
-  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-  exports.canUseDOM = canUseDOM;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _TextInput = $__require('16');
+  var _TextInput2 = _interopRequireDefault(_TextInput);
+  var _Repeatable = $__require('28');
+  var _Repeatable2 = _interopRequireDefault(_Repeatable);
+  var _Button = $__require('18');
+  var _Button2 = _interopRequireDefault(_Button);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var AddCustomFieldOptions = function(_Component) {
+    _inherits(AddCustomFieldOptions, _Component);
+    _createClass(AddCustomFieldOptions, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          field: _react.PropTypes.string,
+          index: _react.PropTypes.number.isRequired,
+          onRemove: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    function AddCustomFieldOptions(props) {
+      _classCallCheck(this, AddCustomFieldOptions);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AddCustomFieldOptions).call(this, props));
+      _this.state = {};
+      return _this;
+    }
+    _createClass(AddCustomFieldOptions, [{
+      key: 'render',
+      value: function render() {
+        var valueName = this.props.field + '.type';
+        var labelName = this.props.field + '.label';
+        return _react2.default.createElement('fieldset', {className: 'form-inline'}, _react2.default.createElement(_TextInput2.default, {
+          label: 'Label',
+          name: labelName,
+          required: true
+        }), _react2.default.createElement(_TextInput2.default, {
+          label: 'Value',
+          name: valueName,
+          required: true
+        }), _react2.default.createElement(_Button2.default, {
+          text: 'Remove',
+          onButtonClick: this.props.onRemove
+        }));
+      }
+    }]);
+    return AddCustomFieldOptions;
+  }(_react.Component);
+  exports.default = (0, _Repeatable2.default)(AddCustomFieldOptions);
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("6f", ["67", "70", "71", "6b", "72"], true, function($__require, exports, module) {
+$__System.registerDynamic("18", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  exports.__esModule = true;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Button = function(_Component) {
+    _inherits(Button, _Component);
+    function Button(props) {
+      _classCallCheck(this, Button);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Button).call(this, props));
+    }
+    _createClass(Button, [{
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement("button", {
+          type: "button",
+          className: "btn btn-default",
+          onClick: function onClick(e) {
+            return _this2.handleClick(e);
+          }
+        }, this.props.text);
+      }
+    }, {
+      key: "handleClick",
+      value: function handleClick(event) {
+        this.props.onButtonClick(event);
+      }
+    }]);
+    return Button;
+  }(_react.Component);
+  Button.propTypes = {
+    onButtonClick: _react.PropTypes.func.isRequired,
+    text: _react.PropTypes.string.isRequired
+  };
+  exports.default = Button;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("28", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -5423,1527 +2470,602 @@ $__System.registerDynamic("6f", ["67", "70", "71", "6b", "72"], true, function($
     }
     return target;
   };
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
+    return obj && obj.__esModule ? obj : {default: obj};
   }
-  function _objectWithoutProperties(obj, keys) {
-    var target = {};
-    for (var i in obj) {
-      if (keys.indexOf(i) >= 0)
-        continue;
-      if (!Object.prototype.hasOwnProperty.call(obj, i))
-        continue;
-      target[i] = obj[i];
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  exports.default = function(ComposedComponent) {
+    var RepeatableComponent = function(_Component) {
+      _inherits(RepeatableComponent, _Component);
+      _createClass(RepeatableComponent, null, [{
+        key: 'propTypes',
+        get: function get() {
+          return {
+            index: _react.PropTypes.number.isRequired,
+            field: _react.PropTypes.string.isRequired
+          };
+        }
+      }]);
+      function RepeatableComponent(props) {
+        _classCallCheck(this, RepeatableComponent);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(RepeatableComponent).call(this, props));
+      }
+      _createClass(RepeatableComponent, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+      }, {
+        key: 'render',
+        value: function render() {
+          var field = this.props.field + '[' + this.props.index + ']';
+          return _react2.default.createElement(ComposedComponent, _extends({}, this.props, {field: field}));
+        }
+      }]);
+      return RepeatableComponent;
+    }(_react.Component);
+    return RepeatableComponent;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("19", ["4", "26", "16", "27", "18", "28"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
     }
     return target;
+  };
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Select = $__require('26');
+  var _Select2 = _interopRequireDefault(_Select);
+  var _TextInput = $__require('16');
+  var _TextInput2 = _interopRequireDefault(_TextInput);
+  var _AddCustomFieldOptions = $__require('27');
+  var _AddCustomFieldOptions2 = _interopRequireDefault(_AddCustomFieldOptions);
+  var _Button = $__require('18');
+  var _Button2 = _interopRequireDefault(_Button);
+  var _Repeatable = $__require('28');
+  var _Repeatable2 = _interopRequireDefault(_Repeatable);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
   }
-  var _ExecutionEnvironment = $__require('67');
-  var _runTransitionHook = $__require('70');
-  var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-  var _extractPath = $__require('71');
-  var _extractPath2 = _interopRequireDefault(_extractPath);
-  var _parsePath = $__require('6b');
-  var _parsePath2 = _interopRequireDefault(_parsePath);
-  var _deprecate = $__require('72');
-  var _deprecate2 = _interopRequireDefault(_deprecate);
-  function useBasename(createHistory) {
-    return function() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var basename = options.basename;
-      var historyOptions = _objectWithoutProperties(options, ['basename']);
-      var history = createHistory(historyOptions);
-      if (basename == null && _ExecutionEnvironment.canUseDOM) {
-        var base = document.getElementsByTagName('base')[0];
-        if (base)
-          basename = _extractPath2['default'](base.href);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var fieldTypes = [{
+    label: '',
+    value: ''
+  }, {
+    label: 'Select',
+    value: 'select'
+  }, {
+    label: 'Textbox',
+    value: 'text'
+  }];
+  var AddCustomField = function(_Component) {
+    _inherits(AddCustomField, _Component);
+    _createClass(AddCustomField, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          field: _react.PropTypes.string.isRequired,
+          index: _react.PropTypes.number.isRequired,
+          onRemove: _react.PropTypes.func.isRequired,
+          addField: _react.PropTypes.func.isRequired,
+          options: _react.PropTypes.array.isRequired,
+          removeField: _react.PropTypes.func.isRequired
+        };
       }
-      function addBasename(location) {
-        if (basename && location.basename == null) {
-          if (location.pathname.indexOf(basename) === 0) {
-            location.pathname = location.pathname.substring(basename.length);
-            location.basename = basename;
-            if (location.pathname === '')
-              location.pathname = '/';
-          } else {
-            location.basename = '';
-          }
+    }]);
+    function AddCustomField(props) {
+      _classCallCheck(this, AddCustomField);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AddCustomField).call(this, props));
+      _this.state = {showAddOptions: false};
+      return _this;
+    }
+    _createClass(AddCustomField, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        var typeName = this.props.field + '.type';
+        var labelName = this.props.field + '.label';
+        var optionsField = this.props.field + '.options';
+        return _react2.default.createElement('div', null, _react2.default.createElement('fieldset', {className: 'form-inline'}, _react2.default.createElement('legend', null, 'Custom Field #' + (this.props.index + 1)), _react2.default.createElement(_Select2.default, {
+          name: typeName,
+          label: 'Type',
+          onChange: this.handleTypeChange.bind(this),
+          options: fieldTypes
+        }), _react2.default.createElement(_TextInput2.default, {
+          name: labelName,
+          label: 'Label'
+        }), _react2.default.createElement(_Button2.default, {
+          text: 'Remove',
+          onButtonClick: this.props.onRemove
+        })), this.state.showAddOptions ? _react2.default.createElement(_Button2.default, {
+          text: 'Add Option',
+          onButtonClick: this.handleAddOption.bind(this)
+        }) : null, this.state.showAddOptions ? this.props.options.map(function(result, index) {
+          return _react2.default.createElement(_AddCustomFieldOptions2.default, _extends({
+            key: result._id,
+            index: index,
+            field: optionsField,
+            onRemove: _this2.handleRemoveOption.bind(_this2, index)
+          }, result));
+        }) : null);
+      }
+    }, {
+      key: 'handleTypeChange',
+      value: function handleTypeChange(name, value) {
+        this.setState({showAddOptions: value === 'select' ? true : false});
+      }
+    }, {
+      key: 'handleAddOption',
+      value: function handleAddOption() {
+        this.props.addField(this.props.field + '.options', {});
+      }
+    }, {
+      key: 'handleRemoveOption',
+      value: function handleRemoveOption(index) {
+        this.props.removeField(this.props.field + '.options', index);
+      }
+    }]);
+    return AddCustomField;
+  }(_react.Component);
+  exports.default = (0, _Repeatable2.default)(AddCustomField);
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("29", ["4", "16", "17", "1a", "18", "19"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
         }
-        return location;
       }
-      function prependBasename(location) {
-        if (!basename)
-          return location;
-        if (typeof location === 'string')
-          location = _parsePath2['default'](location);
-        var pname = location.pathname;
-        var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
-        var normalizedPathname = pname.charAt(0) === '/' ? pname.slice(1) : pname;
-        var pathname = normalizedBasename + normalizedPathname;
-        return _extends({}, location, {pathname: pathname});
+    }
+    return target;
+  };
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
-      function listenBefore(hook) {
-        return history.listenBefore(function(location, callback) {
-          _runTransitionHook2['default'](hook, addBasename(location), callback);
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _TextInput = $__require('16');
+  var _TextInput2 = _interopRequireDefault(_TextInput);
+  var _Textarea = $__require('17');
+  var _Textarea2 = _interopRequireDefault(_Textarea);
+  var _Form = $__require('1a');
+  var _Form2 = _interopRequireDefault(_Form);
+  var _Button = $__require('18');
+  var _Button2 = _interopRequireDefault(_Button);
+  var _AddCustomField = $__require('19');
+  var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var model = {
+    name: '',
+    description: '',
+    type: '',
+    fields: [],
+    createdPlatformId: ''
+  };
+  var AddPartForm = function(_Component) {
+    _inherits(AddPartForm, _Component);
+    function AddPartForm() {
+      _classCallCheck(this, AddPartForm);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(AddPartForm).apply(this, arguments));
+    }
+    _createClass(AddPartForm, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement('div', null, _react2.default.createElement(_TextInput2.default, {
+          name: 'name',
+          label: 'Name',
+          required: true
+        }), _react2.default.createElement(_Textarea2.default, {
+          name: 'description',
+          label: 'Description',
+          required: true
+        }), _react2.default.createElement('h3', null, 'Custom Fields'), _react2.default.createElement(_Button2.default, {
+          text: 'Add Field',
+          onButtonClick: this.handleAddField.bind(this)
+        }), this.props.form.fields.map(function(result, index) {
+          return _react2.default.createElement(_AddCustomField2.default, _extends({
+            key: result._id,
+            index: index,
+            field: 'fields',
+            onRemove: _this2.handleRemoveField.bind(_this2, index),
+            addField: _this2.props.addField,
+            removeField: _this2.props.removeField
+          }, result));
+        }), _react2.default.createElement(_Button2.default, {
+          text: 'Save',
+          onButtonClick: this.handleSave.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleAddField',
+      value: function handleAddField() {
+        this.props.addField('fields', {options: []});
+      }
+    }, {
+      key: 'handleRemoveField',
+      value: function handleRemoveField(index) {
+        this.props.removeField('fields', index);
+      }
+    }, {
+      key: 'handleSave',
+      value: function handleSave(event) {
+        var _this3 = this;
+        this.props.validate(event, function(data) {
+          _this3.props.onSave(data);
         });
       }
-      function listen(listener) {
-        return history.listen(function(location) {
-          listener(addBasename(location));
-        });
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          addField: _react.PropTypes.func.isRequired,
+          removeField: _react.PropTypes.func.isRequired,
+          form: _react.PropTypes.object.isRequired,
+          validate: _react.PropTypes.func.isRequired,
+          onSave: _react.PropTypes.func.isRequired
+        };
       }
-      function push(location) {
-        history.push(prependBasename(location));
+    }]);
+    return AddPartForm;
+  }(_react.Component);
+  exports.default = (0, _Form2.default)(AddPartForm, {model: model});
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
-      function replace(location) {
-        history.replace(prependBasename(location));
-      }
-      function createPath(location) {
-        return history.createPath(prependBasename(location));
-      }
-      function createHref(location) {
-        return history.createHref(prependBasename(location));
-      }
-      function createLocation() {
-        return addBasename(history.createLocation.apply(history, arguments));
-      }
-      function pushState(state, path) {
-        if (typeof path === 'string')
-          path = _parsePath2['default'](path);
-        push(_extends({state: state}, path));
-      }
-      function replaceState(state, path) {
-        if (typeof path === 'string')
-          path = _parsePath2['default'](path);
-        replace(_extends({state: state}, path));
-      }
-      return _extends({}, history, {
-        listenBefore: listenBefore,
-        listen: listen,
-        push: push,
-        replace: replace,
-        createPath: createPath,
-        createHref: createHref,
-        createLocation: createLocation,
-        pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-        replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
-      });
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
     };
-  }
-  exports['default'] = useBasename;
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("73", ["4c", "6f"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = useRouterHistory;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _historyLibUseQueries = $__require('4c');
-  var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
-  var _historyLibUseBasename = $__require('6f');
-  var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
-  function useRouterHistory(createHistory) {
-    return function(options) {
-      var history = _historyLibUseQueries2['default'](_historyLibUseBasename2['default'](createHistory))(options);
-      history.__v2_compatible__ = true;
-      return history;
-    };
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6d", ["73"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _useRouterHistory = $__require('73');
-  var _useRouterHistory2 = _interopRequireDefault(_useRouterHistory);
-  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-  exports['default'] = function(createHistory) {
-    var history = undefined;
-    if (canUseDOM)
-      history = _useRouterHistory2['default'](createHistory)();
-    return history;
-  };
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("74", ["4b", "6d"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _historyLibCreateHashHistory = $__require('4b');
-  var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
-  var _createRouterHistory = $__require('6d');
-  var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
-  exports['default'] = _createRouterHistory2['default'](_historyLibCreateHashHistory2['default']);
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("75", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-      return '%' + c.charCodeAt(0).toString(16).toUpperCase();
-    });
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("76", ["75"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('75');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("77", ["76"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var strictUriEncode = $__require('76');
-  exports.extract = function(str) {
-    return str.split('?')[1] || '';
-  };
-  exports.parse = function(str) {
-    if (typeof str !== 'string') {
-      return {};
-    }
-    str = str.trim().replace(/^(\?|#|&)/, '');
-    if (!str) {
-      return {};
-    }
-    return str.split('&').reduce(function(ret, param) {
-      var parts = param.replace(/\+/g, ' ').split('=');
-      var key = parts.shift();
-      var val = parts.length > 0 ? parts.join('=') : undefined;
-      key = decodeURIComponent(key);
-      val = val === undefined ? null : decodeURIComponent(val);
-      if (!ret.hasOwnProperty(key)) {
-        ret[key] = val;
-      } else if (Array.isArray(ret[key])) {
-        ret[key].push(val);
-      } else {
-        ret[key] = [ret[key], val];
-      }
-      return ret;
-    }, {});
-  };
-  exports.stringify = function(obj) {
-    return obj ? Object.keys(obj).sort().map(function(key) {
-      var val = obj[key];
-      if (val === undefined) {
-        return '';
-      }
-      if (val === null) {
-        return key;
-      }
-      if (Array.isArray(val)) {
-        return val.sort().map(function(val2) {
-          return strictUriEncode(key) + '=' + strictUriEncode(val2);
-        }).join('&');
-      }
-      return strictUriEncode(key) + '=' + strictUriEncode(val);
-    }).filter(function(x) {
-      return x.length > 0;
-    }).join('&') : '';
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("78", ["77"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('77');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4c", ["63", "78", "70", "6b", "72", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    function _objectWithoutProperties(obj, keys) {
-      var target = {};
-      for (var i in obj) {
-        if (keys.indexOf(i) >= 0)
-          continue;
-        if (!Object.prototype.hasOwnProperty.call(obj, i))
-          continue;
-        target[i] = obj[i];
-      }
-      return target;
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _queryString = $__require('78');
-    var _runTransitionHook = $__require('70');
-    var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    var _deprecate = $__require('72');
-    var _deprecate2 = _interopRequireDefault(_deprecate);
-    var SEARCH_BASE_KEY = '$searchBase';
-    function defaultStringifyQuery(query) {
-      return _queryString.stringify(query).replace(/%20/g, '+');
-    }
-    var defaultParseQueryString = _queryString.parse;
-    function isNestedObject(object) {
-      for (var p in object) {
-        if (object.hasOwnProperty(p) && typeof object[p] === 'object' && !Array.isArray(object[p]) && object[p] !== null)
-          return true;
-      }
-      return false;
-    }
-    function useQueries(createHistory) {
-      return function() {
-        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-        var stringifyQuery = options.stringifyQuery;
-        var parseQueryString = options.parseQueryString;
-        var historyOptions = _objectWithoutProperties(options, ['stringifyQuery', 'parseQueryString']);
-        var history = createHistory(historyOptions);
-        if (typeof stringifyQuery !== 'function')
-          stringifyQuery = defaultStringifyQuery;
-        if (typeof parseQueryString !== 'function')
-          parseQueryString = defaultParseQueryString;
-        function addQuery(location) {
-          if (location.query == null) {
-            var search = location.search;
-            location.query = parseQueryString(search.substring(1));
-            location[SEARCH_BASE_KEY] = {
-              search: search,
-              searchBase: ''
-            };
-          }
-          return location;
-        }
-        function appendQuery(location, query) {
-          var _extends2;
-          var queryString = undefined;
-          if (!query || (queryString = stringifyQuery(query)) === '')
-            return location;
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
-          if (typeof location === 'string')
-            location = _parsePath2['default'](location);
-          var searchBaseSpec = location[SEARCH_BASE_KEY];
-          var searchBase = undefined;
-          if (searchBaseSpec && location.search === searchBaseSpec.search) {
-            searchBase = searchBaseSpec.searchBase;
-          } else {
-            searchBase = location.search || '';
-          }
-          var search = searchBase + (searchBase ? '&' : '?') + queryString;
-          return _extends({}, location, (_extends2 = {search: search}, _extends2[SEARCH_BASE_KEY] = {
-            search: search,
-            searchBase: searchBase
-          }, _extends2));
-        }
-        function listenBefore(hook) {
-          return history.listenBefore(function(location, callback) {
-            _runTransitionHook2['default'](hook, addQuery(location), callback);
-          });
-        }
-        function listen(listener) {
-          return history.listen(function(location) {
-            listener(addQuery(location));
-          });
-        }
-        function push(location) {
-          history.push(appendQuery(location, location.query));
-        }
-        function replace(location) {
-          history.replace(appendQuery(location, location.query));
-        }
-        function createPath(location, query) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](!query, 'the query argument to createPath is deprecated; use a location descriptor instead') : undefined;
-          return history.createPath(appendQuery(location, query || location.query));
-        }
-        function createHref(location, query) {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](!query, 'the query argument to createHref is deprecated; use a location descriptor instead') : undefined;
-          return history.createHref(appendQuery(location, query || location.query));
-        }
-        function createLocation() {
-          return addQuery(history.createLocation.apply(history, arguments));
-        }
-        function pushState(state, path, query) {
-          if (typeof path === 'string')
-            path = _parsePath2['default'](path);
-          push(_extends({state: state}, path, {query: query}));
-        }
-        function replaceState(state, path, query) {
-          if (typeof path === 'string')
-            path = _parsePath2['default'](path);
-          replace(_extends({state: state}, path, {query: query}));
-        }
-        return _extends({}, history, {
-          listenBefore: listenBefore,
-          listen: listen,
-          push: push,
-          replace: replace,
-          createPath: createPath,
-          createHref: createHref,
-          createLocation: createLocation,
-          pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-          replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
-        });
-      };
-    }
-    exports['default'] = useQueries;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("79", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports = module.exports = typeof Object.keys === 'function' ? Object.keys : shim;
-  exports.shim = shim;
-  function shim(obj) {
-    var keys = [];
-    for (var key in obj)
-      keys.push(key);
-    return keys;
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7a", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var supportsArgumentsClass = (function() {
-    return Object.prototype.toString.call(arguments);
-  })() == '[object Arguments]';
-  exports = module.exports = supportsArgumentsClass ? supported : unsupported;
-  exports.supported = supported;
-  function supported(object) {
-    return Object.prototype.toString.call(object) == '[object Arguments]';
-  }
-  ;
-  exports.unsupported = unsupported;
-  function unsupported(object) {
-    return object && typeof object == 'object' && typeof object.length == 'number' && Object.prototype.hasOwnProperty.call(object, 'callee') && !Object.prototype.propertyIsEnumerable.call(object, 'callee') || false;
-  }
-  ;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7b", ["79", "7a"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var pSlice = Array.prototype.slice;
-  var objectKeys = $__require('79');
-  var isArguments = $__require('7a');
-  var deepEqual = module.exports = function(actual, expected, opts) {
-    if (!opts)
-      opts = {};
-    if (actual === expected) {
-      return true;
-    } else if (actual instanceof Date && expected instanceof Date) {
-      return actual.getTime() === expected.getTime();
-    } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
-      return opts.strict ? actual === expected : actual == expected;
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  var _AddPartForm = $__require('29');
+  var _AddPartForm2 = _interopRequireDefault(_AddPartForm);
+  var _platform = $__require('d');
+  var PlatformActions = _interopRequireWildcard(_platform);
+  var _part = $__require('2b');
+  var PartActions = _interopRequireWildcard(_part);
+  var _reactRouter = $__require('5');
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
     } else {
-      return objEquiv(actual, expected, opts);
-    }
-  };
-  function isUndefinedOrNull(value) {
-    return value === null || value === undefined;
-  }
-  function isBuffer(x) {
-    if (!x || typeof x !== 'object' || typeof x.length !== 'number')
-      return false;
-    if (typeof x.copy !== 'function' || typeof x.slice !== 'function') {
-      return false;
-    }
-    if (x.length > 0 && typeof x[0] !== 'number')
-      return false;
-    return true;
-  }
-  function objEquiv(a, b, opts) {
-    var i,
-        key;
-    if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
-      return false;
-    if (a.prototype !== b.prototype)
-      return false;
-    if (isArguments(a)) {
-      if (!isArguments(b)) {
-        return false;
-      }
-      a = pSlice.call(a);
-      b = pSlice.call(b);
-      return deepEqual(a, b, opts);
-    }
-    if (isBuffer(a)) {
-      if (!isBuffer(b)) {
-        return false;
-      }
-      if (a.length !== b.length)
-        return false;
-      for (i = 0; i < a.length; i++) {
-        if (a[i] !== b[i])
-          return false;
-      }
-      return true;
-    }
-    try {
-      var ka = objectKeys(a),
-          kb = objectKeys(b);
-    } catch (e) {
-      return false;
-    }
-    if (ka.length != kb.length)
-      return false;
-    ka.sort();
-    kb.sort();
-    for (i = ka.length - 1; i >= 0; i--) {
-      if (ka[i] != kb[i])
-        return false;
-    }
-    for (i = ka.length - 1; i >= 0; i--) {
-      key = ka[i];
-      if (!deepEqual(a[key], b[key], opts))
-        return false;
-    }
-    return typeof a === typeof b;
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7c", ["7b"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('7b');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7d", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports.loopAsync = loopAsync;
-  function loopAsync(turns, work, callback) {
-    var currentTurn = 0;
-    var isDone = false;
-    function done() {
-      isDone = true;
-      callback.apply(this, arguments);
-    }
-    function next() {
-      if (isDone)
-        return;
-      if (currentTurn < turns) {
-        work.call(this, currentTurn++, next, done);
-      } else {
-        done.apply(this, arguments);
-      }
-    }
-    next();
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("62", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  var PUSH = 'PUSH';
-  exports.PUSH = PUSH;
-  var REPLACE = 'REPLACE';
-  exports.REPLACE = REPLACE;
-  var POP = 'POP';
-  exports.POP = POP;
-  exports['default'] = {
-    PUSH: PUSH,
-    REPLACE: REPLACE,
-    POP: POP
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7e", ["63", "62", "6b", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
+      var newObj = {};
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key))
+            newObj[key] = obj[key];
         }
       }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
+      newObj.default = obj;
+      return newObj;
     }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _Actions = $__require('62');
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    function createLocation() {
-      var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
-      var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
-      var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-      var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-      if (typeof location === 'string')
-        location = _parsePath2['default'](location);
-      if (typeof action === 'object') {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
-        location = _extends({}, location, {state: action});
-        action = key || _Actions.POP;
-        key = _fourthArg;
-      }
-      var pathname = location.pathname || '/';
-      var search = location.search || '';
-      var hash = location.hash || '';
-      var state = location.state || null;
-      return {
-        pathname: pathname,
-        search: search,
-        hash: hash,
-        state: state,
-        action: action,
-        key: key
-      };
+  }
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
-    exports['default'] = createLocation;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("70", ["63", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    function runTransitionHook(hook, location, callback) {
-      var result = hook(location, callback);
-      if (hook.length < 2) {
-        callback(result);
-      } else {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](result === undefined, 'You should not "return" in a transition hook with a callback argument; call the callback instead') : undefined;
-      }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
     }
-    exports['default'] = runTransitionHook;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("72", ["63", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    function deprecate(fn, message) {
-      return function() {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] ' + message) : undefined;
-        return fn.apply(this, arguments);
-      };
-    }
-    exports['default'] = deprecate;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6e", ["63", "7c", "7d", "62", "7e", "70", "6b", "72", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _deepEqual = $__require('7c');
-    var _deepEqual2 = _interopRequireDefault(_deepEqual);
-    var _AsyncUtils = $__require('7d');
-    var _Actions = $__require('62');
-    var _createLocation2 = $__require('7e');
-    var _createLocation3 = _interopRequireDefault(_createLocation2);
-    var _runTransitionHook = $__require('70');
-    var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    var _deprecate = $__require('72');
-    var _deprecate2 = _interopRequireDefault(_deprecate);
-    function createRandomKey(length) {
-      return Math.random().toString(36).substr(2, length);
-    }
-    function locationsAreEqual(a, b) {
-      return a.pathname === b.pathname && a.search === b.search && a.key === b.key && _deepEqual2['default'](a.state, b.state);
-    }
-    var DefaultKeyLength = 6;
-    function createHistory() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var getCurrentLocation = options.getCurrentLocation;
-      var finishTransition = options.finishTransition;
-      var saveState = options.saveState;
-      var go = options.go;
-      var keyLength = options.keyLength;
-      var getUserConfirmation = options.getUserConfirmation;
-      if (typeof keyLength !== 'number')
-        keyLength = DefaultKeyLength;
-      var transitionHooks = [];
-      function listenBefore(hook) {
-        transitionHooks.push(hook);
-        return function() {
-          transitionHooks = transitionHooks.filter(function(item) {
-            return item !== hook;
-          });
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var CreatePart = function(_Component) {
+    _inherits(CreatePart, _Component);
+    _createClass(CreatePart, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          dispatch: _react.PropTypes.func.isRequired,
+          platform: _react.PropTypes.object.isRequired,
+          part: _react.PropTypes.object.isRequired
         };
       }
-      var allKeys = [];
-      var changeListeners = [];
-      var location = undefined;
-      function getCurrent() {
-        if (pendingLocation && pendingLocation.action === _Actions.POP) {
-          return allKeys.indexOf(pendingLocation.key);
-        } else if (location) {
-          return allKeys.indexOf(location.key);
-        } else {
-          return -1;
-        }
-      }
-      function updateLocation(newLocation) {
-        var current = getCurrent();
-        location = newLocation;
-        if (location.action === _Actions.PUSH) {
-          allKeys = [].concat(allKeys.slice(0, current + 1), [location.key]);
-        } else if (location.action === _Actions.REPLACE) {
-          allKeys[current] = location.key;
-        }
-        changeListeners.forEach(function(listener) {
-          listener(location);
-        });
-      }
-      function listen(listener) {
-        changeListeners.push(listener);
-        if (location) {
-          listener(location);
-        } else {
-          var _location = getCurrentLocation();
-          allKeys = [_location.key];
-          updateLocation(_location);
-        }
-        return function() {
-          changeListeners = changeListeners.filter(function(item) {
-            return item !== listener;
-          });
-        };
-      }
-      function confirmTransitionTo(location, callback) {
-        _AsyncUtils.loopAsync(transitionHooks.length, function(index, next, done) {
-          _runTransitionHook2['default'](transitionHooks[index], location, function(result) {
-            if (result != null) {
-              done(result);
-            } else {
-              next();
-            }
-          });
-        }, function(message) {
-          if (getUserConfirmation && typeof message === 'string') {
-            getUserConfirmation(message, function(ok) {
-              callback(ok !== false);
-            });
-          } else {
-            callback(message !== false);
-          }
-        });
-      }
-      var pendingLocation = undefined;
-      function transitionTo(nextLocation) {
-        if (location && locationsAreEqual(location, nextLocation))
-          return;
-        pendingLocation = nextLocation;
-        confirmTransitionTo(nextLocation, function(ok) {
-          if (pendingLocation !== nextLocation)
-            return;
-          if (ok) {
-            if (nextLocation.action === _Actions.PUSH) {
-              var prevPath = createPath(location);
-              var nextPath = createPath(nextLocation);
-              if (nextPath === prevPath)
-                nextLocation.action = _Actions.REPLACE;
-            }
-            if (finishTransition(nextLocation) !== false)
-              updateLocation(nextLocation);
-          } else if (location && nextLocation.action === _Actions.POP) {
-            var prevIndex = allKeys.indexOf(location.key);
-            var nextIndex = allKeys.indexOf(nextLocation.key);
-            if (prevIndex !== -1 && nextIndex !== -1)
-              go(prevIndex - nextIndex);
-          }
-        });
-      }
-      function push(location) {
-        transitionTo(createLocation(location, _Actions.PUSH, createKey()));
-      }
-      function replace(location) {
-        transitionTo(createLocation(location, _Actions.REPLACE, createKey()));
-      }
-      function goBack() {
-        go(-1);
-      }
-      function goForward() {
-        go(1);
-      }
-      function createKey() {
-        return createRandomKey(keyLength);
-      }
-      function createPath(location) {
-        if (location == null || typeof location === 'string')
-          return location;
-        var pathname = location.pathname;
-        var search = location.search;
-        var hash = location.hash;
-        var result = pathname;
-        if (search)
-          result += search;
-        if (hash)
-          result += hash;
-        return result;
-      }
-      function createHref(location) {
-        return createPath(location);
-      }
-      function createLocation(location, action) {
-        var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
-        if (typeof action === 'object') {
-          process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to history.createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
-          if (typeof location === 'string')
-            location = _parsePath2['default'](location);
-          location = _extends({}, location, {state: action});
-          action = key;
-          key = arguments[3] || createKey();
-        }
-        return _createLocation3['default'](location, action, key);
-      }
-      function setState(state) {
-        if (location) {
-          updateLocationState(location, state);
-          updateLocation(location);
-        } else {
-          updateLocationState(getCurrentLocation(), state);
-        }
-      }
-      function updateLocationState(location, state) {
-        location.state = _extends({}, location.state, state);
-        saveState(location.key, location.state);
-      }
-      function registerTransitionHook(hook) {
-        if (transitionHooks.indexOf(hook) === -1)
-          transitionHooks.push(hook);
-      }
-      function unregisterTransitionHook(hook) {
-        transitionHooks = transitionHooks.filter(function(item) {
-          return item !== hook;
-        });
-      }
-      function pushState(state, path) {
-        if (typeof path === 'string')
-          path = _parsePath2['default'](path);
-        push(_extends({state: state}, path));
-      }
-      function replaceState(state, path) {
-        if (typeof path === 'string')
-          path = _parsePath2['default'](path);
-        replace(_extends({state: state}, path));
-      }
-      return {
-        listenBefore: listenBefore,
-        listen: listen,
-        transitionTo: transitionTo,
-        push: push,
-        replace: replace,
-        go: go,
-        goBack: goBack,
-        goForward: goForward,
-        createKey: createKey,
-        createPath: createPath,
-        createHref: createHref,
-        createLocation: createLocation,
-        setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
-        registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
-        unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
-        pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-        replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
-      };
+    }]);
+    function CreatePart(props) {
+      _classCallCheck(this, CreatePart);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(CreatePart).call(this, props));
     }
-    exports['default'] = createHistory;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("7f", ["29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var warning = function() {};
-    if (process.env.NODE_ENV !== 'production') {
-      warning = function(condition, format, args) {
-        var len = arguments.length;
-        args = new Array(len > 2 ? len - 2 : 0);
-        for (var key = 2; key < len; key++) {
-          args[key - 2] = arguments[key];
-        }
-        if (format === undefined) {
-          throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-        }
-        if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-          throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
-        }
-        if (!condition) {
-          var argIndex = 0;
-          var message = 'Warning: ' + format.replace(/%s/g, function() {
-            return args[argIndex++];
-          });
-          if (typeof console !== 'undefined') {
-            console.error(message);
-          }
-          try {
-            throw new Error(message);
-          } catch (x) {}
-        }
-      };
-    }
-    module.exports = warning;
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("63", ["7f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('7f');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("71", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  function extractPath(string) {
-    var match = string.match(/^https?:\/\/[^\/]*/);
-    if (match == null)
-      return string;
-    return string.substring(match[0].length);
-  }
-  exports["default"] = extractPath;
-  module.exports = exports["default"];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6b", ["63", "71", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _extractPath = $__require('71');
-    var _extractPath2 = _interopRequireDefault(_extractPath);
-    function parsePath(path) {
-      var pathname = _extractPath2['default'](path);
-      var search = '';
-      var hash = '';
-      process.env.NODE_ENV !== 'production' ? _warning2['default'](path === pathname, 'A path must be pathname + search + hash only, not a fully qualified URL like "%s"', path) : undefined;
-      var hashIndex = pathname.indexOf('#');
-      if (hashIndex !== -1) {
-        hash = pathname.substring(hashIndex);
-        pathname = pathname.substring(0, hashIndex);
+    _createClass(CreatePart, [{
+      key: 'render',
+      value: function render() {
+        var returnLink = '/platform/' + this.props.platform.id + '/build';
+        return _react2.default.createElement('div', null, _react2.default.createElement('h3', null, 'Create New Part'), _react2.default.createElement(_reactRouter.Link, {to: returnLink}, 'Return to Platform'), _react2.default.createElement(_AddPartForm2.default, {
+          form: this.props.part,
+          onSave: this.handleSave.bind(this)
+        }));
       }
-      var searchIndex = pathname.indexOf('?');
-      if (searchIndex !== -1) {
-        search = pathname.substring(searchIndex);
-        pathname = pathname.substring(0, searchIndex);
+    }, {
+      key: 'handleSave',
+      value: function handleSave(model) {
+        this.props.dispatch(PartActions.createPart(Object.assign({}, model)));
+        console.log(model);
       }
-      if (pathname === '')
-        pathname = '/';
-      return {
-        pathname: pathname,
-        search: search,
-        hash: hash
-      };
-    }
-    exports['default'] = parsePath;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("80", ["63", "51", "62", "6e", "6b", "29"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    exports.__esModule = true;
-    var _extends = Object.assign || function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
+    }], [{
+      key: 'needs',
+      get: function get() {
+        return [PlatformActions.fetchPlatform];
       }
-      return target;
-    };
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : {'default': obj};
-    }
-    var _warning = $__require('63');
-    var _warning2 = _interopRequireDefault(_warning);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var _Actions = $__require('62');
-    var _createHistory = $__require('6e');
-    var _createHistory2 = _interopRequireDefault(_createHistory);
-    var _parsePath = $__require('6b');
-    var _parsePath2 = _interopRequireDefault(_parsePath);
-    function createStateStorage(entries) {
-      return entries.filter(function(entry) {
-        return entry.state;
-      }).reduce(function(memo, entry) {
-        memo[entry.key] = entry.state;
-        return memo;
-      }, {});
-    }
-    function createMemoryHistory() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      if (Array.isArray(options)) {
-        options = {entries: options};
-      } else if (typeof options === 'string') {
-        options = {entries: [options]};
-      }
-      var history = _createHistory2['default'](_extends({}, options, {
-        getCurrentLocation: getCurrentLocation,
-        finishTransition: finishTransition,
-        saveState: saveState,
-        go: go
-      }));
-      var _options = options;
-      var entries = _options.entries;
-      var current = _options.current;
-      if (typeof entries === 'string') {
-        entries = [entries];
-      } else if (!Array.isArray(entries)) {
-        entries = ['/'];
-      }
-      entries = entries.map(function(entry) {
-        var key = history.createKey();
-        if (typeof entry === 'string')
-          return {
-            pathname: entry,
-            key: key
-          };
-        if (typeof entry === 'object' && entry)
-          return _extends({}, entry, {key: key});
-        !false ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Unable to create history entry from %s', entry) : _invariant2['default'](false) : undefined;
-      });
-      if (current == null) {
-        current = entries.length - 1;
-      } else {
-        !(current >= 0 && current < entries.length) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Current index must be >= 0 and < %s, was %s', entries.length, current) : _invariant2['default'](false) : undefined;
-      }
-      var storage = createStateStorage(entries);
-      function saveState(key, state) {
-        storage[key] = state;
-      }
-      function readState(key) {
-        return storage[key];
-      }
-      function getCurrentLocation() {
-        var entry = entries[current];
-        var key = entry.key;
-        var basename = entry.basename;
-        var pathname = entry.pathname;
-        var search = entry.search;
-        var path = (basename || '') + pathname + (search || '');
-        var state = undefined;
-        if (key) {
-          state = readState(key);
-        } else {
-          state = null;
-          key = history.createKey();
-          entry.key = key;
-        }
-        var location = _parsePath2['default'](path);
-        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
-      }
-      function canGo(n) {
-        var index = current + n;
-        return index >= 0 && index < entries.length;
-      }
-      function go(n) {
-        if (n) {
-          if (!canGo(n)) {
-            process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'Cannot go(%s) there is not enough history', n) : undefined;
-            return;
-          }
-          current += n;
-          var currentLocation = getCurrentLocation();
-          history.transitionTo(_extends({}, currentLocation, {action: _Actions.POP}));
-        }
-      }
-      function finishTransition(location) {
-        switch (location.action) {
-          case _Actions.PUSH:
-            current += 1;
-            if (current < entries.length)
-              entries.splice(current);
-            entries.push(location);
-            saveState(location.key, location.state);
-            break;
-          case _Actions.REPLACE:
-            entries[current] = location;
-            saveState(location.key, location.state);
-            break;
-        }
-      }
-      return history;
-    }
-    exports['default'] = createMemoryHistory;
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("65", ["4c", "80"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = createMemoryHistory;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _historyLibUseQueries = $__require('4c');
-  var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
-  var _historyLibCreateMemoryHistory = $__require('80');
-  var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
-  function createMemoryHistory(options) {
-    var memoryHistory = _historyLibCreateMemoryHistory2['default'](options);
-    var createHistory = function createHistory() {
-      return memoryHistory;
-    };
-    var history = _historyLibUseQueries2['default'](createHistory)(options);
-    history.__v2_compatible__ = true;
-    return history;
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("81", ["44", "4d", "4e", "4f", "52", "50", "54", "55", "56", "57", "58", "48", "47", "5b", "46", "64", "73", "53", "6c", "74", "65"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _Router2 = $__require('44');
-  var _Router3 = _interopRequireDefault(_Router2);
-  exports.Router = _Router3['default'];
-  var _Link2 = $__require('4d');
-  var _Link3 = _interopRequireDefault(_Link2);
-  exports.Link = _Link3['default'];
-  var _IndexLink2 = $__require('4e');
-  var _IndexLink3 = _interopRequireDefault(_IndexLink2);
-  exports.IndexLink = _IndexLink3['default'];
-  var _IndexRedirect2 = $__require('4f');
-  var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
-  exports.IndexRedirect = _IndexRedirect3['default'];
-  var _IndexRoute2 = $__require('52');
-  var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
-  exports.IndexRoute = _IndexRoute3['default'];
-  var _Redirect2 = $__require('50');
-  var _Redirect3 = _interopRequireDefault(_Redirect2);
-  exports.Redirect = _Redirect3['default'];
-  var _Route2 = $__require('54');
-  var _Route3 = _interopRequireDefault(_Route2);
-  exports.Route = _Route3['default'];
-  var _History2 = $__require('55');
-  var _History3 = _interopRequireDefault(_History2);
-  exports.History = _History3['default'];
-  var _Lifecycle2 = $__require('56');
-  var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
-  exports.Lifecycle = _Lifecycle3['default'];
-  var _RouteContext2 = $__require('57');
-  var _RouteContext3 = _interopRequireDefault(_RouteContext2);
-  exports.RouteContext = _RouteContext3['default'];
-  var _useRoutes2 = $__require('58');
-  var _useRoutes3 = _interopRequireDefault(_useRoutes2);
-  exports.useRoutes = _useRoutes3['default'];
-  var _RouteUtils = $__require('48');
-  exports.createRoutes = _RouteUtils.createRoutes;
-  var _RouterContext2 = $__require('47');
-  var _RouterContext3 = _interopRequireDefault(_RouterContext2);
-  exports.RouterContext = _RouterContext3['default'];
-  var _RoutingContext2 = $__require('5b');
-  var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
-  exports.RoutingContext = _RoutingContext3['default'];
-  var _PropTypes2 = $__require('46');
-  var _PropTypes3 = _interopRequireDefault(_PropTypes2);
-  exports.PropTypes = _PropTypes3['default'];
-  var _match2 = $__require('64');
-  var _match3 = _interopRequireDefault(_match2);
-  exports.match = _match3['default'];
-  var _useRouterHistory2 = $__require('73');
-  var _useRouterHistory3 = _interopRequireDefault(_useRouterHistory2);
-  exports.useRouterHistory = _useRouterHistory3['default'];
-  var _PatternUtils = $__require('53');
-  exports.formatPattern = _PatternUtils.formatPattern;
-  var _browserHistory2 = $__require('6c');
-  var _browserHistory3 = _interopRequireDefault(_browserHistory2);
-  exports.browserHistory = _browserHistory3['default'];
-  var _hashHistory2 = $__require('74');
-  var _hashHistory3 = _interopRequireDefault(_hashHistory2);
-  exports.hashHistory = _hashHistory3['default'];
-  var _createMemoryHistory2 = $__require('65');
-  var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
-  exports.createMemoryHistory = _createMemoryHistory3['default'];
-  var _Router4 = _interopRequireDefault(_Router2);
-  exports['default'] = _Router4['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5", ["81"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('81');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.register('82', ['4', '5', '9', '11', '16', '43', '83', 'a', 'b', 'c', 'd'], function (_export) {
-  var React, Component, PropTypes, Link, connect, PlatformActions, _Object$assign, AddPartForm, PartActions, _get, _inherits, _createClass, _classCallCheck, CreatePart;
-
+    }]);
+    return CreatePart;
+  }(_react.Component);
   function select(state) {
     return {
       platform: state.platformsById[state.workingPlatformId],
-      // something like this?
-      part: {
-        createdPlatformId: state.workingPlatformId
-      }
+      part: {createdPlatformId: state.workingPlatformId}
     };
   }
-
-  // not sure what this would all need yet
-  return {
-    setters: [function (_2) {
-      React = _2['default'];
-      Component = _2.Component;
-      PropTypes = _2.PropTypes;
-    }, function (_7) {
-      Link = _7.Link;
-    }, function (_3) {
-      connect = _3.connect;
-    }, function (_5) {
-      PlatformActions = _5;
-    }, function (_) {
-      _Object$assign = _['default'];
-    }, function (_4) {
-      AddPartForm = _4['default'];
-    }, function (_6) {
-      PartActions = _6;
-    }, function (_a) {
-      _get = _a['default'];
-    }, function (_b) {
-      _inherits = _b['default'];
-    }, function (_c) {
-      _createClass = _c['default'];
-    }, function (_d) {
-      _classCallCheck = _d['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      CreatePart = (function (_Component) {
-        _inherits(CreatePart, _Component);
-
-        _createClass(CreatePart, null, [{
-          key: 'propTypes',
-          get: function get() {
-            return {
-              dispatch: PropTypes.func.isRequired,
-              platform: PropTypes.object.isRequired,
-              part: PropTypes.object.isRequired
-            };
-          }
-        }]);
-
-        function CreatePart(props) {
-          _classCallCheck(this, CreatePart);
-
-          _get(Object.getPrototypeOf(CreatePart.prototype), 'constructor', this).call(this, props);
-        }
-
-        _createClass(CreatePart, [{
-          key: 'render',
-          value: function render() {
-            var returnLink = '/platform/' + this.props.platform.id + '/build';
-            return React.createElement(
-              'div',
-              null,
-              React.createElement(
-                'h3',
-                null,
-                'Create New Part'
-              ),
-              React.createElement(
-                Link,
-                { to: returnLink },
-                'Return to Platform'
-              ),
-              React.createElement(AddPartForm, { form: this.props.part, onSave: this.handleSave.bind(this) })
-            );
-          }
-        }, {
-          key: 'handleSave',
-          value: function handleSave(model) {
-            this.props.dispatch(PartActions.createPart(_Object$assign({}, model)));
-            console.log(model);
-          }
-        }], [{
-          key: 'needs',
-          get: function get() {
-            return [PlatformActions.fetchPlatform];
-          }
-        }]);
-
-        return CreatePart;
-      })(Component);
-
-      _export('default', connect(select)(CreatePart));
-    }
-  };
+  exports.default = (0, _reactRedux.connect)(select)(CreatePart);
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('84', ['3', '6', '7', '8', '10', '21', '82'], function (_export) {
-  // routes should only interface with layouts
-  // layouts will then interface with views which are smart components
-  'use strict';
-
-  var Root, Dashboard, About, Platform, CreatePlatform, UpdatePlatform, CreatePart;
-  return {
-    setters: [function (_) {
-      Root = _['default'];
-    }, function (_2) {
-      Dashboard = _2['default'];
-    }, function (_3) {
-      About = _3['default'];
-    }, function (_4) {
-      Platform = _4['default'];
-    }, function (_5) {
-      CreatePlatform = _5['default'];
-    }, function (_6) {
-      UpdatePlatform = _6['default'];
-    }, function (_7) {
-      CreatePart = _7['default'];
-    }],
-    execute: function () {
-      _export('default', {
-        path: '/',
-        component: Root,
-        indexRoute: { component: Dashboard },
-        childRoutes: [{
-          path: 'about',
-          component: About
-        }, {
-          path: 'platform',
-          component: Platform,
-          indexRoute: { component: CreatePlatform },
-          childRoutes: [{
-            path: ':platformId/build',
-            component: UpdatePlatform
-          }, {
-            path: ':platformId/part',
-            component: CreatePart
-          }]
-        }]
-      });
-    }
-  };
-});
-
-$__System.registerDynamic("85", ["86"], true, function($__require, exports, module) {
+$__System.registerDynamic("2c", ["3", "6", "7", "8", "c", "1b", "2a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('86');
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _Root = $__require('3');
+  var _Root2 = _interopRequireDefault(_Root);
+  var _Dashboard = $__require('6');
+  var _Dashboard2 = _interopRequireDefault(_Dashboard);
+  var _About = $__require('7');
+  var _About2 = _interopRequireDefault(_About);
+  var _Platform = $__require('8');
+  var _Platform2 = _interopRequireDefault(_Platform);
+  var _CreatePlatform = $__require('c');
+  var _CreatePlatform2 = _interopRequireDefault(_CreatePlatform);
+  var _UpdatePlatform = $__require('1b');
+  var _UpdatePlatform2 = _interopRequireDefault(_UpdatePlatform);
+  var _CreatePart = $__require('2a');
+  var _CreatePart2 = _interopRequireDefault(_CreatePart);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  exports.default = {
+    path: '/',
+    component: _Root2.default,
+    indexRoute: {component: _Dashboard2.default},
+    childRoutes: [{
+      path: 'about',
+      component: _About2.default
+    }, {
+      path: 'platform',
+      component: _Platform2.default,
+      indexRoute: {component: _CreatePlatform2.default},
+      childRoutes: [{
+        path: ':platformId/build',
+        component: _UpdatePlatform2.default
+      }, {
+        path: ':platformId/part',
+        component: _CreatePart2.default
+      }]
+    }]
+  };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("87", ["85"], true, function($__require, exports, module) {
+$__System.registerDynamic("2d", ["2e"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('85');
+  module.exports = $__require('2e');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("88", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2f", ["2d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('2d');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("30", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -6963,17 +3085,17 @@ $__System.registerDynamic("88", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("89", ["88"], true, function($__require, exports, module) {
+$__System.registerDynamic("31", ["30"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('88');
+  module.exports = $__require('30');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("8a", [], true, function($__require, exports, module) {
+$__System.registerDynamic("32", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -7146,54 +3268,63 @@ $__System.registerDynamic("8a", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("8b", ["8a"], true, function($__require, exports, module) {
+$__System.registerDynamic("33", ["32"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('8a');
+  module.exports = $__require('32');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('11', ['8d', '8c'], function (_export) {
-  var _Promise, fetch, CREATED_PLATFORM, CREATING_PLATFORM, SAVED_PLATFORM, SAVING_PLATFORM, FETCHED_PLATFORM;
-
+$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.createPlatform = createPlatform;
+  exports.savePlatform = savePlatform;
+  exports.fetchPlatform = fetchPlatform;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
+  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
+  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
+  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
+  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
   function creatingPlatform(platform) {
     return {
       type: CREATING_PLATFORM,
       platform: platform
     };
   }
-
   function createdPlatform(platform) {
     return {
       type: CREATED_PLATFORM,
       platform: platform,
       receivedAt: Date.now(),
-      meta: {
-        transition: function transition(prevState, nextState, action) {
+      meta: {transition: function transition(prevState, nextState, action) {
           return {
             path: '/platform/' + action.platform.id + '/build',
-            query: {
-              some: 'queryParam'
-            },
-            state: {
-              some: 'state'
-            }
+            query: {some: 'queryParam'},
+            state: {some: 'state'}
           };
-        }
-      }
+        }}
     };
   }
-
   function savingPlatform(platform) {
     return {
       type: SAVING_PLATFORM,
       platform: platform
     };
   }
-
   function savedPlatform(platform) {
     return {
       type: SAVED_PLATFORM,
@@ -7201,7 +3332,6 @@ $__System.register('11', ['8d', '8c'], function (_export) {
       receivedAt: Date.now()
     };
   }
-
   function fetchedPlatform(platform) {
     return {
       type: FETCHED_PLATFORM,
@@ -7209,356 +3339,82 @@ $__System.register('11', ['8d', '8c'], function (_export) {
       receivedAt: Date.now()
     };
   }
-
   function postPlatform(platform) {
-    return function (dispatch) {
+    return function(dispatch) {
       dispatch(creatingPlatform(platform));
-      return fetch('/api/platform', {
+      return (0, _isomorphicFetch2.default)('/api/platform', {
         method: 'post',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(platform)
-      }).then(function (response) {
+      }).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(createdPlatform(json));
       });
     };
   }
-
   function putPlatform(platform) {
-    return function (dispatch) {
+    return function(dispatch) {
       dispatch(savingPlatform(platform));
-      return fetch('/api/platform/' + platform.id, {
+      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
         method: 'put',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(platform)
-      }).then(function (response) {
+      }).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(savedPlatform(json));
       });
     };
   }
-
   function getPlatform(platformId) {
-    return function (dispatch) {
-      return fetch('http://localhost:5000/api/platform/' + platformId).then(function (response) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(fetchedPlatform(json));
-      }) // TODO: This last peice does not work on server because of need for window?
-      ['catch'](function (error) {
+      }).catch(function(error) {
         console.log('fetch platform failed ' + error);
       });
     };
   }
-
   function createPlatform(platform) {
-    return function (dispatch, getState) {
+    return function(dispatch, getState) {
       return dispatch(postPlatform(platform));
     };
   }
-
   function savePlatform(platform) {
-    return function (dispatch, getState) {
+    return function(dispatch, getState) {
       return dispatch(putPlatform(platform));
     };
   }
-
   function fetchPlatform(params) {
-    return function (dispatch, getState) {
+    return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-
       if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
         isFetch = false;
       }
-
-      return isFetch ? dispatch(getPlatform(params.platformId)) : _Promise.resolve();
+      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
     };
   }
-
-  return {
-    setters: [function (_d) {
-      _Promise = _d['default'];
-    }, function (_c) {
-      fetch = _c['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('createPlatform', createPlatform);
-
-      _export('savePlatform', savePlatform);
-
-      _export('fetchPlatform', fetchPlatform);
-
-      CREATED_PLATFORM = 'CREATED_PLATFORM';
-
-      _export('CREATED_PLATFORM', CREATED_PLATFORM);
-
-      CREATING_PLATFORM = 'CREATING_PLATFORM';
-
-      _export('CREATING_PLATFORM', CREATING_PLATFORM);
-
-      SAVED_PLATFORM = 'SAVED_PLATFORM';
-
-      _export('SAVED_PLATFORM', SAVED_PLATFORM);
-
-      SAVING_PLATFORM = 'SAVING_PLATFORM';
-
-      _export('SAVING_PLATFORM', SAVING_PLATFORM);
-
-      FETCHED_PLATFORM = 'FETCHED_PLATFORM';
-
-      _export('FETCHED_PLATFORM', FETCHED_PLATFORM);
-    }
-  };
-});
-
-$__System.register('8e', ['11', '16', '8f'], function (_export) {
-  var CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, _Object$assign4, _defineProperty;
-
-  function platforms(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case CREATED_PLATFORM:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.platform);
-      case SAVED_PLATFORM:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.platform);
-      case FETCHED_PLATFORM:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.platform);
-      default:
-        return state;
-    }
-  }
-
-  // this is used to create the state shape
-  // what gets return here is at the root of the store
-  // so platforms: {
-  //   'key' : {}
-  //
-  // }
-
-  function platformsById(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case CREATING_PLATFORM:
-        return state;
-      case CREATED_PLATFORM:
-        return _Object$assign4({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
-      case SAVING_PLATFORM:
-        return state;
-      case SAVED_PLATFORM:
-        return _Object$assign4({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
-      case FETCHED_PLATFORM:
-        return _Object$assign4({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
-      default:
-        return state;
-    }
-  }
-
-  // this will be used to store the current platform that is being worked on
-
-  function workingPlatformId(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case CREATED_PLATFORM:
-        return action.platform.id;
-      case FETCHED_PLATFORM:
-        return action.platform.id;
-      default:
-        return state || null;
-    }
-  }
-
-  return {
-    setters: [function (_2) {
-      CREATING_PLATFORM = _2.CREATING_PLATFORM;
-      CREATED_PLATFORM = _2.CREATED_PLATFORM;
-      SAVING_PLATFORM = _2.SAVING_PLATFORM;
-      SAVED_PLATFORM = _2.SAVED_PLATFORM;
-      FETCHED_PLATFORM = _2.FETCHED_PLATFORM;
-    }, function (_) {
-      _Object$assign4 = _['default'];
-    }, function (_f) {
-      _defineProperty = _f['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('platformsById', platformsById);
-
-      _export('workingPlatformId', workingPlatformId);
-    }
-  };
-});
-
-$__System.register('12', ['8d', '8c'], function (_export) {
-  var _Promise, fetch, FETCHED_CATEGOIRES;
-
-  function fetchedCategories(json) {
-    return {
-      type: FETCHED_CATEGOIRES,
-      categories: json,
-      receivedAt: Date.now()
-    };
-  }
-
-  function fetchCategories() {
-    return function (dispatch) {
-      return fetch(new Request('http://localhost:5000/api/categories')) // was getting an issue when needed to loaded categories later, so switched to new Request()
-      .then(function (response) {
-        return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
-        return dispatch(fetchedCategories(json));
-      }) // TODO: This last peice does not work on server because of need for window?
-      ['catch'](function (error) {
-        console.log('fetch categories failed ' + error);
-      });
-    };
-  }
-
-  function getCategories() {
-    return function (dispatch, getState) {
-      var state = getState();
-      var isFetch = true;
-
-      if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
-        isFetch = false;
-      }
-
-      return isFetch ? dispatch(fetchCategories()) : _Promise.resolve();
-    };
-  }
-
-  return {
-    setters: [function (_d) {
-      _Promise = _d['default'];
-    }, function (_c) {
-      fetch = _c['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('getCategories', getCategories);
-
-      FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
-
-      _export('FETCHED_CATEGOIRES', FETCHED_CATEGOIRES);
-    }
-  };
-});
-
-$__System.register('90', ['12', '16'], function (_export) {
-  var FETCHED_CATEGOIRES, _Object$assign;
-
-  function posts(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case FETCHED_CATEGOIRES:
-        return _Object$assign({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt,
-          categories: action.categories
-        });
-      default:
-        return state;
-    }
-  }
-
-  // this is used to create the state shape
-  // what gets return here is at the root of the store
-  // so platforms: {
-  //   'key' : {}
-  //
-  // }
-  function categories(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case FETCHED_CATEGOIRES:
-        return _Object$assign({}, state, posts(state, action));
-      default:
-        return state;
-    }
-  }
-
-  return {
-    setters: [function (_2) {
-      FETCHED_CATEGOIRES = _2.FETCHED_CATEGOIRES;
-    }, function (_) {
-      _Object$assign = _['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('default', categories);
-    }
-  };
-});
-
-$__System.registerDynamic("91", ["3a"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a');
-  module.exports = function defineProperty(it, key, desc) {
-    return $.setDesc(it, key, desc);
-  };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("42", ["91"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('91'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("8f", ["42"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _Object$defineProperty = $__require('42')["default"];
-  exports["default"] = function(obj, key, value) {
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.platformsById = platformsById;
+  exports.workingPlatformId = workingPlatformId;
+  var _platform = $__require('d');
+  function _defineProperty(obj, key, value) {
     if (key in obj) {
-      _Object$defineProperty(obj, key, {
+      Object.defineProperty(obj, key, {
         value: value,
         enumerable: true,
         configurable: true,
@@ -7568,104 +3424,153 @@ $__System.registerDynamic("8f", ["42"], true, function($__require, exports, modu
       obj[key] = value;
     }
     return obj;
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("23", ["92"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var defined = $__require('92');
-  module.exports = function(it) {
-    return Object(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("93", ["3a", "23", "94", "36"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a'),
-      toObject = $__require('23'),
-      IObject = $__require('94');
-  module.exports = $__require('36')(function() {
-    var a = Object.assign,
-        A = {},
-        B = {},
-        S = Symbol(),
-        K = 'abcdefghijklmnopqrst';
-    A[S] = 7;
-    K.split('').forEach(function(k) {
-      B[k] = k;
-    });
-    return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
-  }) ? function assign(target, source) {
-    var T = toObject(target),
-        $$ = arguments,
-        $$len = $$.length,
-        index = 1,
-        getKeys = $.getKeys,
-        getSymbols = $.getSymbols,
-        isEnum = $.isEnum;
-    while ($$len > index) {
-      var S = IObject($$[index++]),
-          keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S),
-          length = keys.length,
-          j = 0,
-          key;
-      while (length > j)
-        if (isEnum.call(S, key = keys[j++]))
-          T[key] = S[key];
+  }
+  function platforms() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _platform.CREATED_PLATFORM:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      case _platform.SAVED_PLATFORM:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      case _platform.FETCHED_PLATFORM:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      default:
+        return state;
     }
-    return T;
-  } : Object.assign;
+  }
+  function platformsById() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _platform.CREATING_PLATFORM:
+        return state;
+      case _platform.CREATED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _platform.SAVING_PLATFORM:
+        return state;
+      case _platform.SAVED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _platform.FETCHED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      default:
+        return state;
+    }
+  }
+  function workingPlatformId() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _platform.CREATED_PLATFORM:
+        return action.platform.id;
+      case _platform.FETCHED_PLATFORM:
+        return action.platform.id;
+      default:
+        return state || null;
+    }
+  }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("95", ["35", "93"], true, function($__require, exports, module) {
+$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $export = $__require('35');
-  $export($export.S + $export.F, 'Object', {assign: $__require('93')});
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_CATEGOIRES = undefined;
+  exports.getCategories = getCategories;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var FETCHED_CATEGOIRES = exports.FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
+  function fetchedCategories(json) {
+    return {
+      type: FETCHED_CATEGOIRES,
+      categories: json,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchCategories() {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)(new Request('http://localhost:5000/api/categories')).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedCategories(json));
+      }).catch(function(error) {
+        console.log('fetch categories failed ' + error);
+      });
+    };
+  }
+  function getCategories() {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(fetchCategories()) : Promise.resolve();
+    };
+  }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("96", ["95", "26"], true, function($__require, exports, module) {
+$__System.registerDynamic("36", ["e"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  $__require('95');
-  module.exports = $__require('26').Object.assign;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _categories = $__require('e');
+  function posts() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt,
+          categories: action.categories
+        });
+      default:
+        return state;
+    }
+  }
+  function categories() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, posts(state, action));
+      default:
+        return state;
+    }
+  }
+  exports.default = categories;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["96"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('96'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("97", [], true, function($__require, exports, module) {
+$__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -8005,75 +3910,80 @@ $__System.registerDynamic("97", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("98", ["97"], true, function($__require, exports, module) {
+$__System.registerDynamic("38", ["37"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('97');
+  module.exports = $__require('37');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("99", ["98"], true, function($__require, exports, module) {
+$__System.registerDynamic("39", ["38"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  $__require('98');
+  $__require('38');
   module.exports = self.fetch.bind(self);
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("8c", ["99"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["39"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('99');
+  module.exports = $__require('39');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('83', ['8d', '8c'], function (_export) {
-  var _Promise, fetch, CREATED_PART, CREATING_PART, SAVED_PART, SAVING_PART, FETCHED_PART;
-
+$__System.registerDynamic("2b", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_PART = exports.SAVING_PART = exports.SAVED_PART = exports.CREATING_PART = exports.CREATED_PART = undefined;
+  exports.createPart = createPart;
+  exports.savePart = savePart;
+  exports.fetchPart = fetchPart;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
+  var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
+  var SAVED_PART = exports.SAVED_PART = 'SAVED_PART';
+  var SAVING_PART = exports.SAVING_PART = 'SAVING_PART';
+  var FETCHED_PART = exports.FETCHED_PART = 'FETCHED_PART';
   function creatingPart(part) {
     return {
       type: CREATING_PART,
       part: part
     };
   }
-
   function createdPart(part) {
     return {
       type: CREATED_PART,
       part: part,
       receivedAt: Date.now(),
-      meta: {
-        transition: function transition(prevState, nextState, action) {
-          return {
-            path: '/platform/' + action.part.createdPlatformId + '/build'
-            // query: {
-            //   some: 'queryParam'
-            // },
-            // state: {
-            //   some: 'state'
-            // }
-          };
-        }
-      }
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {path: '/platform/' + action.part.createdPlatformId + '/build'};
+        }}
     };
   }
-
   function savingPart(part) {
     return {
       type: SAVING_PART,
       part: part
     };
   }
-
   function savedPart(part) {
     return {
       type: SAVED_PART,
@@ -8081,7 +3991,6 @@ $__System.register('83', ['8d', '8c'], function (_export) {
       receivedAt: Date.now()
     };
   }
-
   function fetchedPart(part) {
     return {
       type: FETCHED_PART,
@@ -8089,222 +3998,166 @@ $__System.register('83', ['8d', '8c'], function (_export) {
       receivedAt: Date.now()
     };
   }
-
   function postPart(part) {
-    return function (dispatch) {
+    return function(dispatch) {
       dispatch(creatingPart(part));
-      return fetch('/api/platform/' + part.createdPlatformId + '/part', {
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part', {
         method: 'post',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(part)
-      }).then(function (response) {
+      }).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(createdPart(json));
       });
     };
   }
-
   function putPart(part) {
-    return function (dispatch) {
+    return function(dispatch) {
       dispatch(savingPart(part));
-      return fetch('/api/part/' + part.createdPlatformId + '/part/' + part.id, {
+      return (0, _isomorphicFetch2.default)('/api/part/' + part.createdPlatformId + '/part/' + part.id, {
         method: 'put',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
+        headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(part)
-      }).then(function (response) {
+      }).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(savedPart(json));
       });
     };
   }
-
   function getPart(platformId) {
-    return function (dispatch) {
-      return fetch('http://localhost:5000/api/platform/' + platformId).then(function (response) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
         return response.json();
-      }) // response.json returns a promise so it can return chunked data (I assume)
-      .then(function (json) {
+      }).then(function(json) {
         return dispatch(fetchedPart(json));
-      }) // TODO: This last peice does not work on server because of need for window?
-      ['catch'](function (error) {
+      }).catch(function(error) {
         console.log('fetch platform failed ' + error);
       });
     };
   }
-
   function createPart(part) {
-    return function (dispatch, getState) {
-      // eslint-disable-line no-unused-vars
+    return function(dispatch, getState) {
       return dispatch(postPart(part));
     };
   }
-
   function savePart(part) {
-    return function (dispatch, getState) {
-      // eslint-disable-line no-unused-vars
+    return function(dispatch, getState) {
       return dispatch(putPart(part));
     };
   }
-
   function fetchPart(params) {
-    return function (dispatch, getState) {
+    return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-
       if (state.partsById && state.partsById[params.partId] && !state.partsById[params.partId].didInvalidate) {
         isFetch = false;
       }
-
-      return isFetch ? dispatch(getPart(params.partId)) : _Promise.resolve();
+      return isFetch ? dispatch(getPart(params.partId)) : Promise.resolve();
     };
   }
-
-  return {
-    setters: [function (_d) {
-      _Promise = _d['default'];
-    }, function (_c) {
-      fetch = _c['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('createPart', createPart);
-
-      _export('savePart', savePart);
-
-      _export('fetchPart', fetchPart);
-
-      CREATED_PART = 'CREATED_PART';
-
-      _export('CREATED_PART', CREATED_PART);
-
-      CREATING_PART = 'CREATING_PART';
-
-      _export('CREATING_PART', CREATING_PART);
-
-      SAVED_PART = 'SAVED_PART';
-
-      _export('SAVED_PART', SAVED_PART);
-
-      SAVING_PART = 'SAVING_PART';
-
-      _export('SAVING_PART', SAVING_PART);
-
-      FETCHED_PART = 'FETCHED_PART';
-
-      _export('FETCHED_PART', FETCHED_PART);
-    }
-  };
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('9a', ['16', '83', '8f'], function (_export) {
-  var _Object$assign4, CREATING_PART, CREATED_PART, SAVING_PART, SAVED_PART, FETCHED_PART, _defineProperty;
-
-  function parts(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case CREATING_PART:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.part);
-      case SAVED_PART:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.part);
-      case FETCHED_PART:
-        return _Object$assign4({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        }, action.part);
-      default:
-        return state;
-    }
-  }
-
-  function partsById(state, action) {
-    if (state === undefined) state = {};
-
-    switch (action.type) {
-      case CREATING_PART:
-        return state;
-      case CREATED_PART:
-        return _Object$assign4({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
-      case SAVING_PART:
-        return state;
-      case SAVED_PART:
-        return _Object$assign4({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
-      case FETCHED_PART:
-        return _Object$assign4({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
-      default:
-        return state;
-    }
-  }
-
-  return {
-    setters: [function (_) {
-      _Object$assign4 = _['default'];
-    }, function (_2) {
-      CREATING_PART = _2.CREATING_PART;
-      CREATED_PART = _2.CREATED_PART;
-      SAVING_PART = _2.SAVING_PART;
-      SAVED_PART = _2.SAVED_PART;
-      FETCHED_PART = _2.FETCHED_PART;
-    }, function (_f) {
-      _defineProperty = _f['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      _export('partsById', partsById);
-    }
-  };
-});
-
-$__System.register('9b', ['90', '9c', '8e', '9a'], function (_export) {
-
-  // state shape here would be {postsByReddit: {}}
-  'use strict';
-
-  var categories, combineReducers, platformsById, workingPlatformId, parts, rootReducer;
-  return {
-    setters: [function (_) {
-      categories = _['default'];
-    }, function (_c) {
-      combineReducers = _c.combineReducers;
-    }, function (_e) {
-      platformsById = _e.platformsById;
-      workingPlatformId = _e.workingPlatformId;
-    }, function (_a) {
-      parts = _a['default'];
-    }],
-    execute: function () {
-      rootReducer = combineReducers({
-        platformsById: platformsById,
-        workingPlatformId: workingPlatformId,
-        categories: categories,
-        parts: parts
+$__System.registerDynamic("3a", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.partsById = partsById;
+  var _part = $__require('2b');
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
       });
-
-      _export('default', rootReducer);
+    } else {
+      obj[key] = value;
     }
-  };
+    return obj;
+  }
+  function parts() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _part.CREATED_PART:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.part);
+      case _part.SAVED_PART:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.part);
+      case _part.FETCHED_PART:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.part);
+      default:
+        return state;
+    }
+  }
+  function partsById() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _part.CREATING_PART:
+        return state;
+      case _part.CREATED_PART:
+        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+      case _part.SAVING_PART:
+        return state;
+      case _part.SAVED_PART:
+        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+      case _part.FETCHED_PART:
+        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+      default:
+        return state;
+    }
+  }
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.registerDynamic("9d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", ["3c", "35", "36", "3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _redux = $__require('3c');
+  var _platforms = $__require('35');
+  var _categories = $__require('36');
+  var _categories2 = _interopRequireDefault(_categories);
+  var _parts = $__require('3a');
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var rootReducer = (0, _redux.combineReducers)({
+    platformsById: _platforms.platformsById,
+    workingPlatformId: _platforms.workingPlatformId,
+    categories: _categories2.default,
+    partsById: _parts.partsById
+  });
+  exports.default = rootReducer;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3d", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -8352,82 +4205,2776 @@ $__System.registerDynamic("9d", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("9e", ["9d"], true, function($__require, exports, module) {
+$__System.registerDynamic("3e", ["3d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('9d');
+  module.exports = $__require('3d');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('9f', ['89', '9c', '8b', '9b', '9e'], function (_export) {
-  // import api from '../middleware/api';
-  'use strict';
-
-  var thunk, createStore, applyMiddleware, compose, createLogger, rootReducer, storeEnhancer;
-
-  _export('default', configureStore);
-
-  function configureStore(initialState, history) {
-    // pulled my hair out with this one, need to set node logger
-    var logger = createLogger({ logger: console });
-    var createStoreWithMiddleware = compose(applyMiddleware(thunk, logger), storeEnhancer(history))(createStore);
-    var finalCreateStore = createStoreWithMiddleware(rootReducer, initialState);
-
-    return finalCreateStore;
-  }
-
-  return {
-    setters: [function (_) {
-      thunk = _['default'];
-    }, function (_c) {
-      createStore = _c.createStore;
-      applyMiddleware = _c.applyMiddleware;
-      compose = _c.compose;
-    }, function (_b) {
-      createLogger = _b['default'];
-    }, function (_b2) {
-      rootReducer = _b2['default'];
-    }, function (_e) {
-      storeEnhancer = _e['default'];
-    }],
-    execute: function () {}
-  };
-});
-
-$__System.registerDynamic("a0", ["a1"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["3c", "31", "33", "3b", "3e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactMount = $__require('a1');
-  module.exports = ReactMount.renderSubtreeIntoContainer;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.default = configureStore;
+  var _redux = $__require('3c');
+  var _reduxThunk = $__require('31');
+  var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+  var _reduxLogger = $__require('33');
+  var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+  var _index = $__require('3b');
+  var _index2 = _interopRequireDefault(_index);
+  var _reduxHistoryTransitions = $__require('3e');
+  var _reduxHistoryTransitions2 = _interopRequireDefault(_reduxHistoryTransitions);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function configureStore(initialState, history) {
+    var logger = (0, _reduxLogger2.default)({logger: console});
+    var createStoreWithMiddleware = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default, logger), (0, _reduxHistoryTransitions2.default)(history))(_redux.createStore);
+    var finalCreateStore = createStoreWithMiddleware(_index2.default, initialState);
+    return finalCreateStore;
+  }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("86", ["a2", "a3", "a4", "a5", "a1", "a6", "a7", "a8", "a9", "aa", "a0", "ab", "ac", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("40", ["41"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = createProvider;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var _utilsCreateStoreShape = $__require('41');
+  var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
+  function isUsingOwnerContext(React) {
+    var version = React.version;
+    if (typeof version !== 'string') {
+      return true;
+    }
+    var sections = version.split('.');
+    var major = parseInt(sections[0], 10);
+    var minor = parseInt(sections[1], 10);
+    return major === 0 && minor === 13;
+  }
+  function createProvider(React) {
+    var Component = React.Component;
+    var PropTypes = React.PropTypes;
+    var Children = React.Children;
+    var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
+    var requireFunctionChild = isUsingOwnerContext(React);
+    var didWarnAboutChild = false;
+    function warnAboutFunctionChild() {
+      if (didWarnAboutChild || requireFunctionChild) {
+        return;
+      }
+      didWarnAboutChild = true;
+      console.error('With React 0.14 and later versions, you no longer need to ' + 'wrap <Provider> child into a function.');
+    }
+    function warnAboutElementChild() {
+      if (didWarnAboutChild || !requireFunctionChild) {
+        return;
+      }
+      didWarnAboutChild = true;
+      console.error('With React 0.13, you need to ' + 'wrap <Provider> child into a function. ' + 'This restriction will be removed with React 0.14.');
+    }
+    var didWarnAboutReceivingStore = false;
+    function warnAboutReceivingStore() {
+      if (didWarnAboutReceivingStore) {
+        return;
+      }
+      didWarnAboutReceivingStore = true;
+      console.error('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/rackt/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
+    }
+    var Provider = (function(_Component) {
+      _inherits(Provider, _Component);
+      Provider.prototype.getChildContext = function getChildContext() {
+        return {store: this.store};
+      };
+      function Provider(props, context) {
+        _classCallCheck(this, Provider);
+        _Component.call(this, props, context);
+        this.store = props.store;
+      }
+      Provider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var store = this.store;
+        var nextStore = nextProps.store;
+        if (store !== nextStore) {
+          warnAboutReceivingStore();
+        }
+      };
+      Provider.prototype.render = function render() {
+        var children = this.props.children;
+        if (typeof children === 'function') {
+          warnAboutFunctionChild();
+          children = children();
+        } else {
+          warnAboutElementChild();
+        }
+        return Children.only(children);
+      };
+      return Provider;
+    })(Component);
+    Provider.childContextTypes = {store: storeShape.isRequired};
+    Provider.propTypes = {
+      store: storeShape.isRequired,
+      children: (requireFunctionChild ? PropTypes.func : PropTypes.element).isRequired
+    };
+    return Provider;
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("41", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = createStoreShape;
+  function createStoreShape(PropTypes) {
+    return PropTypes.shape({
+      subscribe: PropTypes.func.isRequired,
+      dispatch: PropTypes.func.isRequired,
+      getState: PropTypes.func.isRequired
+    });
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("42", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = shallowEqual;
+  function shallowEqual(objA, objB) {
+    if (objA === objB) {
+      return true;
+    }
+    var keysA = Object.keys(objA);
+    var keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+    var hasOwn = Object.prototype.hasOwnProperty;
+    for (var i = 0; i < keysA.length; i++) {
+      if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("43", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = isPlainObject;
+  var fnToString = function fnToString(fn) {
+    return Function.prototype.toString.call(fn);
+  };
+  function isPlainObject(obj) {
+    if (!obj || typeof obj !== 'object') {
+      return false;
+    }
+    var proto = typeof obj.constructor === 'function' ? Object.getPrototypeOf(obj) : Object.prototype;
+    if (proto === null) {
+      return true;
+    }
+    var constructor = proto.constructor;
+    return typeof constructor === 'function' && constructor instanceof constructor && fnToString(constructor) === fnToString(Object);
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("44", ["45"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = createStore;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _lodashIsPlainObject = $__require('45');
+  var _lodashIsPlainObject2 = _interopRequireDefault(_lodashIsPlainObject);
+  var ActionTypes = {INIT: '@@redux/INIT'};
+  exports.ActionTypes = ActionTypes;
+  function createStore(reducer, initialState, enhancer) {
+    if (typeof initialState === 'function' && typeof enhancer === 'undefined') {
+      enhancer = initialState;
+      initialState = undefined;
+    }
+    if (typeof enhancer !== 'undefined') {
+      if (typeof enhancer !== 'function') {
+        throw new Error('Expected the enhancer to be a function.');
+      }
+      return enhancer(createStore)(reducer, initialState);
+    }
+    if (typeof reducer !== 'function') {
+      throw new Error('Expected the reducer to be a function.');
+    }
+    var currentReducer = reducer;
+    var currentState = initialState;
+    var currentListeners = [];
+    var nextListeners = currentListeners;
+    var isDispatching = false;
+    function ensureCanMutateNextListeners() {
+      if (nextListeners === currentListeners) {
+        nextListeners = currentListeners.slice();
+      }
+    }
+    function getState() {
+      return currentState;
+    }
+    function subscribe(listener) {
+      if (typeof listener !== 'function') {
+        throw new Error('Expected listener to be a function.');
+      }
+      var isSubscribed = true;
+      ensureCanMutateNextListeners();
+      nextListeners.push(listener);
+      return function unsubscribe() {
+        if (!isSubscribed) {
+          return;
+        }
+        isSubscribed = false;
+        ensureCanMutateNextListeners();
+        var index = nextListeners.indexOf(listener);
+        nextListeners.splice(index, 1);
+      };
+    }
+    function dispatch(action) {
+      if (!_lodashIsPlainObject2['default'](action)) {
+        throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+      }
+      if (typeof action.type === 'undefined') {
+        throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+      }
+      if (isDispatching) {
+        throw new Error('Reducers may not dispatch actions.');
+      }
+      try {
+        isDispatching = true;
+        currentState = currentReducer(currentState, action);
+      } finally {
+        isDispatching = false;
+      }
+      var listeners = currentListeners = nextListeners;
+      for (var i = 0; i < listeners.length; i++) {
+        listeners[i]();
+      }
+      return action;
+    }
+    function replaceReducer(nextReducer) {
+      if (typeof nextReducer !== 'function') {
+        throw new Error('Expected the nextReducer to be a function.');
+      }
+      currentReducer = nextReducer;
+      dispatch({type: ActionTypes.INIT});
+    }
+    dispatch({type: ActionTypes.INIT});
+    return {
+      dispatch: dispatch,
+      subscribe: subscribe,
+      getState: getState,
+      replaceReducer: replaceReducer
+    };
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("46", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function isHostObject(value) {
+    var result = false;
+    if (value != null && typeof value.toString != 'function') {
+      try {
+        result = !!(value + '');
+      } catch (e) {}
+    }
+    return result;
+  }
+  module.exports = isHostObject;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("47", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function isObjectLike(value) {
+    return !!value && typeof value == 'object';
+  }
+  module.exports = isObjectLike;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("45", ["46", "47"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var isHostObject = $__require('46'),
+      isObjectLike = $__require('47');
+  var objectTag = '[object Object]';
+  var objectProto = global.Object.prototype;
+  var funcToString = global.Function.prototype.toString;
+  var objectCtorString = funcToString.call(Object);
+  var objectToString = objectProto.toString;
+  var getPrototypeOf = Object.getPrototypeOf;
+  function isPlainObject(value) {
+    if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
+      return false;
+    }
+    var proto = objectProto;
+    if (typeof value.constructor == 'function') {
+      proto = getPrototypeOf(value);
+    }
+    if (proto === null) {
+      return true;
+    }
+    var Ctor = proto.constructor;
+    return (typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+  }
+  module.exports = isPlainObject;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("48", ["44", "45", "49", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('a2');
-    var ReactDOMTextComponent = $__require('a3');
-    var ReactDefaultInjection = $__require('a4');
-    var ReactInstanceHandles = $__require('a5');
-    var ReactMount = $__require('a1');
-    var ReactPerf = $__require('a6');
-    var ReactReconciler = $__require('a7');
-    var ReactUpdates = $__require('a8');
-    var ReactVersion = $__require('a9');
-    var findDOMNode = $__require('aa');
-    var renderSubtreeIntoContainer = $__require('a0');
-    var warning = $__require('ab');
+    exports.__esModule = true;
+    exports['default'] = combineReducers;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _createStore = $__require('44');
+    var _lodashIsPlainObject = $__require('45');
+    var _lodashIsPlainObject2 = _interopRequireDefault(_lodashIsPlainObject);
+    var _utilsWarning = $__require('49');
+    var _utilsWarning2 = _interopRequireDefault(_utilsWarning);
+    function getUndefinedStateErrorMessage(key, action) {
+      var actionType = action && action.type;
+      var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+      return 'Reducer "' + key + '" returned undefined handling ' + actionName + '. ' + 'To ignore an action, you must explicitly return the previous state.';
+    }
+    function getUnexpectedStateShapeWarningMessage(inputState, reducers, action) {
+      var reducerKeys = Object.keys(reducers);
+      var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'initialState argument passed to createStore' : 'previous state received by the reducer';
+      if (reducerKeys.length === 0) {
+        return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+      }
+      if (!_lodashIsPlainObject2['default'](inputState)) {
+        return 'The ' + argumentName + ' has unexpected type of "' + ({}).toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
+      }
+      var unexpectedKeys = Object.keys(inputState).filter(function(key) {
+        return !reducers.hasOwnProperty(key);
+      });
+      if (unexpectedKeys.length > 0) {
+        return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+      }
+    }
+    function assertReducerSanity(reducers) {
+      Object.keys(reducers).forEach(function(key) {
+        var reducer = reducers[key];
+        var initialState = reducer(undefined, {type: _createStore.ActionTypes.INIT});
+        if (typeof initialState === 'undefined') {
+          throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
+        }
+        var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+        if (typeof reducer(undefined, {type: type}) === 'undefined') {
+          throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
+        }
+      });
+    }
+    function combineReducers(reducers) {
+      var reducerKeys = Object.keys(reducers);
+      var finalReducers = {};
+      for (var i = 0; i < reducerKeys.length; i++) {
+        var key = reducerKeys[i];
+        if (typeof reducers[key] === 'function') {
+          finalReducers[key] = reducers[key];
+        }
+      }
+      var finalReducerKeys = Object.keys(finalReducers);
+      var sanityError;
+      try {
+        assertReducerSanity(finalReducers);
+      } catch (e) {
+        sanityError = e;
+      }
+      return function combination(state, action) {
+        if (state === undefined)
+          state = {};
+        if (sanityError) {
+          throw sanityError;
+        }
+        if ("production" !== 'production') {
+          var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action);
+          if (warningMessage) {
+            _utilsWarning2['default'](warningMessage);
+          }
+        }
+        var hasChanged = false;
+        var nextState = {};
+        for (var i = 0; i < finalReducerKeys.length; i++) {
+          var key = finalReducerKeys[i];
+          var reducer = finalReducers[key];
+          var previousStateForKey = state[key];
+          var nextStateForKey = reducer(previousStateForKey, action);
+          if (typeof nextStateForKey === 'undefined') {
+            var errorMessage = getUndefinedStateErrorMessage(key, action);
+            throw new Error(errorMessage);
+          }
+          nextState[key] = nextStateForKey;
+          hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+        }
+        return hasChanged ? nextState : state;
+      };
+    }
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4a", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = bindActionCreators;
+  function bindActionCreator(actionCreator, dispatch) {
+    return function() {
+      return dispatch(actionCreator.apply(undefined, arguments));
+    };
+  }
+  function bindActionCreators(actionCreators, dispatch) {
+    if (typeof actionCreators === 'function') {
+      return bindActionCreator(actionCreators, dispatch);
+    }
+    if (typeof actionCreators !== 'object' || actionCreators === null) {
+      throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
+    }
+    var keys = Object.keys(actionCreators);
+    var boundActionCreators = {};
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var actionCreator = actionCreators[key];
+      if (typeof actionCreator === 'function') {
+        boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+      }
+    }
+    return boundActionCreators;
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4b", ["4c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  exports['default'] = applyMiddleware;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _compose = $__require('4c');
+  var _compose2 = _interopRequireDefault(_compose);
+  function applyMiddleware() {
+    for (var _len = arguments.length,
+        middlewares = Array(_len),
+        _key = 0; _key < _len; _key++) {
+      middlewares[_key] = arguments[_key];
+    }
+    return function(createStore) {
+      return function(reducer, initialState, enhancer) {
+        var store = createStore(reducer, initialState, enhancer);
+        var _dispatch = store.dispatch;
+        var chain = [];
+        var middlewareAPI = {
+          getState: store.getState,
+          dispatch: function dispatch(action) {
+            return _dispatch(action);
+          }
+        };
+        chain = middlewares.map(function(middleware) {
+          return middleware(middlewareAPI);
+        });
+        _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
+        return _extends({}, store, {dispatch: _dispatch});
+      };
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4c", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = compose;
+  function compose() {
+    for (var _len = arguments.length,
+        funcs = Array(_len),
+        _key = 0; _key < _len; _key++) {
+      funcs[_key] = arguments[_key];
+    }
+    return function() {
+      if (funcs.length === 0) {
+        return arguments[0];
+      }
+      var last = funcs[funcs.length - 1];
+      var rest = funcs.slice(0, -1);
+      return rest.reduceRight(function(composed, f) {
+        return f(composed);
+      }, last.apply(undefined, arguments));
+    };
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("49", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = warning;
+  function warning(message) {
+    if (typeof console !== 'undefined' && typeof console.error === 'function') {
+      console.error(message);
+    }
+    try {
+      throw new Error(message);
+    } catch (e) {}
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4d", ["44", "48", "4a", "4b", "4c", "49", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _createStore = $__require('44');
+    var _createStore2 = _interopRequireDefault(_createStore);
+    var _combineReducers = $__require('48');
+    var _combineReducers2 = _interopRequireDefault(_combineReducers);
+    var _bindActionCreators = $__require('4a');
+    var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+    var _applyMiddleware = $__require('4b');
+    var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+    var _compose = $__require('4c');
+    var _compose2 = _interopRequireDefault(_compose);
+    var _utilsWarning = $__require('49');
+    var _utilsWarning2 = _interopRequireDefault(_utilsWarning);
+    function isCrushed() {}
+    if ("production" !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+      _utilsWarning2['default']('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+    }
+    exports.createStore = _createStore2['default'];
+    exports.combineReducers = _combineReducers2['default'];
+    exports.bindActionCreators = _bindActionCreators2['default'];
+    exports.applyMiddleware = _applyMiddleware2['default'];
+    exports.compose = _compose2['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3c", ["4d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('4d');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4e", ["3c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = wrapActionCreators;
+  var _redux = $__require('3c');
+  function wrapActionCreators(actionCreators) {
+    return function(dispatch) {
+      return _redux.bindActionCreators(actionCreators, dispatch);
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4f", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var REACT_STATICS = {
+    childContextTypes: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+  };
+  var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    arguments: true,
+    arity: true
+  };
+  module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
+    var keys = Object.getOwnPropertyNames(sourceComponent);
+    for (var i = 0; i < keys.length; ++i) {
+      if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+        targetComponent[keys[i]] = sourceComponent[keys[i]];
+      }
+    }
+    return targetComponent;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("50", ["4f"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('4f');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("51", ["41", "42", "43", "4e", "50", "52", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    exports['default'] = createConnect;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+      }
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+          value: subClass,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }});
+      if (superClass)
+        Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+    }
+    var _utilsCreateStoreShape = $__require('41');
+    var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
+    var _utilsShallowEqual = $__require('42');
+    var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
+    var _utilsIsPlainObject = $__require('43');
+    var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
+    var _utilsWrapActionCreators = $__require('4e');
+    var _utilsWrapActionCreators2 = _interopRequireDefault(_utilsWrapActionCreators);
+    var _hoistNonReactStatics = $__require('50');
+    var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var defaultMapStateToProps = function defaultMapStateToProps() {
+      return {};
+    };
+    var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
+      return {dispatch: dispatch};
+    };
+    var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
+      return _extends({}, parentProps, stateProps, dispatchProps);
+    };
+    function getDisplayName(Component) {
+      return Component.displayName || Component.name || 'Component';
+    }
+    var nextVersion = 0;
+    function createConnect(React) {
+      var Component = React.Component;
+      var PropTypes = React.PropTypes;
+      var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
+      return function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
+        var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+        var shouldSubscribe = Boolean(mapStateToProps);
+        var finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
+        var finalMapDispatchToProps = _utilsIsPlainObject2['default'](mapDispatchToProps) ? _utilsWrapActionCreators2['default'](mapDispatchToProps) : mapDispatchToProps || defaultMapDispatchToProps;
+        var finalMergeProps = mergeProps || defaultMergeProps;
+        var shouldUpdateStateProps = finalMapStateToProps.length > 1;
+        var shouldUpdateDispatchProps = finalMapDispatchToProps.length > 1;
+        var _options$pure = options.pure;
+        var pure = _options$pure === undefined ? true : _options$pure;
+        var version = nextVersion++;
+        function computeStateProps(store, props) {
+          var state = store.getState();
+          var stateProps = shouldUpdateStateProps ? finalMapStateToProps(state, props) : finalMapStateToProps(state);
+          _invariant2['default'](_utilsIsPlainObject2['default'](stateProps), '`mapStateToProps` must return an object. Instead received %s.', stateProps);
+          return stateProps;
+        }
+        function computeDispatchProps(store, props) {
+          var dispatch = store.dispatch;
+          var dispatchProps = shouldUpdateDispatchProps ? finalMapDispatchToProps(dispatch, props) : finalMapDispatchToProps(dispatch);
+          _invariant2['default'](_utilsIsPlainObject2['default'](dispatchProps), '`mapDispatchToProps` must return an object. Instead received %s.', dispatchProps);
+          return dispatchProps;
+        }
+        function _computeNextState(stateProps, dispatchProps, parentProps) {
+          var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
+          _invariant2['default'](_utilsIsPlainObject2['default'](mergedProps), '`mergeProps` must return an object. Instead received %s.', mergedProps);
+          return mergedProps;
+        }
+        return function wrapWithConnect(WrappedComponent) {
+          var Connect = (function(_Component) {
+            _inherits(Connect, _Component);
+            Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
+              if (!pure) {
+                this.updateStateProps(nextProps);
+                this.updateDispatchProps(nextProps);
+                this.updateState(nextProps);
+                return true;
+              }
+              var storeChanged = nextState.storeState !== this.state.storeState;
+              var propsChanged = !_utilsShallowEqual2['default'](nextProps, this.props);
+              var mapStateProducedChange = false;
+              var dispatchPropsChanged = false;
+              if (storeChanged || propsChanged && shouldUpdateStateProps) {
+                mapStateProducedChange = this.updateStateProps(nextProps);
+              }
+              if (propsChanged && shouldUpdateDispatchProps) {
+                dispatchPropsChanged = this.updateDispatchProps(nextProps);
+              }
+              if (propsChanged || mapStateProducedChange || dispatchPropsChanged) {
+                this.updateState(nextProps);
+                return true;
+              }
+              return false;
+            };
+            function Connect(props, context) {
+              _classCallCheck(this, Connect);
+              _Component.call(this, props, context);
+              this.version = version;
+              this.store = props.store || context.store;
+              _invariant2['default'](this.store, 'Could not find "store" in either the context or ' + ('props of "' + this.constructor.displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + this.constructor.displayName + '".'));
+              this.stateProps = computeStateProps(this.store, props);
+              this.dispatchProps = computeDispatchProps(this.store, props);
+              this.state = {storeState: null};
+              this.updateState();
+            }
+            Connect.prototype.computeNextState = function computeNextState() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              return _computeNextState(this.stateProps, this.dispatchProps, props);
+            };
+            Connect.prototype.updateStateProps = function updateStateProps() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              var nextStateProps = computeStateProps(this.store, props);
+              if (_utilsShallowEqual2['default'](nextStateProps, this.stateProps)) {
+                return false;
+              }
+              this.stateProps = nextStateProps;
+              return true;
+            };
+            Connect.prototype.updateDispatchProps = function updateDispatchProps() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              var nextDispatchProps = computeDispatchProps(this.store, props);
+              if (_utilsShallowEqual2['default'](nextDispatchProps, this.dispatchProps)) {
+                return false;
+              }
+              this.dispatchProps = nextDispatchProps;
+              return true;
+            };
+            Connect.prototype.updateState = function updateState() {
+              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+              this.nextState = this.computeNextState(props);
+            };
+            Connect.prototype.isSubscribed = function isSubscribed() {
+              return typeof this.unsubscribe === 'function';
+            };
+            Connect.prototype.trySubscribe = function trySubscribe() {
+              if (shouldSubscribe && !this.unsubscribe) {
+                this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+                this.handleChange();
+              }
+            };
+            Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
+              if (this.unsubscribe) {
+                this.unsubscribe();
+                this.unsubscribe = null;
+              }
+            };
+            Connect.prototype.componentDidMount = function componentDidMount() {
+              this.trySubscribe();
+            };
+            Connect.prototype.componentWillUnmount = function componentWillUnmount() {
+              this.tryUnsubscribe();
+            };
+            Connect.prototype.handleChange = function handleChange() {
+              if (!this.unsubscribe) {
+                return;
+              }
+              this.setState({storeState: this.store.getState()});
+            };
+            Connect.prototype.getWrappedInstance = function getWrappedInstance() {
+              return this.refs.wrappedInstance;
+            };
+            Connect.prototype.render = function render() {
+              return React.createElement(WrappedComponent, _extends({ref: 'wrappedInstance'}, this.nextState));
+            };
+            return Connect;
+          })(Component);
+          Connect.displayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
+          Connect.WrappedComponent = WrappedComponent;
+          Connect.contextTypes = {store: storeShape};
+          Connect.propTypes = {store: storeShape};
+          if ("production" !== 'production') {
+            Connect.prototype.componentWillUpdate = function componentWillUpdate() {
+              if (this.version === version) {
+                return;
+              }
+              this.version = version;
+              this.trySubscribe();
+              this.updateStateProps();
+              this.updateDispatchProps();
+              this.updateState();
+            };
+          }
+          return _hoistNonReactStatics2['default'](Connect, WrappedComponent);
+        };
+      };
+    }
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("53", ["40", "51"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = createAll;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _createProvider = $__require('40');
+  var _createProvider2 = _interopRequireDefault(_createProvider);
+  var _createConnect = $__require('51');
+  var _createConnect2 = _interopRequireDefault(_createConnect);
+  function createAll(React) {
+    var Provider = _createProvider2['default'](React);
+    var connect = _createConnect2['default'](React);
+    return {
+      Provider: Provider,
+      connect: connect
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("54", ["4", "53"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _componentsCreateAll = $__require('53');
+  var _componentsCreateAll2 = _interopRequireDefault(_componentsCreateAll);
+  var _createAll = _componentsCreateAll2['default'](_react2['default']);
+  var Provider = _createAll.Provider;
+  var connect = _createAll.connect;
+  exports.Provider = Provider;
+  exports.connect = connect;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("9", ["54"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('54');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("55", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.default = fetchComponentData;
+  function fetchComponentData(dispatch, components, params) {
+    var needs = components.reduce(function(prev, current) {
+      return (current.needs || []).concat(prev);
+    }, []);
+    var promises = needs.map(function(need) {
+      return dispatch(need(params));
+    });
+    return Promise.all(promises);
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("56", ["5d", "5e", "4", "57", "58", "59", "5a", "5b", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _objectWithoutProperties(obj, keys) {
+      var target = {};
+      for (var i in obj) {
+        if (keys.indexOf(i) >= 0)
+          continue;
+        if (!Object.prototype.hasOwnProperty.call(obj, i))
+          continue;
+        target[i] = obj[i];
+      }
+      return target;
+    }
+    var _historyLibCreateHashHistory = $__require('5d');
+    var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
+    var _historyLibUseQueries = $__require('5e');
+    var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _createTransitionManager = $__require('57');
+    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+    var _PropTypes = $__require('58');
+    var _RouterContext = $__require('59');
+    var _RouterContext2 = _interopRequireDefault(_RouterContext);
+    var _RouteUtils = $__require('5a');
+    var _RouterUtils = $__require('5b');
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    function isDeprecatedHistory(history) {
+      return !history || !history.__v2_compatible__;
+    }
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var func = _React$PropTypes.func;
+    var object = _React$PropTypes.object;
+    var Router = _react2['default'].createClass({
+      displayName: 'Router',
+      propTypes: {
+        history: object,
+        children: _PropTypes.routes,
+        routes: _PropTypes.routes,
+        render: func,
+        createElement: func,
+        onError: func,
+        onUpdate: func
+      },
+      getDefaultProps: function getDefaultProps() {
+        return {render: function render(props) {
+            return _react2['default'].createElement(_RouterContext2['default'], props);
+          }};
+      },
+      getInitialState: function getInitialState() {
+        var _props = this.props;
+        var location = _props.location;
+        var routes = _props.routes;
+        var params = _props.params;
+        var components = _props.components;
+        return {
+          location: location,
+          routes: routes,
+          params: params,
+          components: components
+        };
+      },
+      handleError: function handleError(error) {
+        if (this.props.onError) {
+          this.props.onError.call(this, error);
+        } else {
+          throw error;
+        }
+      },
+      componentWillMount: function componentWillMount() {
+        var _this = this;
+        var history = this.props.history;
+        var _props2 = this.props;
+        var routes = _props2.routes;
+        var children = _props2.children;
+        var _props3 = this.props;
+        var parseQueryString = _props3.parseQueryString;
+        var stringifyQuery = _props3.stringifyQuery;
+        "production" !== 'production' ? _warning2['default'](!(parseQueryString || stringifyQuery), '`parseQueryString` and `stringifyQuery` are deprecated. Please create a custom history. http://tiny.cc/router-customquerystring') : undefined;
+        if (isDeprecatedHistory(history)) {
+          history = this.wrapDeprecatedHistory(history);
+        }
+        var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes || children));
+        this._unlisten = transitionManager.listen(function(error, state) {
+          if (error) {
+            _this.handleError(error);
+          } else {
+            _this.setState(state, _this.props.onUpdate);
+          }
+        });
+        this.router = _RouterUtils.createRouterObject(history, transitionManager);
+        this.history = _RouterUtils.createRoutingHistory(history, transitionManager);
+      },
+      wrapDeprecatedHistory: function wrapDeprecatedHistory(history) {
+        var _props4 = this.props;
+        var parseQueryString = _props4.parseQueryString;
+        var stringifyQuery = _props4.stringifyQuery;
+        var createHistory = undefined;
+        if (history) {
+          "production" !== 'production' ? _warning2['default'](false, 'It appears you have provided a deprecated history object to `<Router/>`, please use a history provided by ' + 'React Router with `import { browserHistory } from \'react-router\'` or `import { hashHistory } from \'react-router\'`. ' + 'If you are using a custom history please create it with `useRouterHistory`, see http://tiny.cc/router-usinghistory for details.') : undefined;
+          createHistory = function() {
+            return history;
+          };
+        } else {
+          "production" !== 'production' ? _warning2['default'](false, '`Router` no longer defaults the history prop to hash history. Please use the `hashHistory` singleton instead. http://tiny.cc/router-defaulthistory') : undefined;
+          createHistory = _historyLibCreateHashHistory2['default'];
+        }
+        return _historyLibUseQueries2['default'](createHistory)({
+          parseQueryString: parseQueryString,
+          stringifyQuery: stringifyQuery
+        });
+      },
+      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+        "production" !== 'production' ? _warning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
+        "production" !== 'production' ? _warning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
+      },
+      componentWillUnmount: function componentWillUnmount() {
+        if (this._unlisten)
+          this._unlisten();
+      },
+      render: function render() {
+        var _state = this.state;
+        var location = _state.location;
+        var routes = _state.routes;
+        var params = _state.params;
+        var components = _state.components;
+        var _props5 = this.props;
+        var createElement = _props5.createElement;
+        var render = _props5.render;
+        var props = _objectWithoutProperties(_props5, ['createElement', 'render']);
+        if (location == null)
+          return null;
+        Object.keys(Router.propTypes).forEach(function(propType) {
+          return delete props[propType];
+        });
+        return render(_extends({}, props, {
+          history: this.history,
+          router: this.router,
+          location: location,
+          routes: routes,
+          params: params,
+          components: components,
+          createElement: createElement
+        }));
+      }
+    });
+    exports['default'] = Router;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5f", ["4", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _objectWithoutProperties(obj, keys) {
+      var target = {};
+      for (var i in obj) {
+        if (keys.indexOf(i) >= 0)
+          continue;
+        if (!Object.prototype.hasOwnProperty.call(obj, i))
+          continue;
+        target[i] = obj[i];
+      }
+      return target;
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var bool = _React$PropTypes.bool;
+    var object = _React$PropTypes.object;
+    var string = _React$PropTypes.string;
+    var func = _React$PropTypes.func;
+    var oneOfType = _React$PropTypes.oneOfType;
+    function isLeftClickEvent(event) {
+      return event.button === 0;
+    }
+    function isModifiedEvent(event) {
+      return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+    }
+    function isEmptyObject(object) {
+      for (var p in object) {
+        if (object.hasOwnProperty(p))
+          return false;
+      }
+      return true;
+    }
+    function createLocationDescriptor(_ref) {
+      var to = _ref.to;
+      var query = _ref.query;
+      var hash = _ref.hash;
+      var state = _ref.state;
+      if (typeof to !== 'object') {
+        return {
+          pathname: to,
+          query: query,
+          hash: hash,
+          state: state
+        };
+      } else {
+        return _extends({
+          query: query,
+          hash: hash,
+          state: state
+        }, to);
+      }
+    }
+    var Link = _react2['default'].createClass({
+      displayName: 'Link',
+      contextTypes: {router: object},
+      propTypes: {
+        to: oneOfType([string, object]).isRequired,
+        query: object,
+        hash: string,
+        state: object,
+        activeStyle: object,
+        activeClassName: string,
+        onlyActiveOnIndex: bool.isRequired,
+        onClick: func
+      },
+      getDefaultProps: function getDefaultProps() {
+        return {
+          onlyActiveOnIndex: false,
+          className: '',
+          style: {}
+        };
+      },
+      handleClick: function handleClick(event) {
+        var allowTransition = true;
+        if (this.props.onClick)
+          this.props.onClick(event);
+        if (isModifiedEvent(event) || !isLeftClickEvent(event))
+          return;
+        if (event.defaultPrevented === true)
+          allowTransition = false;
+        if (this.props.target) {
+          if (!allowTransition)
+            event.preventDefault();
+          return;
+        }
+        event.preventDefault();
+        if (allowTransition) {
+          var _props = this.props;
+          var state = _props.state;
+          var to = _props.to;
+          var query = _props.query;
+          var hash = _props.hash;
+          var _location = createLocationDescriptor({
+            to: to,
+            query: query,
+            hash: hash,
+            state: state
+          });
+          this.context.router.push(_location);
+        }
+      },
+      render: function render() {
+        var _props2 = this.props;
+        var to = _props2.to;
+        var query = _props2.query;
+        var hash = _props2.hash;
+        var state = _props2.state;
+        var activeClassName = _props2.activeClassName;
+        var activeStyle = _props2.activeStyle;
+        var onlyActiveOnIndex = _props2.onlyActiveOnIndex;
+        var props = _objectWithoutProperties(_props2, ['to', 'query', 'hash', 'state', 'activeClassName', 'activeStyle', 'onlyActiveOnIndex']);
+        "production" !== 'production' ? _warning2['default'](!(query || hash || state), 'the `query`, `hash`, and `state` props on `<Link>` are deprecated, use `<Link to={{ pathname, query, hash, state }}/>. http://tiny.cc/router-isActivedeprecated') : undefined;
+        var router = this.context.router;
+        if (router) {
+          var loc = createLocationDescriptor({
+            to: to,
+            query: query,
+            hash: hash,
+            state: state
+          });
+          props.href = router.createHref(loc);
+          if (activeClassName || activeStyle != null && !isEmptyObject(activeStyle)) {
+            if (router.isActive(loc, onlyActiveOnIndex)) {
+              if (activeClassName)
+                props.className += props.className === '' ? activeClassName : ' ' + activeClassName;
+              if (activeStyle)
+                props.style = _extends({}, props.style, activeStyle);
+            }
+          }
+        }
+        return _react2['default'].createElement('a', _extends({}, props, {onClick: this.handleClick}));
+      }
+    });
+    exports['default'] = Link;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("60", ["4", "5f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Link = $__require('5f');
+  var _Link2 = _interopRequireDefault(_Link);
+  var IndexLink = _react2['default'].createClass({
+    displayName: 'IndexLink',
+    render: function render() {
+      return _react2['default'].createElement(_Link2['default'], _extends({}, this.props, {onlyActiveOnIndex: true}));
+    }
+  });
+  exports['default'] = IndexLink;
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("61", ["4", "5c", "52", "62", "58", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _Redirect = $__require('62');
+    var _Redirect2 = _interopRequireDefault(_Redirect);
+    var _PropTypes = $__require('58');
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var string = _React$PropTypes.string;
+    var object = _React$PropTypes.object;
+    var IndexRedirect = _react2['default'].createClass({
+      displayName: 'IndexRedirect',
+      statics: {createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
+          if (parentRoute) {
+            parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
+          } else {
+            "production" !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
+          }
+        }},
+      propTypes: {
+        to: string.isRequired,
+        query: object,
+        state: object,
+        onEnter: _PropTypes.falsy,
+        children: _PropTypes.falsy
+      },
+      render: function render() {
+        !false ? "production" !== 'production' ? _invariant2['default'](false, '<IndexRedirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+      }
+    });
+    exports['default'] = IndexRedirect;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("63", ["4", "5c", "52", "5a", "58", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _RouteUtils = $__require('5a');
+    var _PropTypes = $__require('58');
+    var func = _react2['default'].PropTypes.func;
+    var IndexRoute = _react2['default'].createClass({
+      displayName: 'IndexRoute',
+      statics: {createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
+          if (parentRoute) {
+            parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
+          } else {
+            "production" !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
+          }
+        }},
+      propTypes: {
+        path: _PropTypes.falsy,
+        component: _PropTypes.component,
+        components: _PropTypes.components,
+        getComponent: func,
+        getComponents: func
+      },
+      render: function render() {
+        !false ? "production" !== 'production' ? _invariant2['default'](false, '<IndexRoute> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+      }
+    });
+    exports['default'] = IndexRoute;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("62", ["4", "52", "5a", "64", "58", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _RouteUtils = $__require('5a');
+    var _PatternUtils = $__require('64');
+    var _PropTypes = $__require('58');
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var string = _React$PropTypes.string;
+    var object = _React$PropTypes.object;
+    var Redirect = _react2['default'].createClass({
+      displayName: 'Redirect',
+      statics: {
+        createRouteFromReactElement: function createRouteFromReactElement(element) {
+          var route = _RouteUtils.createRouteFromReactElement(element);
+          if (route.from)
+            route.path = route.from;
+          route.onEnter = function(nextState, replace) {
+            var location = nextState.location;
+            var params = nextState.params;
+            var pathname = undefined;
+            if (route.to.charAt(0) === '/') {
+              pathname = _PatternUtils.formatPattern(route.to, params);
+            } else if (!route.to) {
+              pathname = location.pathname;
+            } else {
+              var routeIndex = nextState.routes.indexOf(route);
+              var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
+              var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
+              pathname = _PatternUtils.formatPattern(pattern, params);
+            }
+            replace({
+              pathname: pathname,
+              query: route.query || location.query,
+              state: route.state || location.state
+            });
+          };
+          return route;
+        },
+        getRoutePattern: function getRoutePattern(routes, routeIndex) {
+          var parentPattern = '';
+          for (var i = routeIndex; i >= 0; i--) {
+            var route = routes[i];
+            var pattern = route.path || '';
+            parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
+            if (pattern.indexOf('/') === 0)
+              break;
+          }
+          return '/' + parentPattern;
+        }
+      },
+      propTypes: {
+        path: string,
+        from: string,
+        to: string.isRequired,
+        query: object,
+        state: object,
+        onEnter: _PropTypes.falsy,
+        children: _PropTypes.falsy
+      },
+      render: function render() {
+        !false ? "production" !== 'production' ? _invariant2['default'](false, '<Redirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+      }
+    });
+    exports['default'] = Redirect;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("65", ["4", "52", "5a", "58", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _RouteUtils = $__require('5a');
+    var _PropTypes = $__require('58');
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var string = _React$PropTypes.string;
+    var func = _React$PropTypes.func;
+    var Route = _react2['default'].createClass({
+      displayName: 'Route',
+      statics: {createRouteFromReactElement: _RouteUtils.createRouteFromReactElement},
+      propTypes: {
+        path: string,
+        component: _PropTypes.component,
+        components: _PropTypes.components,
+        getComponent: func,
+        getComponents: func
+      },
+      render: function render() {
+        !false ? "production" !== 'production' ? _invariant2['default'](false, '<Route> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+      }
+    });
+    exports['default'] = Route;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("66", ["5c", "58", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _PropTypes = $__require('58');
+    var History = {
+      contextTypes: {history: _PropTypes.history},
+      componentWillMount: function componentWillMount() {
+        "production" !== 'production' ? _warning2['default'](false, 'the `History` mixin is deprecated, please access `context.router` with your own `contextTypes`. http://tiny.cc/router-historymixin') : undefined;
+        this.history = this.context.history;
+      }
+    };
+    exports['default'] = History;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("67", ["5c", "4", "52", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var object = _react2['default'].PropTypes.object;
+    var Lifecycle = {
+      contextTypes: {
+        history: object.isRequired,
+        route: object
+      },
+      propTypes: {route: object},
+      componentDidMount: function componentDidMount() {
+        "production" !== 'production' ? _warning2['default'](false, 'the `Lifecycle` mixin is deprecated, please use `context.router.setRouteLeaveHook(route, hook)`. http://tiny.cc/router-lifecyclemixin') : undefined;
+        !this.routerWillLeave ? "production" !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin requires you to define a routerWillLeave method') : _invariant2['default'](false) : undefined;
+        var route = this.props.route || this.context.route;
+        !route ? "production" !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin must be used on either a) a <Route component> or ' + 'b) a descendant of a <Route component> that uses the RouteContext mixin') : _invariant2['default'](false) : undefined;
+        this._unlistenBeforeLeavingRoute = this.context.history.listenBeforeLeavingRoute(route, this.routerWillLeave);
+      },
+      componentWillUnmount: function componentWillUnmount() {
+        if (this._unlistenBeforeLeavingRoute)
+          this._unlistenBeforeLeavingRoute();
+      }
+    };
+    exports['default'] = Lifecycle;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("68", ["5c", "4", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var object = _react2['default'].PropTypes.object;
+    var RouteContext = {
+      propTypes: {route: object.isRequired},
+      childContextTypes: {route: object.isRequired},
+      getChildContext: function getChildContext() {
+        return {route: this.props.route};
+      },
+      componentWillMount: function componentWillMount() {
+        "production" !== 'production' ? _warning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
+      }
+    };
+    exports['default'] = RouteContext;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("69", ["5e", "57", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _objectWithoutProperties(obj, keys) {
+      var target = {};
+      for (var i in obj) {
+        if (keys.indexOf(i) >= 0)
+          continue;
+        if (!Object.prototype.hasOwnProperty.call(obj, i))
+          continue;
+        target[i] = obj[i];
+      }
+      return target;
+    }
+    var _historyLibUseQueries = $__require('5e');
+    var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+    var _createTransitionManager = $__require('57');
+    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    function useRoutes(createHistory) {
+      "production" !== 'production' ? _warning2['default'](false, '`useRoutes` is deprecated. Please use `createTransitionManager` instead.') : undefined;
+      return function() {
+        var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var routes = _ref.routes;
+        var options = _objectWithoutProperties(_ref, ['routes']);
+        var history = _historyLibUseQueries2['default'](createHistory)(options);
+        var transitionManager = _createTransitionManager2['default'](history, routes);
+        return _extends({}, history, transitionManager);
+      };
+    }
+    exports['default'] = useRoutes;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6a", ["64"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _PatternUtils = $__require('64');
+  function getRouteParams(route, params) {
+    var routeParams = {};
+    if (!route.path)
+      return routeParams;
+    var paramNames = _PatternUtils.getParamNames(route.path);
+    for (var p in params) {
+      if (params.hasOwnProperty(p) && paramNames.indexOf(p) !== -1)
+        routeParams[p] = params[p];
+    }
+    return routeParams;
+  }
+  exports['default'] = getRouteParams;
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("59", ["52", "4", "6b", "6a", "5a", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _deprecateObjectProperties = $__require('6b');
+    var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
+    var _getRouteParams = $__require('6a');
+    var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
+    var _RouteUtils = $__require('5a');
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _React$PropTypes = _react2['default'].PropTypes;
+    var array = _React$PropTypes.array;
+    var func = _React$PropTypes.func;
+    var object = _React$PropTypes.object;
+    var RouterContext = _react2['default'].createClass({
+      displayName: 'RouterContext',
+      propTypes: {
+        history: object,
+        router: object.isRequired,
+        location: object.isRequired,
+        routes: array.isRequired,
+        params: object.isRequired,
+        components: array.isRequired,
+        createElement: func.isRequired
+      },
+      getDefaultProps: function getDefaultProps() {
+        return {createElement: _react2['default'].createElement};
+      },
+      childContextTypes: {
+        history: object,
+        location: object.isRequired,
+        router: object.isRequired
+      },
+      getChildContext: function getChildContext() {
+        var _props = this.props;
+        var router = _props.router;
+        var history = _props.history;
+        var location = _props.location;
+        if (!router) {
+          "production" !== 'production' ? _warning2['default'](false, '`<RouterContext>` expects a `router` rather than a `history`') : undefined;
+          router = _extends({}, history, {setRouteLeaveHook: history.listenBeforeLeavingRoute});
+          delete router.listenBeforeLeavingRoute;
+        }
+        if ("production" !== 'production') {
+          location = _deprecateObjectProperties2['default'](location, '`context.location` is deprecated, please use a route component\'s `props.location` instead. http://tiny.cc/router-accessinglocation');
+        }
+        return {
+          history: history,
+          location: location,
+          router: router
+        };
+      },
+      createElement: function createElement(component, props) {
+        return component == null ? null : this.props.createElement(component, props);
+      },
+      render: function render() {
+        var _this = this;
+        var _props2 = this.props;
+        var history = _props2.history;
+        var location = _props2.location;
+        var routes = _props2.routes;
+        var params = _props2.params;
+        var components = _props2.components;
+        var element = null;
+        if (components) {
+          element = components.reduceRight(function(element, components, index) {
+            if (components == null)
+              return element;
+            var route = routes[index];
+            var routeParams = _getRouteParams2['default'](route, params);
+            var props = {
+              history: history,
+              location: location,
+              params: params,
+              route: route,
+              routeParams: routeParams,
+              routes: routes
+            };
+            if (_RouteUtils.isReactChildren(element)) {
+              props.children = element;
+            } else if (element) {
+              for (var prop in element) {
+                if (element.hasOwnProperty(prop))
+                  props[prop] = element[prop];
+              }
+            }
+            if (typeof components === 'object') {
+              var elements = {};
+              for (var key in components) {
+                if (components.hasOwnProperty(key)) {
+                  elements[key] = _this.createElement(components[key], _extends({key: key}, props));
+                }
+              }
+              return elements;
+            }
+            return _this.createElement(components, props);
+          }, element);
+        }
+        !(element === null || element === false || _react2['default'].isValidElement(element)) ? "production" !== 'production' ? _invariant2['default'](false, 'The root route must render a single element') : _invariant2['default'](false) : undefined;
+        return element;
+      }
+    });
+    exports['default'] = RouterContext;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6c", ["4", "59", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _RouterContext = $__require('59');
+    var _RouterContext2 = _interopRequireDefault(_RouterContext);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var RoutingContext = _react2['default'].createClass({
+      displayName: 'RoutingContext',
+      componentWillMount: function componentWillMount() {
+        "production" !== 'production' ? _warning2['default'](false, '`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from \'react-router\'`. http://tiny.cc/router-routercontext') : undefined;
+      },
+      render: function render() {
+        return _react2['default'].createElement(_RouterContext2['default'], this.props);
+      }
+    });
+    exports['default'] = RoutingContext;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("58", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports.falsy = falsy;
+  var _react = $__require('4');
+  var func = _react.PropTypes.func;
+  var object = _react.PropTypes.object;
+  var arrayOf = _react.PropTypes.arrayOf;
+  var oneOfType = _react.PropTypes.oneOfType;
+  var element = _react.PropTypes.element;
+  var shape = _react.PropTypes.shape;
+  var string = _react.PropTypes.string;
+  function falsy(props, propName, componentName) {
+    if (props[propName])
+      return new Error('<' + componentName + '> should not have a "' + propName + '" prop');
+  }
+  var history = shape({
+    listen: func.isRequired,
+    pushState: func.isRequired,
+    replaceState: func.isRequired,
+    go: func.isRequired
+  });
+  exports.history = history;
+  var location = shape({
+    pathname: string.isRequired,
+    search: string.isRequired,
+    state: object,
+    action: string.isRequired,
+    key: string
+  });
+  exports.location = location;
+  var component = oneOfType([func, string]);
+  exports.component = component;
+  var components = oneOfType([component, object]);
+  exports.components = components;
+  var route = oneOfType([object, element]);
+  exports.route = route;
+  var routes = oneOfType([route, arrayOf(route)]);
+  exports.routes = routes;
+  exports['default'] = {
+    falsy: falsy,
+    history: history,
+    location: location,
+    component: component,
+    components: components,
+    route: route
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6d", ["64"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _PatternUtils = $__require('64');
+  function routeParamsChanged(route, prevState, nextState) {
+    if (!route.path)
+      return false;
+    var paramNames = _PatternUtils.getParamNames(route.path);
+    return paramNames.some(function(paramName) {
+      return prevState.params[paramName] !== nextState.params[paramName];
+    });
+  }
+  function computeChangedRoutes(prevState, nextState) {
+    var prevRoutes = prevState && prevState.routes;
+    var nextRoutes = nextState.routes;
+    var leaveRoutes = undefined,
+        enterRoutes = undefined;
+    if (prevRoutes) {
+      leaveRoutes = prevRoutes.filter(function(route) {
+        return nextRoutes.indexOf(route) === -1 || routeParamsChanged(route, prevState, nextState);
+      });
+      leaveRoutes.reverse();
+      enterRoutes = nextRoutes.filter(function(route) {
+        return prevRoutes.indexOf(route) === -1 || leaveRoutes.indexOf(route) !== -1;
+      });
+    } else {
+      leaveRoutes = [];
+      enterRoutes = nextRoutes;
+    }
+    return {
+      leaveRoutes: leaveRoutes,
+      enterRoutes: enterRoutes
+    };
+  }
+  exports['default'] = computeChangedRoutes;
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6e", ["6f", "5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports.runEnterHooks = runEnterHooks;
+    exports.runLeaveHooks = runLeaveHooks;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _AsyncUtils = $__require('6f');
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    function createEnterHook(hook, route) {
+      return function(a, b, callback) {
+        hook.apply(route, arguments);
+        if (hook.length < 3) {
+          callback();
+        }
+      };
+    }
+    function getEnterHooks(routes) {
+      return routes.reduce(function(hooks, route) {
+        if (route.onEnter)
+          hooks.push(createEnterHook(route.onEnter, route));
+        return hooks;
+      }, []);
+    }
+    function runEnterHooks(routes, nextState, callback) {
+      var hooks = getEnterHooks(routes);
+      if (!hooks.length) {
+        callback();
+        return;
+      }
+      var redirectInfo = undefined;
+      function replace(location, deprecatedPathname, deprecatedQuery) {
+        if (deprecatedPathname) {
+          "production" !== 'production' ? _warning2['default'](false, '`replaceState(state, pathname, query) is deprecated; use `replace(location)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+          redirectInfo = {
+            pathname: deprecatedPathname,
+            query: deprecatedQuery,
+            state: location
+          };
+          return;
+        }
+        redirectInfo = location;
+      }
+      _AsyncUtils.loopAsync(hooks.length, function(index, next, done) {
+        hooks[index](nextState, replace, function(error) {
+          if (error || redirectInfo) {
+            done(error, redirectInfo);
+          } else {
+            next();
+          }
+        });
+      }, callback);
+    }
+    function runLeaveHooks(routes) {
+      for (var i = 0,
+          len = routes.length; i < len; ++i) {
+        if (routes[i].onLeave)
+          routes[i].onLeave.call(routes[i]);
+      }
+    }
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("70", ["64"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = isActive;
+  var _PatternUtils = $__require('64');
+  function deepEqual(a, b) {
+    if (a == b)
+      return true;
+    if (a == null || b == null)
+      return false;
+    if (Array.isArray(a)) {
+      return Array.isArray(b) && a.length === b.length && a.every(function(item, index) {
+        return deepEqual(item, b[index]);
+      });
+    }
+    if (typeof a === 'object') {
+      for (var p in a) {
+        if (!a.hasOwnProperty(p)) {
+          continue;
+        }
+        if (a[p] === undefined) {
+          if (b[p] !== undefined) {
+            return false;
+          }
+        } else if (!b.hasOwnProperty(p)) {
+          return false;
+        } else if (!deepEqual(a[p], b[p])) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return String(a) === String(b);
+  }
+  function paramsAreActive(paramNames, paramValues, activeParams) {
+    return paramNames.every(function(paramName, index) {
+      return String(paramValues[index]) === String(activeParams[paramName]);
+    });
+  }
+  function getMatchingRouteIndex(pathname, activeRoutes, activeParams) {
+    var remainingPathname = pathname,
+        paramNames = [],
+        paramValues = [];
+    for (var i = 0,
+        len = activeRoutes.length; i < len; ++i) {
+      var route = activeRoutes[i];
+      var pattern = route.path || '';
+      if (pattern.charAt(0) === '/') {
+        remainingPathname = pathname;
+        paramNames = [];
+        paramValues = [];
+      }
+      if (remainingPathname !== null) {
+        var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
+        remainingPathname = matched.remainingPathname;
+        paramNames = [].concat(paramNames, matched.paramNames);
+        paramValues = [].concat(paramValues, matched.paramValues);
+      }
+      if (remainingPathname === '' && route.path && paramsAreActive(paramNames, paramValues, activeParams))
+        return i;
+    }
+    return null;
+  }
+  function routeIsActive(pathname, routes, params, indexOnly) {
+    var i = getMatchingRouteIndex(pathname, routes, params);
+    if (i === null) {
+      return false;
+    } else if (!indexOnly) {
+      return true;
+    }
+    return routes.slice(i + 1).every(function(route) {
+      return !route.path;
+    });
+  }
+  function queryIsActive(query, activeQuery) {
+    if (activeQuery == null)
+      return query == null;
+    if (query == null)
+      return true;
+    return deepEqual(query, activeQuery);
+  }
+  function isActive(_ref, indexOnly, currentLocation, routes, params) {
+    var pathname = _ref.pathname;
+    var query = _ref.query;
+    if (currentLocation == null)
+      return false;
+    if (!routeIsActive(pathname, routes, params, indexOnly))
+      return false;
+    return queryIsActive(query, currentLocation.query);
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("71", ["6f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _AsyncUtils = $__require('6f');
+  function getComponentsForRoute(location, route, callback) {
+    if (route.component || route.components) {
+      callback(null, route.component || route.components);
+    } else if (route.getComponent) {
+      route.getComponent(location, callback);
+    } else if (route.getComponents) {
+      route.getComponents(location, callback);
+    } else {
+      callback();
+    }
+  }
+  function getComponents(nextState, callback) {
+    _AsyncUtils.mapAsync(nextState.routes, function(route, index, callback) {
+      getComponentsForRoute(nextState.location, route, callback);
+    }, callback);
+  }
+  exports['default'] = getComponents;
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6f", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports.loopAsync = loopAsync;
+  exports.mapAsync = mapAsync;
+  function loopAsync(turns, work, callback) {
+    var currentTurn = 0,
+        isDone = false;
+    function done() {
+      isDone = true;
+      callback.apply(this, arguments);
+    }
+    function next() {
+      if (isDone)
+        return;
+      if (currentTurn < turns) {
+        work.call(this, currentTurn++, next, done);
+      } else {
+        done.apply(this, arguments);
+      }
+    }
+    next();
+  }
+  function mapAsync(array, work, callback) {
+    var length = array.length;
+    var values = [];
+    if (length === 0)
+      return callback(null, values);
+    var isDone = false,
+        doneCount = 0;
+    function done(index, error, value) {
+      if (isDone)
+        return;
+      if (error) {
+        isDone = true;
+        callback(error);
+      } else {
+        values[index] = value;
+        isDone = ++doneCount === length;
+        if (isDone)
+          callback(null, values);
+      }
+    }
+    array.forEach(function(item, index) {
+      work(item, index, function(error, value) {
+        done(index, error, value);
+      });
+    });
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("72", ["5c", "6f", "64", "5a", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _AsyncUtils = $__require('6f');
+    var _PatternUtils = $__require('64');
+    var _RouteUtils = $__require('5a');
+    function getChildRoutes(route, location, callback) {
+      if (route.childRoutes) {
+        callback(null, route.childRoutes);
+      } else if (route.getChildRoutes) {
+        route.getChildRoutes(location, function(error, childRoutes) {
+          callback(error, !error && _RouteUtils.createRoutes(childRoutes));
+        });
+      } else {
+        callback();
+      }
+    }
+    function getIndexRoute(route, location, callback) {
+      if (route.indexRoute) {
+        callback(null, route.indexRoute);
+      } else if (route.getIndexRoute) {
+        route.getIndexRoute(location, function(error, indexRoute) {
+          callback(error, !error && _RouteUtils.createRoutes(indexRoute)[0]);
+        });
+      } else if (route.childRoutes) {
+        (function() {
+          var pathless = route.childRoutes.filter(function(obj) {
+            return !obj.hasOwnProperty('path');
+          });
+          _AsyncUtils.loopAsync(pathless.length, function(index, next, done) {
+            getIndexRoute(pathless[index], location, function(error, indexRoute) {
+              if (error || indexRoute) {
+                var routes = [pathless[index]].concat(Array.isArray(indexRoute) ? indexRoute : [indexRoute]);
+                done(error, routes);
+              } else {
+                next();
+              }
+            });
+          }, function(err, routes) {
+            callback(null, routes);
+          });
+        })();
+      } else {
+        callback();
+      }
+    }
+    function assignParams(params, paramNames, paramValues) {
+      return paramNames.reduce(function(params, paramName, index) {
+        var paramValue = paramValues && paramValues[index];
+        if (Array.isArray(params[paramName])) {
+          params[paramName].push(paramValue);
+        } else if (paramName in params) {
+          params[paramName] = [params[paramName], paramValue];
+        } else {
+          params[paramName] = paramValue;
+        }
+        return params;
+      }, params);
+    }
+    function createParams(paramNames, paramValues) {
+      return assignParams({}, paramNames, paramValues);
+    }
+    function matchRouteDeep(route, location, remainingPathname, paramNames, paramValues, callback) {
+      var pattern = route.path || '';
+      if (pattern.charAt(0) === '/') {
+        remainingPathname = location.pathname;
+        paramNames = [];
+        paramValues = [];
+      }
+      if (remainingPathname !== null) {
+        var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
+        remainingPathname = matched.remainingPathname;
+        paramNames = [].concat(paramNames, matched.paramNames);
+        paramValues = [].concat(paramValues, matched.paramValues);
+        if (remainingPathname === '' && route.path) {
+          var _ret2 = (function() {
+            var match = {
+              routes: [route],
+              params: createParams(paramNames, paramValues)
+            };
+            getIndexRoute(route, location, function(error, indexRoute) {
+              if (error) {
+                callback(error);
+              } else {
+                if (Array.isArray(indexRoute)) {
+                  var _match$routes;
+                  "production" !== 'production' ? _warning2['default'](indexRoute.every(function(route) {
+                    return !route.path;
+                  }), 'Index routes should not have paths') : undefined;
+                  (_match$routes = match.routes).push.apply(_match$routes, indexRoute);
+                } else if (indexRoute) {
+                  "production" !== 'production' ? _warning2['default'](!indexRoute.path, 'Index routes should not have paths') : undefined;
+                  match.routes.push(indexRoute);
+                }
+                callback(null, match);
+              }
+            });
+            return {v: undefined};
+          })();
+          if (typeof _ret2 === 'object')
+            return _ret2.v;
+        }
+      }
+      if (remainingPathname != null || route.childRoutes) {
+        getChildRoutes(route, location, function(error, childRoutes) {
+          if (error) {
+            callback(error);
+          } else if (childRoutes) {
+            matchRoutes(childRoutes, location, function(error, match) {
+              if (error) {
+                callback(error);
+              } else if (match) {
+                match.routes.unshift(route);
+                callback(null, match);
+              } else {
+                callback();
+              }
+            }, remainingPathname, paramNames, paramValues);
+          } else {
+            callback();
+          }
+        });
+      } else {
+        callback();
+      }
+    }
+    function matchRoutes(routes, location, callback) {
+      var remainingPathname = arguments.length <= 3 || arguments[3] === undefined ? location.pathname : arguments[3];
+      var paramNames = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
+      var paramValues = arguments.length <= 5 || arguments[5] === undefined ? [] : arguments[5];
+      return (function() {
+        _AsyncUtils.loopAsync(routes.length, function(index, next, done) {
+          matchRouteDeep(routes[index], location, remainingPathname, paramNames, paramValues, function(error, match) {
+            if (error || match) {
+              done(error, match);
+            } else {
+              next();
+            }
+          });
+        }, callback);
+      })();
+    }
+    exports['default'] = matchRoutes;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("57", ["5c", "73", "6d", "6e", "70", "71", "72", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    exports['default'] = createTransitionManager;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _historyLibActions = $__require('73');
+    var _computeChangedRoutes2 = $__require('6d');
+    var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
+    var _TransitionUtils = $__require('6e');
+    var _isActive2 = $__require('70');
+    var _isActive3 = _interopRequireDefault(_isActive2);
+    var _getComponents = $__require('71');
+    var _getComponents2 = _interopRequireDefault(_getComponents);
+    var _matchRoutes = $__require('72');
+    var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
+    function hasAnyProperties(object) {
+      for (var p in object) {
+        if (object.hasOwnProperty(p))
+          return true;
+      }
+      return false;
+    }
+    function createTransitionManager(history, routes) {
+      var state = {};
+      function isActive(location) {
+        var indexOnlyOrDeprecatedQuery = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+        var deprecatedIndexOnly = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+        var indexOnly = undefined;
+        if (indexOnlyOrDeprecatedQuery && indexOnlyOrDeprecatedQuery !== true || deprecatedIndexOnly !== null) {
+          "production" !== 'production' ? _warning2['default'](false, '`isActive(pathname, query, indexOnly) is deprecated; use `isActive(location, indexOnly)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+          location = {
+            pathname: location,
+            query: indexOnlyOrDeprecatedQuery
+          };
+          indexOnly = deprecatedIndexOnly || false;
+        } else {
+          if (typeof location === 'string') {
+            location = {pathname: location};
+          }
+          indexOnly = indexOnlyOrDeprecatedQuery;
+        }
+        return _isActive3['default'](location, indexOnly, state.location, state.routes, state.params);
+      }
+      function createLocationFromRedirectInfo(location) {
+        return history.createLocation(location, _historyLibActions.REPLACE);
+      }
+      var partialNextState = undefined;
+      function match(location, callback) {
+        if (partialNextState && partialNextState.location === location) {
+          finishMatch(partialNextState, callback);
+        } else {
+          _matchRoutes2['default'](routes, location, function(error, nextState) {
+            if (error) {
+              callback(error);
+            } else if (nextState) {
+              finishMatch(_extends({}, nextState, {location: location}), callback);
+            } else {
+              callback();
+            }
+          });
+        }
+      }
+      function finishMatch(nextState, callback) {
+        var _computeChangedRoutes = _computeChangedRoutes3['default'](state, nextState);
+        var leaveRoutes = _computeChangedRoutes.leaveRoutes;
+        var enterRoutes = _computeChangedRoutes.enterRoutes;
+        _TransitionUtils.runLeaveHooks(leaveRoutes);
+        leaveRoutes.forEach(removeListenBeforeHooksForRoute);
+        _TransitionUtils.runEnterHooks(enterRoutes, nextState, function(error, redirectInfo) {
+          if (error) {
+            callback(error);
+          } else if (redirectInfo) {
+            callback(null, createLocationFromRedirectInfo(redirectInfo));
+          } else {
+            _getComponents2['default'](nextState, function(error, components) {
+              if (error) {
+                callback(error);
+              } else {
+                callback(null, null, state = _extends({}, nextState, {components: components}));
+              }
+            });
+          }
+        });
+      }
+      var RouteGuid = 1;
+      function getRouteID(route) {
+        var create = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+        return route.__id__ || create && (route.__id__ = RouteGuid++);
+      }
+      var RouteHooks = {};
+      function getRouteHooksForRoutes(routes) {
+        return routes.reduce(function(hooks, route) {
+          hooks.push.apply(hooks, RouteHooks[getRouteID(route)]);
+          return hooks;
+        }, []);
+      }
+      function transitionHook(location, callback) {
+        _matchRoutes2['default'](routes, location, function(error, nextState) {
+          if (nextState == null) {
+            callback();
+            return;
+          }
+          partialNextState = _extends({}, nextState, {location: location});
+          var hooks = getRouteHooksForRoutes(_computeChangedRoutes3['default'](state, partialNextState).leaveRoutes);
+          var result = undefined;
+          for (var i = 0,
+              len = hooks.length; result == null && i < len; ++i) {
+            result = hooks[i](location);
+          }
+          callback(result);
+        });
+      }
+      function beforeUnloadHook() {
+        if (state.routes) {
+          var hooks = getRouteHooksForRoutes(state.routes);
+          var message = undefined;
+          for (var i = 0,
+              len = hooks.length; typeof message !== 'string' && i < len; ++i) {
+            message = hooks[i]();
+          }
+          return message;
+        }
+      }
+      var unlistenBefore = undefined,
+          unlistenBeforeUnload = undefined;
+      function removeListenBeforeHooksForRoute(route) {
+        var routeID = getRouteID(route, false);
+        if (!routeID) {
+          return;
+        }
+        delete RouteHooks[routeID];
+        if (!hasAnyProperties(RouteHooks)) {
+          if (unlistenBefore) {
+            unlistenBefore();
+            unlistenBefore = null;
+          }
+          if (unlistenBeforeUnload) {
+            unlistenBeforeUnload();
+            unlistenBeforeUnload = null;
+          }
+        }
+      }
+      function listenBeforeLeavingRoute(route, hook) {
+        var routeID = getRouteID(route);
+        var hooks = RouteHooks[routeID];
+        if (!hooks) {
+          var thereWereNoRouteHooks = !hasAnyProperties(RouteHooks);
+          RouteHooks[routeID] = [hook];
+          if (thereWereNoRouteHooks) {
+            unlistenBefore = history.listenBefore(transitionHook);
+            if (history.listenBeforeUnload)
+              unlistenBeforeUnload = history.listenBeforeUnload(beforeUnloadHook);
+          }
+        } else {
+          "production" !== 'production' ? _warning2['default'](false, 'adding multiple leave hooks for the same route is deprecated; manage multiple confirmations in your own code instead') : undefined;
+          if (hooks.indexOf(hook) === -1) {
+            hooks.push(hook);
+          }
+        }
+        return function() {
+          var hooks = RouteHooks[routeID];
+          if (hooks) {
+            var newHooks = hooks.filter(function(item) {
+              return item !== hook;
+            });
+            if (newHooks.length === 0) {
+              removeListenBeforeHooksForRoute(route);
+            } else {
+              RouteHooks[routeID] = newHooks;
+            }
+          }
+        };
+      }
+      function listen(listener) {
+        return history.listen(function(location) {
+          if (state.location === location) {
+            listener(null, state);
+          } else {
+            match(location, function(error, redirectLocation, nextState) {
+              if (error) {
+                listener(error);
+              } else if (redirectLocation) {
+                history.transitionTo(redirectLocation);
+              } else if (nextState) {
+                listener(null, nextState);
+              } else {
+                "production" !== 'production' ? _warning2['default'](false, 'Location "%s" did not match any routes', location.pathname + location.search + location.hash) : undefined;
+              }
+            });
+          }
+        });
+      }
+      return {
+        isActive: isActive,
+        match: match,
+        listenBeforeLeavingRoute: listenBeforeLeavingRoute,
+        listen: listen
+      };
+    }
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("74", ["75"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactMount = $__require('75');
+  module.exports = ReactMount.renderSubtreeIntoContainer;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["76", "77", "78", "79", "75", "7a", "7b", "7c", "7d", "7e", "74", "7f", "80", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactCurrentOwner = $__require('76');
+    var ReactDOMTextComponent = $__require('77');
+    var ReactDefaultInjection = $__require('78');
+    var ReactInstanceHandles = $__require('79');
+    var ReactMount = $__require('75');
+    var ReactPerf = $__require('7a');
+    var ReactReconciler = $__require('7b');
+    var ReactUpdates = $__require('7c');
+    var ReactVersion = $__require('7d');
+    var findDOMNode = $__require('7e');
+    var renderSubtreeIntoContainer = $__require('74');
+    var warning = $__require('7f');
     ReactDefaultInjection.inject();
     var render = ReactPerf.measure('React', 'render', ReactMount.render);
     var React = {
@@ -8447,8 +6994,8 @@ $__System.registerDynamic("86", ["a2", "a3", "a4", "a5", "a1", "a6", "a7", "a8",
         TextComponent: ReactDOMTextComponent
       });
     }
-    if (process.env.NODE_ENV !== 'production') {
-      var ExecutionEnvironment = $__require('ac');
+    if ("production" !== 'production') {
+      var ExecutionEnvironment = $__require('80');
       if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
           if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
@@ -8456,7 +7003,7 @@ $__System.registerDynamic("86", ["a2", "a3", "a4", "a5", "a1", "a6", "a7", "a8",
           }
         }
         var ieCompatibilityMode = document.documentMode && document.documentMode < 8;
-        process.env.NODE_ENV !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
+        "production" !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
         var expectedFeatures = [Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim, Object.create, Object.freeze];
         for (var i = 0; i < expectedFeatures.length; i++) {
           if (!expectedFeatures[i]) {
@@ -8467,20 +7014,20 @@ $__System.registerDynamic("86", ["a2", "a3", "a4", "a5", "a1", "a6", "a7", "a8",
       }
     }
     module.exports = React;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("ad", ["ae", "af", "b0"], true, function($__require, exports, module) {
+$__System.registerDynamic("81", ["82", "83", "84"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var PooledClass = $__require('ae');
-  var assign = $__require('af');
-  var getTextContentAccessor = $__require('b0');
+  var PooledClass = $__require('82');
+  var assign = $__require('83');
+  var getTextContentAccessor = $__require('84');
   function FallbackCompositionState(root) {
     this._root = root;
     this._startText = this.getText();
@@ -8530,13 +7077,13 @@ $__System.registerDynamic("ad", ["ae", "af", "b0"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("b1", ["b2"], true, function($__require, exports, module) {
+$__System.registerDynamic("85", ["86"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticEvent = $__require('b2');
+  var SyntheticEvent = $__require('86');
   var CompositionEventInterface = {data: null};
   function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {
     SyntheticEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);
@@ -8547,13 +7094,13 @@ $__System.registerDynamic("b1", ["b2"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("b3", ["b2"], true, function($__require, exports, module) {
+$__System.registerDynamic("87", ["86"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticEvent = $__require('b2');
+  var SyntheticEvent = $__require('86');
   var InputEventInterface = {data: null};
   function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {
     SyntheticEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);
@@ -8564,19 +7111,19 @@ $__System.registerDynamic("b3", ["b2"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("b4", ["b5", "b6", "ac", "ad", "b1", "b3", "b7"], true, function($__require, exports, module) {
+$__System.registerDynamic("88", ["89", "8a", "80", "81", "85", "87", "8b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var EventConstants = $__require('b5');
-  var EventPropagators = $__require('b6');
-  var ExecutionEnvironment = $__require('ac');
-  var FallbackCompositionState = $__require('ad');
-  var SyntheticCompositionEvent = $__require('b1');
-  var SyntheticInputEvent = $__require('b3');
-  var keyOf = $__require('b7');
+  var EventConstants = $__require('89');
+  var EventPropagators = $__require('8a');
+  var ExecutionEnvironment = $__require('80');
+  var FallbackCompositionState = $__require('81');
+  var SyntheticCompositionEvent = $__require('85');
+  var SyntheticInputEvent = $__require('87');
+  var keyOf = $__require('8b');
   var END_KEYCODES = [9, 13, 27, 32];
   var START_KEYCODE = 229;
   var canUseCompositionEvent = ExecutionEnvironment.canUseDOM && 'CompositionEvent' in window;
@@ -8769,23 +7316,23 @@ $__System.registerDynamic("b4", ["b5", "b6", "ac", "ad", "b1", "b3", "b7"], true
   return module.exports;
 });
 
-$__System.registerDynamic("b8", ["b5", "b9", "b6", "ac", "a8", "b2", "ba", "bb", "bc", "b7", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("8c", ["89", "8d", "8a", "80", "7c", "86", "8e", "8f", "90", "8b", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventConstants = $__require('b5');
-    var EventPluginHub = $__require('b9');
-    var EventPropagators = $__require('b6');
-    var ExecutionEnvironment = $__require('ac');
-    var ReactUpdates = $__require('a8');
-    var SyntheticEvent = $__require('b2');
-    var getEventTarget = $__require('ba');
-    var isEventSupported = $__require('bb');
-    var isTextInputElement = $__require('bc');
-    var keyOf = $__require('b7');
+    var EventConstants = $__require('89');
+    var EventPluginHub = $__require('8d');
+    var EventPropagators = $__require('8a');
+    var ExecutionEnvironment = $__require('80');
+    var ReactUpdates = $__require('7c');
+    var SyntheticEvent = $__require('86');
+    var getEventTarget = $__require('8e');
+    var isEventSupported = $__require('8f');
+    var isTextInputElement = $__require('90');
+    var keyOf = $__require('8b');
     var topLevelTypes = EventConstants.topLevelTypes;
     var eventTypes = {change: {
         phasedRegistrationNames: {
@@ -8949,12 +7496,12 @@ $__System.registerDynamic("b8", ["b5", "b9", "b6", "ac", "a8", "b2", "ba", "bb",
       }
     };
     module.exports = ChangeEventPlugin;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("bd", [], true, function($__require, exports, module) {
+$__System.registerDynamic("91", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -8969,30 +7516,30 @@ $__System.registerDynamic("bd", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("be", ["b7"], true, function($__require, exports, module) {
+$__System.registerDynamic("92", ["8b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var keyOf = $__require('b7');
+  var keyOf = $__require('8b');
   var DefaultEventPluginOrder = [keyOf({ResponderEventPlugin: null}), keyOf({SimpleEventPlugin: null}), keyOf({TapEventPlugin: null}), keyOf({EnterLeaveEventPlugin: null}), keyOf({ChangeEventPlugin: null}), keyOf({SelectEventPlugin: null}), keyOf({BeforeInputEventPlugin: null})];
   module.exports = DefaultEventPluginOrder;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("bf", ["b5", "b6", "c0", "a1", "b7"], true, function($__require, exports, module) {
+$__System.registerDynamic("93", ["89", "8a", "94", "75", "8b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var EventConstants = $__require('b5');
-  var EventPropagators = $__require('b6');
-  var SyntheticMouseEvent = $__require('c0');
-  var ReactMount = $__require('a1');
-  var keyOf = $__require('b7');
+  var EventConstants = $__require('89');
+  var EventPropagators = $__require('8a');
+  var SyntheticMouseEvent = $__require('94');
+  var ReactMount = $__require('75');
+  var keyOf = $__require('8b');
   var topLevelTypes = EventConstants.topLevelTypes;
   var getFirstReactDOM = ReactMount.getFirstReactDOM;
   var eventTypes = {
@@ -9067,14 +7614,14 @@ $__System.registerDynamic("bf", ["b5", "b6", "c0", "a1", "b7"], true, function($
   return module.exports;
 });
 
-$__System.registerDynamic("c1", ["c2", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("95", ["96", "80"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var DOMProperty = $__require('c2');
-  var ExecutionEnvironment = $__require('ac');
+  var DOMProperty = $__require('96');
+  var ExecutionEnvironment = $__require('80');
   var MUST_USE_ATTRIBUTE = DOMProperty.injection.MUST_USE_ATTRIBUTE;
   var MUST_USE_PROPERTY = DOMProperty.injection.MUST_USE_PROPERTY;
   var HAS_BOOLEAN_VALUE = DOMProperty.injection.HAS_BOOLEAN_VALUE;
@@ -9255,45 +7802,45 @@ $__System.registerDynamic("c1", ["c2", "ac"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("c3", ["c4", "aa", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("97", ["98", "7e", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactInstanceMap = $__require('c4');
-    var findDOMNode = $__require('aa');
-    var warning = $__require('ab');
+    var ReactInstanceMap = $__require('98');
+    var findDOMNode = $__require('7e');
+    var warning = $__require('7f');
     var didWarnKey = '_getDOMNodeDidWarn';
     var ReactBrowserComponentMixin = {getDOMNode: function() {
-        process.env.NODE_ENV !== 'production' ? warning(this.constructor[didWarnKey], '%s.getDOMNode(...) is deprecated. Please use ' + 'ReactDOM.findDOMNode(instance) instead.', ReactInstanceMap.get(this).getName() || this.tagName || 'Unknown') : undefined;
+        "production" !== 'production' ? warning(this.constructor[didWarnKey], '%s.getDOMNode(...) is deprecated. Please use ' + 'ReactDOM.findDOMNode(instance) instead.', ReactInstanceMap.get(this).getName() || this.tagName || 'Unknown') : undefined;
         this.constructor[didWarnKey] = true;
         return findDOMNode(this);
       }};
     module.exports = ReactBrowserComponentMixin;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("aa", ["a2", "c4", "a1", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("7e", ["76", "98", "75", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('a2');
-    var ReactInstanceMap = $__require('c4');
-    var ReactMount = $__require('a1');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactCurrentOwner = $__require('76');
+    var ReactInstanceMap = $__require('98');
+    var ReactMount = $__require('75');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     function findDOMNode(componentOrElement) {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         var owner = ReactCurrentOwner.current;
         if (owner !== null) {
-          process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing getDOMNode or findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
+          "production" !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing getDOMNode or findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
           owner._warnedAboutRefsInRender = true;
         }
       }
@@ -9306,24 +7853,24 @@ $__System.registerDynamic("aa", ["a2", "c4", "a1", "c5", "ab", "29"], true, func
       if (ReactInstanceMap.has(componentOrElement)) {
         return ReactMount.getNodeFromInstance(componentOrElement);
       }
-      !(componentOrElement.render == null || typeof componentOrElement.render !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'findDOMNode was called on an unmounted component.') : invariant(false) : undefined;
-      !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement)) : invariant(false) : undefined;
+      !(componentOrElement.render == null || typeof componentOrElement.render !== 'function') ? "production" !== 'production' ? invariant(false, 'findDOMNode was called on an unmounted component.') : invariant(false) : undefined;
+      !false ? "production" !== 'production' ? invariant(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement)) : invariant(false) : undefined;
     }
     module.exports = findDOMNode;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("c6", ["a1", "aa", "c7"], true, function($__require, exports, module) {
+$__System.registerDynamic("9a", ["75", "7e", "9b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactMount = $__require('a1');
-  var findDOMNode = $__require('aa');
-  var focusNode = $__require('c7');
+  var ReactMount = $__require('75');
+  var findDOMNode = $__require('7e');
+  var focusNode = $__require('9b');
   var Mixin = {componentDidMount: function() {
       if (this.props.autoFocus) {
         focusNode(findDOMNode(this));
@@ -9340,7 +7887,7 @@ $__System.registerDynamic("c6", ["a1", "aa", "c7"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("c8", [], true, function($__require, exports, module) {
+$__System.registerDynamic("9c", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -9357,13 +7904,13 @@ $__System.registerDynamic("c8", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("c9", ["c8"], true, function($__require, exports, module) {
+$__System.registerDynamic("9d", ["9c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var camelize = $__require('c8');
+  var camelize = $__require('9c');
   var msPattern = /^-ms-/;
   function camelizeStyleName(string) {
     return camelize(string.replace(msPattern, 'ms-'));
@@ -9373,7 +7920,7 @@ $__System.registerDynamic("c9", ["c8"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("ca", [], true, function($__require, exports, module) {
+$__System.registerDynamic("9e", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -9477,13 +8024,13 @@ $__System.registerDynamic("ca", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("cb", ["ca"], true, function($__require, exports, module) {
+$__System.registerDynamic("9f", ["9e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var CSSProperty = $__require('ca');
+  var CSSProperty = $__require('9e');
   var isUnitlessNumber = CSSProperty.isUnitlessNumber;
   function dangerousStyleValue(name, value) {
     var isEmpty = value == null || typeof value === 'boolean' || value === '';
@@ -9504,7 +8051,7 @@ $__System.registerDynamic("cb", ["ca"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("cc", [], true, function($__require, exports, module) {
+$__System.registerDynamic("a0", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -9519,13 +8066,13 @@ $__System.registerDynamic("cc", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("cd", ["cc"], true, function($__require, exports, module) {
+$__System.registerDynamic("a1", ["a0"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var hyphenate = $__require('cc');
+  var hyphenate = $__require('a0');
   var msPattern = /^ms-/;
   function hyphenateStyleName(string) {
     return hyphenate(string).replace(msPattern, '-ms-');
@@ -9535,7 +8082,7 @@ $__System.registerDynamic("cd", ["cc"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("ce", [], true, function($__require, exports, module) {
+$__System.registerDynamic("a2", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -9555,21 +8102,21 @@ $__System.registerDynamic("ce", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("a3", ["9e", "80", "7a", "9d", "9f", "a1", "a2", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var CSSProperty = $__require('ca');
-    var ExecutionEnvironment = $__require('ac');
-    var ReactPerf = $__require('a6');
-    var camelizeStyleName = $__require('c9');
-    var dangerousStyleValue = $__require('cb');
-    var hyphenateStyleName = $__require('cd');
-    var memoizeStringOnly = $__require('ce');
-    var warning = $__require('ab');
+    var CSSProperty = $__require('9e');
+    var ExecutionEnvironment = $__require('80');
+    var ReactPerf = $__require('7a');
+    var camelizeStyleName = $__require('9d');
+    var dangerousStyleValue = $__require('9f');
+    var hyphenateStyleName = $__require('a1');
+    var memoizeStringOnly = $__require('a2');
+    var warning = $__require('7f');
     var processStyleName = memoizeStringOnly(function(styleName) {
       return hyphenateStyleName(styleName);
     });
@@ -9586,7 +8133,7 @@ $__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab",
         styleFloatAccessor = 'styleFloat';
       }
     }
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
       var badStyleValueWithSemicolonPattern = /;\s*$/;
       var warnedStyleNames = {};
@@ -9596,21 +8143,21 @@ $__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab",
           return;
         }
         warnedStyleNames[name] = true;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'Unsupported style property %s. Did you mean %s?', name, camelizeStyleName(name)) : undefined;
+        "production" !== 'production' ? warning(false, 'Unsupported style property %s. Did you mean %s?', name, camelizeStyleName(name)) : undefined;
       };
       var warnBadVendoredStyleName = function(name) {
         if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
           return;
         }
         warnedStyleNames[name] = true;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?', name, name.charAt(0).toUpperCase() + name.slice(1)) : undefined;
+        "production" !== 'production' ? warning(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?', name, name.charAt(0).toUpperCase() + name.slice(1)) : undefined;
       };
       var warnStyleValueWithSemicolon = function(name, value) {
         if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
           return;
         }
         warnedStyleValues[value] = true;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'Style property values shouldn\'t contain a semicolon. ' + 'Try "%s: %s" instead.', name, value.replace(badStyleValueWithSemicolonPattern, '')) : undefined;
+        "production" !== 'production' ? warning(false, 'Style property values shouldn\'t contain a semicolon. ' + 'Try "%s: %s" instead.', name, value.replace(badStyleValueWithSemicolonPattern, '')) : undefined;
       };
       var warnValidStyle = function(name, value) {
         if (name.indexOf('-') > -1) {
@@ -9630,7 +8177,7 @@ $__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab",
             continue;
           }
           var styleValue = styles[styleName];
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             warnValidStyle(styleName, styleValue);
           }
           if (styleValue != null) {
@@ -9646,7 +8193,7 @@ $__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab",
           if (!styles.hasOwnProperty(styleName)) {
             continue;
           }
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             warnValidStyle(styleName, styles[styleName]);
           }
           var styleValue = dangerousStyleValue(styleName, styles[styleName]);
@@ -9670,12 +8217,12 @@ $__System.registerDynamic("cf", ["ca", "ac", "a6", "c9", "cb", "cd", "ce", "ab",
     };
     ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {setValueForStyles: 'setValueForStyles'});
     module.exports = CSSPropertyOperations;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d0", [], true, function($__require, exports, module) {
+$__System.registerDynamic("a4", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -9710,19 +8257,19 @@ $__System.registerDynamic("d0", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("d1", ["d2", "d3", "a1", "a8", "af", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("a5", ["a6", "a7", "75", "7c", "83", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactDOMIDOperations = $__require('d2');
-    var LinkedValueUtils = $__require('d3');
-    var ReactMount = $__require('a1');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
+    var ReactDOMIDOperations = $__require('a6');
+    var LinkedValueUtils = $__require('a7');
+    var ReactMount = $__require('75');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var invariant = $__require('99');
     var instancesByReactID = {};
     function forceUpdateIfMounted() {
       if (this._rootNodeID) {
@@ -9743,7 +8290,7 @@ $__System.registerDynamic("d1", ["d2", "d3", "a1", "a8", "af", "c5", "29"], true
         return nativeProps;
       },
       mountWrapper: function(inst, props) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           LinkedValueUtils.checkPropTypes('input', props, inst._currentElement._owner);
         }
         var defaultValue = props.defaultValue;
@@ -9789,36 +8336,36 @@ $__System.registerDynamic("d1", ["d2", "d3", "a1", "a8", "af", "c5", "29"], true
             continue;
           }
           var otherID = ReactMount.getID(otherNode);
-          !otherID ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactDOMInput: Mixing React and non-React radio inputs with the ' + 'same `name` is not supported.') : invariant(false) : undefined;
+          !otherID ? "production" !== 'production' ? invariant(false, 'ReactDOMInput: Mixing React and non-React radio inputs with the ' + 'same `name` is not supported.') : invariant(false) : undefined;
           var otherInstance = instancesByReactID[otherID];
-          !otherInstance ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactDOMInput: Unknown radio button ID %s.', otherID) : invariant(false) : undefined;
+          !otherInstance ? "production" !== 'production' ? invariant(false, 'ReactDOMInput: Unknown radio button ID %s.', otherID) : invariant(false) : undefined;
           ReactUpdates.asap(forceUpdateIfMounted, otherInstance);
         }
       }
       return returnValue;
     }
     module.exports = ReactDOMInput;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d4", ["d5", "d6", "af", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("a8", ["a9", "aa", "83", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactChildren = $__require('d5');
-    var ReactDOMSelect = $__require('d6');
-    var assign = $__require('af');
-    var warning = $__require('ab');
+    var ReactChildren = $__require('a9');
+    var ReactDOMSelect = $__require('aa');
+    var assign = $__require('83');
+    var warning = $__require('7f');
     var valueContextKey = ReactDOMSelect.valueContextKey;
     var ReactDOMOption = {
       mountWrapper: function(inst, props, context) {
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(props.selected == null, 'Use the `defaultValue` or `value` props on <select> instead of ' + 'setting `selected` on <option>.') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(props.selected == null, 'Use the `defaultValue` or `value` props on <select> instead of ' + 'setting `selected` on <option>.') : undefined;
         }
         var selectValue = context[valueContextKey];
         var selected = null;
@@ -9853,7 +8400,7 @@ $__System.registerDynamic("d4", ["d5", "d6", "af", "ab", "29"], true, function($
           if (typeof child === 'string' || typeof child === 'number') {
             content += child;
           } else {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'Only strings and numbers are supported as <option> children.') : undefined;
+            "production" !== 'production' ? warning(false, 'Only strings and numbers are supported as <option> children.') : undefined;
           }
         });
         if (content) {
@@ -9863,23 +8410,23 @@ $__System.registerDynamic("d4", ["d5", "d6", "af", "ab", "29"], true, function($
       }
     };
     module.exports = ReactDOMOption;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d6", ["d3", "a1", "a8", "af", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("aa", ["a7", "75", "7c", "83", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var LinkedValueUtils = $__require('d3');
-    var ReactMount = $__require('a1');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var warning = $__require('ab');
+    var LinkedValueUtils = $__require('a7');
+    var ReactMount = $__require('75');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var warning = $__require('7f');
     var valueContextKey = '__ReactDOMSelect_value$' + Math.random().toString(36).slice(2);
     function updateOptionsIfPendingUpdateAndMounted() {
       if (this._rootNodeID && this._wrapperState.pendingUpdate) {
@@ -9910,9 +8457,9 @@ $__System.registerDynamic("d6", ["d3", "a1", "a8", "af", "ab", "29"], true, func
           continue;
         }
         if (props.multiple) {
-          process.env.NODE_ENV !== 'production' ? warning(Array.isArray(props[propName]), 'The `%s` prop supplied to <select> must be an array if ' + '`multiple` is true.%s', propName, getDeclarationErrorAddendum(owner)) : undefined;
+          "production" !== 'production' ? warning(Array.isArray(props[propName]), 'The `%s` prop supplied to <select> must be an array if ' + '`multiple` is true.%s', propName, getDeclarationErrorAddendum(owner)) : undefined;
         } else {
-          process.env.NODE_ENV !== 'production' ? warning(!Array.isArray(props[propName]), 'The `%s` prop supplied to <select> must be a scalar ' + 'value if `multiple` is false.%s', propName, getDeclarationErrorAddendum(owner)) : undefined;
+          "production" !== 'production' ? warning(!Array.isArray(props[propName]), 'The `%s` prop supplied to <select> must be a scalar ' + 'value if `multiple` is false.%s', propName, getDeclarationErrorAddendum(owner)) : undefined;
         }
       }
     }
@@ -9953,7 +8500,7 @@ $__System.registerDynamic("d6", ["d3", "a1", "a8", "af", "ab", "29"], true, func
         });
       },
       mountWrapper: function(inst, props) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           checkSelectPropTypes(inst, props);
         }
         var value = LinkedValueUtils.getValue(props);
@@ -9995,22 +8542,22 @@ $__System.registerDynamic("d6", ["d3", "a1", "a8", "af", "ab", "29"], true, func
       return returnValue;
     }
     module.exports = ReactDOMSelect;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d3", ["d7", "d8", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("a7", ["ab", "ac", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactPropTypes = $__require('d7');
-    var ReactPropTypeLocations = $__require('d8');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactPropTypes = $__require('ab');
+    var ReactPropTypeLocations = $__require('ac');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     var hasReadOnlyValue = {
       'button': true,
       'checkbox': true,
@@ -10021,15 +8568,15 @@ $__System.registerDynamic("d3", ["d7", "d8", "c5", "ab", "29"], true, function($
       'submit': true
     };
     function _assertSingleLink(inputProps) {
-      !(inputProps.checkedLink == null || inputProps.valueLink == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot provide a checkedLink and a valueLink. If you want to use ' + 'checkedLink, you probably don\'t want to use valueLink and vice versa.') : invariant(false) : undefined;
+      !(inputProps.checkedLink == null || inputProps.valueLink == null) ? "production" !== 'production' ? invariant(false, 'Cannot provide a checkedLink and a valueLink. If you want to use ' + 'checkedLink, you probably don\'t want to use valueLink and vice versa.') : invariant(false) : undefined;
     }
     function _assertValueLink(inputProps) {
       _assertSingleLink(inputProps);
-      !(inputProps.value == null && inputProps.onChange == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot provide a valueLink and a value or onChange event. If you want ' + 'to use value or onChange, you probably don\'t want to use valueLink.') : invariant(false) : undefined;
+      !(inputProps.value == null && inputProps.onChange == null) ? "production" !== 'production' ? invariant(false, 'Cannot provide a valueLink and a value or onChange event. If you want ' + 'to use value or onChange, you probably don\'t want to use valueLink.') : invariant(false) : undefined;
     }
     function _assertCheckedLink(inputProps) {
       _assertSingleLink(inputProps);
-      !(inputProps.checked == null && inputProps.onChange == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Cannot provide a checkedLink and a checked property or onChange event. ' + 'If you want to use checked or onChange, you probably don\'t want to ' + 'use checkedLink') : invariant(false) : undefined;
+      !(inputProps.checked == null && inputProps.onChange == null) ? "production" !== 'production' ? invariant(false, 'Cannot provide a checkedLink and a checked property or onChange event. ' + 'If you want to use checked or onChange, you probably don\'t want to ' + 'use checkedLink') : invariant(false) : undefined;
     }
     var propTypes = {
       value: function(props, propName, componentName) {
@@ -10065,7 +8612,7 @@ $__System.registerDynamic("d3", ["d7", "d8", "c5", "ab", "29"], true, function($
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             loggedTypeFailures[error.message] = true;
             var addendum = getDeclarationErrorAddendum(owner);
-            process.env.NODE_ENV !== 'production' ? warning(false, 'Failed form propType: %s%s', error.message, addendum) : undefined;
+            "production" !== 'production' ? warning(false, 'Failed form propType: %s%s', error.message, addendum) : undefined;
           }
         }
       },
@@ -10096,24 +8643,24 @@ $__System.registerDynamic("d3", ["d7", "d8", "c5", "ab", "29"], true, function($
       }
     };
     module.exports = LinkedValueUtils;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d9", ["d3", "d2", "a8", "af", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ad", ["a7", "a6", "7c", "83", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var LinkedValueUtils = $__require('d3');
-    var ReactDOMIDOperations = $__require('d2');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var LinkedValueUtils = $__require('a7');
+    var ReactDOMIDOperations = $__require('a6');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     function forceUpdateIfMounted() {
       if (this._rootNodeID) {
         ReactDOMTextarea.updateWrapper(this);
@@ -10121,7 +8668,7 @@ $__System.registerDynamic("d9", ["d3", "d2", "a8", "af", "c5", "ab", "29"], true
     }
     var ReactDOMTextarea = {
       getNativeProps: function(inst, props, context) {
-        !(props.dangerouslySetInnerHTML == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, '`dangerouslySetInnerHTML` does not make sense on <textarea>.') : invariant(false) : undefined;
+        !(props.dangerouslySetInnerHTML == null) ? "production" !== 'production' ? invariant(false, '`dangerouslySetInnerHTML` does not make sense on <textarea>.') : invariant(false) : undefined;
         var nativeProps = assign({}, props, {
           defaultValue: undefined,
           value: undefined,
@@ -10131,18 +8678,18 @@ $__System.registerDynamic("d9", ["d3", "d2", "a8", "af", "c5", "ab", "29"], true
         return nativeProps;
       },
       mountWrapper: function(inst, props) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           LinkedValueUtils.checkPropTypes('textarea', props, inst._currentElement._owner);
         }
         var defaultValue = props.defaultValue;
         var children = props.children;
         if (children != null) {
-          if (process.env.NODE_ENV !== 'production') {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'Use the `defaultValue` or `value` props instead of setting ' + 'children on <textarea>.') : undefined;
+          if ("production" !== 'production') {
+            "production" !== 'production' ? warning(false, 'Use the `defaultValue` or `value` props instead of setting ' + 'children on <textarea>.') : undefined;
           }
-          !(defaultValue == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'If you supply `defaultValue` on a <textarea>, do not pass children.') : invariant(false) : undefined;
+          !(defaultValue == null) ? "production" !== 'production' ? invariant(false, 'If you supply `defaultValue` on a <textarea>, do not pass children.') : invariant(false) : undefined;
           if (Array.isArray(children)) {
-            !(children.length <= 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, '<textarea> can only have at most one child.') : invariant(false) : undefined;
+            !(children.length <= 1) ? "production" !== 'production' ? invariant(false, '<textarea> can only have at most one child.') : invariant(false) : undefined;
             children = children[0];
           }
           defaultValue = '' + children;
@@ -10171,27 +8718,27 @@ $__System.registerDynamic("d9", ["d3", "d2", "a8", "af", "c5", "ab", "29"], true
       return returnValue;
     }
     module.exports = ReactDOMTextarea;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("da", ["a7", "db", "dc", "dd", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ae", ["7b", "af", "b0", "b1", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactReconciler = $__require('a7');
-    var instantiateReactComponent = $__require('db');
-    var shouldUpdateReactComponent = $__require('dc');
-    var traverseAllChildren = $__require('dd');
-    var warning = $__require('ab');
+    var ReactReconciler = $__require('7b');
+    var instantiateReactComponent = $__require('af');
+    var shouldUpdateReactComponent = $__require('b0');
+    var traverseAllChildren = $__require('b1');
+    var warning = $__require('7f');
     function instantiateChild(childInstances, child, name) {
       var keyUnique = childInstances[name] === undefined;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.', name) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.', name) : undefined;
       }
       if (child != null && keyUnique) {
         childInstances[name] = instantiateReactComponent(child, null);
@@ -10246,25 +8793,25 @@ $__System.registerDynamic("da", ["a7", "db", "dc", "dd", "ab", "29"], true, func
       }
     };
     module.exports = ReactChildReconciler;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("de", ["dd", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b2", ["b1", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var traverseAllChildren = $__require('dd');
-    var warning = $__require('ab');
+    var traverseAllChildren = $__require('b1');
+    var warning = $__require('7f');
     function flattenSingleChildIntoContext(traverseContext, child, name) {
       var result = traverseContext;
       var keyUnique = result[name] === undefined;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.', name) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.', name) : undefined;
       }
       if (keyUnique && child != null) {
         result[name] = child;
@@ -10279,24 +8826,24 @@ $__System.registerDynamic("de", ["dd", "ab", "29"], true, function($__require, e
       return result;
     }
     module.exports = flattenChildren;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("df", ["e0", "e1", "a2", "a7", "da", "de", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b3", ["b4", "b5", "76", "7b", "ae", "b2", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactComponentEnvironment = $__require('e0');
-    var ReactMultiChildUpdateTypes = $__require('e1');
-    var ReactCurrentOwner = $__require('a2');
-    var ReactReconciler = $__require('a7');
-    var ReactChildReconciler = $__require('da');
-    var flattenChildren = $__require('de');
+    var ReactComponentEnvironment = $__require('b4');
+    var ReactMultiChildUpdateTypes = $__require('b5');
+    var ReactCurrentOwner = $__require('76');
+    var ReactReconciler = $__require('7b');
+    var ReactChildReconciler = $__require('ae');
+    var flattenChildren = $__require('b2');
     var updateDepth = 0;
     var updateQueue = [];
     var markupQueue = [];
@@ -10367,7 +8914,7 @@ $__System.registerDynamic("df", ["e0", "e1", "a2", "a7", "da", "de", "29"], true
     }
     var ReactMultiChild = {Mixin: {
         _reconcilerInstantiateChildren: function(nestedChildren, transaction, context) {
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             if (this._currentElement) {
               try {
                 ReactCurrentOwner.current = this._currentElement._owner;
@@ -10381,7 +8928,7 @@ $__System.registerDynamic("df", ["e0", "e1", "a2", "a7", "da", "de", "29"], true
         },
         _reconcilerUpdateChildren: function(prevChildren, nextNestedChildrenElements, transaction, context) {
           var nextChildren;
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             if (this._currentElement) {
               try {
                 ReactCurrentOwner.current = this._currentElement._owner;
@@ -10545,45 +9092,45 @@ $__System.registerDynamic("df", ["e0", "e1", "a2", "a7", "da", "de", "29"], true
         }
       }};
     module.exports = ReactMultiChild;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0", "d1", "d4", "d6", "d9", "a1", "df", "a6", "e6", "af", "e7", "e8", "c5", "bb", "b7", "e9", "ea", "ec", "eb", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b6", ["9a", "a3", "96", "b7", "89", "b8", "b9", "a4", "a5", "a8", "aa", "ad", "75", "b3", "7a", "ba", "83", "bb", "bc", "99", "8f", "8b", "bd", "be", "c0", "bf", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var AutoFocusUtils = $__require('c6');
-    var CSSPropertyOperations = $__require('cf');
-    var DOMProperty = $__require('c2');
-    var DOMPropertyOperations = $__require('e3');
-    var EventConstants = $__require('b5');
-    var ReactBrowserEventEmitter = $__require('e4');
-    var ReactComponentBrowserEnvironment = $__require('e5');
-    var ReactDOMButton = $__require('d0');
-    var ReactDOMInput = $__require('d1');
-    var ReactDOMOption = $__require('d4');
-    var ReactDOMSelect = $__require('d6');
-    var ReactDOMTextarea = $__require('d9');
-    var ReactMount = $__require('a1');
-    var ReactMultiChild = $__require('df');
-    var ReactPerf = $__require('a6');
-    var ReactUpdateQueue = $__require('e6');
-    var assign = $__require('af');
-    var canDefineProperty = $__require('e7');
-    var escapeTextContentForBrowser = $__require('e8');
-    var invariant = $__require('c5');
-    var isEventSupported = $__require('bb');
-    var keyOf = $__require('b7');
-    var setInnerHTML = $__require('e9');
-    var setTextContent = $__require('ea');
-    var shallowEqual = $__require('ec');
-    var validateDOMNesting = $__require('eb');
-    var warning = $__require('ab');
+    var AutoFocusUtils = $__require('9a');
+    var CSSPropertyOperations = $__require('a3');
+    var DOMProperty = $__require('96');
+    var DOMPropertyOperations = $__require('b7');
+    var EventConstants = $__require('89');
+    var ReactBrowserEventEmitter = $__require('b8');
+    var ReactComponentBrowserEnvironment = $__require('b9');
+    var ReactDOMButton = $__require('a4');
+    var ReactDOMInput = $__require('a5');
+    var ReactDOMOption = $__require('a8');
+    var ReactDOMSelect = $__require('aa');
+    var ReactDOMTextarea = $__require('ad');
+    var ReactMount = $__require('75');
+    var ReactMultiChild = $__require('b3');
+    var ReactPerf = $__require('7a');
+    var ReactUpdateQueue = $__require('ba');
+    var assign = $__require('83');
+    var canDefineProperty = $__require('bb');
+    var escapeTextContentForBrowser = $__require('bc');
+    var invariant = $__require('99');
+    var isEventSupported = $__require('8f');
+    var keyOf = $__require('8b');
+    var setInnerHTML = $__require('bd');
+    var setTextContent = $__require('be');
+    var shallowEqual = $__require('c0');
+    var validateDOMNesting = $__require('bf');
+    var warning = $__require('7f');
     var deleteListener = ReactBrowserEventEmitter.deleteListener;
     var listenTo = ReactBrowserEventEmitter.listenTo;
     var registrationNameModules = ReactBrowserEventEmitter.registrationNameModules;
@@ -10608,40 +9155,40 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
       return '';
     }
     var legacyPropsDescriptor;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       legacyPropsDescriptor = {props: {
           enumerable: false,
           get: function() {
             var component = this._reactInternalComponent;
-            process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .props of a DOM node; instead, ' + 'recreate the props as `render` did originally or read the DOM ' + 'properties/attributes directly from this node (e.g., ' + 'this.refs.box.className).%s', getDeclarationErrorAddendum(component)) : undefined;
+            "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .props of a DOM node; instead, ' + 'recreate the props as `render` did originally or read the DOM ' + 'properties/attributes directly from this node (e.g., ' + 'this.refs.box.className).%s', getDeclarationErrorAddendum(component)) : undefined;
             return component._currentElement.props;
           }
         }};
     }
     function legacyGetDOMNode() {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         var component = this._reactInternalComponent;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .getDOMNode() of a DOM node; ' + 'instead, use the node directly.%s', getDeclarationErrorAddendum(component)) : undefined;
+        "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .getDOMNode() of a DOM node; ' + 'instead, use the node directly.%s', getDeclarationErrorAddendum(component)) : undefined;
       }
       return this;
     }
     function legacyIsMounted() {
       var component = this._reactInternalComponent;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .isMounted() of a DOM node.%s', getDeclarationErrorAddendum(component)) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .isMounted() of a DOM node.%s', getDeclarationErrorAddendum(component)) : undefined;
       }
       return !!component;
     }
     function legacySetStateEtc() {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         var component = this._reactInternalComponent;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .setState(), .replaceState(), or ' + '.forceUpdate() of a DOM node. This is a no-op.%s', getDeclarationErrorAddendum(component)) : undefined;
+        "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .setState(), .replaceState(), or ' + '.forceUpdate() of a DOM node. This is a no-op.%s', getDeclarationErrorAddendum(component)) : undefined;
       }
     }
     function legacySetProps(partialProps, callback) {
       var component = this._reactInternalComponent;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .setProps() of a DOM node. ' + 'Instead, call ReactDOM.render again at the top level.%s', getDeclarationErrorAddendum(component)) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .setProps() of a DOM node. ' + 'Instead, call ReactDOM.render again at the top level.%s', getDeclarationErrorAddendum(component)) : undefined;
       }
       if (!component) {
         return;
@@ -10653,8 +9200,8 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
     }
     function legacyReplaceProps(partialProps, callback) {
       var component = this._reactInternalComponent;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .replaceProps() of a DOM node. ' + 'Instead, call ReactDOM.render again at the top level.%s', getDeclarationErrorAddendum(component)) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(false, 'ReactDOMComponent: Do not access .replaceProps() of a DOM node. ' + 'Instead, call ReactDOM.render again at the top level.%s', getDeclarationErrorAddendum(component)) : undefined;
       }
       if (!component) {
         return;
@@ -10704,30 +9251,30 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
         return;
       }
       styleMutationWarning[hash] = true;
-      process.env.NODE_ENV !== 'production' ? warning(false, '`%s` was passed a style object that has previously been mutated. ' + 'Mutating `style` is deprecated. Consider cloning it beforehand. Check ' + 'the `render` %s. Previous style: %s. Mutated style: %s.', componentName, owner ? 'of `' + ownerName + '`' : 'using <' + componentName + '>', friendlyStringify(style1), friendlyStringify(style2)) : undefined;
+      "production" !== 'production' ? warning(false, '`%s` was passed a style object that has previously been mutated. ' + 'Mutating `style` is deprecated. Consider cloning it beforehand. Check ' + 'the `render` %s. Previous style: %s. Mutated style: %s.', componentName, owner ? 'of `' + ownerName + '`' : 'using <' + componentName + '>', friendlyStringify(style1), friendlyStringify(style2)) : undefined;
     }
     function assertValidProps(component, props) {
       if (!props) {
         return;
       }
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         if (voidElementTags[component._tag]) {
-          process.env.NODE_ENV !== 'production' ? warning(props.children == null && props.dangerouslySetInnerHTML == null, '%s is a void element tag and must not have `children` or ' + 'use `props.dangerouslySetInnerHTML`.%s', component._tag, component._currentElement._owner ? ' Check the render method of ' + component._currentElement._owner.getName() + '.' : '') : undefined;
+          "production" !== 'production' ? warning(props.children == null && props.dangerouslySetInnerHTML == null, '%s is a void element tag and must not have `children` or ' + 'use `props.dangerouslySetInnerHTML`.%s', component._tag, component._currentElement._owner ? ' Check the render method of ' + component._currentElement._owner.getName() + '.' : '') : undefined;
         }
       }
       if (props.dangerouslySetInnerHTML != null) {
-        !(props.children == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
-        !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ? process.env.NODE_ENV !== 'production' ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
+        !(props.children == null) ? "production" !== 'production' ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
+        !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ? "production" !== 'production' ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
       }
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(props.innerHTML == null, 'Directly setting property `innerHTML` is not permitted. ' + 'For more information, lookup documentation on `dangerouslySetInnerHTML`.') : undefined;
-        process.env.NODE_ENV !== 'production' ? warning(!props.contentEditable || props.children == null, 'A component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.') : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(props.innerHTML == null, 'Directly setting property `innerHTML` is not permitted. ' + 'For more information, lookup documentation on `dangerouslySetInnerHTML`.') : undefined;
+        "production" !== 'production' ? warning(!props.contentEditable || props.children == null, 'A component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.') : undefined;
       }
-      !(props.style == null || typeof props.style === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'The `style` prop expects a mapping from style properties to values, ' + 'not a string. For example, style={{marginRight: spacing + \'em\'}} when ' + 'using JSX.%s', getDeclarationErrorAddendum(component)) : invariant(false) : undefined;
+      !(props.style == null || typeof props.style === 'object') ? "production" !== 'production' ? invariant(false, 'The `style` prop expects a mapping from style properties to values, ' + 'not a string. For example, style={{marginRight: spacing + \'em\'}} when ' + 'using JSX.%s', getDeclarationErrorAddendum(component)) : invariant(false) : undefined;
     }
     function enqueuePutListener(id, registrationName, listener, transaction) {
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(registrationName !== 'onScroll' || isEventSupported('scroll', true), 'This browser doesn\'t support the `onScroll` event') : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(registrationName !== 'onScroll' || isEventSupported('scroll', true), 'This browser doesn\'t support the `onScroll` event') : undefined;
       }
       var container = ReactMount.findReactContainerForID(id);
       if (container) {
@@ -10771,9 +9318,9 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
     };
     function trapBubbledEventsLocal() {
       var inst = this;
-      !inst._rootNodeID ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Must be mounted to trap events') : invariant(false) : undefined;
+      !inst._rootNodeID ? "production" !== 'production' ? invariant(false, 'Must be mounted to trap events') : invariant(false) : undefined;
       var node = ReactMount.getNode(inst._rootNodeID);
-      !node ? process.env.NODE_ENV !== 'production' ? invariant(false, 'trapBubbledEvent(...): Requires node to be rendered.') : invariant(false) : undefined;
+      !node ? "production" !== 'production' ? invariant(false, 'trapBubbledEvent(...): Requires node to be rendered.') : invariant(false) : undefined;
       switch (inst._tag) {
         case 'iframe':
           inst._wrapperState.listeners = [ReactBrowserEventEmitter.trapBubbledEvent(EventConstants.topLevelTypes.topLoad, 'load', node)];
@@ -10829,7 +9376,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
     var hasOwnProperty = ({}).hasOwnProperty;
     function validateDangerousTag(tag) {
       if (!hasOwnProperty.call(validatedTagCache, tag)) {
-        !VALID_TAG_REGEX.test(tag) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Invalid tag: %s', tag) : invariant(false) : undefined;
+        !VALID_TAG_REGEX.test(tag) ? "production" !== 'production' ? invariant(false, 'Invalid tag: %s', tag) : invariant(false) : undefined;
         validatedTagCache[tag] = true;
       }
     }
@@ -10852,7 +9399,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
       this._wrapperState = null;
       this._topLevelWrapper = null;
       this._nodeWithLegacyProperties = null;
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         this._unprocessedContextDev = null;
         this._processedContextDev = null;
       }
@@ -10896,12 +9443,12 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
             break;
         }
         assertValidProps(this, props);
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (context[validateDOMNesting.ancestorInfoContextKey]) {
             validateDOMNesting(this._tag, this, context[validateDOMNesting.ancestorInfoContextKey]);
           }
         }
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           this._unprocessedContextDev = context;
           this._processedContextDev = processChildContextDev(context, this);
           context = this._processedContextDev;
@@ -10954,7 +9501,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
           } else {
             if (propKey === STYLE) {
               if (propValue) {
-                if (process.env.NODE_ENV !== 'production') {
+                if ("production" !== 'production') {
                   this._previousStyle = propValue;
                 }
                 propValue = this._previousStyleCopy = assign({}, props.style);
@@ -11054,7 +9601,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
             nextProps = ReactDOMTextarea.getNativeProps(this, nextProps);
             break;
         }
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (this._unprocessedContextDev !== context) {
             this._unprocessedContextDev = context;
             this._processedContextDev = processChildContextDev(context, this);
@@ -11107,7 +9654,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
           }
           if (propKey === STYLE) {
             if (nextProp) {
-              if (process.env.NODE_ENV !== 'production') {
+              if ("production" !== 'production') {
                 checkAndWarnForMutatedStyle(this._previousStyleCopy, this._previousStyle, this);
                 this._previousStyle = nextProp;
               }
@@ -11209,7 +9756,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
           case 'html':
           case 'head':
           case 'body':
-            !false ? process.env.NODE_ENV !== 'production' ? invariant(false, '<%s> tried to unmount. Because of cross-browser quirks it is ' + 'impossible to unmount some top-level components (eg <html>, ' + '<head>, and <body>) reliably and efficiently. To fix this, have a ' + 'single top-level component that never unmounts render these ' + 'elements.', this._tag) : invariant(false) : undefined;
+            !false ? "production" !== 'production' ? invariant(false, '<%s> tried to unmount. Because of cross-browser quirks it is ' + 'impossible to unmount some top-level components (eg <html>, ' + '<head>, and <body>) reliably and efficiently. To fix this, have a ' + 'single top-level component that never unmounts render these ' + 'elements.', this._tag) : invariant(false) : undefined;
             break;
         }
         this.unmountChildren();
@@ -11234,7 +9781,7 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
           node.forceUpdate = legacySetStateEtc;
           node.setProps = legacySetProps;
           node.replaceProps = legacyReplaceProps;
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             if (canDefineProperty) {
               Object.defineProperties(node, legacyPropsDescriptor);
             } else {
@@ -11254,24 +9801,24 @@ $__System.registerDynamic("e2", ["c6", "cf", "c2", "e3", "b5", "e4", "e5", "d0",
     });
     assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mixin);
     module.exports = ReactDOMComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("ed", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c1", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     function toArray(obj) {
       var length = obj.length;
-      !(!Array.isArray(obj) && (typeof obj === 'object' || typeof obj === 'function')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'toArray: Array-like object expected') : invariant(false) : undefined;
-      !(typeof length === 'number') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'toArray: Object needs a length property') : invariant(false) : undefined;
-      !(length === 0 || length - 1 in obj) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'toArray: Object should have keys for indices') : invariant(false) : undefined;
+      !(!Array.isArray(obj) && (typeof obj === 'object' || typeof obj === 'function')) ? "production" !== 'production' ? invariant(false, 'toArray: Array-like object expected') : invariant(false) : undefined;
+      !(typeof length === 'number') ? "production" !== 'production' ? invariant(false, 'toArray: Object needs a length property') : invariant(false) : undefined;
+      !(length === 0 || length - 1 in obj) ? "production" !== 'production' ? invariant(false, 'toArray: Object should have keys for indices') : invariant(false) : undefined;
       if (obj.hasOwnProperty) {
         try {
           return Array.prototype.slice.call(obj);
@@ -11284,18 +9831,18 @@ $__System.registerDynamic("ed", ["c5", "29"], true, function($__require, exports
       return ret;
     }
     module.exports = toArray;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("ee", ["ed"], true, function($__require, exports, module) {
+$__System.registerDynamic("c2", ["c1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toArray = $__require('ed');
+  var toArray = $__require('c1');
   function hasArrayNature(obj) {
     return (!!obj && (typeof obj == 'object' || typeof obj == 'function') && 'length' in obj && !('setInterval' in obj) && typeof obj.nodeType != 'number' && (Array.isArray(obj) || 'callee' in obj || 'item' in obj));
   }
@@ -11313,17 +9860,17 @@ $__System.registerDynamic("ee", ["ed"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("ef", ["ac", "ee", "f0", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c3", ["80", "c2", "c4", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ExecutionEnvironment = $__require('ac');
-    var createArrayFromMixed = $__require('ee');
-    var getMarkupWrap = $__require('f0');
-    var invariant = $__require('c5');
+    var ExecutionEnvironment = $__require('80');
+    var createArrayFromMixed = $__require('c2');
+    var getMarkupWrap = $__require('c4');
+    var invariant = $__require('99');
     var dummyNode = ExecutionEnvironment.canUseDOM ? document.createElement('div') : null;
     var nodeNamePattern = /^\s*<(\w+)/;
     function getNodeName(markup) {
@@ -11332,7 +9879,7 @@ $__System.registerDynamic("ef", ["ac", "ee", "f0", "c5", "29"], true, function($
     }
     function createNodesFromMarkup(markup, handleScript) {
       var node = dummyNode;
-      !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup dummy not initialized') : invariant(false) : undefined;
+      !!!dummyNode ? "production" !== 'production' ? invariant(false, 'createNodesFromMarkup dummy not initialized') : invariant(false) : undefined;
       var nodeName = getNodeName(markup);
       var wrap = nodeName && getMarkupWrap(nodeName);
       if (wrap) {
@@ -11346,7 +9893,7 @@ $__System.registerDynamic("ef", ["ac", "ee", "f0", "c5", "29"], true, function($
       }
       var scripts = node.getElementsByTagName('script');
       if (scripts.length) {
-        !handleScript ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(false) : undefined;
+        !handleScript ? "production" !== 'production' ? invariant(false, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(false) : undefined;
         createArrayFromMixed(scripts).forEach(handleScript);
       }
       var nodes = createArrayFromMixed(node.childNodes);
@@ -11356,20 +9903,20 @@ $__System.registerDynamic("ef", ["ac", "ee", "f0", "c5", "29"], true, function($
       return nodes;
     }
     module.exports = createNodesFromMarkup;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f0", ["ac", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c4", ["80", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ExecutionEnvironment = $__require('ac');
-    var invariant = $__require('c5');
+    var ExecutionEnvironment = $__require('80');
+    var invariant = $__require('99');
     var dummyNode = ExecutionEnvironment.canUseDOM ? document.createElement('div') : null;
     var shouldWrap = {};
     var selectWrap = [1, '<select multiple="true">', '</select>'];
@@ -11399,7 +9946,7 @@ $__System.registerDynamic("f0", ["ac", "c5", "29"], true, function($__require, e
       shouldWrap[nodeName] = true;
     });
     function getMarkupWrap(nodeName) {
-      !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : undefined;
+      !!!dummyNode ? "production" !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : undefined;
       if (!markupWrap.hasOwnProperty(nodeName)) {
         nodeName = '*';
       }
@@ -11414,23 +9961,23 @@ $__System.registerDynamic("f0", ["ac", "c5", "29"], true, function($__require, e
       return shouldWrap[nodeName] ? markupWrap[nodeName] : null;
     }
     module.exports = getMarkupWrap;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f1", ["ac", "ef", "f2", "f0", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c5", ["80", "c3", "c6", "c4", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ExecutionEnvironment = $__require('ac');
-    var createNodesFromMarkup = $__require('ef');
-    var emptyFunction = $__require('f2');
-    var getMarkupWrap = $__require('f0');
-    var invariant = $__require('c5');
+    var ExecutionEnvironment = $__require('80');
+    var createNodesFromMarkup = $__require('c3');
+    var emptyFunction = $__require('c6');
+    var getMarkupWrap = $__require('c4');
+    var invariant = $__require('99');
     var OPEN_TAG_NAME_EXP = /^(<[^ \/>]+)/;
     var RESULT_INDEX_ATTR = 'data-danger-index';
     function getNodeName(markup) {
@@ -11438,11 +9985,11 @@ $__System.registerDynamic("f1", ["ac", "ef", "f2", "f0", "c5", "29"], true, func
     }
     var Danger = {
       dangerouslyRenderMarkup: function(markupList) {
-        !ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyRenderMarkup(...): Cannot render markup in a worker ' + 'thread. Make sure `window` and `document` are available globally ' + 'before requiring React when unit testing or use ' + 'ReactDOMServer.renderToString for server rendering.') : invariant(false) : undefined;
+        !ExecutionEnvironment.canUseDOM ? "production" !== 'production' ? invariant(false, 'dangerouslyRenderMarkup(...): Cannot render markup in a worker ' + 'thread. Make sure `window` and `document` are available globally ' + 'before requiring React when unit testing or use ' + 'ReactDOMServer.renderToString for server rendering.') : invariant(false) : undefined;
         var nodeName;
         var markupByNodeName = {};
         for (var i = 0; i < markupList.length; i++) {
-          !markupList[i] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyRenderMarkup(...): Missing markup.') : invariant(false) : undefined;
+          !markupList[i] ? "production" !== 'production' ? invariant(false, 'dangerouslyRenderMarkup(...): Missing markup.') : invariant(false) : undefined;
           nodeName = getNodeName(markupList[i]);
           nodeName = getMarkupWrap(nodeName) ? nodeName : '*';
           markupByNodeName[nodeName] = markupByNodeName[nodeName] || [];
@@ -11468,22 +10015,22 @@ $__System.registerDynamic("f1", ["ac", "ef", "f2", "f0", "c5", "29"], true, func
             if (renderNode.hasAttribute && renderNode.hasAttribute(RESULT_INDEX_ATTR)) {
               resultIndex = +renderNode.getAttribute(RESULT_INDEX_ATTR);
               renderNode.removeAttribute(RESULT_INDEX_ATTR);
-              !!resultList.hasOwnProperty(resultIndex) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Danger: Assigning to an already-occupied result index.') : invariant(false) : undefined;
+              !!resultList.hasOwnProperty(resultIndex) ? "production" !== 'production' ? invariant(false, 'Danger: Assigning to an already-occupied result index.') : invariant(false) : undefined;
               resultList[resultIndex] = renderNode;
               resultListAssignmentCount += 1;
-            } else if (process.env.NODE_ENV !== 'production') {
+            } else if ("production" !== 'production') {
               console.error('Danger: Discarding unexpected node:', renderNode);
             }
           }
         }
-        !(resultListAssignmentCount === resultList.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Danger: Did not assign to every index of resultList.') : invariant(false) : undefined;
-        !(resultList.length === markupList.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Danger: Expected markup to render %s nodes, but rendered %s.', markupList.length, resultList.length) : invariant(false) : undefined;
+        !(resultListAssignmentCount === resultList.length) ? "production" !== 'production' ? invariant(false, 'Danger: Did not assign to every index of resultList.') : invariant(false) : undefined;
+        !(resultList.length === markupList.length) ? "production" !== 'production' ? invariant(false, 'Danger: Expected markup to render %s nodes, but rendered %s.', markupList.length, resultList.length) : invariant(false) : undefined;
         return resultList;
       },
       dangerouslyReplaceNodeWithMarkup: function(oldChild, markup) {
-        !ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot render markup in a ' + 'worker thread. Make sure `window` and `document` are available ' + 'globally before requiring React when unit testing or use ' + 'ReactDOMServer.renderToString() for server rendering.') : invariant(false) : undefined;
-        !markup ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Missing markup.') : invariant(false) : undefined;
-        !(oldChild.tagName.toLowerCase() !== 'html') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot replace markup of the ' + '<html> node. This is because browser quirks make this unreliable ' + 'and/or slow. If you want to render to the root you must use ' + 'server rendering. See ReactDOMServer.renderToString().') : invariant(false) : undefined;
+        !ExecutionEnvironment.canUseDOM ? "production" !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot render markup in a ' + 'worker thread. Make sure `window` and `document` are available ' + 'globally before requiring React when unit testing or use ' + 'ReactDOMServer.renderToString() for server rendering.') : invariant(false) : undefined;
+        !markup ? "production" !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Missing markup.') : invariant(false) : undefined;
+        !(oldChild.tagName.toLowerCase() !== 'html') ? "production" !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot replace markup of the ' + '<html> node. This is because browser quirks make this unreliable ' + 'and/or slow. If you want to render to the root you must use ' + 'server rendering. See ReactDOMServer.renderToString().') : invariant(false) : undefined;
         var newChild;
         if (typeof markup === 'string') {
           newChild = createNodesFromMarkup(markup, emptyFunction)[0];
@@ -11494,18 +10041,18 @@ $__System.registerDynamic("f1", ["ac", "ef", "f2", "f0", "c5", "29"], true, func
       }
     };
     module.exports = Danger;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("e1", ["f3"], true, function($__require, exports, module) {
+$__System.registerDynamic("b5", ["c7"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var keyMirror = $__require('f3');
+  var keyMirror = $__require('c7');
   var ReactMultiChildUpdateTypes = keyMirror({
     INSERT_MARKUP: null,
     MOVE_EXISTING: null,
@@ -11518,19 +10065,19 @@ $__System.registerDynamic("e1", ["f3"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("f4", ["f1", "e1", "a6", "e9", "ea", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c8", ["c5", "b5", "7a", "bd", "be", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var Danger = $__require('f1');
-    var ReactMultiChildUpdateTypes = $__require('e1');
-    var ReactPerf = $__require('a6');
-    var setInnerHTML = $__require('e9');
-    var setTextContent = $__require('ea');
-    var invariant = $__require('c5');
+    var Danger = $__require('c5');
+    var ReactMultiChildUpdateTypes = $__require('b5');
+    var ReactPerf = $__require('7a');
+    var setInnerHTML = $__require('bd');
+    var setTextContent = $__require('be');
+    var invariant = $__require('99');
     function insertChildAt(parentNode, childNode, index) {
       var beforeChild = index >= parentNode.childNodes.length ? null : parentNode.childNodes.item(index);
       parentNode.insertBefore(childNode, beforeChild);
@@ -11548,7 +10095,7 @@ $__System.registerDynamic("f4", ["f1", "e1", "a6", "e9", "ea", "c5", "29"], true
             var updatedIndex = update.fromIndex;
             var updatedChild = update.parentNode.childNodes[updatedIndex];
             var parentID = update.parentID;
-            !updatedChild ? process.env.NODE_ENV !== 'production' ? invariant(false, 'processUpdates(): Unable to find child %s of element. This ' + 'probably means the DOM was unexpectedly mutated (e.g., by the ' + 'browser), usually due to forgetting a <tbody> when using tables, ' + 'nesting tags like <form>, <p>, or <a>, or using non-SVG elements ' + 'in an <svg> parent. Try inspecting the child nodes of the element ' + 'with React ID `%s`.', updatedIndex, parentID) : invariant(false) : undefined;
+            !updatedChild ? "production" !== 'production' ? invariant(false, 'processUpdates(): Unable to find child %s of element. This ' + 'probably means the DOM was unexpectedly mutated (e.g., by the ' + 'browser), usually due to forgetting a <tbody> when using tables, ' + 'nesting tags like <form>, <p>, or <a>, or using non-SVG elements ' + 'in an <svg> parent. Try inspecting the child nodes of the element ' + 'with React ID `%s`.', updatedIndex, parentID) : invariant(false) : undefined;
             initialChildren = initialChildren || {};
             initialChildren[parentID] = initialChildren[parentID] || [];
             initialChildren[parentID][updatedIndex] = updatedChild;
@@ -11590,18 +10137,18 @@ $__System.registerDynamic("f4", ["f1", "e1", "a6", "e9", "ea", "c5", "29"], true
     };
     ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {updateTextContent: 'updateTextContent'});
     module.exports = DOMChildrenOperations;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f5", ["e8"], true, function($__require, exports, module) {
+$__System.registerDynamic("c9", ["bc"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var escapeTextContentForBrowser = $__require('e8');
+  var escapeTextContentForBrowser = $__require('bc');
   function quoteAttributeValueForBrowser(value) {
     return '"' + escapeTextContentForBrowser(value) + '"';
   }
@@ -11610,17 +10157,17 @@ $__System.registerDynamic("f5", ["e8"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b7", ["96", "7a", "c9", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var DOMProperty = $__require('c2');
-    var ReactPerf = $__require('a6');
-    var quoteAttributeValueForBrowser = $__require('f5');
-    var warning = $__require('ab');
+    var DOMProperty = $__require('96');
+    var ReactPerf = $__require('7a');
+    var quoteAttributeValueForBrowser = $__require('c9');
+    var warning = $__require('7f');
     var VALID_ATTRIBUTE_NAME_REGEX = /^[a-zA-Z_][\w\.\-]*$/;
     var illegalAttributeNameCache = {};
     var validatedAttributeNameCache = {};
@@ -11636,13 +10183,13 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
         return true;
       }
       illegalAttributeNameCache[attributeName] = true;
-      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid attribute name: `%s`', attributeName) : undefined;
+      "production" !== 'production' ? warning(false, 'Invalid attribute name: `%s`', attributeName) : undefined;
       return false;
     }
     function shouldIgnoreValue(propertyInfo, value) {
       return value == null || propertyInfo.hasBooleanValue && !value || propertyInfo.hasNumericValue && isNaN(value) || propertyInfo.hasPositiveNumericValue && value < 1 || propertyInfo.hasOverloadedBooleanValue && value === false;
     }
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       var reactProps = {
         children: true,
         dangerouslySetInnerHTML: true,
@@ -11657,7 +10204,7 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
         warnedProperties[name] = true;
         var lowerCasedName = name.toLowerCase();
         var standardName = DOMProperty.isCustomAttribute(lowerCasedName) ? lowerCasedName : DOMProperty.getPossibleStandardName.hasOwnProperty(lowerCasedName) ? DOMProperty.getPossibleStandardName[lowerCasedName] : null;
-        process.env.NODE_ENV !== 'production' ? warning(standardName == null, 'Unknown DOM property %s. Did you mean %s?', name, standardName) : undefined;
+        "production" !== 'production' ? warning(standardName == null, 'Unknown DOM property %s. Did you mean %s?', name, standardName) : undefined;
       };
     }
     var DOMPropertyOperations = {
@@ -11683,7 +10230,7 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
             return '';
           }
           return name + '=' + quoteAttributeValueForBrowser(value);
-        } else if (process.env.NODE_ENV !== 'production') {
+        } else if ("production" !== 'production') {
           warnUnknownProperty(name);
         }
         return null;
@@ -11720,7 +10267,7 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
           }
         } else if (DOMProperty.isCustomAttribute(name)) {
           DOMPropertyOperations.setValueForAttribute(node, name, value);
-        } else if (process.env.NODE_ENV !== 'production') {
+        } else if ("production" !== 'production') {
           warnUnknownProperty(name);
         }
       },
@@ -11751,7 +10298,7 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
           }
         } else if (DOMProperty.isCustomAttribute(name)) {
           node.removeAttribute(name);
-        } else if (process.env.NODE_ENV !== 'production') {
+        } else if ("production" !== 'production') {
           warnUnknownProperty(name);
         }
       }
@@ -11762,23 +10309,23 @@ $__System.registerDynamic("e3", ["c2", "a6", "f5", "ab", "29"], true, function($
       deleteValueForProperty: 'deleteValueForProperty'
     });
     module.exports = DOMPropertyOperations;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d2", ["f4", "e3", "a1", "a6", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("a6", ["c8", "b7", "75", "7a", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var DOMChildrenOperations = $__require('f4');
-    var DOMPropertyOperations = $__require('e3');
-    var ReactMount = $__require('a1');
-    var ReactPerf = $__require('a6');
-    var invariant = $__require('c5');
+    var DOMChildrenOperations = $__require('c8');
+    var DOMPropertyOperations = $__require('b7');
+    var ReactMount = $__require('75');
+    var ReactPerf = $__require('7a');
+    var invariant = $__require('99');
     var INVALID_PROPERTY_ERRORS = {
       dangerouslySetInnerHTML: '`dangerouslySetInnerHTML` must be set using `updateInnerHTMLByID()`.',
       style: '`style` must be set using `updateStylesByID()`.'
@@ -11786,7 +10333,7 @@ $__System.registerDynamic("d2", ["f4", "e3", "a1", "a6", "c5", "29"], true, func
     var ReactDOMIDOperations = {
       updatePropertyByID: function(id, name, value) {
         var node = ReactMount.getNode(id);
-        !!INVALID_PROPERTY_ERRORS.hasOwnProperty(name) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'updatePropertyByID(...): %s', INVALID_PROPERTY_ERRORS[name]) : invariant(false) : undefined;
+        !!INVALID_PROPERTY_ERRORS.hasOwnProperty(name) ? "production" !== 'production' ? invariant(false, 'updatePropertyByID(...): %s', INVALID_PROPERTY_ERRORS[name]) : invariant(false) : undefined;
         if (value != null) {
           DOMPropertyOperations.setValueForProperty(node, name, value);
         } else {
@@ -11809,20 +10356,20 @@ $__System.registerDynamic("d2", ["f4", "e3", "a1", "a6", "c5", "29"], true, func
       dangerouslyProcessChildrenUpdates: 'dangerouslyProcessChildrenUpdates'
     });
     module.exports = ReactDOMIDOperations;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("e5", ["d2", "a1", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b9", ["a6", "75", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactDOMIDOperations = $__require('d2');
-    var ReactMount = $__require('a1');
+    var ReactDOMIDOperations = $__require('a6');
+    var ReactMount = $__require('75');
     var ReactComponentBrowserEnvironment = {
       processChildrenUpdates: ReactDOMIDOperations.dangerouslyProcessChildrenUpdates,
       replaceNodeWithMarkupByID: ReactDOMIDOperations.dangerouslyReplaceNodeWithMarkupByID,
@@ -11831,12 +10378,12 @@ $__System.registerDynamic("e5", ["d2", "a1", "29"], true, function($__require, e
       }
     };
     module.exports = ReactComponentBrowserEnvironment;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("e8", [], true, function($__require, exports, module) {
+$__System.registerDynamic("bc", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11861,15 +10408,15 @@ $__System.registerDynamic("e8", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("ea", ["ac", "e8", "e9"], true, function($__require, exports, module) {
+$__System.registerDynamic("be", ["80", "bc", "bd"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ExecutionEnvironment = $__require('ac');
-  var escapeTextContentForBrowser = $__require('e8');
-  var setInnerHTML = $__require('e9');
+  var ExecutionEnvironment = $__require('80');
+  var escapeTextContentForBrowser = $__require('bc');
+  var setInnerHTML = $__require('bd');
   var setTextContent = function(node, text) {
     node.textContent = text;
   };
@@ -11885,21 +10432,21 @@ $__System.registerDynamic("ea", ["ac", "e8", "e9"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("a3", ["f4", "e3", "e5", "a1", "af", "e8", "ea", "eb", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("77", ["c8", "b7", "b9", "75", "83", "bc", "be", "bf", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var DOMChildrenOperations = $__require('f4');
-    var DOMPropertyOperations = $__require('e3');
-    var ReactComponentBrowserEnvironment = $__require('e5');
-    var ReactMount = $__require('a1');
-    var assign = $__require('af');
-    var escapeTextContentForBrowser = $__require('e8');
-    var setTextContent = $__require('ea');
-    var validateDOMNesting = $__require('eb');
+    var DOMChildrenOperations = $__require('c8');
+    var DOMPropertyOperations = $__require('b7');
+    var ReactComponentBrowserEnvironment = $__require('b9');
+    var ReactMount = $__require('75');
+    var assign = $__require('83');
+    var escapeTextContentForBrowser = $__require('bc');
+    var setTextContent = $__require('be');
+    var validateDOMNesting = $__require('bf');
     var ReactDOMTextComponent = function(props) {};
     assign(ReactDOMTextComponent.prototype, {
       construct: function(text) {
@@ -11909,7 +10456,7 @@ $__System.registerDynamic("a3", ["f4", "e3", "e5", "a1", "af", "e8", "ea", "eb",
         this._mountIndex = 0;
       },
       mountComponent: function(rootID, transaction, context) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (context[validateDOMNesting.ancestorInfoContextKey]) {
             validateDOMNesting('span', null, context[validateDOMNesting.ancestorInfoContextKey]);
           }
@@ -11946,12 +10493,12 @@ $__System.registerDynamic("a3", ["f4", "e3", "e5", "a1", "af", "e8", "ea", "eb",
       }
     });
     module.exports = ReactDOMTextComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f6", [], true, function($__require, exports, module) {
+$__System.registerDynamic("ca", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11974,22 +10521,22 @@ $__System.registerDynamic("f6", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("f7", ["f8", "ac", "ae", "a5", "a1", "a8", "af", "ba", "f6", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("cb", ["cc", "80", "82", "79", "75", "7c", "83", "8e", "ca", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventListener = $__require('f8');
-    var ExecutionEnvironment = $__require('ac');
-    var PooledClass = $__require('ae');
-    var ReactInstanceHandles = $__require('a5');
-    var ReactMount = $__require('a1');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var getEventTarget = $__require('ba');
-    var getUnboundedScrollPosition = $__require('f6');
+    var EventListener = $__require('cc');
+    var ExecutionEnvironment = $__require('80');
+    var PooledClass = $__require('82');
+    var ReactInstanceHandles = $__require('79');
+    var ReactMount = $__require('75');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var getEventTarget = $__require('8e');
+    var getUnboundedScrollPosition = $__require('ca');
     var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
     function findParent(node) {
       var nodeID = ReactMount.getID(node);
@@ -12102,27 +10649,27 @@ $__System.registerDynamic("f7", ["f8", "ac", "ae", "a5", "a1", "a8", "af", "ba",
       }
     };
     module.exports = ReactEventListener;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f9", ["c2", "b9", "e0", "fa", "fb", "e4", "fc", "a6", "fd", "a8"], true, function($__require, exports, module) {
+$__System.registerDynamic("cd", ["96", "8d", "b4", "ce", "cf", "b8", "d0", "7a", "d1", "7c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var DOMProperty = $__require('c2');
-  var EventPluginHub = $__require('b9');
-  var ReactComponentEnvironment = $__require('e0');
-  var ReactClass = $__require('fa');
-  var ReactEmptyComponent = $__require('fb');
-  var ReactBrowserEventEmitter = $__require('e4');
-  var ReactNativeComponent = $__require('fc');
-  var ReactPerf = $__require('a6');
-  var ReactRootIndex = $__require('fd');
-  var ReactUpdates = $__require('a8');
+  var DOMProperty = $__require('96');
+  var EventPluginHub = $__require('8d');
+  var ReactComponentEnvironment = $__require('b4');
+  var ReactClass = $__require('ce');
+  var ReactEmptyComponent = $__require('cf');
+  var ReactBrowserEventEmitter = $__require('b8');
+  var ReactNativeComponent = $__require('d0');
+  var ReactPerf = $__require('7a');
+  var ReactRootIndex = $__require('d1');
+  var ReactUpdates = $__require('7c');
   var ReactInjection = {
     Component: ReactComponentEnvironment.injection,
     Class: ReactClass.injection,
@@ -12140,19 +10687,19 @@ $__System.registerDynamic("f9", ["c2", "b9", "e0", "fa", "fb", "e4", "fc", "a6",
   return module.exports;
 });
 
-$__System.registerDynamic("fe", ["ff", "ae", "e4", "100", "101", "102", "af"], true, function($__require, exports, module) {
+$__System.registerDynamic("d2", ["d3", "82", "b8", "d4", "d5", "d6", "83"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var CallbackQueue = $__require('ff');
-  var PooledClass = $__require('ae');
-  var ReactBrowserEventEmitter = $__require('e4');
-  var ReactDOMFeatureFlags = $__require('100');
-  var ReactInputSelection = $__require('101');
-  var Transaction = $__require('102');
-  var assign = $__require('af');
+  var CallbackQueue = $__require('d3');
+  var PooledClass = $__require('82');
+  var ReactBrowserEventEmitter = $__require('b8');
+  var ReactDOMFeatureFlags = $__require('d4');
+  var ReactInputSelection = $__require('d5');
+  var Transaction = $__require('d6');
+  var assign = $__require('83');
   var SELECTION_RESTORATION = {
     initialize: ReactInputSelection.getSelectionInformation,
     close: ReactInputSelection.restoreSelection
@@ -12201,7 +10748,7 @@ $__System.registerDynamic("fe", ["ff", "ae", "e4", "100", "101", "102", "af"], t
   return module.exports;
 });
 
-$__System.registerDynamic("103", [], true, function($__require, exports, module) {
+$__System.registerDynamic("d7", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12244,13 +10791,13 @@ $__System.registerDynamic("103", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("b0", ["ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("84", ["80"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ExecutionEnvironment = $__require('ac');
+  var ExecutionEnvironment = $__require('80');
   var contentKey = null;
   function getTextContentAccessor() {
     if (!contentKey && ExecutionEnvironment.canUseDOM) {
@@ -12263,15 +10810,15 @@ $__System.registerDynamic("b0", ["ac"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("104", ["ac", "103", "b0"], true, function($__require, exports, module) {
+$__System.registerDynamic("d8", ["80", "d7", "84"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ExecutionEnvironment = $__require('ac');
-  var getNodeForCharacterOffset = $__require('103');
-  var getTextContentAccessor = $__require('b0');
+  var ExecutionEnvironment = $__require('80');
+  var getNodeForCharacterOffset = $__require('d7');
+  var getTextContentAccessor = $__require('84');
   function isCollapsed(anchorNode, anchorOffset, focusNode, focusOffset) {
     return anchorNode === focusNode && anchorOffset === focusOffset;
   }
@@ -12380,7 +10927,7 @@ $__System.registerDynamic("104", ["ac", "103", "b0"], true, function($__require,
   return module.exports;
 });
 
-$__System.registerDynamic("c7", [], true, function($__require, exports, module) {
+$__System.registerDynamic("9b", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12396,16 +10943,16 @@ $__System.registerDynamic("c7", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("101", ["104", "105", "c7", "106"], true, function($__require, exports, module) {
+$__System.registerDynamic("d5", ["d8", "d9", "9b", "da"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactDOMSelection = $__require('104');
-  var containsNode = $__require('105');
-  var focusNode = $__require('c7');
-  var getActiveElement = $__require('106');
+  var ReactDOMSelection = $__require('d8');
+  var containsNode = $__require('d9');
+  var focusNode = $__require('9b');
+  var getActiveElement = $__require('da');
   function isInDocument(node) {
     return containsNode(document.documentElement, node);
   }
@@ -12480,7 +11027,7 @@ $__System.registerDynamic("101", ["104", "105", "c7", "106"], true, function($__
   return module.exports;
 });
 
-$__System.registerDynamic("106", [], true, function($__require, exports, module) {
+$__System.registerDynamic("da", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12501,7 +11048,7 @@ $__System.registerDynamic("106", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("bc", [], true, function($__require, exports, module) {
+$__System.registerDynamic("90", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12533,7 +11080,7 @@ $__System.registerDynamic("bc", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("ec", [], true, function($__require, exports, module) {
+$__System.registerDynamic("c0", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12565,21 +11112,21 @@ $__System.registerDynamic("ec", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("107", ["b5", "b6", "ac", "101", "b2", "106", "bc", "b7", "ec"], true, function($__require, exports, module) {
+$__System.registerDynamic("db", ["89", "8a", "80", "d5", "86", "da", "90", "8b", "c0"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var EventConstants = $__require('b5');
-  var EventPropagators = $__require('b6');
-  var ExecutionEnvironment = $__require('ac');
-  var ReactInputSelection = $__require('101');
-  var SyntheticEvent = $__require('b2');
-  var getActiveElement = $__require('106');
-  var isTextInputElement = $__require('bc');
-  var keyOf = $__require('b7');
-  var shallowEqual = $__require('ec');
+  var EventConstants = $__require('89');
+  var EventPropagators = $__require('8a');
+  var ExecutionEnvironment = $__require('80');
+  var ReactInputSelection = $__require('d5');
+  var SyntheticEvent = $__require('86');
+  var getActiveElement = $__require('da');
+  var isTextInputElement = $__require('90');
+  var keyOf = $__require('8b');
+  var shallowEqual = $__require('c0');
   var topLevelTypes = EventConstants.topLevelTypes;
   var skipSelectionChangeEvent = ExecutionEnvironment.canUseDOM && 'documentMode' in document && document.documentMode <= 11;
   var eventTypes = {select: {
@@ -12681,7 +11228,7 @@ $__System.registerDynamic("107", ["b5", "b6", "ac", "101", "b2", "106", "bc", "b
   return module.exports;
 });
 
-$__System.registerDynamic("108", [], true, function($__require, exports, module) {
+$__System.registerDynamic("dc", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -12696,14 +11243,14 @@ $__System.registerDynamic("108", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("f8", ["f2", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("cc", ["c6", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var emptyFunction = $__require('f2');
+    var emptyFunction = $__require('c6');
     var EventListener = {
       listen: function(target, eventType, callback) {
         if (target.addEventListener) {
@@ -12725,7 +11272,7 @@ $__System.registerDynamic("f8", ["f2", "29"], true, function($__require, exports
               target.removeEventListener(eventType, callback, true);
             }};
         } else {
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             console.error('Attempted to listen to events during the capture phase on a ' + 'browser that does not support the capture phase. Your application ' + 'will not receive some events.');
           }
           return {remove: emptyFunction};
@@ -12734,23 +11281,23 @@ $__System.registerDynamic("f8", ["f2", "29"], true, function($__require, exports
       registerDefault: function() {}
     };
     module.exports = EventListener;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("b6", ["b5", "b9", "ab", "109", "10a", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("8a", ["89", "8d", "7f", "dd", "de", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventConstants = $__require('b5');
-    var EventPluginHub = $__require('b9');
-    var warning = $__require('ab');
-    var accumulateInto = $__require('109');
-    var forEachAccumulated = $__require('10a');
+    var EventConstants = $__require('89');
+    var EventPluginHub = $__require('8d');
+    var warning = $__require('7f');
+    var accumulateInto = $__require('dd');
+    var forEachAccumulated = $__require('de');
     var PropagationPhases = EventConstants.PropagationPhases;
     var getListener = EventPluginHub.getListener;
     function listenerAtPhase(id, event, propagationPhase) {
@@ -12758,8 +11305,8 @@ $__System.registerDynamic("b6", ["b5", "b9", "ab", "109", "10a", "29"], true, fu
       return getListener(id, registrationName);
     }
     function accumulateDirectionalDispatches(domID, upwards, event) {
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(domID, 'Dispatching id must not be null') : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(domID, 'Dispatching id must not be null') : undefined;
       }
       var phase = upwards ? PropagationPhases.bubbled : PropagationPhases.captured;
       var listener = listenerAtPhase(domID, event, phase);
@@ -12812,18 +11359,18 @@ $__System.registerDynamic("b6", ["b5", "b9", "ab", "109", "10a", "29"], true, fu
       accumulateEnterLeaveDispatches: accumulateEnterLeaveDispatches
     };
     module.exports = EventPropagators;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("10b", ["b2"], true, function($__require, exports, module) {
+$__System.registerDynamic("df", ["86"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticEvent = $__require('b2');
+  var SyntheticEvent = $__require('86');
   var ClipboardEventInterface = {clipboardData: function(event) {
       return 'clipboardData' in event ? event.clipboardData : window.clipboardData;
     }};
@@ -12836,13 +11383,13 @@ $__System.registerDynamic("10b", ["b2"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("10c", ["10d"], true, function($__require, exports, module) {
+$__System.registerDynamic("e0", ["e1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticUIEvent = $__require('10d');
+  var SyntheticUIEvent = $__require('e1');
   var FocusEventInterface = {relatedTarget: null};
   function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {
     SyntheticUIEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);
@@ -12853,13 +11400,13 @@ $__System.registerDynamic("10c", ["10d"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("10e", ["10f"], true, function($__require, exports, module) {
+$__System.registerDynamic("e2", ["e3"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var getEventCharCode = $__require('10f');
+  var getEventCharCode = $__require('e3');
   var normalizeKey = {
     'Esc': 'Escape',
     'Spacebar': ' ',
@@ -12933,16 +11480,16 @@ $__System.registerDynamic("10e", ["10f"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("110", ["10d", "10f", "10e", "111"], true, function($__require, exports, module) {
+$__System.registerDynamic("e4", ["e1", "e3", "e2", "e5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticUIEvent = $__require('10d');
-  var getEventCharCode = $__require('10f');
-  var getEventKey = $__require('10e');
-  var getEventModifierState = $__require('111');
+  var SyntheticUIEvent = $__require('e1');
+  var getEventCharCode = $__require('e3');
+  var getEventKey = $__require('e2');
+  var getEventModifierState = $__require('e5');
   var KeyboardEventInterface = {
     key: getEventKey,
     location: null,
@@ -12984,13 +11531,13 @@ $__System.registerDynamic("110", ["10d", "10f", "10e", "111"], true, function($_
   return module.exports;
 });
 
-$__System.registerDynamic("112", ["c0"], true, function($__require, exports, module) {
+$__System.registerDynamic("e6", ["94"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticMouseEvent = $__require('c0');
+  var SyntheticMouseEvent = $__require('94');
   var DragEventInterface = {dataTransfer: null};
   function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {
     SyntheticMouseEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);
@@ -13001,14 +11548,14 @@ $__System.registerDynamic("112", ["c0"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("113", ["10d", "111"], true, function($__require, exports, module) {
+$__System.registerDynamic("e7", ["e1", "e5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticUIEvent = $__require('10d');
-  var getEventModifierState = $__require('111');
+  var SyntheticUIEvent = $__require('e1');
+  var getEventModifierState = $__require('e5');
   var TouchEventInterface = {
     touches: null,
     targetTouches: null,
@@ -13028,17 +11575,17 @@ $__System.registerDynamic("113", ["10d", "111"], true, function($__require, expo
   return module.exports;
 });
 
-$__System.registerDynamic("b2", ["ae", "af", "f2", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("86", ["82", "83", "c6", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var PooledClass = $__require('ae');
-    var assign = $__require('af');
-    var emptyFunction = $__require('f2');
-    var warning = $__require('ab');
+    var PooledClass = $__require('82');
+    var assign = $__require('83');
+    var emptyFunction = $__require('c6');
+    var warning = $__require('7f');
     var EventInterface = {
       type: null,
       target: null,
@@ -13084,8 +11631,8 @@ $__System.registerDynamic("b2", ["ae", "af", "f2", "ab", "29"], true, function($
       preventDefault: function() {
         this.defaultPrevented = true;
         var event = this.nativeEvent;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `preventDefault` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `preventDefault` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
         }
         if (!event) {
           return;
@@ -13099,8 +11646,8 @@ $__System.registerDynamic("b2", ["ae", "af", "f2", "ab", "29"], true, function($
       },
       stopPropagation: function() {
         var event = this.nativeEvent;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
         }
         if (!event) {
           return;
@@ -13139,12 +11686,12 @@ $__System.registerDynamic("b2", ["ae", "af", "f2", "ab", "29"], true, function($
     };
     PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
     module.exports = SyntheticEvent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("ba", [], true, function($__require, exports, module) {
+$__System.registerDynamic("8e", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -13159,14 +11706,14 @@ $__System.registerDynamic("ba", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("10d", ["b2", "ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("e1", ["86", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticEvent = $__require('b2');
-  var getEventTarget = $__require('ba');
+  var SyntheticEvent = $__require('86');
+  var getEventTarget = $__require('8e');
   var UIEventInterface = {
     view: function(event) {
       if (event.view) {
@@ -13196,7 +11743,7 @@ $__System.registerDynamic("10d", ["b2", "ba"], true, function($__require, export
   return module.exports;
 });
 
-$__System.registerDynamic("111", [], true, function($__require, exports, module) {
+$__System.registerDynamic("e5", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -13225,15 +11772,15 @@ $__System.registerDynamic("111", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("c0", ["10d", "114", "111"], true, function($__require, exports, module) {
+$__System.registerDynamic("94", ["e1", "e8", "e5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticUIEvent = $__require('10d');
-  var ViewportMetrics = $__require('114');
-  var getEventModifierState = $__require('111');
+  var SyntheticUIEvent = $__require('e1');
+  var ViewportMetrics = $__require('e8');
+  var getEventModifierState = $__require('e5');
   var MouseEventInterface = {
     screenX: null,
     screenY: null,
@@ -13271,13 +11818,13 @@ $__System.registerDynamic("c0", ["10d", "114", "111"], true, function($__require
   return module.exports;
 });
 
-$__System.registerDynamic("115", ["c0"], true, function($__require, exports, module) {
+$__System.registerDynamic("e9", ["94"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var SyntheticMouseEvent = $__require('c0');
+  var SyntheticMouseEvent = $__require('94');
   var WheelEventInterface = {
     deltaX: function(event) {
       return 'deltaX' in event ? event.deltaX : 'wheelDeltaX' in event ? -event.wheelDeltaX : 0;
@@ -13297,7 +11844,7 @@ $__System.registerDynamic("115", ["c0"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("10f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("e3", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -13324,30 +11871,30 @@ $__System.registerDynamic("10f", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("116", ["b5", "f8", "b6", "a1", "10b", "b2", "10c", "110", "c0", "112", "113", "10d", "115", "f2", "10f", "c5", "b7", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ea", ["89", "cc", "8a", "75", "df", "86", "e0", "e4", "94", "e6", "e7", "e1", "e9", "c6", "e3", "99", "8b", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventConstants = $__require('b5');
-    var EventListener = $__require('f8');
-    var EventPropagators = $__require('b6');
-    var ReactMount = $__require('a1');
-    var SyntheticClipboardEvent = $__require('10b');
-    var SyntheticEvent = $__require('b2');
-    var SyntheticFocusEvent = $__require('10c');
-    var SyntheticKeyboardEvent = $__require('110');
-    var SyntheticMouseEvent = $__require('c0');
-    var SyntheticDragEvent = $__require('112');
-    var SyntheticTouchEvent = $__require('113');
-    var SyntheticUIEvent = $__require('10d');
-    var SyntheticWheelEvent = $__require('115');
-    var emptyFunction = $__require('f2');
-    var getEventCharCode = $__require('10f');
-    var invariant = $__require('c5');
-    var keyOf = $__require('b7');
+    var EventConstants = $__require('89');
+    var EventListener = $__require('cc');
+    var EventPropagators = $__require('8a');
+    var ReactMount = $__require('75');
+    var SyntheticClipboardEvent = $__require('df');
+    var SyntheticEvent = $__require('86');
+    var SyntheticFocusEvent = $__require('e0');
+    var SyntheticKeyboardEvent = $__require('e4');
+    var SyntheticMouseEvent = $__require('94');
+    var SyntheticDragEvent = $__require('e6');
+    var SyntheticTouchEvent = $__require('e7');
+    var SyntheticUIEvent = $__require('e1');
+    var SyntheticWheelEvent = $__require('e9');
+    var emptyFunction = $__require('c6');
+    var getEventCharCode = $__require('e3');
+    var invariant = $__require('99');
+    var keyOf = $__require('8b');
     var topLevelTypes = EventConstants.topLevelTypes;
     var eventTypes = {
       abort: {phasedRegistrationNames: {
@@ -13734,7 +12281,7 @@ $__System.registerDynamic("116", ["b5", "f8", "b6", "a1", "10b", "b2", "10c", "1
             EventConstructor = SyntheticClipboardEvent;
             break;
         }
-        !EventConstructor ? process.env.NODE_ENV !== 'production' ? invariant(false, 'SimpleEventPlugin: Unhandled event type, `%s`.', topLevelType) : invariant(false) : undefined;
+        !EventConstructor ? "production" !== 'production' ? invariant(false, 'SimpleEventPlugin: Unhandled event type, `%s`.', topLevelType) : invariant(false) : undefined;
         var event = EventConstructor.getPooled(dispatchConfig, topLevelTargetID, nativeEvent, nativeEventTarget);
         EventPropagators.accumulateTwoPhaseDispatches(event);
         return event;
@@ -13755,18 +12302,18 @@ $__System.registerDynamic("116", ["b5", "f8", "b6", "a1", "10b", "b2", "10c", "1
       }
     };
     module.exports = SimpleEventPlugin;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("117", ["c2"], true, function($__require, exports, module) {
+$__System.registerDynamic("eb", ["96"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var DOMProperty = $__require('c2');
+  var DOMProperty = $__require('96');
   var MUST_USE_ATTRIBUTE = DOMProperty.injection.MUST_USE_ATTRIBUTE;
   var NS = {
     xlink: 'http://www.w3.org/1999/xlink',
@@ -13880,13 +12427,13 @@ $__System.registerDynamic("117", ["c2"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("118", ["af"], true, function($__require, exports, module) {
+$__System.registerDynamic("ec", ["83"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var assign = $__require('af');
+  var assign = $__require('83');
   var DONT_CARE_THRESHOLD = 1.2;
   var DOM_OPERATION_TYPES = {
     '_mountImageIntoNode': 'set innerHTML',
@@ -14037,14 +12584,14 @@ $__System.registerDynamic("118", ["af"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("c2", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("96", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     function checkMask(value, bitmask) {
       return (value & bitmask) === bitmask;
     }
@@ -14067,7 +12614,7 @@ $__System.registerDynamic("c2", ["c5", "29"], true, function($__require, exports
           DOMProperty._isCustomAttributeFunctions.push(domPropertyConfig.isCustomAttribute);
         }
         for (var propName in Properties) {
-          !!DOMProperty.properties.hasOwnProperty(propName) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'injectDOMPropertyConfig(...): You\'re trying to inject DOM property ' + '\'%s\' which has already been injected. You may be accidentally ' + 'injecting the same DOM property config twice, or you may be ' + 'injecting two configs that have conflicting property names.', propName) : invariant(false) : undefined;
+          !!DOMProperty.properties.hasOwnProperty(propName) ? "production" !== 'production' ? invariant(false, 'injectDOMPropertyConfig(...): You\'re trying to inject DOM property ' + '\'%s\' which has already been injected. You may be accidentally ' + 'injecting the same DOM property config twice, or you may be ' + 'injecting two configs that have conflicting property names.', propName) : invariant(false) : undefined;
           var lowerCased = propName.toLowerCase();
           var propConfig = Properties[propName];
           var propertyInfo = {
@@ -14083,16 +12630,16 @@ $__System.registerDynamic("c2", ["c5", "29"], true, function($__require, exports
             hasPositiveNumericValue: checkMask(propConfig, Injection.HAS_POSITIVE_NUMERIC_VALUE),
             hasOverloadedBooleanValue: checkMask(propConfig, Injection.HAS_OVERLOADED_BOOLEAN_VALUE)
           };
-          !(!propertyInfo.mustUseAttribute || !propertyInfo.mustUseProperty) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'DOMProperty: Cannot require using both attribute and property: %s', propName) : invariant(false) : undefined;
-          !(propertyInfo.mustUseProperty || !propertyInfo.hasSideEffects) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'DOMProperty: Properties that have side effects must use property: %s', propName) : invariant(false) : undefined;
-          !(propertyInfo.hasBooleanValue + propertyInfo.hasNumericValue + propertyInfo.hasOverloadedBooleanValue <= 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'DOMProperty: Value can be one of boolean, overloaded boolean, or ' + 'numeric value, but not a combination: %s', propName) : invariant(false) : undefined;
-          if (process.env.NODE_ENV !== 'production') {
+          !(!propertyInfo.mustUseAttribute || !propertyInfo.mustUseProperty) ? "production" !== 'production' ? invariant(false, 'DOMProperty: Cannot require using both attribute and property: %s', propName) : invariant(false) : undefined;
+          !(propertyInfo.mustUseProperty || !propertyInfo.hasSideEffects) ? "production" !== 'production' ? invariant(false, 'DOMProperty: Properties that have side effects must use property: %s', propName) : invariant(false) : undefined;
+          !(propertyInfo.hasBooleanValue + propertyInfo.hasNumericValue + propertyInfo.hasOverloadedBooleanValue <= 1) ? "production" !== 'production' ? invariant(false, 'DOMProperty: Value can be one of boolean, overloaded boolean, or ' + 'numeric value, but not a combination: %s', propName) : invariant(false) : undefined;
+          if ("production" !== 'production') {
             DOMProperty.getPossibleStandardName[lowerCased] = propName;
           }
           if (DOMAttributeNames.hasOwnProperty(propName)) {
             var attributeName = DOMAttributeNames[propName];
             propertyInfo.attributeName = attributeName;
-            if (process.env.NODE_ENV !== 'production') {
+            if ("production" !== 'production') {
               DOMProperty.getPossibleStandardName[attributeName] = propName;
             }
           }
@@ -14113,7 +12660,7 @@ $__System.registerDynamic("c2", ["c5", "29"], true, function($__require, exports
     var DOMProperty = {
       ID_ATTRIBUTE_NAME: 'data-reactid',
       properties: {},
-      getPossibleStandardName: process.env.NODE_ENV !== 'production' ? {} : null,
+      getPossibleStandardName: "production" !== 'production' ? {} : null,
       _isCustomAttributeFunctions: [],
       isCustomAttribute: function(attributeName) {
         for (var i = 0; i < DOMProperty._isCustomAttributeFunctions.length; i++) {
@@ -14139,19 +12686,19 @@ $__System.registerDynamic("c2", ["c5", "29"], true, function($__require, exports
       injection: DOMPropertyInjection
     };
     module.exports = DOMProperty;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("119", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ed", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var EventPluginOrder = null;
     var namesToPlugins = {};
     function recomputePluginOrdering() {
@@ -14161,20 +12708,20 @@ $__System.registerDynamic("119", ["c5", "29"], true, function($__require, export
       for (var pluginName in namesToPlugins) {
         var PluginModule = namesToPlugins[pluginName];
         var pluginIndex = EventPluginOrder.indexOf(pluginName);
-        !(pluginIndex > -1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject event plugins that do not exist in ' + 'the plugin ordering, `%s`.', pluginName) : invariant(false) : undefined;
+        !(pluginIndex > -1) ? "production" !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject event plugins that do not exist in ' + 'the plugin ordering, `%s`.', pluginName) : invariant(false) : undefined;
         if (EventPluginRegistry.plugins[pluginIndex]) {
           continue;
         }
-        !PluginModule.extractEvents ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginRegistry: Event plugins must implement an `extractEvents` ' + 'method, but `%s` does not.', pluginName) : invariant(false) : undefined;
+        !PluginModule.extractEvents ? "production" !== 'production' ? invariant(false, 'EventPluginRegistry: Event plugins must implement an `extractEvents` ' + 'method, but `%s` does not.', pluginName) : invariant(false) : undefined;
         EventPluginRegistry.plugins[pluginIndex] = PluginModule;
         var publishedEvents = PluginModule.eventTypes;
         for (var eventName in publishedEvents) {
-          !publishEventForPlugin(publishedEvents[eventName], PluginModule, eventName) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginRegistry: Failed to publish event `%s` for plugin `%s`.', eventName, pluginName) : invariant(false) : undefined;
+          !publishEventForPlugin(publishedEvents[eventName], PluginModule, eventName) ? "production" !== 'production' ? invariant(false, 'EventPluginRegistry: Failed to publish event `%s` for plugin `%s`.', eventName, pluginName) : invariant(false) : undefined;
         }
       }
     }
     function publishEventForPlugin(dispatchConfig, PluginModule, eventName) {
-      !!EventPluginRegistry.eventNameDispatchConfigs.hasOwnProperty(eventName) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'event name, `%s`.', eventName) : invariant(false) : undefined;
+      !!EventPluginRegistry.eventNameDispatchConfigs.hasOwnProperty(eventName) ? "production" !== 'production' ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'event name, `%s`.', eventName) : invariant(false) : undefined;
       EventPluginRegistry.eventNameDispatchConfigs[eventName] = dispatchConfig;
       var phasedRegistrationNames = dispatchConfig.phasedRegistrationNames;
       if (phasedRegistrationNames) {
@@ -14192,7 +12739,7 @@ $__System.registerDynamic("119", ["c5", "29"], true, function($__require, export
       return false;
     }
     function publishRegistrationName(registrationName, PluginModule, eventName) {
-      !!EventPluginRegistry.registrationNameModules[registrationName] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'registration name, `%s`.', registrationName) : invariant(false) : undefined;
+      !!EventPluginRegistry.registrationNameModules[registrationName] ? "production" !== 'production' ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'registration name, `%s`.', registrationName) : invariant(false) : undefined;
       EventPluginRegistry.registrationNameModules[registrationName] = PluginModule;
       EventPluginRegistry.registrationNameDependencies[registrationName] = PluginModule.eventTypes[eventName].dependencies;
     }
@@ -14202,7 +12749,7 @@ $__System.registerDynamic("119", ["c5", "29"], true, function($__require, export
       registrationNameModules: {},
       registrationNameDependencies: {},
       injectEventPluginOrder: function(InjectedEventPluginOrder) {
-        !!EventPluginOrder ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject event plugin ordering more than ' + 'once. You are likely trying to load more than one copy of React.') : invariant(false) : undefined;
+        !!EventPluginOrder ? "production" !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject event plugin ordering more than ' + 'once. You are likely trying to load more than one copy of React.') : invariant(false) : undefined;
         EventPluginOrder = Array.prototype.slice.call(InjectedEventPluginOrder);
         recomputePluginOrdering();
       },
@@ -14214,7 +12761,7 @@ $__System.registerDynamic("119", ["c5", "29"], true, function($__require, export
           }
           var PluginModule = injectedNamesToPlugins[pluginName];
           if (!namesToPlugins.hasOwnProperty(pluginName) || namesToPlugins[pluginName] !== PluginModule) {
-            !!namesToPlugins[pluginName] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject two different event plugins ' + 'using the same name, `%s`.', pluginName) : invariant(false) : undefined;
+            !!namesToPlugins[pluginName] ? "production" !== 'production' ? invariant(false, 'EventPluginRegistry: Cannot inject two different event plugins ' + 'using the same name, `%s`.', pluginName) : invariant(false) : undefined;
             namesToPlugins[pluginName] = PluginModule;
             isOrderingDirty = true;
           }
@@ -14262,18 +12809,18 @@ $__System.registerDynamic("119", ["c5", "29"], true, function($__require, export
       }
     };
     module.exports = EventPluginRegistry;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("b5", ["f3"], true, function($__require, exports, module) {
+$__System.registerDynamic("89", ["c7"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var keyMirror = $__require('f3');
+  var keyMirror = $__require('c7');
   var PropagationPhases = keyMirror({
     bubbled: null,
     captured: null
@@ -14352,23 +12899,23 @@ $__System.registerDynamic("b5", ["f3"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ee", ["89", "ef", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventConstants = $__require('b5');
-    var ReactErrorUtils = $__require('11b');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var EventConstants = $__require('89');
+    var ReactErrorUtils = $__require('ef');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     var injection = {
       Mount: null,
       injectMount: function(InjectedMount) {
         injection.Mount = InjectedMount;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(InjectedMount && InjectedMount.getNode && InjectedMount.getID, 'EventPluginUtils.injection.injectMount(...): Injected Mount ' + 'module is missing getNode or getID.') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(InjectedMount && InjectedMount.getNode && InjectedMount.getID, 'EventPluginUtils.injection.injectMount(...): Injected Mount ' + 'module is missing getNode or getID.') : undefined;
         }
       }
     };
@@ -14383,7 +12930,7 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
       return topLevelType === topLevelTypes.topMouseDown || topLevelType === topLevelTypes.topTouchStart;
     }
     var validateEventDispatches;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       validateEventDispatches = function(event) {
         var dispatchListeners = event._dispatchListeners;
         var dispatchIDs = event._dispatchIDs;
@@ -14391,7 +12938,7 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
         var idsIsArr = Array.isArray(dispatchIDs);
         var IDsLen = idsIsArr ? dispatchIDs.length : dispatchIDs ? 1 : 0;
         var listenersLen = listenersIsArr ? dispatchListeners.length : dispatchListeners ? 1 : 0;
-        process.env.NODE_ENV !== 'production' ? warning(idsIsArr === listenersIsArr && IDsLen === listenersLen, 'EventPluginUtils: Invalid `event`.') : undefined;
+        "production" !== 'production' ? warning(idsIsArr === listenersIsArr && IDsLen === listenersLen, 'EventPluginUtils: Invalid `event`.') : undefined;
       };
     }
     function executeDispatch(event, simulated, listener, domID) {
@@ -14407,7 +12954,7 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
     function executeDispatchesInOrder(event, simulated) {
       var dispatchListeners = event._dispatchListeners;
       var dispatchIDs = event._dispatchIDs;
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         validateEventDispatches(event);
       }
       if (Array.isArray(dispatchListeners)) {
@@ -14426,7 +12973,7 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
     function executeDispatchesInOrderStopAtTrueImpl(event) {
       var dispatchListeners = event._dispatchListeners;
       var dispatchIDs = event._dispatchIDs;
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         validateEventDispatches(event);
       }
       if (Array.isArray(dispatchListeners)) {
@@ -14452,12 +12999,12 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
       return ret;
     }
     function executeDirectDispatch(event) {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         validateEventDispatches(event);
       }
       var dispatchListener = event._dispatchListeners;
       var dispatchID = event._dispatchIDs;
-      !!Array.isArray(dispatchListener) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'executeDirectDispatch(...): Invalid `event`.') : invariant(false) : undefined;
+      !!Array.isArray(dispatchListener) ? "production" !== 'production' ? invariant(false, 'executeDirectDispatch(...): Invalid `event`.') : invariant(false) : undefined;
       var res = dispatchListener ? dispatchListener(event, dispatchID) : null;
       event._dispatchListeners = null;
       event._dispatchIDs = null;
@@ -14483,12 +13030,12 @@ $__System.registerDynamic("11a", ["b5", "11b", "c5", "ab", "29"], true, function
       injection: injection
     };
     module.exports = EventPluginUtils;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("11b", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ef", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -14517,7 +13064,7 @@ $__System.registerDynamic("11b", ["29"], true, function($__require, exports, mod
         }
       }
     };
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof document !== 'undefined' && typeof document.createEvent === 'function') {
         var fakeNode = document.createElement('react');
         ReactErrorUtils.invokeGuardedCallback = function(name, func, a, b) {
@@ -14532,21 +13079,21 @@ $__System.registerDynamic("11b", ["29"], true, function($__require, exports, mod
       }
     }
     module.exports = ReactErrorUtils;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("109", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("dd", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     function accumulateInto(current, next) {
-      !(next != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'accumulateInto(...): Accumulated items must not be null or undefined.') : invariant(false) : undefined;
+      !(next != null) ? "production" !== 'production' ? invariant(false, 'accumulateInto(...): Accumulated items must not be null or undefined.') : invariant(false) : undefined;
       if (current == null) {
         return next;
       }
@@ -14566,12 +13113,12 @@ $__System.registerDynamic("109", ["c5", "29"], true, function($__require, export
       return [current, next];
     }
     module.exports = accumulateInto;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("10a", [], true, function($__require, exports, module) {
+$__System.registerDynamic("de", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14589,20 +13136,20 @@ $__System.registerDynamic("10a", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("b9", ["119", "11a", "11b", "109", "10a", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("8d", ["ed", "ee", "ef", "dd", "de", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventPluginRegistry = $__require('119');
-    var EventPluginUtils = $__require('11a');
-    var ReactErrorUtils = $__require('11b');
-    var accumulateInto = $__require('109');
-    var forEachAccumulated = $__require('10a');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var EventPluginRegistry = $__require('ed');
+    var EventPluginUtils = $__require('ee');
+    var ReactErrorUtils = $__require('ef');
+    var accumulateInto = $__require('dd');
+    var forEachAccumulated = $__require('de');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     var listenerBank = {};
     var eventQueue = null;
     var executeDispatchesAndRelease = function(event, simulated) {
@@ -14622,19 +13169,19 @@ $__System.registerDynamic("b9", ["119", "11a", "11b", "109", "10a", "c5", "ab", 
     var InstanceHandle = null;
     function validateInstanceHandle() {
       var valid = InstanceHandle && InstanceHandle.traverseTwoPhase && InstanceHandle.traverseEnterLeave;
-      process.env.NODE_ENV !== 'production' ? warning(valid, 'InstanceHandle not injected before use!') : undefined;
+      "production" !== 'production' ? warning(valid, 'InstanceHandle not injected before use!') : undefined;
     }
     var EventPluginHub = {
       injection: {
         injectMount: EventPluginUtils.injection.injectMount,
         injectInstanceHandle: function(InjectedInstanceHandle) {
           InstanceHandle = InjectedInstanceHandle;
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             validateInstanceHandle();
           }
         },
         getInstanceHandle: function() {
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             validateInstanceHandle();
           }
           return InstanceHandle;
@@ -14645,7 +13192,7 @@ $__System.registerDynamic("b9", ["119", "11a", "11b", "109", "10a", "c5", "ab", 
       eventNameDispatchConfigs: EventPluginRegistry.eventNameDispatchConfigs,
       registrationNameModules: EventPluginRegistry.registrationNameModules,
       putListener: function(id, registrationName, listener) {
-        !(typeof listener === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected %s listener to be a function, instead got type %s', registrationName, typeof listener) : invariant(false) : undefined;
+        !(typeof listener === 'function') ? "production" !== 'production' ? invariant(false, 'Expected %s listener to be a function, instead got type %s', registrationName, typeof listener) : invariant(false) : undefined;
         var bankForRegistrationName = listenerBank[registrationName] || (listenerBank[registrationName] = {});
         bankForRegistrationName[id] = listener;
         var PluginModule = EventPluginRegistry.registrationNameModules[registrationName];
@@ -14706,7 +13253,7 @@ $__System.registerDynamic("b9", ["119", "11a", "11b", "109", "10a", "c5", "ab", 
         } else {
           forEachAccumulated(processingEventQueue, executeDispatchesAndReleaseTopLevel);
         }
-        !!eventQueue ? process.env.NODE_ENV !== 'production' ? invariant(false, 'processEventQueue(): Additional events were enqueued while processing ' + 'an event queue. Support for this has not yet been implemented.') : invariant(false) : undefined;
+        !!eventQueue ? "production" !== 'production' ? invariant(false, 'processEventQueue(): Additional events were enqueued while processing ' + 'an event queue. Support for this has not yet been implemented.') : invariant(false) : undefined;
         ReactErrorUtils.rethrowCaughtError();
       },
       __purge: function() {
@@ -14717,18 +13264,18 @@ $__System.registerDynamic("b9", ["119", "11a", "11b", "109", "10a", "c5", "ab", 
       }
     };
     module.exports = EventPluginHub;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("11c", ["b9"], true, function($__require, exports, module) {
+$__System.registerDynamic("f0", ["8d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var EventPluginHub = $__require('b9');
+  var EventPluginHub = $__require('8d');
   function runEventQueueInBatch(events) {
     EventPluginHub.enqueueEvents(events);
     EventPluginHub.processEventQueue(false);
@@ -14742,7 +13289,7 @@ $__System.registerDynamic("11c", ["b9"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("114", [], true, function($__require, exports, module) {
+$__System.registerDynamic("e8", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14761,13 +13308,13 @@ $__System.registerDynamic("114", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("bb", ["ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("8f", ["80"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ExecutionEnvironment = $__require('ac');
+  var ExecutionEnvironment = $__require('80');
   var useHasFeature;
   if (ExecutionEnvironment.canUseDOM) {
     useHasFeature = document.implementation && document.implementation.hasFeature && document.implementation.hasFeature('', '') !== true;
@@ -14793,21 +13340,21 @@ $__System.registerDynamic("bb", ["ac"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("e4", ["b5", "b9", "119", "11c", "a6", "114", "af", "bb", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b8", ["89", "8d", "ed", "f0", "7a", "e8", "83", "8f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var EventConstants = $__require('b5');
-    var EventPluginHub = $__require('b9');
-    var EventPluginRegistry = $__require('119');
-    var ReactEventEmitterMixin = $__require('11c');
-    var ReactPerf = $__require('a6');
-    var ViewportMetrics = $__require('114');
-    var assign = $__require('af');
-    var isEventSupported = $__require('bb');
+    var EventConstants = $__require('89');
+    var EventPluginHub = $__require('8d');
+    var EventPluginRegistry = $__require('ed');
+    var ReactEventEmitterMixin = $__require('f0');
+    var ReactPerf = $__require('7a');
+    var ViewportMetrics = $__require('e8');
+    var assign = $__require('83');
+    var isEventSupported = $__require('8f');
     var alreadyListeningTo = {};
     var isMonitoringScrollValue = false;
     var reactTopListenersCounter = 0;
@@ -14959,12 +13506,12 @@ $__System.registerDynamic("e4", ["b5", "b9", "119", "11c", "a6", "114", "af", "b
       deleteListener: 'deleteListener'
     });
     module.exports = ReactBrowserEventEmitter;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("100", [], true, function($__require, exports, module) {
+$__System.registerDynamic("d4", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14976,7 +13523,7 @@ $__System.registerDynamic("100", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("11d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("f1", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14990,13 +13537,13 @@ $__System.registerDynamic("11d", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("11e", ["11d"], true, function($__require, exports, module) {
+$__System.registerDynamic("f2", ["f1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isNode = $__require('11d');
+  var isNode = $__require('f1');
   function isTextNode(object) {
     return isNode(object) && object.nodeType == 3;
   }
@@ -15005,13 +13552,13 @@ $__System.registerDynamic("11e", ["11d"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("105", ["11e"], true, function($__require, exports, module) {
+$__System.registerDynamic("d9", ["f2"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isTextNode = $__require('11e');
+  var isTextNode = $__require('f2');
   function containsNode(_x, _x2) {
     var _again = true;
     _function: while (_again) {
@@ -15043,14 +13590,14 @@ $__System.registerDynamic("105", ["11e"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("e9", ["ac", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("bd", ["80", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ExecutionEnvironment = $__require('ac');
+    var ExecutionEnvironment = $__require('80');
     var WHITESPACE_TEST = /^[ \r\n\t\f]/;
     var NONVISIBLE_TEST = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/;
     var setInnerHTML = function(node, html) {
@@ -15086,23 +13633,23 @@ $__System.registerDynamic("e9", ["ac", "29"], true, function($__require, exports
       }
     }
     module.exports = setInnerHTML;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("eb", ["af", "f2", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("bf", ["83", "c6", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var assign = $__require('af');
-    var emptyFunction = $__require('f2');
-    var warning = $__require('ab');
+    var assign = $__require('83');
+    var emptyFunction = $__require('c6');
+    var warning = $__require('7f');
     var validateDOMNesting = emptyFunction;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       var specialTags = ['address', 'applet', 'area', 'article', 'aside', 'base', 'basefont', 'bgsound', 'blockquote', 'body', 'br', 'button', 'caption', 'center', 'col', 'colgroup', 'dd', 'details', 'dir', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'iframe', 'img', 'input', 'isindex', 'li', 'link', 'listing', 'main', 'marquee', 'menu', 'menuitem', 'meta', 'nav', 'noembed', 'noframes', 'noscript', 'object', 'ol', 'p', 'param', 'plaintext', 'pre', 'script', 'section', 'select', 'source', 'style', 'summary', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'title', 'tr', 'track', 'ul', 'wbr', 'xmp'];
       var inScopeTags = ['applet', 'caption', 'html', 'table', 'td', 'th', 'marquee', 'object', 'template', 'foreignObject', 'desc', 'title'];
       var buttonScopeTags = inScopeTags.concat(['button']);
@@ -15316,9 +13863,9 @@ $__System.registerDynamic("eb", ["af", "f2", "ab", "29"], true, function($__requ
             if (ancestorTag === 'table' && childTag === 'tr') {
               info += ' Add a <tbody> to your code to match the DOM tree generated by ' + 'the browser.';
             }
-            process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a child of <%s>. ' + 'See %s.%s', childTag, ancestorTag, ownerInfo, info) : undefined;
+            "production" !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a child of <%s>. ' + 'See %s.%s', childTag, ancestorTag, ownerInfo, info) : undefined;
           } else {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a descendant of ' + '<%s>. See %s.', childTag, ancestorTag, ownerInfo) : undefined;
+            "production" !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a descendant of ' + '<%s>. See %s.', childTag, ancestorTag, ownerInfo) : undefined;
           }
         }
       };
@@ -15332,40 +13879,40 @@ $__System.registerDynamic("eb", ["af", "f2", "ab", "29"], true, function($__requ
       };
     }
     module.exports = validateDOMNesting;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c4", "121", "a6", "a7", "e6", "a8", "af", "122", "105", "db", "c5", "e9", "dc", "eb", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("75", ["96", "b8", "76", "d4", "f3", "f4", "79", "98", "f5", "7a", "7b", "ba", "7c", "83", "f6", "d9", "af", "99", "bd", "b0", "bf", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var DOMProperty = $__require('c2');
-    var ReactBrowserEventEmitter = $__require('e4');
-    var ReactCurrentOwner = $__require('a2');
-    var ReactDOMFeatureFlags = $__require('100');
-    var ReactElement = $__require('11f');
-    var ReactEmptyComponentRegistry = $__require('120');
-    var ReactInstanceHandles = $__require('a5');
-    var ReactInstanceMap = $__require('c4');
-    var ReactMarkupChecksum = $__require('121');
-    var ReactPerf = $__require('a6');
-    var ReactReconciler = $__require('a7');
-    var ReactUpdateQueue = $__require('e6');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var emptyObject = $__require('122');
-    var containsNode = $__require('105');
-    var instantiateReactComponent = $__require('db');
-    var invariant = $__require('c5');
-    var setInnerHTML = $__require('e9');
-    var shouldUpdateReactComponent = $__require('dc');
-    var validateDOMNesting = $__require('eb');
-    var warning = $__require('ab');
+    var DOMProperty = $__require('96');
+    var ReactBrowserEventEmitter = $__require('b8');
+    var ReactCurrentOwner = $__require('76');
+    var ReactDOMFeatureFlags = $__require('d4');
+    var ReactElement = $__require('f3');
+    var ReactEmptyComponentRegistry = $__require('f4');
+    var ReactInstanceHandles = $__require('79');
+    var ReactInstanceMap = $__require('98');
+    var ReactMarkupChecksum = $__require('f5');
+    var ReactPerf = $__require('7a');
+    var ReactReconciler = $__require('7b');
+    var ReactUpdateQueue = $__require('ba');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var emptyObject = $__require('f6');
+    var containsNode = $__require('d9');
+    var instantiateReactComponent = $__require('af');
+    var invariant = $__require('99');
+    var setInnerHTML = $__require('bd');
+    var shouldUpdateReactComponent = $__require('b0');
+    var validateDOMNesting = $__require('bf');
+    var warning = $__require('7f');
     var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
     var nodeCache = {};
     var ELEMENT_NODE_TYPE = 1;
@@ -15374,7 +13921,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
     var ownerDocumentContextKey = '__ReactMount_ownerDocument$' + Math.random().toString(36).slice(2);
     var instancesByReactRootID = {};
     var containersByReactRootID = {};
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       var rootElementsByReactRootID = {};
     }
     var findComponentRootReusableArray = [];
@@ -15407,7 +13954,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
         if (nodeCache.hasOwnProperty(id)) {
           var cached = nodeCache[id];
           if (cached !== node) {
-            !!isValid(cached, id) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactMount: Two valid but unequal nodes with the same `%s`: %s', ATTR_NAME, id) : invariant(false) : undefined;
+            !!isValid(cached, id) ? "production" !== 'production' ? invariant(false, 'ReactMount: Two valid but unequal nodes with the same `%s`: %s', ATTR_NAME, id) : invariant(false) : undefined;
             nodeCache[id] = node;
           }
         } else {
@@ -15445,7 +13992,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
     }
     function isValid(node, id) {
       if (node) {
-        !(internalGetID(node) === id) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactMount: Unexpected modification of `%s`', ATTR_NAME) : invariant(false) : undefined;
+        !(internalGetID(node) === id) ? "production" !== 'production' ? invariant(false, 'ReactMount: Unexpected modification of `%s`', ATTR_NAME) : invariant(false) : undefined;
         var container = ReactMount.findReactContainerForID(id);
         if (container && containsNode(container, node)) {
           return true;
@@ -15481,7 +14028,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
           context[ownerDocumentContextKey] = container.ownerDocument;
         }
       }
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         if (context === emptyObject) {
           context = {};
         }
@@ -15537,7 +14084,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
     }
     var TopLevelWrapper = function() {};
     TopLevelWrapper.prototype.isReactComponent = {};
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       TopLevelWrapper.displayName = 'TopLevelWrapper';
     }
     TopLevelWrapper.prototype.render = function() {
@@ -15556,35 +14103,35 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
             ReactUpdateQueue.enqueueCallbackInternal(prevComponent, callback);
           }
         });
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           rootElementsByReactRootID[getReactRootID(container)] = getReactRootElementInContainer(container);
         }
         return prevComponent;
       },
       _registerComponent: function(nextComponent, container) {
-        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '_registerComponent(...): Target container is not a DOM element.') : invariant(false) : undefined;
+        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? "production" !== 'production' ? invariant(false, '_registerComponent(...): Target container is not a DOM element.') : invariant(false) : undefined;
         ReactBrowserEventEmitter.ensureScrollValueMonitoring();
         var reactRootID = ReactMount.registerContainer(container);
         instancesByReactRootID[reactRootID] = nextComponent;
         return reactRootID;
       },
       _renderNewRootComponent: function(nextElement, container, shouldReuseMarkup, context) {
-        process.env.NODE_ENV !== 'production' ? warning(ReactCurrentOwner.current == null, '_renderNewRootComponent(): Render methods should be a pure function ' + 'of props and state; triggering nested component updates from ' + 'render is not allowed. If necessary, trigger nested updates in ' + 'componentDidUpdate. Check the render method of %s.', ReactCurrentOwner.current && ReactCurrentOwner.current.getName() || 'ReactCompositeComponent') : undefined;
+        "production" !== 'production' ? warning(ReactCurrentOwner.current == null, '_renderNewRootComponent(): Render methods should be a pure function ' + 'of props and state; triggering nested component updates from ' + 'render is not allowed. If necessary, trigger nested updates in ' + 'componentDidUpdate. Check the render method of %s.', ReactCurrentOwner.current && ReactCurrentOwner.current.getName() || 'ReactCompositeComponent') : undefined;
         var componentInstance = instantiateReactComponent(nextElement, null);
         var reactRootID = ReactMount._registerComponent(componentInstance, container);
         ReactUpdates.batchedUpdates(batchedMountComponentIntoNode, componentInstance, reactRootID, container, shouldReuseMarkup, context);
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           rootElementsByReactRootID[reactRootID] = getReactRootElementInContainer(container);
         }
         return componentInstance;
       },
       renderSubtreeIntoContainer: function(parentComponent, nextElement, container, callback) {
-        !(parentComponent != null && parentComponent._reactInternalInstance != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'parentComponent must be a valid React Component') : invariant(false) : undefined;
+        !(parentComponent != null && parentComponent._reactInternalInstance != null) ? "production" !== 'production' ? invariant(false, 'parentComponent must be a valid React Component') : invariant(false) : undefined;
         return ReactMount._renderSubtreeIntoContainer(parentComponent, nextElement, container, callback);
       },
       _renderSubtreeIntoContainer: function(parentComponent, nextElement, container, callback) {
-        !ReactElement.isValidElement(nextElement) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactDOM.render(): Invalid component element.%s', typeof nextElement === 'string' ? ' Instead of passing an element string, make sure to instantiate ' + 'it by passing it to React.createElement.' : typeof nextElement === 'function' ? ' Instead of passing a component class, make sure to instantiate ' + 'it by passing it to React.createElement.' : nextElement != null && nextElement.props !== undefined ? ' This may be caused by unintentionally loading two independent ' + 'copies of React.' : '') : invariant(false) : undefined;
-        process.env.NODE_ENV !== 'production' ? warning(!container || !container.tagName || container.tagName.toUpperCase() !== 'BODY', 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : undefined;
+        !ReactElement.isValidElement(nextElement) ? "production" !== 'production' ? invariant(false, 'ReactDOM.render(): Invalid component element.%s', typeof nextElement === 'string' ? ' Instead of passing an element string, make sure to instantiate ' + 'it by passing it to React.createElement.' : typeof nextElement === 'function' ? ' Instead of passing a component class, make sure to instantiate ' + 'it by passing it to React.createElement.' : nextElement != null && nextElement.props !== undefined ? ' This may be caused by unintentionally loading two independent ' + 'copies of React.' : '') : invariant(false) : undefined;
+        "production" !== 'production' ? warning(!container || !container.tagName || container.tagName.toUpperCase() !== 'BODY', 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : undefined;
         var nextWrappedElement = new ReactElement(TopLevelWrapper, null, null, null, null, null, nextElement);
         var prevComponent = instancesByReactRootID[getReactRootID(container)];
         if (prevComponent) {
@@ -15604,13 +14151,13 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
         var reactRootElement = getReactRootElementInContainer(container);
         var containerHasReactMarkup = reactRootElement && !!internalGetID(reactRootElement);
         var containerHasNonRootReactChild = hasNonRootReactChild(container);
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!containerHasNonRootReactChild, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new components instead of calling ReactDOM.render.') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(!containerHasNonRootReactChild, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new components instead of calling ReactDOM.render.') : undefined;
           if (!containerHasReactMarkup || reactRootElement.nextSibling) {
             var rootElementSibling = reactRootElement;
             while (rootElementSibling) {
               if (internalGetID(rootElementSibling)) {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'render(): Target node has markup rendered by React, but there ' + 'are unrelated nodes as well. This is most commonly caused by ' + 'white-space inserted around server-rendered markup.') : undefined;
+                "production" !== 'production' ? warning(false, 'render(): Target node has markup rendered by React, but there ' + 'are unrelated nodes as well. This is most commonly caused by ' + 'white-space inserted around server-rendered markup.') : undefined;
                 break;
               }
               rootElementSibling = rootElementSibling.nextSibling;
@@ -15639,23 +14186,23 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
         return reactRootID;
       },
       unmountComponentAtNode: function(container) {
-        process.env.NODE_ENV !== 'production' ? warning(ReactCurrentOwner.current == null, 'unmountComponentAtNode(): Render methods should be a pure function ' + 'of props and state; triggering nested component updates from render ' + 'is not allowed. If necessary, trigger nested updates in ' + 'componentDidUpdate. Check the render method of %s.', ReactCurrentOwner.current && ReactCurrentOwner.current.getName() || 'ReactCompositeComponent') : undefined;
-        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'unmountComponentAtNode(...): Target container is not a DOM element.') : invariant(false) : undefined;
+        "production" !== 'production' ? warning(ReactCurrentOwner.current == null, 'unmountComponentAtNode(): Render methods should be a pure function ' + 'of props and state; triggering nested component updates from render ' + 'is not allowed. If necessary, trigger nested updates in ' + 'componentDidUpdate. Check the render method of %s.', ReactCurrentOwner.current && ReactCurrentOwner.current.getName() || 'ReactCompositeComponent') : undefined;
+        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? "production" !== 'production' ? invariant(false, 'unmountComponentAtNode(...): Target container is not a DOM element.') : invariant(false) : undefined;
         var reactRootID = getReactRootID(container);
         var component = instancesByReactRootID[reactRootID];
         if (!component) {
           var containerHasNonRootReactChild = hasNonRootReactChild(container);
           var containerID = internalGetID(container);
           var isContainerReactRoot = containerID && containerID === ReactInstanceHandles.getReactRootIDFromNodeID(containerID);
-          if (process.env.NODE_ENV !== 'production') {
-            process.env.NODE_ENV !== 'production' ? warning(!containerHasNonRootReactChild, 'unmountComponentAtNode(): The node you\'re attempting to unmount ' + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : undefined;
+          if ("production" !== 'production') {
+            "production" !== 'production' ? warning(!containerHasNonRootReactChild, 'unmountComponentAtNode(): The node you\'re attempting to unmount ' + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : undefined;
           }
           return false;
         }
         ReactUpdates.batchedUpdates(unmountComponentFromNode, component, container);
         delete instancesByReactRootID[reactRootID];
         delete containersByReactRootID[reactRootID];
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           delete rootElementsByReactRootID[reactRootID];
         }
         return true;
@@ -15663,15 +14210,15 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
       findReactContainerForID: function(id) {
         var reactRootID = ReactInstanceHandles.getReactRootIDFromNodeID(id);
         var container = containersByReactRootID[reactRootID];
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var rootElement = rootElementsByReactRootID[reactRootID];
           if (rootElement && rootElement.parentNode !== container) {
-            process.env.NODE_ENV !== 'production' ? warning(internalGetID(rootElement) === reactRootID, 'ReactMount: Root element ID differed from reactRootID.') : undefined;
+            "production" !== 'production' ? warning(internalGetID(rootElement) === reactRootID, 'ReactMount: Root element ID differed from reactRootID.') : undefined;
             var containerChild = container.firstChild;
             if (containerChild && reactRootID === internalGetID(containerChild)) {
               rootElementsByReactRootID[reactRootID] = containerChild;
             } else {
-              process.env.NODE_ENV !== 'production' ? warning(false, 'ReactMount: Root element has been removed from its original ' + 'container. New container: %s', rootElement.parentNode) : undefined;
+              "production" !== 'production' ? warning(false, 'ReactMount: Root element has been removed from its original ' + 'container. New container: %s', rootElement.parentNode) : undefined;
             }
           }
         }
@@ -15688,8 +14235,8 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
         var firstChildren = findComponentRootReusableArray;
         var childIndex = 0;
         var deepestAncestor = findDeepestCachedAncestor(targetID) || ancestorNode;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(deepestAncestor != null, 'React can\'t find the root component node for data-reactid value ' + '`%s`. If you\'re seeing this message, it probably means that ' + 'you\'ve loaded two copies of React on the page. At this time, only ' + 'a single copy of React can be loaded at a time.', targetID) : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(deepestAncestor != null, 'React can\'t find the root component node for data-reactid value ' + '`%s`. If you\'re seeing this message, it probably means that ' + 'you\'ve loaded two copies of React on the page. At this time, only ' + 'a single copy of React can be loaded at a time.', targetID) : undefined;
         }
         firstChildren[0] = deepestAncestor.firstChild;
         firstChildren.length = 1;
@@ -15716,10 +14263,10 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
           }
         }
         firstChildren.length = 0;
-        !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'findComponentRoot(..., %s): Unable to find element. This probably ' + 'means the DOM was unexpectedly mutated (e.g., by the browser), ' + 'usually due to forgetting a <tbody> when using tables, nesting tags ' + 'like <form>, <p>, or <a>, or using non-SVG elements in an <svg> ' + 'parent. ' + 'Try inspecting the child nodes of the element with React ID `%s`.', targetID, ReactMount.getID(ancestorNode)) : invariant(false) : undefined;
+        !false ? "production" !== 'production' ? invariant(false, 'findComponentRoot(..., %s): Unable to find element. This probably ' + 'means the DOM was unexpectedly mutated (e.g., by the browser), ' + 'usually due to forgetting a <tbody> when using tables, nesting tags ' + 'like <form>, <p>, or <a>, or using non-SVG elements in an <svg> ' + 'parent. ' + 'Try inspecting the child nodes of the element with React ID `%s`.', targetID, ReactMount.getID(ancestorNode)) : invariant(false) : undefined;
       },
       _mountImageIntoNode: function(markup, container, shouldReuseMarkup, transaction) {
-        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mountComponentIntoNode(...): Target container is not valid.') : invariant(false) : undefined;
+        !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? "production" !== 'production' ? invariant(false, 'mountComponentIntoNode(...): Target container is not valid.') : invariant(false) : undefined;
         if (shouldReuseMarkup) {
           var rootElement = getReactRootElementInContainer(container);
           if (ReactMarkupChecksum.canReuseMarkup(markup, rootElement)) {
@@ -15730,7 +14277,7 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
             var rootMarkup = rootElement.outerHTML;
             rootElement.setAttribute(ReactMarkupChecksum.CHECKSUM_ATTR_NAME, checksum);
             var normalizedMarkup = markup;
-            if (process.env.NODE_ENV !== 'production') {
+            if ("production" !== 'production') {
               var normalizer;
               if (container.nodeType === ELEMENT_NODE_TYPE) {
                 normalizer = document.createElement('div');
@@ -15746,13 +14293,13 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
             }
             var diffIndex = firstDifferenceIndex(normalizedMarkup, rootMarkup);
             var difference = ' (client) ' + normalizedMarkup.substring(diffIndex - 20, diffIndex + 20) + '\n (server) ' + rootMarkup.substring(diffIndex - 20, diffIndex + 20);
-            !(container.nodeType !== DOC_NODE_TYPE) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'You\'re trying to render a component to the document using ' + 'server rendering but the checksum was invalid. This usually ' + 'means you rendered a different component type or props on ' + 'the client from the one on the server, or your render() ' + 'methods are impure. React cannot handle this case due to ' + 'cross-browser quirks by rendering at the document root. You ' + 'should look for environment dependent code in your components ' + 'and ensure the props are the same client and server side:\n%s', difference) : invariant(false) : undefined;
-            if (process.env.NODE_ENV !== 'production') {
-              process.env.NODE_ENV !== 'production' ? warning(false, 'React attempted to reuse markup in a container but the ' + 'checksum was invalid. This generally means that you are ' + 'using server rendering and the markup generated on the ' + 'server was not what the client was expecting. React injected ' + 'new markup to compensate which works but you have lost many ' + 'of the benefits of server rendering. Instead, figure out ' + 'why the markup being generated is different on the client ' + 'or server:\n%s', difference) : undefined;
+            !(container.nodeType !== DOC_NODE_TYPE) ? "production" !== 'production' ? invariant(false, 'You\'re trying to render a component to the document using ' + 'server rendering but the checksum was invalid. This usually ' + 'means you rendered a different component type or props on ' + 'the client from the one on the server, or your render() ' + 'methods are impure. React cannot handle this case due to ' + 'cross-browser quirks by rendering at the document root. You ' + 'should look for environment dependent code in your components ' + 'and ensure the props are the same client and server side:\n%s', difference) : invariant(false) : undefined;
+            if ("production" !== 'production') {
+              "production" !== 'production' ? warning(false, 'React attempted to reuse markup in a container but the ' + 'checksum was invalid. This generally means that you are ' + 'using server rendering and the markup generated on the ' + 'server was not what the client was expecting. React injected ' + 'new markup to compensate which works but you have lost many ' + 'of the benefits of server rendering. Instead, figure out ' + 'why the markup being generated is different on the client ' + 'or server:\n%s', difference) : undefined;
             }
           }
         }
-        !(container.nodeType !== DOC_NODE_TYPE) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'You\'re trying to render a component to the document but ' + 'you didn\'t use server rendering. We can\'t do this ' + 'without using server rendering due to cross-browser quirks. ' + 'See ReactDOMServer.renderToString() for server rendering.') : invariant(false) : undefined;
+        !(container.nodeType !== DOC_NODE_TYPE) ? "production" !== 'production' ? invariant(false, 'You\'re trying to render a component to the document but ' + 'you didn\'t use server rendering. We can\'t do this ' + 'without using server rendering due to cross-browser quirks. ' + 'See ReactDOMServer.renderToString() for server rendering.') : invariant(false) : undefined;
         if (transaction.useCreateElement) {
           while (container.lastChild) {
             container.removeChild(container.lastChild);
@@ -15776,12 +14323,12 @@ $__System.registerDynamic("a1", ["c2", "e4", "a2", "100", "11f", "120", "a5", "c
       _mountImageIntoNode: '_mountImageIntoNode'
     });
     module.exports = ReactMount;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("ac", [], true, function($__require, exports, module) {
+$__System.registerDynamic("80", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -15800,13 +14347,13 @@ $__System.registerDynamic("ac", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("123", ["ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("f7", ["80"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ExecutionEnvironment = $__require('ac');
+  var ExecutionEnvironment = $__require('80');
   var performance;
   if (ExecutionEnvironment.canUseDOM) {
     performance = window.performance || window.msPerformance || window.webkitPerformance;
@@ -15816,13 +14363,13 @@ $__System.registerDynamic("123", ["ac"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("124", ["123"], true, function($__require, exports, module) {
+$__System.registerDynamic("f8", ["f7"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var performance = $__require('123');
+  var performance = $__require('f7');
   var performanceNow;
   if (performance.now) {
     performanceNow = function() {
@@ -15838,17 +14385,17 @@ $__System.registerDynamic("124", ["123"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("125", ["c2", "118", "a1", "a6", "124"], true, function($__require, exports, module) {
+$__System.registerDynamic("f9", ["96", "ec", "75", "7a", "f8"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var DOMProperty = $__require('c2');
-  var ReactDefaultPerfAnalysis = $__require('118');
-  var ReactMount = $__require('a1');
-  var ReactPerf = $__require('a6');
-  var performanceNow = $__require('124');
+  var DOMProperty = $__require('96');
+  var ReactDefaultPerfAnalysis = $__require('ec');
+  var ReactMount = $__require('75');
+  var ReactPerf = $__require('7a');
+  var performanceNow = $__require('f8');
   function roundFloat(val) {
     return Math.floor(val * 100) / 100;
   }
@@ -16036,34 +14583,34 @@ $__System.registerDynamic("125", ["c2", "118", "a1", "a6", "124"], true, functio
   return module.exports;
 });
 
-$__System.registerDynamic("a4", ["b4", "b8", "bd", "be", "bf", "ac", "c1", "c3", "e5", "126", "e2", "a3", "f7", "f9", "a5", "a1", "fe", "107", "108", "116", "117", "125", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("78", ["88", "8c", "91", "92", "93", "80", "95", "97", "b9", "fa", "b6", "77", "cb", "cd", "79", "75", "d2", "db", "dc", "ea", "eb", "f9", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var BeforeInputEventPlugin = $__require('b4');
-    var ChangeEventPlugin = $__require('b8');
-    var ClientReactRootIndex = $__require('bd');
-    var DefaultEventPluginOrder = $__require('be');
-    var EnterLeaveEventPlugin = $__require('bf');
-    var ExecutionEnvironment = $__require('ac');
-    var HTMLDOMPropertyConfig = $__require('c1');
-    var ReactBrowserComponentMixin = $__require('c3');
-    var ReactComponentBrowserEnvironment = $__require('e5');
-    var ReactDefaultBatchingStrategy = $__require('126');
-    var ReactDOMComponent = $__require('e2');
-    var ReactDOMTextComponent = $__require('a3');
-    var ReactEventListener = $__require('f7');
-    var ReactInjection = $__require('f9');
-    var ReactInstanceHandles = $__require('a5');
-    var ReactMount = $__require('a1');
-    var ReactReconcileTransaction = $__require('fe');
-    var SelectEventPlugin = $__require('107');
-    var ServerReactRootIndex = $__require('108');
-    var SimpleEventPlugin = $__require('116');
-    var SVGDOMPropertyConfig = $__require('117');
+    var BeforeInputEventPlugin = $__require('88');
+    var ChangeEventPlugin = $__require('8c');
+    var ClientReactRootIndex = $__require('91');
+    var DefaultEventPluginOrder = $__require('92');
+    var EnterLeaveEventPlugin = $__require('93');
+    var ExecutionEnvironment = $__require('80');
+    var HTMLDOMPropertyConfig = $__require('95');
+    var ReactBrowserComponentMixin = $__require('97');
+    var ReactComponentBrowserEnvironment = $__require('b9');
+    var ReactDefaultBatchingStrategy = $__require('fa');
+    var ReactDOMComponent = $__require('b6');
+    var ReactDOMTextComponent = $__require('77');
+    var ReactEventListener = $__require('cb');
+    var ReactInjection = $__require('cd');
+    var ReactInstanceHandles = $__require('79');
+    var ReactMount = $__require('75');
+    var ReactReconcileTransaction = $__require('d2');
+    var SelectEventPlugin = $__require('db');
+    var ServerReactRootIndex = $__require('dc');
+    var SimpleEventPlugin = $__require('ea');
+    var SVGDOMPropertyConfig = $__require('eb');
     var alreadyInjected = false;
     function inject() {
       if (alreadyInjected) {
@@ -16091,30 +14638,30 @@ $__System.registerDynamic("a4", ["b4", "b8", "bd", "be", "bf", "ac", "c1", "c3",
       ReactInjection.Updates.injectBatchingStrategy(ReactDefaultBatchingStrategy);
       ReactInjection.RootIndex.injectCreateReactRootIndex(ExecutionEnvironment.canUseDOM ? ClientReactRootIndex.createReactRootIndex : ServerReactRootIndex.createReactRootIndex);
       ReactInjection.Component.injectEnvironment(ReactComponentBrowserEnvironment);
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         var url = ExecutionEnvironment.canUseDOM && window.location.href || '';
         if (/[?&]react_perf\b/.test(url)) {
-          var ReactDefaultPerf = $__require('125');
+          var ReactDefaultPerf = $__require('f9');
           ReactDefaultPerf.start();
         }
       }
     }
     module.exports = {inject: inject};
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("126", ["a8", "102", "af", "f2"], true, function($__require, exports, module) {
+$__System.registerDynamic("fa", ["7c", "d6", "83", "c6"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactUpdates = $__require('a8');
-  var Transaction = $__require('102');
-  var assign = $__require('af');
-  var emptyFunction = $__require('f2');
+  var ReactUpdates = $__require('7c');
+  var Transaction = $__require('d6');
+  var assign = $__require('83');
+  var emptyFunction = $__require('c6');
   var RESET_BATCHED_UPDATES = {
     initialize: emptyFunction,
     close: function() {
@@ -16150,7 +14697,7 @@ $__System.registerDynamic("126", ["a8", "102", "af", "f2"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("127", [], true, function($__require, exports, module) {
+$__System.registerDynamic("fb", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16182,13 +14729,13 @@ $__System.registerDynamic("127", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("121", ["127"], true, function($__require, exports, module) {
+$__System.registerDynamic("f5", ["fb"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var adler32 = $__require('127');
+  var adler32 = $__require('fb');
   var TAG_END = /\/?>/;
   var ReactMarkupChecksum = {
     CHECKSUM_ATTR_NAME: 'data-react-checksum',
@@ -16208,7 +14755,7 @@ $__System.registerDynamic("121", ["127"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("128", [], true, function($__require, exports, module) {
+$__System.registerDynamic("fc", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16223,17 +14770,17 @@ $__System.registerDynamic("128", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("129", ["ae", "ff", "102", "af", "f2"], true, function($__require, exports, module) {
+$__System.registerDynamic("fd", ["82", "d3", "d6", "83", "c6"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var PooledClass = $__require('ae');
-  var CallbackQueue = $__require('ff');
-  var Transaction = $__require('102');
-  var assign = $__require('af');
-  var emptyFunction = $__require('f2');
+  var PooledClass = $__require('82');
+  var CallbackQueue = $__require('d3');
+  var Transaction = $__require('d6');
+  var assign = $__require('83');
+  var emptyFunction = $__require('c6');
   var ON_DOM_READY_QUEUEING = {
     initialize: function() {
       this.reactMountReady.reset();
@@ -16266,21 +14813,21 @@ $__System.registerDynamic("129", ["ae", "ff", "102", "af", "f2"], true, function
   return module.exports;
 });
 
-$__System.registerDynamic("e0", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b4", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var injected = false;
     var ReactComponentEnvironment = {
       unmountIDFromEnvironment: null,
       replaceNodeWithMarkupByID: null,
       processChildrenUpdates: null,
       injection: {injectEnvironment: function(environment) {
-          !!injected ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactCompositeComponent: injectEnvironment() can only be called once.') : invariant(false) : undefined;
+          !!injected ? "production" !== 'production' ? invariant(false, 'ReactCompositeComponent: injectEnvironment() can only be called once.') : invariant(false) : undefined;
           ReactComponentEnvironment.unmountIDFromEnvironment = environment.unmountIDFromEnvironment;
           ReactComponentEnvironment.replaceNodeWithMarkupByID = environment.replaceNodeWithMarkupByID;
           ReactComponentEnvironment.processChildrenUpdates = environment.processChildrenUpdates;
@@ -16288,12 +14835,12 @@ $__System.registerDynamic("e0", ["c5", "29"], true, function($__require, exports
         }}
     };
     module.exports = ReactComponentEnvironment;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("c4", [], true, function($__require, exports, module) {
+$__System.registerDynamic("98", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16318,16 +14865,16 @@ $__System.registerDynamic("c4", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("ff", ["ae", "af", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("d3", ["82", "83", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var PooledClass = $__require('ae');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
+    var PooledClass = $__require('82');
+    var assign = $__require('83');
+    var invariant = $__require('99');
     function CallbackQueue() {
       this._callbacks = null;
       this._contexts = null;
@@ -16343,7 +14890,7 @@ $__System.registerDynamic("ff", ["ae", "af", "c5", "29"], true, function($__requ
         var callbacks = this._callbacks;
         var contexts = this._contexts;
         if (callbacks) {
-          !(callbacks.length === contexts.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Mismatched list of contexts in callback queue') : invariant(false) : undefined;
+          !(callbacks.length === contexts.length) ? "production" !== 'production' ? invariant(false, 'Mismatched list of contexts in callback queue') : invariant(false) : undefined;
           this._callbacks = null;
           this._contexts = null;
           for (var i = 0; i < callbacks.length; i++) {
@@ -16363,12 +14910,12 @@ $__System.registerDynamic("ff", ["ae", "af", "c5", "29"], true, function($__requ
     });
     PooledClass.addPoolingTo(CallbackQueue);
     module.exports = CallbackQueue;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("a6", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("7a", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -16379,7 +14926,7 @@ $__System.registerDynamic("a6", ["29"], true, function($__require, exports, modu
       enableMeasure: false,
       storedMeasure: _noMeasure,
       measureMethods: function(object, objectName, methodNames) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           for (var key in methodNames) {
             if (!methodNames.hasOwnProperty(key)) {
               continue;
@@ -16389,7 +14936,7 @@ $__System.registerDynamic("a6", ["29"], true, function($__require, exports, modu
         }
       },
       measure: function(objName, fnName, func) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var measuredFunc = null;
           var wrapper = function() {
             if (ReactPerf.enableMeasure) {
@@ -16413,19 +14960,19 @@ $__System.registerDynamic("a6", ["29"], true, function($__require, exports, modu
       return func;
     }
     module.exports = ReactPerf;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("102", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("d6", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var Mixin = {
       reinitializeTransaction: function() {
         this.transactionWrappers = this.getTransactionWrappers();
@@ -16442,7 +14989,7 @@ $__System.registerDynamic("102", ["c5", "29"], true, function($__require, export
         return !!this._isInTransaction;
       },
       perform: function(method, scope, a, b, c, d, e, f) {
-        !!this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.perform(...): Cannot initialize a transaction when there ' + 'is already an outstanding transaction.') : invariant(false) : undefined;
+        !!this.isInTransaction() ? "production" !== 'production' ? invariant(false, 'Transaction.perform(...): Cannot initialize a transaction when there ' + 'is already an outstanding transaction.') : invariant(false) : undefined;
         var errorThrown;
         var ret;
         try {
@@ -16483,7 +15030,7 @@ $__System.registerDynamic("102", ["c5", "29"], true, function($__require, export
         }
       },
       closeAll: function(startIndex) {
-        !this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.closeAll(): Cannot close transaction when none are open.') : invariant(false) : undefined;
+        !this.isInTransaction() ? "production" !== 'production' ? invariant(false, 'Transaction.closeAll(): Cannot close transaction when none are open.') : invariant(false) : undefined;
         var transactionWrappers = this.transactionWrappers;
         for (var i = startIndex; i < transactionWrappers.length; i++) {
           var wrapper = transactionWrappers[i];
@@ -16511,31 +15058,31 @@ $__System.registerDynamic("102", ["c5", "29"], true, function($__require, export
       OBSERVED_ERROR: {}
     };
     module.exports = Transaction;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("a8", ["ff", "ae", "a6", "a7", "102", "af", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("7c", ["d3", "82", "7a", "7b", "d6", "83", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var CallbackQueue = $__require('ff');
-    var PooledClass = $__require('ae');
-    var ReactPerf = $__require('a6');
-    var ReactReconciler = $__require('a7');
-    var Transaction = $__require('102');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
+    var CallbackQueue = $__require('d3');
+    var PooledClass = $__require('82');
+    var ReactPerf = $__require('7a');
+    var ReactReconciler = $__require('7b');
+    var Transaction = $__require('d6');
+    var assign = $__require('83');
+    var invariant = $__require('99');
     var dirtyComponents = [];
     var asapCallbackQueue = CallbackQueue.getPooled();
     var asapEnqueued = false;
     var batchingStrategy = null;
     function ensureInjected() {
-      !(ReactUpdates.ReactReconcileTransaction && batchingStrategy) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must inject a reconcile transaction class and batching ' + 'strategy') : invariant(false) : undefined;
+      !(ReactUpdates.ReactReconcileTransaction && batchingStrategy) ? "production" !== 'production' ? invariant(false, 'ReactUpdates: must inject a reconcile transaction class and batching ' + 'strategy') : invariant(false) : undefined;
     }
     var NESTED_UPDATES = {
       initialize: function() {
@@ -16590,7 +15137,7 @@ $__System.registerDynamic("a8", ["ff", "ae", "a6", "a7", "102", "af", "c5", "29"
     }
     function runBatchedUpdates(transaction) {
       var len = transaction.dirtyComponentsLength;
-      !(len === dirtyComponents.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-components length (%s) to ' + 'match dirty-components array length (%s).', len, dirtyComponents.length) : invariant(false) : undefined;
+      !(len === dirtyComponents.length) ? "production" !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-components length (%s) to ' + 'match dirty-components array length (%s).', len, dirtyComponents.length) : invariant(false) : undefined;
       dirtyComponents.sort(mountOrderComparator);
       for (var i = 0; i < len; i++) {
         var component = dirtyComponents[i];
@@ -16630,19 +15177,19 @@ $__System.registerDynamic("a8", ["ff", "ae", "a6", "a7", "102", "af", "c5", "29"
       dirtyComponents.push(component);
     }
     function asap(callback, context) {
-      !batchingStrategy.isBatchingUpdates ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates.asap: Can\'t enqueue an asap callback in a context where' + 'updates are not being batched.') : invariant(false) : undefined;
+      !batchingStrategy.isBatchingUpdates ? "production" !== 'production' ? invariant(false, 'ReactUpdates.asap: Can\'t enqueue an asap callback in a context where' + 'updates are not being batched.') : invariant(false) : undefined;
       asapCallbackQueue.enqueue(callback, context);
       asapEnqueued = true;
     }
     var ReactUpdatesInjection = {
       injectReconcileTransaction: function(ReconcileTransaction) {
-        !ReconcileTransaction ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a reconcile transaction class') : invariant(false) : undefined;
+        !ReconcileTransaction ? "production" !== 'production' ? invariant(false, 'ReactUpdates: must provide a reconcile transaction class') : invariant(false) : undefined;
         ReactUpdates.ReactReconcileTransaction = ReconcileTransaction;
       },
       injectBatchingStrategy: function(_batchingStrategy) {
-        !_batchingStrategy ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batching strategy') : invariant(false) : undefined;
-        !(typeof _batchingStrategy.batchedUpdates === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batchedUpdates() function') : invariant(false) : undefined;
-        !(typeof _batchingStrategy.isBatchingUpdates === 'boolean') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide an isBatchingUpdates boolean attribute') : invariant(false) : undefined;
+        !_batchingStrategy ? "production" !== 'production' ? invariant(false, 'ReactUpdates: must provide a batching strategy') : invariant(false) : undefined;
+        !(typeof _batchingStrategy.batchedUpdates === 'function') ? "production" !== 'production' ? invariant(false, 'ReactUpdates: must provide a batchedUpdates() function') : invariant(false) : undefined;
+        !(typeof _batchingStrategy.isBatchingUpdates === 'boolean') ? "production" !== 'production' ? invariant(false, 'ReactUpdates: must provide an isBatchingUpdates boolean attribute') : invariant(false) : undefined;
         batchingStrategy = _batchingStrategy;
       }
     };
@@ -16655,47 +15202,47 @@ $__System.registerDynamic("a8", ["ff", "ae", "a6", "a7", "102", "af", "c5", "29"
       asap: asap
     };
     module.exports = ReactUpdates;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ba", ["76", "f3", "98", "7c", "83", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('a2');
-    var ReactElement = $__require('11f');
-    var ReactInstanceMap = $__require('c4');
-    var ReactUpdates = $__require('a8');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactCurrentOwner = $__require('76');
+    var ReactElement = $__require('f3');
+    var ReactInstanceMap = $__require('98');
+    var ReactUpdates = $__require('7c');
+    var assign = $__require('83');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     function enqueueUpdate(internalInstance) {
       ReactUpdates.enqueueUpdate(internalInstance);
     }
     function getInternalInstanceReadyForUpdate(publicInstance, callerName) {
       var internalInstance = ReactInstanceMap.get(publicInstance);
       if (!internalInstance) {
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor.displayName) : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor.displayName) : undefined;
         }
         return null;
       }
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(ReactCurrentOwner.current == null, '%s(...): Cannot update during an existing state transition ' + '(such as within `render`). Render methods should be a pure function ' + 'of props and state.', callerName) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(ReactCurrentOwner.current == null, '%s(...): Cannot update during an existing state transition ' + '(such as within `render`). Render methods should be a pure function ' + 'of props and state.', callerName) : undefined;
       }
       return internalInstance;
     }
     var ReactUpdateQueue = {
       isMounted: function(publicInstance) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var owner = ReactCurrentOwner.current;
           if (owner !== null) {
-            process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
+            "production" !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
             owner._warnedAboutRefsInRender = true;
           }
         }
@@ -16707,7 +15254,7 @@ $__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"
         }
       },
       enqueueCallback: function(publicInstance, callback) {
-        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
+        !(typeof callback === 'function') ? "production" !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
         var internalInstance = getInternalInstanceReadyForUpdate(publicInstance);
         if (!internalInstance) {
           return null;
@@ -16720,7 +15267,7 @@ $__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"
         enqueueUpdate(internalInstance);
       },
       enqueueCallbackInternal: function(internalInstance, callback) {
-        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
+        !(typeof callback === 'function') ? "production" !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
         if (internalInstance._pendingCallbacks) {
           internalInstance._pendingCallbacks.push(callback);
         } else {
@@ -16763,7 +15310,7 @@ $__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"
       },
       enqueueSetPropsInternal: function(internalInstance, partialProps) {
         var topLevelWrapper = internalInstance._topLevelWrapper;
-        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setProps(...): You called `setProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
+        !topLevelWrapper ? "production" !== 'production' ? invariant(false, 'setProps(...): You called `setProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
         var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
         var element = wrapElement.props;
         var props = assign({}, element.props, partialProps);
@@ -16779,7 +15326,7 @@ $__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"
       },
       enqueueReplacePropsInternal: function(internalInstance, props) {
         var topLevelWrapper = internalInstance._topLevelWrapper;
-        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'replaceProps(...): You called `replaceProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
+        !topLevelWrapper ? "production" !== 'production' ? invariant(false, 'replaceProps(...): You called `replaceProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
         var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
         var element = wrapElement.props;
         topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
@@ -16791,12 +15338,12 @@ $__System.registerDynamic("e6", ["a2", "11f", "c4", "a8", "af", "c5", "ab", "29"
       }
     };
     module.exports = ReactUpdateQueue;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("dc", [], true, function($__require, exports, module) {
+$__System.registerDynamic("b0", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -16822,27 +15369,27 @@ $__System.registerDynamic("dc", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a7", "e6", "af", "122", "c5", "dc", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("fe", ["b4", "76", "f3", "98", "7a", "ac", "ff", "7b", "ba", "83", "f6", "99", "b0", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactComponentEnvironment = $__require('e0');
-    var ReactCurrentOwner = $__require('a2');
-    var ReactElement = $__require('11f');
-    var ReactInstanceMap = $__require('c4');
-    var ReactPerf = $__require('a6');
-    var ReactPropTypeLocations = $__require('d8');
-    var ReactPropTypeLocationNames = $__require('12b');
-    var ReactReconciler = $__require('a7');
-    var ReactUpdateQueue = $__require('e6');
-    var assign = $__require('af');
-    var emptyObject = $__require('122');
-    var invariant = $__require('c5');
-    var shouldUpdateReactComponent = $__require('dc');
-    var warning = $__require('ab');
+    var ReactComponentEnvironment = $__require('b4');
+    var ReactCurrentOwner = $__require('76');
+    var ReactElement = $__require('f3');
+    var ReactInstanceMap = $__require('98');
+    var ReactPerf = $__require('7a');
+    var ReactPropTypeLocations = $__require('ac');
+    var ReactPropTypeLocationNames = $__require('ff');
+    var ReactReconciler = $__require('7b');
+    var ReactUpdateQueue = $__require('ba');
+    var assign = $__require('83');
+    var emptyObject = $__require('f6');
+    var invariant = $__require('99');
+    var shouldUpdateReactComponent = $__require('b0');
+    var warning = $__require('7f');
     function getDeclarationErrorAddendum(component) {
       var owner = component._currentElement._owner || null;
       if (owner) {
@@ -16885,7 +15432,7 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
         var renderedElement;
         var canInstantiate = ('prototype' in Component);
         if (canInstantiate) {
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             ReactCurrentOwner.current = this;
             try {
               inst = new Component(publicProps, publicContext, ReactUpdateQueue);
@@ -16900,11 +15447,11 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
           renderedElement = inst;
           inst = new StatelessComponent(Component);
         }
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (inst.render == null) {
-            process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`, returned ' + 'null/false from a stateless component, or tried to render an ' + 'element whose type is a function that isn\'t a React component.', Component.displayName || Component.name || 'Component') : undefined;
+            "production" !== 'production' ? warning(false, '%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`, returned ' + 'null/false from a stateless component, or tried to render an ' + 'element whose type is a function that isn\'t a React component.', Component.displayName || Component.name || 'Component') : undefined;
           } else {
-            process.env.NODE_ENV !== 'production' ? warning(Component.prototype && Component.prototype.isReactComponent || !canInstantiate || !(inst instanceof Component), '%s(...): React component classes must extend React.Component.', Component.displayName || Component.name || 'Component') : undefined;
+            "production" !== 'production' ? warning(Component.prototype && Component.prototype.isReactComponent || !canInstantiate || !(inst instanceof Component), '%s(...): React component classes must extend React.Component.', Component.displayName || Component.name || 'Component') : undefined;
           }
         }
         inst.props = publicProps;
@@ -16913,20 +15460,20 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
         inst.updater = ReactUpdateQueue;
         this._instance = inst;
         ReactInstanceMap.set(inst, this);
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.getDefaultProps || inst.getDefaultProps.isReactClassApproved, 'getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.propTypes, 'propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.contextTypes, 'contextTypes was defined as an instance property on %s. Use a ' + 'static property to define contextTypes instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentShouldUpdate !== 'function', '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', this.getName() || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentDidUnmount !== 'function', '%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', this.getName() || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentWillRecieveProps !== 'function', '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', this.getName() || 'A component') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : undefined;
+          "production" !== 'production' ? warning(!inst.getDefaultProps || inst.getDefaultProps.isReactClassApproved, 'getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', this.getName() || 'a component') : undefined;
+          "production" !== 'production' ? warning(!inst.propTypes, 'propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', this.getName() || 'a component') : undefined;
+          "production" !== 'production' ? warning(!inst.contextTypes, 'contextTypes was defined as an instance property on %s. Use a ' + 'static property to define contextTypes instead.', this.getName() || 'a component') : undefined;
+          "production" !== 'production' ? warning(typeof inst.componentShouldUpdate !== 'function', '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', this.getName() || 'A component') : undefined;
+          "production" !== 'production' ? warning(typeof inst.componentDidUnmount !== 'function', '%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', this.getName() || 'A component') : undefined;
+          "production" !== 'production' ? warning(typeof inst.componentWillRecieveProps !== 'function', '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', this.getName() || 'A component') : undefined;
         }
         var initialState = inst.state;
         if (initialState === undefined) {
           inst.state = initialState = null;
         }
-        !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.state: must be set to an object or null', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+        !(typeof initialState === 'object' && !Array.isArray(initialState)) ? "production" !== 'production' ? invariant(false, '%s.state: must be set to an object or null', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
         this._pendingStateQueue = null;
         this._pendingReplaceState = false;
         this._pendingForceUpdate = false;
@@ -16979,7 +15526,7 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
       },
       _processContext: function(context) {
         var maskedContext = this._maskContext(context);
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var Component = this._currentElement.type;
           if (Component.contextTypes) {
             this._checkPropTypes(Component.contextTypes, maskedContext, ReactPropTypeLocations.context);
@@ -16992,19 +15539,19 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
         var inst = this._instance;
         var childContext = inst.getChildContext && inst.getChildContext();
         if (childContext) {
-          !(typeof Component.childContextTypes === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
-          if (process.env.NODE_ENV !== 'production') {
+          !(typeof Component.childContextTypes === 'object') ? "production" !== 'production' ? invariant(false, '%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+          if ("production" !== 'production') {
             this._checkPropTypes(Component.childContextTypes, childContext, ReactPropTypeLocations.childContext);
           }
           for (var name in childContext) {
-            !(name in Component.childContextTypes) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): key "%s" is not defined in childContextTypes.', this.getName() || 'ReactCompositeComponent', name) : invariant(false) : undefined;
+            !(name in Component.childContextTypes) ? "production" !== 'production' ? invariant(false, '%s.getChildContext(): key "%s" is not defined in childContextTypes.', this.getName() || 'ReactCompositeComponent', name) : invariant(false) : undefined;
           }
           return assign({}, currentContext, childContext);
         }
         return currentContext;
       },
       _processProps: function(newProps) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var Component = this._currentElement.type;
           if (Component.propTypes) {
             this._checkPropTypes(Component.propTypes, newProps, ReactPropTypeLocations.prop);
@@ -17018,7 +15565,7 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
           if (propTypes.hasOwnProperty(propName)) {
             var error;
             try {
-              !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually ' + 'from React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
+              !(typeof propTypes[propName] === 'function') ? "production" !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually ' + 'from React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
               error = propTypes[propName](props, propName, componentName, location);
             } catch (ex) {
               error = ex;
@@ -17026,9 +15573,9 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
             if (error instanceof Error) {
               var addendum = getDeclarationErrorAddendum(this);
               if (location === ReactPropTypeLocations.prop) {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Composite propType: %s%s', error.message, addendum) : undefined;
+                "production" !== 'production' ? warning(false, 'Failed Composite propType: %s%s', error.message, addendum) : undefined;
               } else {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Context Types: %s%s', error.message, addendum) : undefined;
+                "production" !== 'production' ? warning(false, 'Failed Context Types: %s%s', error.message, addendum) : undefined;
               }
             }
           }
@@ -17062,8 +15609,8 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
         }
         var nextState = this._processPendingState(nextProps, nextContext);
         var shouldUpdate = this._pendingForceUpdate || !inst.shouldComponentUpdate || inst.shouldComponentUpdate(nextProps, nextState, nextContext);
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(typeof shouldUpdate !== 'undefined', '%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', this.getName() || 'ReactCompositeComponent') : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(typeof shouldUpdate !== 'undefined', '%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', this.getName() || 'ReactCompositeComponent') : undefined;
         }
         if (shouldUpdate) {
           this._pendingForceUpdate = false;
@@ -17140,7 +15687,7 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
       _renderValidatedComponentWithoutOwnerOrContext: function() {
         var inst = this._instance;
         var renderedComponent = inst.render();
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (typeof renderedComponent === 'undefined' && inst.render._isMockFunction) {
             renderedComponent = null;
           }
@@ -17155,16 +15702,16 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
         } finally {
           ReactCurrentOwner.current = null;
         }
-        !(renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+        !(renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? "production" !== 'production' ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
         return renderedComponent;
       },
       attachRef: function(ref, component) {
         var inst = this.getPublicInstance();
-        !(inst != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Stateless function components cannot have refs.') : invariant(false) : undefined;
+        !(inst != null) ? "production" !== 'production' ? invariant(false, 'Stateless function components cannot have refs.') : invariant(false) : undefined;
         var publicComponentInstance = component.getPublicInstance();
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           var componentName = component && component.getName ? component.getName() : 'a component';
-          process.env.NODE_ENV !== 'production' ? warning(publicComponentInstance != null, 'Stateless function components cannot be given refs ' + '(See ref "%s" in %s created by %s). ' + 'Attempts to access this ref will fail.', ref, componentName, this.getName()) : undefined;
+          "production" !== 'production' ? warning(publicComponentInstance != null, 'Stateless function components cannot be given refs ' + '(See ref "%s" in %s created by %s). ' + 'Attempts to access this ref will fail.', ref, componentName, this.getName()) : undefined;
         }
         var refs = inst.refs === emptyObject ? inst.refs = {} : inst.refs;
         refs[ref] = publicComponentInstance;
@@ -17194,12 +15741,12 @@ $__System.registerDynamic("12a", ["e0", "a2", "11f", "c4", "a6", "d8", "12b", "a
     });
     var ReactCompositeComponent = {Mixin: ReactCompositeComponentMixin};
     module.exports = ReactCompositeComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("120", [], true, function($__require, exports, module) {
+$__System.registerDynamic("f4", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -17225,43 +15772,43 @@ $__System.registerDynamic("120", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("12c", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("100", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var ReactOwner = {
       isValidOwner: function(object) {
         return !!(object && typeof object.attachRef === 'function' && typeof object.detachRef === 'function');
       },
       addComponentAsRefTo: function(component, ref, owner) {
-        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' + 'be adding a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
+        !ReactOwner.isValidOwner(owner) ? "production" !== 'production' ? invariant(false, 'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' + 'be adding a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
         owner.attachRef(ref, component);
       },
       removeComponentAsRefFrom: function(component, ref, owner) {
-        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. You might ' + 'be removing a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
+        !ReactOwner.isValidOwner(owner) ? "production" !== 'production' ? invariant(false, 'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. You might ' + 'be removing a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
         if (owner.getPublicInstance().refs[ref] === component.getPublicInstance()) {
           owner.detachRef(ref);
         }
       }
     };
     module.exports = ReactOwner;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12d", ["12c", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("101", ["100", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactOwner = $__require('12c');
+    var ReactOwner = $__require('100');
     var ReactRef = {};
     function attachRef(ref, component, owner) {
       if (typeof ref === 'function') {
@@ -17301,18 +15848,18 @@ $__System.registerDynamic("12d", ["12c", "29"], true, function($__require, expor
       }
     };
     module.exports = ReactRef;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("a7", ["12d"], true, function($__require, exports, module) {
+$__System.registerDynamic("7b", ["101"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactRef = $__require('12d');
+  var ReactRef = $__require('101');
   function attachRefs() {
     ReactRef.attachRefs(this, this._currentElement);
   }
@@ -17351,16 +15898,16 @@ $__System.registerDynamic("a7", ["12d"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("fb", ["11f", "120", "a7", "af"], true, function($__require, exports, module) {
+$__System.registerDynamic("cf", ["f3", "f4", "7b", "83"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactElement = $__require('11f');
-  var ReactEmptyComponentRegistry = $__require('120');
-  var ReactReconciler = $__require('a7');
-  var assign = $__require('af');
+  var ReactElement = $__require('f3');
+  var ReactEmptyComponentRegistry = $__require('f4');
+  var ReactReconciler = $__require('7b');
+  var assign = $__require('83');
   var placeholderElement;
   var ReactEmptyComponentInjection = {injectEmptyComponent: function(component) {
       placeholderElement = ReactElement.createElement(component);
@@ -17391,15 +15938,15 @@ $__System.registerDynamic("fb", ["11f", "120", "a7", "af"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("fc", ["af", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("d0", ["83", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var assign = $__require('af');
-    var invariant = $__require('c5');
+    var assign = $__require('83');
+    var invariant = $__require('99');
     var autoGenerateWrapperClass = null;
     var genericComponentClass = null;
     var tagToComponentClass = {};
@@ -17427,7 +15974,7 @@ $__System.registerDynamic("fc", ["af", "c5", "29"], true, function($__require, e
       return componentClass;
     }
     function createInternalComponent(element) {
-      !genericComponentClass ? process.env.NODE_ENV !== 'production' ? invariant(false, 'There is no registered component for the tag %s', element.type) : invariant(false) : undefined;
+      !genericComponentClass ? "production" !== 'production' ? invariant(false, 'There is no registered component for the tag %s', element.type) : invariant(false) : undefined;
       return new genericComponentClass(element.type, element.props);
     }
     function createInstanceForText(text) {
@@ -17444,24 +15991,24 @@ $__System.registerDynamic("fc", ["af", "c5", "29"], true, function($__require, e
       injection: ReactNativeComponentInjection
     };
     module.exports = ReactNativeComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("db", ["12a", "fb", "fc", "af", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("af", ["fe", "cf", "d0", "83", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCompositeComponent = $__require('12a');
-    var ReactEmptyComponent = $__require('fb');
-    var ReactNativeComponent = $__require('fc');
-    var assign = $__require('af');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactCompositeComponent = $__require('fe');
+    var ReactEmptyComponent = $__require('cf');
+    var ReactNativeComponent = $__require('d0');
+    var assign = $__require('83');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     var ReactCompositeComponentWrapper = function() {};
     assign(ReactCompositeComponentWrapper.prototype, ReactCompositeComponent.Mixin, {_instantiateReactComponent: instantiateReactComponent});
     function getDeclarationErrorAddendum(owner) {
@@ -17482,7 +16029,7 @@ $__System.registerDynamic("db", ["12a", "fb", "fc", "af", "c5", "ab", "29"], tru
         instance = new ReactEmptyComponent(instantiateReactComponent);
       } else if (typeof node === 'object') {
         var element = node;
-        !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) ' + 'or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : invariant(false) : undefined;
+        !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? "production" !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) ' + 'or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : invariant(false) : undefined;
         if (typeof element.type === 'string') {
           instance = ReactNativeComponent.createInternalComponent(element);
         } else if (isInternalComponentType(element.type)) {
@@ -17493,19 +16040,19 @@ $__System.registerDynamic("db", ["12a", "fb", "fc", "af", "c5", "ab", "29"], tru
       } else if (typeof node === 'string' || typeof node === 'number') {
         instance = ReactNativeComponent.createInstanceForText(node);
       } else {
-        !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
+        !false ? "production" !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
       }
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
       }
       instance.construct(node);
       instance._mountIndex = 0;
       instance._mountImage = null;
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         instance._isOwnerNecessary = false;
         instance._warnedAboutRefsInRender = false;
       }
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         if (Object.preventExtensions) {
           Object.preventExtensions(instance);
         }
@@ -17513,30 +16060,30 @@ $__System.registerDynamic("db", ["12a", "fb", "fc", "af", "c5", "ab", "29"], tru
       return instance;
     }
     module.exports = instantiateReactComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12e", ["126", "11f", "a5", "121", "128", "129", "a8", "122", "db", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("102", ["fa", "f3", "79", "f5", "fc", "fd", "7c", "f6", "af", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactDefaultBatchingStrategy = $__require('126');
-    var ReactElement = $__require('11f');
-    var ReactInstanceHandles = $__require('a5');
-    var ReactMarkupChecksum = $__require('121');
-    var ReactServerBatchingStrategy = $__require('128');
-    var ReactServerRenderingTransaction = $__require('129');
-    var ReactUpdates = $__require('a8');
-    var emptyObject = $__require('122');
-    var instantiateReactComponent = $__require('db');
-    var invariant = $__require('c5');
+    var ReactDefaultBatchingStrategy = $__require('fa');
+    var ReactElement = $__require('f3');
+    var ReactInstanceHandles = $__require('79');
+    var ReactMarkupChecksum = $__require('f5');
+    var ReactServerBatchingStrategy = $__require('fc');
+    var ReactServerRenderingTransaction = $__require('fd');
+    var ReactUpdates = $__require('7c');
+    var emptyObject = $__require('f6');
+    var instantiateReactComponent = $__require('af');
+    var invariant = $__require('99');
     function renderToString(element) {
-      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : invariant(false) : undefined;
+      !ReactElement.isValidElement(element) ? "production" !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : invariant(false) : undefined;
       var transaction;
       try {
         ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
@@ -17553,7 +16100,7 @@ $__System.registerDynamic("12e", ["126", "11f", "a5", "121", "128", "129", "a8",
       }
     }
     function renderToStaticMarkup(element) {
-      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : invariant(false) : undefined;
+      !ReactElement.isValidElement(element) ? "production" !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : invariant(false) : undefined;
       var transaction;
       try {
         ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
@@ -17572,20 +16119,20 @@ $__System.registerDynamic("12e", ["126", "11f", "a5", "121", "128", "129", "a8",
       renderToString: renderToString,
       renderToStaticMarkup: renderToStaticMarkup
     };
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12f", ["a4", "12e", "a9"], true, function($__require, exports, module) {
+$__System.registerDynamic("103", ["78", "102", "7d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactDefaultInjection = $__require('a4');
-  var ReactServerRendering = $__require('12e');
-  var ReactVersion = $__require('a9');
+  var ReactDefaultInjection = $__require('78');
+  var ReactServerRendering = $__require('102');
+  var ReactVersion = $__require('7d');
   ReactDefaultInjection.inject();
   var ReactDOMServer = {
     renderToString: ReactServerRendering.renderToString,
@@ -17597,14 +16144,14 @@ $__System.registerDynamic("12f", ["a4", "12e", "a9"], true, function($__require,
   return module.exports;
 });
 
-$__System.registerDynamic("ae", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("82", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var oneArgumentPooler = function(copyFieldsFrom) {
       var Klass = this;
       if (Klass.instancePool.length) {
@@ -17657,7 +16204,7 @@ $__System.registerDynamic("ae", ["c5", "29"], true, function($__require, exports
     };
     var standardReleaser = function(instance) {
       var Klass = this;
-      !(instance instanceof Klass) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : invariant(false) : undefined;
+      !(instance instanceof Klass) ? "production" !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : invariant(false) : undefined;
       instance.destructor();
       if (Klass.instancePool.length < Klass.poolSize) {
         Klass.instancePool.push(instance);
@@ -17684,12 +16231,12 @@ $__System.registerDynamic("ae", ["c5", "29"], true, function($__require, exports
       fiveArgumentPooler: fiveArgumentPooler
     };
     module.exports = PooledClass;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("fd", [], true, function($__require, exports, module) {
+$__System.registerDynamic("d1", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -17707,15 +16254,15 @@ $__System.registerDynamic("fd", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("a5", ["fd", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("79", ["d1", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactRootIndex = $__require('fd');
-    var invariant = $__require('c5');
+    var ReactRootIndex = $__require('d1');
+    var invariant = $__require('99');
     var SEPARATOR = '.';
     var SEPARATOR_LENGTH = SEPARATOR.length;
     var MAX_TREE_DEPTH = 10000;
@@ -17735,8 +16282,8 @@ $__System.registerDynamic("a5", ["fd", "c5", "29"], true, function($__require, e
       return id ? id.substr(0, id.lastIndexOf(SEPARATOR)) : '';
     }
     function getNextDescendantID(ancestorID, destinationID) {
-      !(isValidID(ancestorID) && isValidID(destinationID)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(%s, %s): Received an invalid React DOM ID.', ancestorID, destinationID) : invariant(false) : undefined;
-      !isAncestorIDOf(ancestorID, destinationID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(...): React has made an invalid assumption about ' + 'the DOM hierarchy. Expected `%s` to be an ancestor of `%s`.', ancestorID, destinationID) : invariant(false) : undefined;
+      !(isValidID(ancestorID) && isValidID(destinationID)) ? "production" !== 'production' ? invariant(false, 'getNextDescendantID(%s, %s): Received an invalid React DOM ID.', ancestorID, destinationID) : invariant(false) : undefined;
+      !isAncestorIDOf(ancestorID, destinationID) ? "production" !== 'production' ? invariant(false, 'getNextDescendantID(...): React has made an invalid assumption about ' + 'the DOM hierarchy. Expected `%s` to be an ancestor of `%s`.', ancestorID, destinationID) : invariant(false) : undefined;
       if (ancestorID === destinationID) {
         return ancestorID;
       }
@@ -17763,15 +16310,15 @@ $__System.registerDynamic("a5", ["fd", "c5", "29"], true, function($__require, e
         }
       }
       var longestCommonID = oneID.substr(0, lastCommonMarkerIndex);
-      !isValidID(longestCommonID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getFirstCommonAncestorID(%s, %s): Expected a valid React DOM ID: %s', oneID, twoID, longestCommonID) : invariant(false) : undefined;
+      !isValidID(longestCommonID) ? "production" !== 'production' ? invariant(false, 'getFirstCommonAncestorID(%s, %s): Expected a valid React DOM ID: %s', oneID, twoID, longestCommonID) : invariant(false) : undefined;
       return longestCommonID;
     }
     function traverseParentPath(start, stop, cb, arg, skipFirst, skipLast) {
       start = start || '';
       stop = stop || '';
-      !(start !== stop) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.', start) : invariant(false) : undefined;
+      !(start !== stop) ? "production" !== 'production' ? invariant(false, 'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.', start) : invariant(false) : undefined;
       var traverseUp = isAncestorIDOf(stop, start);
-      !(traverseUp || isAncestorIDOf(start, stop)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do ' + 'not have a parent path.', start, stop) : invariant(false) : undefined;
+      !(traverseUp || isAncestorIDOf(start, stop)) ? "production" !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do ' + 'not have a parent path.', start, stop) : invariant(false) : undefined;
       var depth = 0;
       var traverse = traverseUp ? getParentID : getNextDescendantID;
       for (var id = start; ; id = traverse(id, stop)) {
@@ -17782,7 +16329,7 @@ $__System.registerDynamic("a5", ["fd", "c5", "29"], true, function($__require, e
         if (ret === false || id === stop) {
           break;
         }
-        !(depth++ < MAX_TREE_DEPTH) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Detected an infinite loop while ' + 'traversing the React DOM ID tree. This may be due to malformed IDs: %s', start, stop, id) : invariant(false) : undefined;
+        !(depth++ < MAX_TREE_DEPTH) ? "production" !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Detected an infinite loop while ' + 'traversing the React DOM ID tree. This may be due to malformed IDs: %s', start, stop, id) : invariant(false) : undefined;
       }
     }
     var ReactInstanceHandles = {
@@ -17829,24 +16376,24 @@ $__System.registerDynamic("a5", ["fd", "c5", "29"], true, function($__require, e
       SEPARATOR: SEPARATOR
     };
     module.exports = ReactInstanceHandles;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("dd", ["a2", "11f", "a5", "130", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("b1", ["76", "f3", "79", "104", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('a2');
-    var ReactElement = $__require('11f');
-    var ReactInstanceHandles = $__require('a5');
-    var getIteratorFn = $__require('130');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactCurrentOwner = $__require('76');
+    var ReactElement = $__require('f3');
+    var ReactInstanceHandles = $__require('79');
+    var getIteratorFn = $__require('104');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     var SEPARATOR = ReactInstanceHandles.SEPARATOR;
     var SUBSEPARATOR = ':';
     var userProvidedKeyEscaperLookup = {
@@ -17903,8 +16450,8 @@ $__System.registerDynamic("dd", ["a2", "11f", "a5", "130", "c5", "ab", "29"], tr
               subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
             }
           } else {
-            if (process.env.NODE_ENV !== 'production') {
-              process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
+            if ("production" !== 'production') {
+              "production" !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
               didWarnAboutMaps = true;
             }
             while (!(step = iterator.next()).done) {
@@ -17918,7 +16465,7 @@ $__System.registerDynamic("dd", ["a2", "11f", "a5", "130", "c5", "ab", "29"], tr
           }
         } else if (type === 'object') {
           var addendum = '';
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             addendum = ' If you meant to render a collection of children, use an array ' + 'instead or wrap the object using createFragment(object) from the ' + 'React add-ons.';
             if (children._isReactElement) {
               addendum = ' It looks like you\'re using an element created by a different ' + 'version of React. Make sure to use only one copy of React.';
@@ -17931,7 +16478,7 @@ $__System.registerDynamic("dd", ["a2", "11f", "a5", "130", "c5", "ab", "29"], tr
             }
           }
           var childrenString = String(children);
-          !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
+          !false ? "production" !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
         }
       }
       return subtreeCount;
@@ -17943,21 +16490,21 @@ $__System.registerDynamic("dd", ["a2", "11f", "a5", "130", "c5", "ab", "29"], tr
       return traverseAllChildrenImpl(children, '', callback, traverseContext);
     }
     module.exports = traverseAllChildren;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d5", ["ae", "11f", "f2", "dd"], true, function($__require, exports, module) {
+$__System.registerDynamic("a9", ["82", "f3", "c6", "b1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var PooledClass = $__require('ae');
-  var ReactElement = $__require('11f');
-  var emptyFunction = $__require('f2');
-  var traverseAllChildren = $__require('dd');
+  var PooledClass = $__require('82');
+  var ReactElement = $__require('f3');
+  var emptyFunction = $__require('c6');
+  var traverseAllChildren = $__require('b1');
   var twoArgumentPooler = PooledClass.twoArgumentPooler;
   var fourArgumentPooler = PooledClass.fourArgumentPooler;
   var userProvidedKeyEscapeRegex = /\/(?!\/)/g;
@@ -18058,18 +16605,18 @@ $__System.registerDynamic("d5", ["ae", "11f", "f2", "dd"], true, function($__req
   return module.exports;
 });
 
-$__System.registerDynamic("131", ["132", "e7", "122", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("105", ["106", "bb", "f6", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactNoopUpdateQueue = $__require('132');
-    var canDefineProperty = $__require('e7');
-    var emptyObject = $__require('122');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactNoopUpdateQueue = $__require('106');
+    var canDefineProperty = $__require('bb');
+    var emptyObject = $__require('f6');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     function ReactComponent(props, context, updater) {
       this.props = props;
       this.context = context;
@@ -18078,9 +16625,9 @@ $__System.registerDynamic("131", ["132", "e7", "122", "c5", "ab", "29"], true, f
     }
     ReactComponent.prototype.isReactComponent = {};
     ReactComponent.prototype.setState = function(partialState, callback) {
-      !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setState(...): takes an object of state variables to update or a ' + 'function which returns an object of state variables.') : invariant(false) : undefined;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(partialState != null, 'setState(...): You passed an undefined or null state object; ' + 'instead, use forceUpdate().') : undefined;
+      !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? "production" !== 'production' ? invariant(false, 'setState(...): takes an object of state variables to update or a ' + 'function which returns an object of state variables.') : invariant(false) : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(partialState != null, 'setState(...): You passed an undefined or null state object; ' + 'instead, use forceUpdate().') : undefined;
       }
       this.updater.enqueueSetState(this, partialState);
       if (callback) {
@@ -18093,7 +16640,7 @@ $__System.registerDynamic("131", ["132", "e7", "122", "c5", "ab", "29"], true, f
         this.updater.enqueueCallback(this, callback);
       }
     };
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       var deprecatedAPIs = {
         getDOMNode: ['getDOMNode', 'Use ReactDOM.findDOMNode(component) instead.'],
         isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
@@ -18104,7 +16651,7 @@ $__System.registerDynamic("131", ["132", "e7", "122", "c5", "ab", "29"], true, f
       var defineDeprecationWarning = function(methodName, info) {
         if (canDefineProperty) {
           Object.defineProperty(ReactComponent.prototype, methodName, {get: function() {
-              process.env.NODE_ENV !== 'production' ? warning(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]) : undefined;
+              "production" !== 'production' ? warning(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]) : undefined;
               return undefined;
             }});
         }
@@ -18116,22 +16663,22 @@ $__System.registerDynamic("131", ["132", "e7", "122", "c5", "ab", "29"], true, f
       }
     }
     module.exports = ReactComponent;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("132", ["ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("106", ["7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var warning = $__require('ab');
+    var warning = $__require('7f');
     function warnTDZ(publicInstance, callerName) {
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor && publicInstance.constructor.displayName || '') : undefined;
+      if ("production" !== 'production') {
+        "production" !== 'production' ? warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor && publicInstance.constructor.displayName || '') : undefined;
       }
     }
     var ReactNoopUpdateQueue = {
@@ -18156,12 +16703,12 @@ $__System.registerDynamic("132", ["ab", "29"], true, function($__require, export
       }
     };
     module.exports = ReactNoopUpdateQueue;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("122", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("f6", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -18169,16 +16716,16 @@ $__System.registerDynamic("122", ["29"], true, function($__require, exports, mod
   (function(process) {
     'use strict';
     var emptyObject = {};
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       Object.freeze(emptyObject);
     }
     module.exports = emptyObject;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("b7", [], true, function($__require, exports, module) {
+$__System.registerDynamic("8b", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18199,24 +16746,24 @@ $__System.registerDynamic("b7", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", "c5", "f3", "b7", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ce", ["105", "f3", "ac", "ff", "106", "83", "f6", "99", "c7", "8b", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactComponent = $__require('131');
-    var ReactElement = $__require('11f');
-    var ReactPropTypeLocations = $__require('d8');
-    var ReactPropTypeLocationNames = $__require('12b');
-    var ReactNoopUpdateQueue = $__require('132');
-    var assign = $__require('af');
-    var emptyObject = $__require('122');
-    var invariant = $__require('c5');
-    var keyMirror = $__require('f3');
-    var keyOf = $__require('b7');
-    var warning = $__require('ab');
+    var ReactComponent = $__require('105');
+    var ReactElement = $__require('f3');
+    var ReactPropTypeLocations = $__require('ac');
+    var ReactPropTypeLocationNames = $__require('ff');
+    var ReactNoopUpdateQueue = $__require('106');
+    var assign = $__require('83');
+    var emptyObject = $__require('f6');
+    var invariant = $__require('99');
+    var keyMirror = $__require('c7');
+    var keyOf = $__require('8b');
+    var warning = $__require('7f');
     var MIXINS_KEY = keyOf({mixins: null});
     var SpecPolicy = keyMirror({
       DEFINE_ONCE: null,
@@ -18229,7 +16776,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
     function warnSetProps() {
       if (!warnedSetProps) {
         warnedSetProps = true;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'setProps(...) and replaceProps(...) are deprecated. ' + 'Instead, call render again at the top level.') : undefined;
+        "production" !== 'production' ? warning(false, 'setProps(...) and replaceProps(...) are deprecated. ' + 'Instead, call render again at the top level.') : undefined;
       }
     }
     var ReactClassInterface = {
@@ -18263,13 +16810,13 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         }
       },
       childContextTypes: function(Constructor, childContextTypes) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           validateTypeDef(Constructor, childContextTypes, ReactPropTypeLocations.childContext);
         }
         Constructor.childContextTypes = assign({}, Constructor.childContextTypes, childContextTypes);
       },
       contextTypes: function(Constructor, contextTypes) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           validateTypeDef(Constructor, contextTypes, ReactPropTypeLocations.context);
         }
         Constructor.contextTypes = assign({}, Constructor.contextTypes, contextTypes);
@@ -18282,7 +16829,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         }
       },
       propTypes: function(Constructor, propTypes) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           validateTypeDef(Constructor, propTypes, ReactPropTypeLocations.prop);
         }
         Constructor.propTypes = assign({}, Constructor.propTypes, propTypes);
@@ -18295,25 +16842,25 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
     function validateTypeDef(Constructor, typeDef, location) {
       for (var propName in typeDef) {
         if (typeDef.hasOwnProperty(propName)) {
-          process.env.NODE_ENV !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : undefined;
+          "production" !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : undefined;
         }
       }
     }
     function validateMethodOverride(proto, name) {
       var specPolicy = ReactClassInterface.hasOwnProperty(name) ? ReactClassInterface[name] : null;
       if (ReactClassMixin.hasOwnProperty(name)) {
-        !(specPolicy === SpecPolicy.OVERRIDE_BASE) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name) : invariant(false) : undefined;
+        !(specPolicy === SpecPolicy.OVERRIDE_BASE) ? "production" !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name) : invariant(false) : undefined;
       }
       if (proto.hasOwnProperty(name)) {
-        !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
+        !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ? "production" !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
       }
     }
     function mixSpecIntoComponent(Constructor, spec) {
       if (!spec) {
         return;
       }
-      !(typeof spec !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component class as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
-      !!ReactElement.isValidElement(spec) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
+      !(typeof spec !== 'function') ? "production" !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component class as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
+      !!ReactElement.isValidElement(spec) ? "production" !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
       var proto = Constructor.prototype;
       if (spec.hasOwnProperty(MIXINS_KEY)) {
         RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
@@ -18343,7 +16890,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
           } else {
             if (isAlreadyDefined) {
               var specPolicy = ReactClassInterface[name];
-              !(isReactClassMethod && (specPolicy === SpecPolicy.DEFINE_MANY_MERGED || specPolicy === SpecPolicy.DEFINE_MANY)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name) : invariant(false) : undefined;
+              !(isReactClassMethod && (specPolicy === SpecPolicy.DEFINE_MANY_MERGED || specPolicy === SpecPolicy.DEFINE_MANY)) ? "production" !== 'production' ? invariant(false, 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name) : invariant(false) : undefined;
               if (specPolicy === SpecPolicy.DEFINE_MANY_MERGED) {
                 proto[name] = createMergedResultFunction(proto[name], property);
               } else if (specPolicy === SpecPolicy.DEFINE_MANY) {
@@ -18351,7 +16898,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
               }
             } else {
               proto[name] = property;
-              if (process.env.NODE_ENV !== 'production') {
+              if ("production" !== 'production') {
                 if (typeof property === 'function' && spec.displayName) {
                   proto[name].displayName = spec.displayName + '_' + name;
                 }
@@ -18371,17 +16918,17 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
           continue;
         }
         var isReserved = (name in RESERVED_SPEC_KEYS);
-        !!isReserved ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name) : invariant(false) : undefined;
+        !!isReserved ? "production" !== 'production' ? invariant(false, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name) : invariant(false) : undefined;
         var isInherited = (name in Constructor);
-        !!isInherited ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
+        !!isInherited ? "production" !== 'production' ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
         Constructor[name] = property;
       }
     }
     function mergeIntoWithNoDuplicateKeys(one, two) {
-      !(one && two && typeof one === 'object' && typeof two === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.') : invariant(false) : undefined;
+      !(one && two && typeof one === 'object' && typeof two === 'object') ? "production" !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.') : invariant(false) : undefined;
       for (var key in two) {
         if (two.hasOwnProperty(key)) {
-          !(one[key] === undefined) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key) : invariant(false) : undefined;
+          !(one[key] === undefined) ? "production" !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key) : invariant(false) : undefined;
           one[key] = two[key];
         }
       }
@@ -18410,7 +16957,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
     }
     function bindAutoBindMethod(component, method) {
       var boundMethod = method.bind(component);
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         boundMethod.__reactBoundContext = component;
         boundMethod.__reactBoundMethod = method;
         boundMethod.__reactBoundArguments = null;
@@ -18423,9 +16970,9 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
             args[_key - 1] = arguments[_key];
           }
           if (newThis !== component && newThis !== null) {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName) : undefined;
+            "production" !== 'production' ? warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName) : undefined;
           } else if (!args.length) {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName) : undefined;
+            "production" !== 'production' ? warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName) : undefined;
             return boundMethod;
           }
           var reboundMethod = _bind.apply(boundMethod, arguments);
@@ -18456,7 +17003,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         return this.updater.isMounted(this);
       },
       setProps: function(partialProps, callback) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           warnSetProps();
         }
         this.updater.enqueueSetProps(this, partialProps);
@@ -18465,7 +17012,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         }
       },
       replaceProps: function(newProps, callback) {
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           warnSetProps();
         }
         this.updater.enqueueReplaceProps(this, newProps);
@@ -18479,8 +17026,8 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
     var ReactClass = {
       createClass: function(spec) {
         var Constructor = function(props, context, updater) {
-          if (process.env.NODE_ENV !== 'production') {
-            process.env.NODE_ENV !== 'production' ? warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory') : undefined;
+          if ("production" !== 'production') {
+            "production" !== 'production' ? warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory') : undefined;
           }
           if (this.__reactAutoBindMap) {
             bindAutoBindMethods(this);
@@ -18491,12 +17038,12 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
           this.updater = updater || ReactNoopUpdateQueue;
           this.state = null;
           var initialState = this.getInitialState ? this.getInitialState() : null;
-          if (process.env.NODE_ENV !== 'production') {
+          if ("production" !== 'production') {
             if (typeof initialState === 'undefined' && this.getInitialState._isMockFunction) {
               initialState = null;
             }
           }
-          !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent') : invariant(false) : undefined;
+          !(typeof initialState === 'object' && !Array.isArray(initialState)) ? "production" !== 'production' ? invariant(false, '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent') : invariant(false) : undefined;
           this.state = initialState;
         };
         Constructor.prototype = new ReactClassComponent();
@@ -18506,7 +17053,7 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         if (Constructor.getDefaultProps) {
           Constructor.defaultProps = Constructor.getDefaultProps();
         }
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (Constructor.getDefaultProps) {
             Constructor.getDefaultProps.isReactClassApproved = {};
           }
@@ -18514,10 +17061,10 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
             Constructor.prototype.getInitialState.isReactClassApproved = {};
           }
         }
-        !Constructor.prototype.render ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createClass(...): Class specification must implement a `render` method.') : invariant(false) : undefined;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component') : undefined;
+        !Constructor.prototype.render ? "production" !== 'production' ? invariant(false, 'createClass(...): Class specification must implement a `render` method.') : invariant(false) : undefined;
+        if ("production" !== 'production') {
+          "production" !== 'production' ? warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component') : undefined;
+          "production" !== 'production' ? warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component') : undefined;
         }
         for (var methodName in ReactClassInterface) {
           if (!Constructor.prototype[methodName]) {
@@ -18531,12 +17078,12 @@ $__System.registerDynamic("fa", ["131", "11f", "d8", "12b", "132", "af", "122", 
         }}
     };
     module.exports = ReactClass;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("133", [], true, function($__require, exports, module) {
+$__System.registerDynamic("107", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18560,18 +17107,18 @@ $__System.registerDynamic("133", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("134", ["11f", "135", "133", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("108", ["f3", "109", "107", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactElement = $__require('11f');
-    var ReactElementValidator = $__require('135');
-    var mapObject = $__require('133');
+    var ReactElement = $__require('f3');
+    var ReactElementValidator = $__require('109');
+    var mapObject = $__require('107');
     function createDOMFactory(tag) {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         return ReactElementValidator.createFactory(tag);
       }
       return ReactElement.createFactory(tag);
@@ -18711,23 +17258,23 @@ $__System.registerDynamic("134", ["11f", "135", "133", "29"], true, function($__
       tspan: 'tspan'
     }, createDOMFactory);
     module.exports = ReactDOMFactories;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f3", ["c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("c7", ["99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var invariant = $__require('c5');
+    var invariant = $__require('99');
     var keyMirror = function(obj) {
       var ret = {};
       var key;
-      !(obj instanceof Object && !Array.isArray(obj)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'keyMirror(...): Argument must be an object.') : invariant(false) : undefined;
+      !(obj instanceof Object && !Array.isArray(obj)) ? "production" !== 'production' ? invariant(false, 'keyMirror(...): Argument must be an object.') : invariant(false) : undefined;
       for (key in obj) {
         if (!obj.hasOwnProperty(key)) {
           continue;
@@ -18737,18 +17284,18 @@ $__System.registerDynamic("f3", ["c5", "29"], true, function($__require, exports
       return ret;
     };
     module.exports = keyMirror;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d8", ["f3"], true, function($__require, exports, module) {
+$__System.registerDynamic("ac", ["c7"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var keyMirror = $__require('f3');
+  var keyMirror = $__require('c7');
   var ReactPropTypeLocations = keyMirror({
     prop: null,
     context: null,
@@ -18759,21 +17306,21 @@ $__System.registerDynamic("d8", ["f3"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("109", ["f3", "ac", "ff", "76", "bb", "104", "99", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactElement = $__require('11f');
-    var ReactPropTypeLocations = $__require('d8');
-    var ReactPropTypeLocationNames = $__require('12b');
-    var ReactCurrentOwner = $__require('a2');
-    var canDefineProperty = $__require('e7');
-    var getIteratorFn = $__require('130');
-    var invariant = $__require('c5');
-    var warning = $__require('ab');
+    var ReactElement = $__require('f3');
+    var ReactPropTypeLocations = $__require('ac');
+    var ReactPropTypeLocationNames = $__require('ff');
+    var ReactCurrentOwner = $__require('76');
+    var canDefineProperty = $__require('bb');
+    var getIteratorFn = $__require('104');
+    var invariant = $__require('99');
+    var warning = $__require('7f');
     function getDeclarationErrorAddendum() {
       if (ReactCurrentOwner.current) {
         var name = ReactCurrentOwner.current.getName();
@@ -18794,7 +17341,7 @@ $__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "
       if (addenda === null) {
         return;
       }
-      process.env.NODE_ENV !== 'production' ? warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s%s', addenda.parentOrOwner || '', addenda.childOwner || '', addenda.url || '') : undefined;
+      "production" !== 'production' ? warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s%s', addenda.parentOrOwner || '', addenda.childOwner || '', addenda.url || '') : undefined;
     }
     function getAddendaForKeyUse(messageType, element, parentType) {
       var addendum = getDeclarationErrorAddendum();
@@ -18854,16 +17401,16 @@ $__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "
         if (propTypes.hasOwnProperty(propName)) {
           var error;
           try {
-            !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
+            !(typeof propTypes[propName] === 'function') ? "production" !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
             error = propTypes[propName](props, propName, componentName, location);
           } catch (ex) {
             error = ex;
           }
-          process.env.NODE_ENV !== 'production' ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], propName, typeof error) : undefined;
+          "production" !== 'production' ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], propName, typeof error) : undefined;
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             loggedTypeFailures[error.message] = true;
             var addendum = getDeclarationErrorAddendum();
-            process.env.NODE_ENV !== 'production' ? warning(false, 'Failed propType: %s%s', error.message, addendum) : undefined;
+            "production" !== 'production' ? warning(false, 'Failed propType: %s%s', error.message, addendum) : undefined;
           }
         }
       }
@@ -18878,13 +17425,13 @@ $__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "
         checkPropTypes(name, componentClass.propTypes, element.props, ReactPropTypeLocations.prop);
       }
       if (typeof componentClass.getDefaultProps === 'function') {
-        process.env.NODE_ENV !== 'production' ? warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : undefined;
+        "production" !== 'production' ? warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : undefined;
       }
     }
     var ReactElementValidator = {
       createElement: function(type, props, children) {
         var validType = typeof type === 'string' || typeof type === 'function';
-        process.env.NODE_ENV !== 'production' ? warning(validType, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : undefined;
+        "production" !== 'production' ? warning(validType, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : undefined;
         var element = ReactElement.createElement.apply(this, arguments);
         if (element == null) {
           return element;
@@ -18900,12 +17447,12 @@ $__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "
       createFactory: function(type) {
         var validatedFactory = ReactElementValidator.createElement.bind(null, type);
         validatedFactory.type = type;
-        if (process.env.NODE_ENV !== 'production') {
+        if ("production" !== 'production') {
           if (canDefineProperty) {
             Object.defineProperty(validatedFactory, 'type', {
               enumerable: false,
               get: function() {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.') : undefined;
+                "production" !== 'production' ? warning(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.') : undefined;
                 Object.defineProperty(this, 'type', {value: type});
                 return type;
               }
@@ -18924,12 +17471,12 @@ $__System.registerDynamic("135", ["11f", "d8", "12b", "a2", "e7", "130", "c5", "
       }
     };
     module.exports = ReactElementValidator;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12b", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("ff", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -18937,7 +17484,7 @@ $__System.registerDynamic("12b", ["29"], true, function($__require, exports, mod
   (function(process) {
     'use strict';
     var ReactPropTypeLocationNames = {};
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       ReactPropTypeLocationNames = {
         prop: 'prop',
         context: 'context',
@@ -18945,12 +17492,12 @@ $__System.registerDynamic("12b", ["29"], true, function($__require, exports, mod
       };
     }
     module.exports = ReactPropTypeLocationNames;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("130", [], true, function($__require, exports, module) {
+$__System.registerDynamic("104", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18969,16 +17516,16 @@ $__System.registerDynamic("130", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("d7", ["11f", "12b", "f2", "130"], true, function($__require, exports, module) {
+$__System.registerDynamic("ab", ["f3", "ff", "c6", "104"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactElement = $__require('11f');
-  var ReactPropTypeLocationNames = $__require('12b');
-  var emptyFunction = $__require('f2');
-  var getIteratorFn = $__require('130');
+  var ReactElement = $__require('f3');
+  var ReactPropTypeLocationNames = $__require('ff');
+  var emptyFunction = $__require('c6');
+  var getIteratorFn = $__require('104');
   var ANONYMOUS = '<<anonymous>>';
   var ReactPropTypes = {
     array: createPrimitiveTypeChecker('array'),
@@ -19235,7 +17782,7 @@ $__System.registerDynamic("d7", ["11f", "12b", "f2", "130"], true, function($__r
   return module.exports;
 });
 
-$__System.registerDynamic("a9", [], true, function($__require, exports, module) {
+$__System.registerDynamic("7d", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19246,7 +17793,7 @@ $__System.registerDynamic("a9", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("a2", [], true, function($__require, exports, module) {
+$__System.registerDynamic("76", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19258,7 +17805,7 @@ $__System.registerDynamic("a2", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("e7", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("bb", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -19266,28 +17813,28 @@ $__System.registerDynamic("e7", ["29"], true, function($__require, exports, modu
   (function(process) {
     'use strict';
     var canDefineProperty = false;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       try {
         Object.defineProperty({}, 'x', {get: function() {}});
         canDefineProperty = true;
       } catch (x) {}
     }
     module.exports = canDefineProperty;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("11f", ["a2", "af", "e7", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("f3", ["76", "83", "bb", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('a2');
-    var assign = $__require('af');
-    var canDefineProperty = $__require('e7');
+    var ReactCurrentOwner = $__require('76');
+    var assign = $__require('83');
+    var canDefineProperty = $__require('bb');
     var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
     var RESERVED_PROPS = {
       key: true,
@@ -19304,7 +17851,7 @@ $__System.registerDynamic("11f", ["a2", "af", "e7", "29"], true, function($__req
         props: props,
         _owner: owner
       };
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         element._store = {};
         if (canDefineProperty) {
           Object.defineProperty(element._store, 'validated', {
@@ -19384,7 +17931,7 @@ $__System.registerDynamic("11f", ["a2", "af", "e7", "29"], true, function($__req
     };
     ReactElement.cloneAndReplaceProps = function(oldElement, newProps) {
       var newElement = ReactElement(oldElement.type, oldElement.key, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, newProps);
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         newElement._store.validated = oldElement._store.validated;
       }
       return newElement;
@@ -19427,12 +17974,12 @@ $__System.registerDynamic("11f", ["a2", "af", "e7", "29"], true, function($__req
       return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
     };
     module.exports = ReactElement;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("c5", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("99", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -19440,7 +17987,7 @@ $__System.registerDynamic("c5", ["29"], true, function($__require, exports, modu
   (function(process) {
     'use strict';
     function invariant(condition, format, a, b, c, d, e, f) {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         if (format === undefined) {
           throw new Error('invariant requires an error message argument');
         }
@@ -19462,51 +18009,51 @@ $__System.registerDynamic("c5", ["29"], true, function($__require, exports, modu
       }
     }
     module.exports = invariant;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("136", ["11f", "c5", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("10a", ["f3", "99", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactElement = $__require('11f');
-    var invariant = $__require('c5');
+    var ReactElement = $__require('f3');
+    var invariant = $__require('99');
     function onlyChild(children) {
-      !ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
+      !ReactElement.isValidElement(children) ? "production" !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
       return children;
     }
     module.exports = onlyChild;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("137", ["d5", "131", "fa", "134", "11f", "135", "d7", "a9", "af", "136", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("10b", ["a9", "105", "ce", "108", "f3", "109", "ab", "7d", "83", "10a", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactChildren = $__require('d5');
-    var ReactComponent = $__require('131');
-    var ReactClass = $__require('fa');
-    var ReactDOMFactories = $__require('134');
-    var ReactElement = $__require('11f');
-    var ReactElementValidator = $__require('135');
-    var ReactPropTypes = $__require('d7');
-    var ReactVersion = $__require('a9');
-    var assign = $__require('af');
-    var onlyChild = $__require('136');
+    var ReactChildren = $__require('a9');
+    var ReactComponent = $__require('105');
+    var ReactClass = $__require('ce');
+    var ReactDOMFactories = $__require('108');
+    var ReactElement = $__require('f3');
+    var ReactElementValidator = $__require('109');
+    var ReactPropTypes = $__require('ab');
+    var ReactVersion = $__require('7d');
+    var assign = $__require('83');
+    var onlyChild = $__require('10a');
     var createElement = ReactElement.createElement;
     var createFactory = ReactElement.createFactory;
     var cloneElement = ReactElement.cloneElement;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       createElement = ReactElementValidator.createElement;
       createFactory = ReactElementValidator.createFactory;
       cloneElement = ReactElementValidator.cloneElement;
@@ -19534,12 +18081,12 @@ $__System.registerDynamic("137", ["d5", "131", "fa", "134", "11f", "135", "d7", 
       __spread: assign
     };
     module.exports = React;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("af", [], true, function($__require, exports, module) {
+$__System.registerDynamic("83", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19570,7 +18117,7 @@ $__System.registerDynamic("af", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("f2", [], true, function($__require, exports, module) {
+$__System.registerDynamic("c6", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -19597,16 +18144,16 @@ $__System.registerDynamic("f2", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("ab", ["f2", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("7f", ["c6", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var emptyFunction = $__require('f2');
+    var emptyFunction = $__require('c6');
     var warning = emptyFunction;
-    if (process.env.NODE_ENV !== 'production') {
+    if ("production" !== 'production') {
       warning = function(condition, format) {
         for (var _len = arguments.length,
             args = Array(_len > 2 ? _len - 2 : 0),
@@ -19634,25 +18181,25 @@ $__System.registerDynamic("ab", ["f2", "29"], true, function($__require, exports
       };
     }
     module.exports = warning;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("138", ["af", "ab", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("10c", ["83", "7f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var assign = $__require('af');
-    var warning = $__require('ab');
+    var assign = $__require('83');
+    var warning = $__require('7f');
     function deprecated(fnName, newModule, newPackage, ctx, fn) {
       var warned = false;
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         var newFn = function() {
-          process.env.NODE_ENV !== 'production' ? warning(warned, 'React.%s is deprecated. Please use %s.%s from require' + '(\'%s\') ' + 'instead.', fnName, newModule, fnName, newPackage) : undefined;
+          "production" !== 'production' ? warning(warned, 'React.%s is deprecated. Please use %s.%s from require' + '(\'%s\') ' + 'instead.', fnName, newModule, fnName, newPackage) : undefined;
           warned = true;
           return fn.apply(ctx, arguments);
         };
@@ -19661,22 +18208,22 @@ $__System.registerDynamic("138", ["af", "ab", "29"], true, function($__require, 
       return fn;
     }
     module.exports = deprecated;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("139", ["86", "12f", "137", "af", "138"], true, function($__require, exports, module) {
+$__System.registerDynamic("10d", ["2e", "103", "10b", "83", "10c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactDOM = $__require('86');
-  var ReactDOMServer = $__require('12f');
-  var ReactIsomorphic = $__require('137');
-  var assign = $__require('af');
-  var deprecated = $__require('138');
+  var ReactDOM = $__require('2e');
+  var ReactDOMServer = $__require('103');
+  var ReactIsomorphic = $__require('10b');
+  var assign = $__require('83');
+  var deprecated = $__require('10c');
   var React = {};
   assign(React, ReactIsomorphic);
   assign(React, {
@@ -19693,380 +18240,28 @@ $__System.registerDynamic("139", ["86", "12f", "137", "af", "138"], true, functi
   return module.exports;
 });
 
-$__System.registerDynamic("13a", ["139"], true, function($__require, exports, module) {
+$__System.registerDynamic("10e", ["10d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('139');
+  module.exports = $__require('10d');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4", ["13a"], true, function($__require, exports, module) {
+$__System.registerDynamic("4", ["10e"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('13a');
+  module.exports = $__require('10e');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("13b", ["13c"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = createProvider;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function');
-    }
-  }
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }});
-    if (superClass)
-      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-  var _utilsCreateStoreShape = $__require('13c');
-  var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
-  function isUsingOwnerContext(React) {
-    var version = React.version;
-    if (typeof version !== 'string') {
-      return true;
-    }
-    var sections = version.split('.');
-    var major = parseInt(sections[0], 10);
-    var minor = parseInt(sections[1], 10);
-    return major === 0 && minor === 13;
-  }
-  function createProvider(React) {
-    var Component = React.Component;
-    var PropTypes = React.PropTypes;
-    var Children = React.Children;
-    var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
-    var requireFunctionChild = isUsingOwnerContext(React);
-    var didWarnAboutChild = false;
-    function warnAboutFunctionChild() {
-      if (didWarnAboutChild || requireFunctionChild) {
-        return;
-      }
-      didWarnAboutChild = true;
-      console.error('With React 0.14 and later versions, you no longer need to ' + 'wrap <Provider> child into a function.');
-    }
-    function warnAboutElementChild() {
-      if (didWarnAboutChild || !requireFunctionChild) {
-        return;
-      }
-      didWarnAboutChild = true;
-      console.error('With React 0.13, you need to ' + 'wrap <Provider> child into a function. ' + 'This restriction will be removed with React 0.14.');
-    }
-    var didWarnAboutReceivingStore = false;
-    function warnAboutReceivingStore() {
-      if (didWarnAboutReceivingStore) {
-        return;
-      }
-      didWarnAboutReceivingStore = true;
-      console.error('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/rackt/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
-    }
-    var Provider = (function(_Component) {
-      _inherits(Provider, _Component);
-      Provider.prototype.getChildContext = function getChildContext() {
-        return {store: this.store};
-      };
-      function Provider(props, context) {
-        _classCallCheck(this, Provider);
-        _Component.call(this, props, context);
-        this.store = props.store;
-      }
-      Provider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        var store = this.store;
-        var nextStore = nextProps.store;
-        if (store !== nextStore) {
-          warnAboutReceivingStore();
-        }
-      };
-      Provider.prototype.render = function render() {
-        var children = this.props.children;
-        if (typeof children === 'function') {
-          warnAboutFunctionChild();
-          children = children();
-        } else {
-          warnAboutElementChild();
-        }
-        return Children.only(children);
-      };
-      return Provider;
-    })(Component);
-    Provider.childContextTypes = {store: storeShape.isRequired};
-    Provider.propTypes = {
-      store: storeShape.isRequired,
-      children: (requireFunctionChild ? PropTypes.func : PropTypes.element).isRequired
-    };
-    return Provider;
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("13c", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports["default"] = createStoreShape;
-  function createStoreShape(PropTypes) {
-    return PropTypes.shape({
-      subscribe: PropTypes.func.isRequired,
-      dispatch: PropTypes.func.isRequired,
-      getState: PropTypes.func.isRequired
-    });
-  }
-  module.exports = exports["default"];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("13d", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports["default"] = shallowEqual;
-  function shallowEqual(objA, objB) {
-    if (objA === objB) {
-      return true;
-    }
-    var keysA = Object.keys(objA);
-    var keysB = Object.keys(objB);
-    if (keysA.length !== keysB.length) {
-      return false;
-    }
-    var hasOwn = Object.prototype.hasOwnProperty;
-    for (var i = 0; i < keysA.length; i++) {
-      if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  module.exports = exports["default"];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("13e", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = isPlainObject;
-  var fnToString = function fnToString(fn) {
-    return Function.prototype.toString.call(fn);
-  };
-  function isPlainObject(obj) {
-    if (!obj || typeof obj !== 'object') {
-      return false;
-    }
-    var proto = typeof obj.constructor === 'function' ? Object.getPrototypeOf(obj) : Object.prototype;
-    if (proto === null) {
-      return true;
-    }
-    var constructor = proto.constructor;
-    return typeof constructor === 'function' && constructor instanceof constructor && fnToString(constructor) === fnToString(Object);
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("13f", ["140"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = createStore;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _lodashIsPlainObject = $__require('140');
-  var _lodashIsPlainObject2 = _interopRequireDefault(_lodashIsPlainObject);
-  var ActionTypes = {INIT: '@@redux/INIT'};
-  exports.ActionTypes = ActionTypes;
-  function createStore(reducer, initialState, enhancer) {
-    if (typeof initialState === 'function' && typeof enhancer === 'undefined') {
-      enhancer = initialState;
-      initialState = undefined;
-    }
-    if (typeof enhancer !== 'undefined') {
-      if (typeof enhancer !== 'function') {
-        throw new Error('Expected the enhancer to be a function.');
-      }
-      return enhancer(createStore)(reducer, initialState);
-    }
-    if (typeof reducer !== 'function') {
-      throw new Error('Expected the reducer to be a function.');
-    }
-    var currentReducer = reducer;
-    var currentState = initialState;
-    var currentListeners = [];
-    var nextListeners = currentListeners;
-    var isDispatching = false;
-    function ensureCanMutateNextListeners() {
-      if (nextListeners === currentListeners) {
-        nextListeners = currentListeners.slice();
-      }
-    }
-    function getState() {
-      return currentState;
-    }
-    function subscribe(listener) {
-      if (typeof listener !== 'function') {
-        throw new Error('Expected listener to be a function.');
-      }
-      var isSubscribed = true;
-      ensureCanMutateNextListeners();
-      nextListeners.push(listener);
-      return function unsubscribe() {
-        if (!isSubscribed) {
-          return;
-        }
-        isSubscribed = false;
-        ensureCanMutateNextListeners();
-        var index = nextListeners.indexOf(listener);
-        nextListeners.splice(index, 1);
-      };
-    }
-    function dispatch(action) {
-      if (!_lodashIsPlainObject2['default'](action)) {
-        throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
-      }
-      if (typeof action.type === 'undefined') {
-        throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
-      }
-      if (isDispatching) {
-        throw new Error('Reducers may not dispatch actions.');
-      }
-      try {
-        isDispatching = true;
-        currentState = currentReducer(currentState, action);
-      } finally {
-        isDispatching = false;
-      }
-      var listeners = currentListeners = nextListeners;
-      for (var i = 0; i < listeners.length; i++) {
-        listeners[i]();
-      }
-      return action;
-    }
-    function replaceReducer(nextReducer) {
-      if (typeof nextReducer !== 'function') {
-        throw new Error('Expected the nextReducer to be a function.');
-      }
-      currentReducer = nextReducer;
-      dispatch({type: ActionTypes.INIT});
-    }
-    dispatch({type: ActionTypes.INIT});
-    return {
-      dispatch: dispatch,
-      subscribe: subscribe,
-      getState: getState,
-      replaceReducer: replaceReducer
-    };
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("141", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function isHostObject(value) {
-    var result = false;
-    if (value != null && typeof value.toString != 'function') {
-      try {
-        result = !!(value + '');
-      } catch (e) {}
-    }
-    return result;
-  }
-  module.exports = isHostObject;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("142", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function isObjectLike(value) {
-    return !!value && typeof value == 'object';
-  }
-  module.exports = isObjectLike;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("140", ["141", "142"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isHostObject = $__require('141'),
-      isObjectLike = $__require('142');
-  var objectTag = '[object Object]';
-  var objectProto = global.Object.prototype;
-  var funcToString = global.Function.prototype.toString;
-  var objectCtorString = funcToString.call(Object);
-  var objectToString = objectProto.toString;
-  var getPrototypeOf = Object.getPrototypeOf;
-  function isPlainObject(value) {
-    if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
-      return false;
-    }
-    var proto = objectProto;
-    if (typeof value.constructor == 'function') {
-      proto = getPrototypeOf(value);
-    }
-    if (proto === null) {
-      return true;
-    }
-    var Ctor = proto.constructor;
-    return (typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
-  }
-  module.exports = isPlainObject;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("143", ["13f", "140", "144", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("5a", ["4", "5c", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -20074,137 +18269,1005 @@ $__System.registerDynamic("143", ["13f", "140", "144", "29"], true, function($__
   (function(process) {
     'use strict';
     exports.__esModule = true;
-    exports['default'] = combineReducers;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    exports.isReactChildren = isReactChildren;
+    exports.createRouteFromReactElement = createRouteFromReactElement;
+    exports.createRoutesFromReactChildren = createRoutesFromReactChildren;
+    exports.createRoutes = createRoutes;
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {'default': obj};
     }
-    var _createStore = $__require('13f');
-    var _lodashIsPlainObject = $__require('140');
-    var _lodashIsPlainObject2 = _interopRequireDefault(_lodashIsPlainObject);
-    var _utilsWarning = $__require('144');
-    var _utilsWarning2 = _interopRequireDefault(_utilsWarning);
-    function getUndefinedStateErrorMessage(key, action) {
-      var actionType = action && action.type;
-      var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
-      return 'Reducer "' + key + '" returned undefined handling ' + actionName + '. ' + 'To ignore an action, you must explicitly return the previous state.';
+    var _react = $__require('4');
+    var _react2 = _interopRequireDefault(_react);
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    function isValidChild(object) {
+      return object == null || _react2['default'].isValidElement(object);
     }
-    function getUnexpectedStateShapeWarningMessage(inputState, reducers, action) {
-      var reducerKeys = Object.keys(reducers);
-      var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'initialState argument passed to createStore' : 'previous state received by the reducer';
-      if (reducerKeys.length === 0) {
-        return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
-      }
-      if (!_lodashIsPlainObject2['default'](inputState)) {
-        return 'The ' + argumentName + ' has unexpected type of "' + ({}).toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
-      }
-      var unexpectedKeys = Object.keys(inputState).filter(function(key) {
-        return !reducers.hasOwnProperty(key);
-      });
-      if (unexpectedKeys.length > 0) {
-        return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+    function isReactChildren(object) {
+      return isValidChild(object) || Array.isArray(object) && object.every(isValidChild);
+    }
+    function checkPropTypes(componentName, propTypes, props) {
+      componentName = componentName || 'UnknownComponent';
+      for (var propName in propTypes) {
+        if (propTypes.hasOwnProperty(propName)) {
+          var error = propTypes[propName](props, propName, componentName);
+          if (error instanceof Error)
+            "production" !== 'production' ? _warning2['default'](false, error.message) : undefined;
+        }
       }
     }
-    function assertReducerSanity(reducers) {
-      Object.keys(reducers).forEach(function(key) {
-        var reducer = reducers[key];
-        var initialState = reducer(undefined, {type: _createStore.ActionTypes.INIT});
-        if (typeof initialState === 'undefined') {
-          throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
-        }
-        var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
-        if (typeof reducer(undefined, {type: type}) === 'undefined') {
-          throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
-        }
-      });
+    function createRoute(defaultProps, props) {
+      return _extends({}, defaultProps, props);
     }
-    function combineReducers(reducers) {
-      var reducerKeys = Object.keys(reducers);
-      var finalReducers = {};
-      for (var i = 0; i < reducerKeys.length; i++) {
-        var key = reducerKeys[i];
-        if (typeof reducers[key] === 'function') {
-          finalReducers[key] = reducers[key];
-        }
+    function createRouteFromReactElement(element) {
+      var type = element.type;
+      var route = createRoute(type.defaultProps, element.props);
+      if (type.propTypes)
+        checkPropTypes(type.displayName || type.name, type.propTypes, route);
+      if (route.children) {
+        var childRoutes = createRoutesFromReactChildren(route.children, route);
+        if (childRoutes.length)
+          route.childRoutes = childRoutes;
+        delete route.children;
       }
-      var finalReducerKeys = Object.keys(finalReducers);
-      var sanityError;
-      try {
-        assertReducerSanity(finalReducers);
-      } catch (e) {
-        sanityError = e;
-      }
-      return function combination(state, action) {
-        if (state === undefined)
-          state = {};
-        if (sanityError) {
-          throw sanityError;
-        }
-        if (process.env.NODE_ENV !== 'production') {
-          var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action);
-          if (warningMessage) {
-            _utilsWarning2['default'](warningMessage);
+      return route;
+    }
+    function createRoutesFromReactChildren(children, parentRoute) {
+      var routes = [];
+      _react2['default'].Children.forEach(children, function(element) {
+        if (_react2['default'].isValidElement(element)) {
+          if (element.type.createRouteFromReactElement) {
+            var route = element.type.createRouteFromReactElement(element, parentRoute);
+            if (route)
+              routes.push(route);
+          } else {
+            routes.push(createRouteFromReactElement(element));
           }
         }
-        var hasChanged = false;
-        var nextState = {};
-        for (var i = 0; i < finalReducerKeys.length; i++) {
-          var key = finalReducerKeys[i];
-          var reducer = finalReducers[key];
-          var previousStateForKey = state[key];
-          var nextStateForKey = reducer(previousStateForKey, action);
-          if (typeof nextStateForKey === 'undefined') {
-            var errorMessage = getUndefinedStateErrorMessage(key, action);
-            throw new Error(errorMessage);
-          }
-          nextState[key] = nextStateForKey;
-          hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
-        }
-        return hasChanged ? nextState : state;
-      };
+      });
+      return routes;
     }
-    module.exports = exports['default'];
-  })($__require('29'));
+    function createRoutes(routes) {
+      if (isReactChildren(routes)) {
+        routes = createRoutesFromReactChildren(routes);
+      } else if (routes && !Array.isArray(routes)) {
+        routes = [routes];
+      }
+      return routes;
+    }
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("145", [], true, function($__require, exports, module) {
+$__System.registerDynamic("5c", ["10f", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports['default'] = routerWarning;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    function routerWarning(falseToWarn, message) {
+      message = '[react-router] ' + message;
+      for (var _len = arguments.length,
+          args = Array(_len > 2 ? _len - 2 : 0),
+          _key = 2; _key < _len; _key++) {
+        args[_key - 2] = arguments[_key];
+      }
+      "production" !== 'production' ? _warning2['default'].apply(undefined, [falseToWarn, message].concat(args)) : undefined;
+    }
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6b", ["5c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports['default'] = deprecateObjectProperties;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('5c');
+    var _warning2 = _interopRequireDefault(_warning);
+    var useMembrane = false;
+    if ("production" !== 'production') {
+      try {
+        if (Object.defineProperty({}, 'x', {get: function get() {
+            return true;
+          }}).x) {
+          useMembrane = true;
+        }
+      } catch (e) {}
+    }
+    function deprecateObjectProperties(object, message) {
+      if (!useMembrane)
+        return object;
+      var membrane = {};
+      var _loop = function(prop) {
+        if (typeof object[prop] === 'function') {
+          membrane[prop] = function() {
+            "production" !== 'production' ? _warning2['default'](false, message) : undefined;
+            return object[prop].apply(object, arguments);
+          };
+        } else {
+          Object.defineProperty(membrane, prop, {
+            configurable: false,
+            enumerable: false,
+            get: function get() {
+              "production" !== 'production' ? _warning2['default'](false, message) : undefined;
+              return object[prop];
+            }
+          });
+        }
+      };
+      for (var prop in object) {
+        _loop(prop);
+      }
+      return membrane;
+    }
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5b", ["6b", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    exports.createRouterObject = createRouterObject;
+    exports.createRoutingHistory = createRoutingHistory;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _deprecateObjectProperties = $__require('6b');
+    var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
+    function createRouterObject(history, transitionManager) {
+      return _extends({}, history, {
+        setRouteLeaveHook: transitionManager.listenBeforeLeavingRoute,
+        isActive: transitionManager.isActive
+      });
+    }
+    function createRoutingHistory(history, transitionManager) {
+      history = _extends({}, history, transitionManager);
+      if ("production" !== 'production') {
+        history = _deprecateObjectProperties2['default'](history, '`props.history` and `context.history` are deprecated. Please use `context.router`. http://tiny.cc/router-contextchanges');
+      }
+      return history;
+    }
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("110", ["52", "111", "57", "5a", "5b", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    function _objectWithoutProperties(obj, keys) {
+      var target = {};
+      for (var i in obj) {
+        if (keys.indexOf(i) >= 0)
+          continue;
+        if (!Object.prototype.hasOwnProperty.call(obj, i))
+          continue;
+        target[i] = obj[i];
+      }
+      return target;
+    }
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _createMemoryHistory = $__require('111');
+    var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
+    var _createTransitionManager = $__require('57');
+    var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+    var _RouteUtils = $__require('5a');
+    var _RouterUtils = $__require('5b');
+    function match(_ref, callback) {
+      var history = _ref.history;
+      var routes = _ref.routes;
+      var location = _ref.location;
+      var options = _objectWithoutProperties(_ref, ['history', 'routes', 'location']);
+      !location ? "production" !== 'production' ? _invariant2['default'](false, 'match needs a location') : _invariant2['default'](false) : undefined;
+      history = history ? history : _createMemoryHistory2['default'](options);
+      var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes));
+      if (typeof location === 'string')
+        location = history.createLocation(location);
+      var router = _RouterUtils.createRouterObject(history, transitionManager);
+      history = _RouterUtils.createRoutingHistory(history, transitionManager);
+      transitionManager.match(location, function(error, redirectLocation, nextState) {
+        callback(error, redirectLocation, nextState && _extends({}, nextState, {
+          history: history,
+          router: router
+        }));
+      });
+    }
+    exports['default'] = match;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("64", ["52", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports.compilePattern = compilePattern;
+    exports.matchPattern = matchPattern;
+    exports.getParamNames = getParamNames;
+    exports.getParams = getParams;
+    exports.formatPattern = formatPattern;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    function escapeSource(string) {
+      return escapeRegExp(string).replace(/\/+/g, '/+');
+    }
+    function _compilePattern(pattern) {
+      var regexpSource = '';
+      var paramNames = [];
+      var tokens = [];
+      var match = undefined,
+          lastIndex = 0,
+          matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)/g;
+      while (match = matcher.exec(pattern)) {
+        if (match.index !== lastIndex) {
+          tokens.push(pattern.slice(lastIndex, match.index));
+          regexpSource += escapeSource(pattern.slice(lastIndex, match.index));
+        }
+        if (match[1]) {
+          regexpSource += '([^/?#]+)';
+          paramNames.push(match[1]);
+        } else if (match[0] === '**') {
+          regexpSource += '([\\s\\S]*)';
+          paramNames.push('splat');
+        } else if (match[0] === '*') {
+          regexpSource += '([\\s\\S]*?)';
+          paramNames.push('splat');
+        } else if (match[0] === '(') {
+          regexpSource += '(?:';
+        } else if (match[0] === ')') {
+          regexpSource += ')?';
+        }
+        tokens.push(match[0]);
+        lastIndex = matcher.lastIndex;
+      }
+      if (lastIndex !== pattern.length) {
+        tokens.push(pattern.slice(lastIndex, pattern.length));
+        regexpSource += escapeSource(pattern.slice(lastIndex, pattern.length));
+      }
+      return {
+        pattern: pattern,
+        regexpSource: regexpSource,
+        paramNames: paramNames,
+        tokens: tokens
+      };
+    }
+    var CompiledPatternsCache = {};
+    function compilePattern(pattern) {
+      if (!(pattern in CompiledPatternsCache))
+        CompiledPatternsCache[pattern] = _compilePattern(pattern);
+      return CompiledPatternsCache[pattern];
+    }
+    function matchPattern(pattern, pathname) {
+      if (pattern.charAt(0) !== '/') {
+        pattern = '/' + pattern;
+      }
+      if (pathname.charAt(0) !== '/') {
+        pathname = '/' + pathname;
+      }
+      var _compilePattern2 = compilePattern(pattern);
+      var regexpSource = _compilePattern2.regexpSource;
+      var paramNames = _compilePattern2.paramNames;
+      var tokens = _compilePattern2.tokens;
+      regexpSource += '/*';
+      var captureRemaining = tokens[tokens.length - 1] !== '*';
+      if (captureRemaining) {
+        regexpSource += '([\\s\\S]*?)';
+      }
+      var match = pathname.match(new RegExp('^' + regexpSource + '$', 'i'));
+      var remainingPathname = undefined,
+          paramValues = undefined;
+      if (match != null) {
+        if (captureRemaining) {
+          remainingPathname = match.pop();
+          var matchedPath = match[0].substr(0, match[0].length - remainingPathname.length);
+          if (remainingPathname && matchedPath.charAt(matchedPath.length - 1) !== '/') {
+            return {
+              remainingPathname: null,
+              paramNames: paramNames,
+              paramValues: null
+            };
+          }
+        } else {
+          remainingPathname = '';
+        }
+        paramValues = match.slice(1).map(function(v) {
+          return v != null ? decodeURIComponent(v) : v;
+        });
+      } else {
+        remainingPathname = paramValues = null;
+      }
+      return {
+        remainingPathname: remainingPathname,
+        paramNames: paramNames,
+        paramValues: paramValues
+      };
+    }
+    function getParamNames(pattern) {
+      return compilePattern(pattern).paramNames;
+    }
+    function getParams(pattern, pathname) {
+      var _matchPattern = matchPattern(pattern, pathname);
+      var paramNames = _matchPattern.paramNames;
+      var paramValues = _matchPattern.paramValues;
+      if (paramValues != null) {
+        return paramNames.reduce(function(memo, paramName, index) {
+          memo[paramName] = paramValues[index];
+          return memo;
+        }, {});
+      }
+      return null;
+    }
+    function formatPattern(pattern, params) {
+      params = params || {};
+      var _compilePattern3 = compilePattern(pattern);
+      var tokens = _compilePattern3.tokens;
+      var parenCount = 0,
+          pathname = '',
+          splatIndex = 0;
+      var token = undefined,
+          paramName = undefined,
+          paramValue = undefined;
+      for (var i = 0,
+          len = tokens.length; i < len; ++i) {
+        token = tokens[i];
+        if (token === '*' || token === '**') {
+          paramValue = Array.isArray(params.splat) ? params.splat[splatIndex++] : params.splat;
+          !(paramValue != null || parenCount > 0) ? "production" !== 'production' ? _invariant2['default'](false, 'Missing splat #%s for path "%s"', splatIndex, pattern) : _invariant2['default'](false) : undefined;
+          if (paramValue != null)
+            pathname += encodeURI(paramValue);
+        } else if (token === '(') {
+          parenCount += 1;
+        } else if (token === ')') {
+          parenCount -= 1;
+        } else if (token.charAt(0) === ':') {
+          paramName = token.substring(1);
+          paramValue = params[paramName];
+          !(paramValue != null || parenCount > 0) ? "production" !== 'production' ? _invariant2['default'](false, 'Missing "%s" parameter for path "%s"', paramName, pattern) : _invariant2['default'](false) : undefined;
+          if (paramValue != null)
+            pathname += encodeURIComponent(paramValue);
+        } else {
+          pathname += token;
+        }
+      }
+      return pathname.replace(/\/+/g, '/');
+    }
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("112", ["52", "73", "113", "114", "115", "116", "117", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _Actions = $__require('73');
+    var _ExecutionEnvironment = $__require('113');
+    var _DOMUtils = $__require('114');
+    var _DOMStateStorage = $__require('115');
+    var _createDOMHistory = $__require('116');
+    var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    function createBrowserHistory() {
+      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      !_ExecutionEnvironment.canUseDOM ? "production" !== 'production' ? _invariant2['default'](false, 'Browser history needs a DOM') : _invariant2['default'](false) : undefined;
+      var forceRefresh = options.forceRefresh;
+      var isSupported = _DOMUtils.supportsHistory();
+      var useRefresh = !isSupported || forceRefresh;
+      function getCurrentLocation(historyState) {
+        historyState = historyState || window.history.state || {};
+        var path = _DOMUtils.getWindowPath();
+        var _historyState = historyState;
+        var key = _historyState.key;
+        var state = undefined;
+        if (key) {
+          state = _DOMStateStorage.readState(key);
+        } else {
+          state = null;
+          key = history.createKey();
+          if (isSupported)
+            window.history.replaceState(_extends({}, historyState, {key: key}), null, path);
+        }
+        var location = _parsePath2['default'](path);
+        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
+      }
+      function startPopStateListener(_ref) {
+        var transitionTo = _ref.transitionTo;
+        function popStateListener(event) {
+          if (event.state === undefined)
+            return;
+          transitionTo(getCurrentLocation(event.state));
+        }
+        _DOMUtils.addEventListener(window, 'popstate', popStateListener);
+        return function() {
+          _DOMUtils.removeEventListener(window, 'popstate', popStateListener);
+        };
+      }
+      function finishTransition(location) {
+        var basename = location.basename;
+        var pathname = location.pathname;
+        var search = location.search;
+        var hash = location.hash;
+        var state = location.state;
+        var action = location.action;
+        var key = location.key;
+        if (action === _Actions.POP)
+          return;
+        _DOMStateStorage.saveState(key, state);
+        var path = (basename || '') + pathname + search + hash;
+        var historyState = {key: key};
+        if (action === _Actions.PUSH) {
+          if (useRefresh) {
+            window.location.href = path;
+            return false;
+          } else {
+            window.history.pushState(historyState, null, path);
+          }
+        } else {
+          if (useRefresh) {
+            window.location.replace(path);
+            return false;
+          } else {
+            window.history.replaceState(historyState, null, path);
+          }
+        }
+      }
+      var history = _createDOMHistory2['default'](_extends({}, options, {
+        getCurrentLocation: getCurrentLocation,
+        finishTransition: finishTransition,
+        saveState: _DOMStateStorage.saveState
+      }));
+      var listenerCount = 0,
+          stopPopStateListener = undefined;
+      function listenBefore(listener) {
+        if (++listenerCount === 1)
+          stopPopStateListener = startPopStateListener(history);
+        var unlisten = history.listenBefore(listener);
+        return function() {
+          unlisten();
+          if (--listenerCount === 0)
+            stopPopStateListener();
+        };
+      }
+      function listen(listener) {
+        if (++listenerCount === 1)
+          stopPopStateListener = startPopStateListener(history);
+        var unlisten = history.listen(listener);
+        return function() {
+          unlisten();
+          if (--listenerCount === 0)
+            stopPopStateListener();
+        };
+      }
+      function registerTransitionHook(hook) {
+        if (++listenerCount === 1)
+          stopPopStateListener = startPopStateListener(history);
+        history.registerTransitionHook(hook);
+      }
+      function unregisterTransitionHook(hook) {
+        history.unregisterTransitionHook(hook);
+        if (--listenerCount === 0)
+          stopPopStateListener();
+      }
+      return _extends({}, history, {
+        listenBefore: listenBefore,
+        listen: listen,
+        registerTransitionHook: registerTransitionHook,
+        unregisterTransitionHook: unregisterTransitionHook
+      });
+    }
+    exports['default'] = createBrowserHistory;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("118", ["112", "119"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   exports.__esModule = true;
-  exports['default'] = bindActionCreators;
-  function bindActionCreator(actionCreator, dispatch) {
-    return function() {
-      return dispatch(actionCreator.apply(undefined, arguments));
-    };
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
   }
-  function bindActionCreators(actionCreators, dispatch) {
-    if (typeof actionCreators === 'function') {
-      return bindActionCreator(actionCreators, dispatch);
-    }
-    if (typeof actionCreators !== 'object' || actionCreators === null) {
-      throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
-    }
-    var keys = Object.keys(actionCreators);
-    var boundActionCreators = {};
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      var actionCreator = actionCreators[key];
-      if (typeof actionCreator === 'function') {
-        boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
-      }
-    }
-    return boundActionCreators;
-  }
+  var _historyLibCreateBrowserHistory = $__require('112');
+  var _historyLibCreateBrowserHistory2 = _interopRequireDefault(_historyLibCreateBrowserHistory);
+  var _createRouterHistory = $__require('119');
+  var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
+  exports['default'] = _createRouterHistory2['default'](_historyLibCreateBrowserHistory2['default']);
   module.exports = exports['default'];
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("146", ["147"], true, function($__require, exports, module) {
+$__System.registerDynamic("115", ["10f", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports.saveState = saveState;
+    exports.readState = readState;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var KeyPrefix = '@@History/';
+    var QuotaExceededError = 'QuotaExceededError';
+    var SecurityError = 'SecurityError';
+    function createKey(key) {
+      return KeyPrefix + key;
+    }
+    function saveState(key, state) {
+      try {
+        if (state == null) {
+          window.sessionStorage.removeItem(createKey(key));
+        } else {
+          window.sessionStorage.setItem(createKey(key), JSON.stringify(state));
+        }
+      } catch (error) {
+        if (error.name === SecurityError) {
+          "production" !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available due to security settings') : undefined;
+          return;
+        }
+        if (error.name === QuotaExceededError && window.sessionStorage.length === 0) {
+          "production" !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode') : undefined;
+          return;
+        }
+        throw error;
+      }
+    }
+    function readState(key) {
+      var json = undefined;
+      try {
+        json = window.sessionStorage.getItem(createKey(key));
+      } catch (error) {
+        if (error.name === SecurityError) {
+          "production" !== 'production' ? _warning2['default'](false, '[history] Unable to read state; sessionStorage is not available due to security settings') : undefined;
+          return null;
+        }
+      }
+      if (json) {
+        try {
+          return JSON.parse(json);
+        } catch (error) {}
+      }
+      return null;
+    }
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("114", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports.addEventListener = addEventListener;
+  exports.removeEventListener = removeEventListener;
+  exports.getHashPath = getHashPath;
+  exports.replaceHashPath = replaceHashPath;
+  exports.getWindowPath = getWindowPath;
+  exports.go = go;
+  exports.getUserConfirmation = getUserConfirmation;
+  exports.supportsHistory = supportsHistory;
+  exports.supportsGoWithoutReloadUsingHash = supportsGoWithoutReloadUsingHash;
+  function addEventListener(node, event, listener) {
+    if (node.addEventListener) {
+      node.addEventListener(event, listener, false);
+    } else {
+      node.attachEvent('on' + event, listener);
+    }
+  }
+  function removeEventListener(node, event, listener) {
+    if (node.removeEventListener) {
+      node.removeEventListener(event, listener, false);
+    } else {
+      node.detachEvent('on' + event, listener);
+    }
+  }
+  function getHashPath() {
+    return window.location.href.split('#')[1] || '';
+  }
+  function replaceHashPath(path) {
+    window.location.replace(window.location.pathname + window.location.search + '#' + path);
+  }
+  function getWindowPath() {
+    return window.location.pathname + window.location.search + window.location.hash;
+  }
+  function go(n) {
+    if (n)
+      window.history.go(n);
+  }
+  function getUserConfirmation(message, callback) {
+    callback(window.confirm(message));
+  }
+  function supportsHistory() {
+    var ua = navigator.userAgent;
+    if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
+      return false;
+    }
+    if (ua.indexOf('CriOS') !== -1) {
+      return false;
+    }
+    return window.history && 'pushState' in window.history;
+  }
+  function supportsGoWithoutReloadUsingHash() {
+    var ua = navigator.userAgent;
+    return ua.indexOf('Firefox') === -1;
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("116", ["52", "113", "114", "11a", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _ExecutionEnvironment = $__require('113');
+    var _DOMUtils = $__require('114');
+    var _createHistory = $__require('11a');
+    var _createHistory2 = _interopRequireDefault(_createHistory);
+    function createDOMHistory(options) {
+      var history = _createHistory2['default'](_extends({getUserConfirmation: _DOMUtils.getUserConfirmation}, options, {go: _DOMUtils.go}));
+      function listen(listener) {
+        !_ExecutionEnvironment.canUseDOM ? "production" !== 'production' ? _invariant2['default'](false, 'DOM history needs a DOM') : _invariant2['default'](false) : undefined;
+        return history.listen(listener);
+      }
+      return _extends({}, history, {listen: listen});
+    }
+    exports['default'] = createDOMHistory;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5d", ["10f", "52", "73", "113", "114", "115", "116", "117", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _Actions = $__require('73');
+    var _ExecutionEnvironment = $__require('113');
+    var _DOMUtils = $__require('114');
+    var _DOMStateStorage = $__require('115');
+    var _createDOMHistory = $__require('116');
+    var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    function isAbsolutePath(path) {
+      return typeof path === 'string' && path.charAt(0) === '/';
+    }
+    function ensureSlash() {
+      var path = _DOMUtils.getHashPath();
+      if (isAbsolutePath(path))
+        return true;
+      _DOMUtils.replaceHashPath('/' + path);
+      return false;
+    }
+    function addQueryStringValueToPath(path, key, value) {
+      return path + (path.indexOf('?') === -1 ? '?' : '&') + (key + '=' + value);
+    }
+    function stripQueryStringValueFromPath(path, key) {
+      return path.replace(new RegExp('[?&]?' + key + '=[a-zA-Z0-9]+'), '');
+    }
+    function getQueryStringValueFromPath(path, key) {
+      var match = path.match(new RegExp('\\?.*?\\b' + key + '=(.+?)\\b'));
+      return match && match[1];
+    }
+    var DefaultQueryKey = '_k';
+    function createHashHistory() {
+      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      !_ExecutionEnvironment.canUseDOM ? "production" !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
+      var queryKey = options.queryKey;
+      if (queryKey === undefined || !!queryKey)
+        queryKey = typeof queryKey === 'string' ? queryKey : DefaultQueryKey;
+      function getCurrentLocation() {
+        var path = _DOMUtils.getHashPath();
+        var key = undefined,
+            state = undefined;
+        if (queryKey) {
+          key = getQueryStringValueFromPath(path, queryKey);
+          path = stripQueryStringValueFromPath(path, queryKey);
+          if (key) {
+            state = _DOMStateStorage.readState(key);
+          } else {
+            state = null;
+            key = history.createKey();
+            _DOMUtils.replaceHashPath(addQueryStringValueToPath(path, queryKey, key));
+          }
+        } else {
+          key = state = null;
+        }
+        var location = _parsePath2['default'](path);
+        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
+      }
+      function startHashChangeListener(_ref) {
+        var transitionTo = _ref.transitionTo;
+        function hashChangeListener() {
+          if (!ensureSlash())
+            return;
+          transitionTo(getCurrentLocation());
+        }
+        ensureSlash();
+        _DOMUtils.addEventListener(window, 'hashchange', hashChangeListener);
+        return function() {
+          _DOMUtils.removeEventListener(window, 'hashchange', hashChangeListener);
+        };
+      }
+      function finishTransition(location) {
+        var basename = location.basename;
+        var pathname = location.pathname;
+        var search = location.search;
+        var state = location.state;
+        var action = location.action;
+        var key = location.key;
+        if (action === _Actions.POP)
+          return;
+        var path = (basename || '') + pathname + search;
+        if (queryKey) {
+          path = addQueryStringValueToPath(path, queryKey, key);
+          _DOMStateStorage.saveState(key, state);
+        } else {
+          location.key = location.state = null;
+        }
+        var currentHash = _DOMUtils.getHashPath();
+        if (action === _Actions.PUSH) {
+          if (currentHash !== path) {
+            window.location.hash = path;
+          } else {
+            "production" !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
+          }
+        } else if (currentHash !== path) {
+          _DOMUtils.replaceHashPath(path);
+        }
+      }
+      var history = _createDOMHistory2['default'](_extends({}, options, {
+        getCurrentLocation: getCurrentLocation,
+        finishTransition: finishTransition,
+        saveState: _DOMStateStorage.saveState
+      }));
+      var listenerCount = 0,
+          stopHashChangeListener = undefined;
+      function listenBefore(listener) {
+        if (++listenerCount === 1)
+          stopHashChangeListener = startHashChangeListener(history);
+        var unlisten = history.listenBefore(listener);
+        return function() {
+          unlisten();
+          if (--listenerCount === 0)
+            stopHashChangeListener();
+        };
+      }
+      function listen(listener) {
+        if (++listenerCount === 1)
+          stopHashChangeListener = startHashChangeListener(history);
+        var unlisten = history.listen(listener);
+        return function() {
+          unlisten();
+          if (--listenerCount === 0)
+            stopHashChangeListener();
+        };
+      }
+      function push(location) {
+        "production" !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+        history.push(location);
+      }
+      function replace(location) {
+        "production" !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+        history.replace(location);
+      }
+      var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
+      function go(n) {
+        "production" !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
+        history.go(n);
+      }
+      function createHref(path) {
+        return '#' + history.createHref(path);
+      }
+      function registerTransitionHook(hook) {
+        if (++listenerCount === 1)
+          stopHashChangeListener = startHashChangeListener(history);
+        history.registerTransitionHook(hook);
+      }
+      function unregisterTransitionHook(hook) {
+        history.unregisterTransitionHook(hook);
+        if (--listenerCount === 0)
+          stopHashChangeListener();
+      }
+      function pushState(state, path) {
+        "production" !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+        history.pushState(state, path);
+      }
+      function replaceState(state, path) {
+        "production" !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+        history.replaceState(state, path);
+      }
+      return _extends({}, history, {
+        listenBefore: listenBefore,
+        listen: listen,
+        push: push,
+        replace: replace,
+        go: go,
+        createHref: createHref,
+        registerTransitionHook: registerTransitionHook,
+        unregisterTransitionHook: unregisterTransitionHook,
+        pushState: pushState,
+        replaceState: replaceState
+      });
+    }
+    exports['default'] = createHashHistory;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("113", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  exports.canUseDOM = canUseDOM;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("11b", ["113", "11c", "11d", "117", "11e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -20222,94 +19285,282 @@ $__System.registerDynamic("146", ["147"], true, function($__require, exports, mo
     }
     return target;
   };
-  exports['default'] = applyMiddleware;
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {'default': obj};
   }
-  var _compose = $__require('147');
-  var _compose2 = _interopRequireDefault(_compose);
-  function applyMiddleware() {
-    for (var _len = arguments.length,
-        middlewares = Array(_len),
-        _key = 0; _key < _len; _key++) {
-      middlewares[_key] = arguments[_key];
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0)
+        continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i))
+        continue;
+      target[i] = obj[i];
     }
-    return function(createStore) {
-      return function(reducer, initialState, enhancer) {
-        var store = createStore(reducer, initialState, enhancer);
-        var _dispatch = store.dispatch;
-        var chain = [];
-        var middlewareAPI = {
-          getState: store.getState,
-          dispatch: function dispatch(action) {
-            return _dispatch(action);
-          }
-        };
-        chain = middlewares.map(function(middleware) {
-          return middleware(middlewareAPI);
-        });
-        _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
-        return _extends({}, store, {dispatch: _dispatch});
-      };
-    };
+    return target;
   }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("147", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports["default"] = compose;
-  function compose() {
-    for (var _len = arguments.length,
-        funcs = Array(_len),
-        _key = 0; _key < _len; _key++) {
-      funcs[_key] = arguments[_key];
-    }
+  var _ExecutionEnvironment = $__require('113');
+  var _runTransitionHook = $__require('11c');
+  var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+  var _extractPath = $__require('11d');
+  var _extractPath2 = _interopRequireDefault(_extractPath);
+  var _parsePath = $__require('117');
+  var _parsePath2 = _interopRequireDefault(_parsePath);
+  var _deprecate = $__require('11e');
+  var _deprecate2 = _interopRequireDefault(_deprecate);
+  function useBasename(createHistory) {
     return function() {
-      if (funcs.length === 0) {
-        return arguments[0];
+      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var basename = options.basename;
+      var historyOptions = _objectWithoutProperties(options, ['basename']);
+      var history = createHistory(historyOptions);
+      if (basename == null && _ExecutionEnvironment.canUseDOM) {
+        var base = document.getElementsByTagName('base')[0];
+        if (base)
+          basename = _extractPath2['default'](base.href);
       }
-      var last = funcs[funcs.length - 1];
-      var rest = funcs.slice(0, -1);
-      return rest.reduceRight(function(composed, f) {
-        return f(composed);
-      }, last.apply(undefined, arguments));
+      function addBasename(location) {
+        if (basename && location.basename == null) {
+          if (location.pathname.indexOf(basename) === 0) {
+            location.pathname = location.pathname.substring(basename.length);
+            location.basename = basename;
+            if (location.pathname === '')
+              location.pathname = '/';
+          } else {
+            location.basename = '';
+          }
+        }
+        return location;
+      }
+      function prependBasename(location) {
+        if (!basename)
+          return location;
+        if (typeof location === 'string')
+          location = _parsePath2['default'](location);
+        var pname = location.pathname;
+        var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
+        var normalizedPathname = pname.charAt(0) === '/' ? pname.slice(1) : pname;
+        var pathname = normalizedBasename + normalizedPathname;
+        return _extends({}, location, {pathname: pathname});
+      }
+      function listenBefore(hook) {
+        return history.listenBefore(function(location, callback) {
+          _runTransitionHook2['default'](hook, addBasename(location), callback);
+        });
+      }
+      function listen(listener) {
+        return history.listen(function(location) {
+          listener(addBasename(location));
+        });
+      }
+      function push(location) {
+        history.push(prependBasename(location));
+      }
+      function replace(location) {
+        history.replace(prependBasename(location));
+      }
+      function createPath(location) {
+        return history.createPath(prependBasename(location));
+      }
+      function createHref(location) {
+        return history.createHref(prependBasename(location));
+      }
+      function createLocation() {
+        return addBasename(history.createLocation.apply(history, arguments));
+      }
+      function pushState(state, path) {
+        if (typeof path === 'string')
+          path = _parsePath2['default'](path);
+        push(_extends({state: state}, path));
+      }
+      function replaceState(state, path) {
+        if (typeof path === 'string')
+          path = _parsePath2['default'](path);
+        replace(_extends({state: state}, path));
+      }
+      return _extends({}, history, {
+        listenBefore: listenBefore,
+        listen: listen,
+        push: push,
+        replace: replace,
+        createPath: createPath,
+        createHref: createHref,
+        createLocation: createLocation,
+        pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+        replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+      });
     };
   }
-  module.exports = exports["default"];
+  exports['default'] = useBasename;
+  module.exports = exports['default'];
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("144", [], true, function($__require, exports, module) {
+$__System.registerDynamic("11f", ["5e", "11b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   exports.__esModule = true;
-  exports['default'] = warning;
-  function warning(message) {
-    if (typeof console !== 'undefined' && typeof console.error === 'function') {
-      console.error(message);
-    }
-    try {
-      throw new Error(message);
-    } catch (e) {}
+  exports['default'] = useRouterHistory;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _historyLibUseQueries = $__require('5e');
+  var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+  var _historyLibUseBasename = $__require('11b');
+  var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
+  function useRouterHistory(createHistory) {
+    return function(options) {
+      var history = _historyLibUseQueries2['default'](_historyLibUseBasename2['default'](createHistory))(options);
+      history.__v2_compatible__ = true;
+      return history;
+    };
   }
   module.exports = exports['default'];
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("148", ["13f", "143", "145", "146", "147", "144", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("119", ["11f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _useRouterHistory = $__require('11f');
+  var _useRouterHistory2 = _interopRequireDefault(_useRouterHistory);
+  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  exports['default'] = function(createHistory) {
+    var history = undefined;
+    if (canUseDOM)
+      history = _useRouterHistory2['default'](createHistory)();
+    return history;
+  };
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("120", ["5d", "119"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _historyLibCreateHashHistory = $__require('5d');
+  var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
+  var _createRouterHistory = $__require('119');
+  var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
+  exports['default'] = _createRouterHistory2['default'](_historyLibCreateHashHistory2['default']);
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("121", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+      return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+    });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("122", ["121"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('121');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("123", ["122"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var strictUriEncode = $__require('122');
+  exports.extract = function(str) {
+    return str.split('?')[1] || '';
+  };
+  exports.parse = function(str) {
+    if (typeof str !== 'string') {
+      return {};
+    }
+    str = str.trim().replace(/^(\?|#|&)/, '');
+    if (!str) {
+      return {};
+    }
+    return str.split('&').reduce(function(ret, param) {
+      var parts = param.replace(/\+/g, ' ').split('=');
+      var key = parts.shift();
+      var val = parts.length > 0 ? parts.join('=') : undefined;
+      key = decodeURIComponent(key);
+      val = val === undefined ? null : decodeURIComponent(val);
+      if (!ret.hasOwnProperty(key)) {
+        ret[key] = val;
+      } else if (Array.isArray(ret[key])) {
+        ret[key].push(val);
+      } else {
+        ret[key] = [ret[key], val];
+      }
+      return ret;
+    }, {});
+  };
+  exports.stringify = function(obj) {
+    return obj ? Object.keys(obj).sort().map(function(key) {
+      var val = obj[key];
+      if (val === undefined) {
+        return '';
+      }
+      if (val === null) {
+        return key;
+      }
+      if (Array.isArray(val)) {
+        return val.sort().map(function(val2) {
+          return strictUriEncode(key) + '=' + strictUriEncode(val2);
+        }).join('&');
+      }
+      return strictUriEncode(key) + '=' + strictUriEncode(val);
+    }).filter(function(x) {
+      return x.length > 0;
+    }).join('&') : '';
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("124", ["123"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('123');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5e", ["10f", "124", "11c", "117", "11e", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -20317,112 +19568,153 @@ $__System.registerDynamic("148", ["13f", "143", "145", "146", "147", "144", "29"
   (function(process) {
     'use strict';
     exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {'default': obj};
     }
-    var _createStore = $__require('13f');
-    var _createStore2 = _interopRequireDefault(_createStore);
-    var _combineReducers = $__require('143');
-    var _combineReducers2 = _interopRequireDefault(_combineReducers);
-    var _bindActionCreators = $__require('145');
-    var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
-    var _applyMiddleware = $__require('146');
-    var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
-    var _compose = $__require('147');
-    var _compose2 = _interopRequireDefault(_compose);
-    var _utilsWarning = $__require('144');
-    var _utilsWarning2 = _interopRequireDefault(_utilsWarning);
-    function isCrushed() {}
-    if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-      _utilsWarning2['default']('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-    }
-    exports.createStore = _createStore2['default'];
-    exports.combineReducers = _combineReducers2['default'];
-    exports.bindActionCreators = _bindActionCreators2['default'];
-    exports.applyMiddleware = _applyMiddleware2['default'];
-    exports.compose = _compose2['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("9c", ["148"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('148');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("149", ["9c"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = wrapActionCreators;
-  var _redux = $__require('9c');
-  function wrapActionCreators(actionCreators) {
-    return function(dispatch) {
-      return _redux.bindActionCreators(actionCreators, dispatch);
-    };
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("14a", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var REACT_STATICS = {
-    childContextTypes: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-  };
-  var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    arguments: true,
-    arity: true
-  };
-  module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-    var keys = Object.getOwnPropertyNames(sourceComponent);
-    for (var i = 0; i < keys.length; ++i) {
-      if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
-        targetComponent[keys[i]] = sourceComponent[keys[i]];
+    function _objectWithoutProperties(obj, keys) {
+      var target = {};
+      for (var i in obj) {
+        if (keys.indexOf(i) >= 0)
+          continue;
+        if (!Object.prototype.hasOwnProperty.call(obj, i))
+          continue;
+        target[i] = obj[i];
       }
+      return target;
     }
-    return targetComponent;
-  };
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _queryString = $__require('124');
+    var _runTransitionHook = $__require('11c');
+    var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    var _deprecate = $__require('11e');
+    var _deprecate2 = _interopRequireDefault(_deprecate);
+    var SEARCH_BASE_KEY = '$searchBase';
+    function defaultStringifyQuery(query) {
+      return _queryString.stringify(query).replace(/%20/g, '+');
+    }
+    var defaultParseQueryString = _queryString.parse;
+    function isNestedObject(object) {
+      for (var p in object) {
+        if (object.hasOwnProperty(p) && typeof object[p] === 'object' && !Array.isArray(object[p]) && object[p] !== null)
+          return true;
+      }
+      return false;
+    }
+    function useQueries(createHistory) {
+      return function() {
+        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var stringifyQuery = options.stringifyQuery;
+        var parseQueryString = options.parseQueryString;
+        var historyOptions = _objectWithoutProperties(options, ['stringifyQuery', 'parseQueryString']);
+        var history = createHistory(historyOptions);
+        if (typeof stringifyQuery !== 'function')
+          stringifyQuery = defaultStringifyQuery;
+        if (typeof parseQueryString !== 'function')
+          parseQueryString = defaultParseQueryString;
+        function addQuery(location) {
+          if (location.query == null) {
+            var search = location.search;
+            location.query = parseQueryString(search.substring(1));
+            location[SEARCH_BASE_KEY] = {
+              search: search,
+              searchBase: ''
+            };
+          }
+          return location;
+        }
+        function appendQuery(location, query) {
+          var _extends2;
+          var queryString = undefined;
+          if (!query || (queryString = stringifyQuery(query)) === '')
+            return location;
+          "production" !== 'production' ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
+          if (typeof location === 'string')
+            location = _parsePath2['default'](location);
+          var searchBaseSpec = location[SEARCH_BASE_KEY];
+          var searchBase = undefined;
+          if (searchBaseSpec && location.search === searchBaseSpec.search) {
+            searchBase = searchBaseSpec.searchBase;
+          } else {
+            searchBase = location.search || '';
+          }
+          var search = searchBase + (searchBase ? '&' : '?') + queryString;
+          return _extends({}, location, (_extends2 = {search: search}, _extends2[SEARCH_BASE_KEY] = {
+            search: search,
+            searchBase: searchBase
+          }, _extends2));
+        }
+        function listenBefore(hook) {
+          return history.listenBefore(function(location, callback) {
+            _runTransitionHook2['default'](hook, addQuery(location), callback);
+          });
+        }
+        function listen(listener) {
+          return history.listen(function(location) {
+            listener(addQuery(location));
+          });
+        }
+        function push(location) {
+          history.push(appendQuery(location, location.query));
+        }
+        function replace(location) {
+          history.replace(appendQuery(location, location.query));
+        }
+        function createPath(location, query) {
+          "production" !== 'production' ? _warning2['default'](!query, 'the query argument to createPath is deprecated; use a location descriptor instead') : undefined;
+          return history.createPath(appendQuery(location, query || location.query));
+        }
+        function createHref(location, query) {
+          "production" !== 'production' ? _warning2['default'](!query, 'the query argument to createHref is deprecated; use a location descriptor instead') : undefined;
+          return history.createHref(appendQuery(location, query || location.query));
+        }
+        function createLocation() {
+          return addQuery(history.createLocation.apply(history, arguments));
+        }
+        function pushState(state, path, query) {
+          if (typeof path === 'string')
+            path = _parsePath2['default'](path);
+          push(_extends({state: state}, path, {query: query}));
+        }
+        function replaceState(state, path, query) {
+          if (typeof path === 'string')
+            path = _parsePath2['default'](path);
+          replace(_extends({state: state}, path, {query: query}));
+        }
+        return _extends({}, history, {
+          listenBefore: listenBefore,
+          listen: listen,
+          push: push,
+          replace: replace,
+          createPath: createPath,
+          createHref: createHref,
+          createLocation: createLocation,
+          pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+          replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+        });
+      };
+    }
+    exports['default'] = useQueries;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14b", ["14a"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('14a');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("14c", ["29"], true, function($__require, exports, module) {
+$__System.registerDynamic("125", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -20430,7 +19722,7 @@ $__System.registerDynamic("14c", ["29"], true, function($__require, exports, mod
   (function(process) {
     'use strict';
     var invariant = function(condition, format, a, b, c, d, e, f) {
-      if (process.env.NODE_ENV !== 'production') {
+      if ("production" !== 'production') {
         if (format === undefined) {
           throw new Error('invariant requires an error message argument');
         }
@@ -20452,22 +19744,210 @@ $__System.registerDynamic("14c", ["29"], true, function($__require, exports, mod
       }
     };
     module.exports = invariant;
-  })($__require('29'));
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("51", ["14c"], true, function($__require, exports, module) {
+$__System.registerDynamic("52", ["125"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('14c');
+  module.exports = $__require('125');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14d", ["13c", "13d", "13e", "149", "14b", "51", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("126", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports = module.exports = typeof Object.keys === 'function' ? Object.keys : shim;
+  exports.shim = shim;
+  function shim(obj) {
+    var keys = [];
+    for (var key in obj)
+      keys.push(key);
+    return keys;
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("127", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var supportsArgumentsClass = (function() {
+    return Object.prototype.toString.call(arguments);
+  })() == '[object Arguments]';
+  exports = module.exports = supportsArgumentsClass ? supported : unsupported;
+  exports.supported = supported;
+  function supported(object) {
+    return Object.prototype.toString.call(object) == '[object Arguments]';
+  }
+  ;
+  exports.unsupported = unsupported;
+  function unsupported(object) {
+    return object && typeof object == 'object' && typeof object.length == 'number' && Object.prototype.hasOwnProperty.call(object, 'callee') && !Object.prototype.propertyIsEnumerable.call(object, 'callee') || false;
+  }
+  ;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("128", ["126", "127"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var pSlice = Array.prototype.slice;
+  var objectKeys = $__require('126');
+  var isArguments = $__require('127');
+  var deepEqual = module.exports = function(actual, expected, opts) {
+    if (!opts)
+      opts = {};
+    if (actual === expected) {
+      return true;
+    } else if (actual instanceof Date && expected instanceof Date) {
+      return actual.getTime() === expected.getTime();
+    } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
+      return opts.strict ? actual === expected : actual == expected;
+    } else {
+      return objEquiv(actual, expected, opts);
+    }
+  };
+  function isUndefinedOrNull(value) {
+    return value === null || value === undefined;
+  }
+  function isBuffer(x) {
+    if (!x || typeof x !== 'object' || typeof x.length !== 'number')
+      return false;
+    if (typeof x.copy !== 'function' || typeof x.slice !== 'function') {
+      return false;
+    }
+    if (x.length > 0 && typeof x[0] !== 'number')
+      return false;
+    return true;
+  }
+  function objEquiv(a, b, opts) {
+    var i,
+        key;
+    if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
+      return false;
+    if (a.prototype !== b.prototype)
+      return false;
+    if (isArguments(a)) {
+      if (!isArguments(b)) {
+        return false;
+      }
+      a = pSlice.call(a);
+      b = pSlice.call(b);
+      return deepEqual(a, b, opts);
+    }
+    if (isBuffer(a)) {
+      if (!isBuffer(b)) {
+        return false;
+      }
+      if (a.length !== b.length)
+        return false;
+      for (i = 0; i < a.length; i++) {
+        if (a[i] !== b[i])
+          return false;
+      }
+      return true;
+    }
+    try {
+      var ka = objectKeys(a),
+          kb = objectKeys(b);
+    } catch (e) {
+      return false;
+    }
+    if (ka.length != kb.length)
+      return false;
+    ka.sort();
+    kb.sort();
+    for (i = ka.length - 1; i >= 0; i--) {
+      if (ka[i] != kb[i])
+        return false;
+    }
+    for (i = ka.length - 1; i >= 0; i--) {
+      key = ka[i];
+      if (!deepEqual(a[key], b[key], opts))
+        return false;
+    }
+    return typeof a === typeof b;
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("129", ["128"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('128');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12a", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports.loopAsync = loopAsync;
+  function loopAsync(turns, work, callback) {
+    var currentTurn = 0;
+    var isDone = false;
+    function done() {
+      isDone = true;
+      callback.apply(this, arguments);
+    }
+    function next() {
+      if (isDone)
+        return;
+      if (currentTurn < turns) {
+        work.call(this, currentTurn++, next, done);
+      } else {
+        done.apply(this, arguments);
+      }
+    }
+    next();
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("73", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var PUSH = 'PUSH';
+  exports.PUSH = PUSH;
+  var REPLACE = 'REPLACE';
+  exports.REPLACE = REPLACE;
+  var POP = 'POP';
+  exports.POP = POP;
+  exports['default'] = {
+    PUSH: PUSH,
+    REPLACE: REPLACE,
+    POP: POP
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12b", ["10f", "73", "117", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -20486,1394 +19966,463 @@ $__System.registerDynamic("14d", ["13c", "13d", "13e", "149", "14b", "51", "29"]
       }
       return target;
     };
-    exports['default'] = createConnect;
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {'default': obj};
     }
-    function _classCallCheck(instance, Constructor) {
-      if (!(instance instanceof Constructor)) {
-        throw new TypeError('Cannot call a class as a function');
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _Actions = $__require('73');
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    function createLocation() {
+      var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+      var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
+      var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+      var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+      if (typeof location === 'string')
+        location = _parsePath2['default'](location);
+      if (typeof action === 'object') {
+        "production" !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
+        location = _extends({}, location, {state: action});
+        action = key || _Actions.POP;
+        key = _fourthArg;
       }
-    }
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== 'function' && superClass !== null) {
-        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-      }
-      subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-          value: subClass,
-          enumerable: false,
-          writable: true,
-          configurable: true
-        }});
-      if (superClass)
-        Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-    }
-    var _utilsCreateStoreShape = $__require('13c');
-    var _utilsCreateStoreShape2 = _interopRequireDefault(_utilsCreateStoreShape);
-    var _utilsShallowEqual = $__require('13d');
-    var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
-    var _utilsIsPlainObject = $__require('13e');
-    var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
-    var _utilsWrapActionCreators = $__require('149');
-    var _utilsWrapActionCreators2 = _interopRequireDefault(_utilsWrapActionCreators);
-    var _hoistNonReactStatics = $__require('14b');
-    var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
-    var _invariant = $__require('51');
-    var _invariant2 = _interopRequireDefault(_invariant);
-    var defaultMapStateToProps = function defaultMapStateToProps() {
-      return {};
-    };
-    var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
-      return {dispatch: dispatch};
-    };
-    var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
-      return _extends({}, parentProps, stateProps, dispatchProps);
-    };
-    function getDisplayName(Component) {
-      return Component.displayName || Component.name || 'Component';
-    }
-    var nextVersion = 0;
-    function createConnect(React) {
-      var Component = React.Component;
-      var PropTypes = React.PropTypes;
-      var storeShape = _utilsCreateStoreShape2['default'](PropTypes);
-      return function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
-        var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-        var shouldSubscribe = Boolean(mapStateToProps);
-        var finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
-        var finalMapDispatchToProps = _utilsIsPlainObject2['default'](mapDispatchToProps) ? _utilsWrapActionCreators2['default'](mapDispatchToProps) : mapDispatchToProps || defaultMapDispatchToProps;
-        var finalMergeProps = mergeProps || defaultMergeProps;
-        var shouldUpdateStateProps = finalMapStateToProps.length > 1;
-        var shouldUpdateDispatchProps = finalMapDispatchToProps.length > 1;
-        var _options$pure = options.pure;
-        var pure = _options$pure === undefined ? true : _options$pure;
-        var version = nextVersion++;
-        function computeStateProps(store, props) {
-          var state = store.getState();
-          var stateProps = shouldUpdateStateProps ? finalMapStateToProps(state, props) : finalMapStateToProps(state);
-          _invariant2['default'](_utilsIsPlainObject2['default'](stateProps), '`mapStateToProps` must return an object. Instead received %s.', stateProps);
-          return stateProps;
-        }
-        function computeDispatchProps(store, props) {
-          var dispatch = store.dispatch;
-          var dispatchProps = shouldUpdateDispatchProps ? finalMapDispatchToProps(dispatch, props) : finalMapDispatchToProps(dispatch);
-          _invariant2['default'](_utilsIsPlainObject2['default'](dispatchProps), '`mapDispatchToProps` must return an object. Instead received %s.', dispatchProps);
-          return dispatchProps;
-        }
-        function _computeNextState(stateProps, dispatchProps, parentProps) {
-          var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
-          _invariant2['default'](_utilsIsPlainObject2['default'](mergedProps), '`mergeProps` must return an object. Instead received %s.', mergedProps);
-          return mergedProps;
-        }
-        return function wrapWithConnect(WrappedComponent) {
-          var Connect = (function(_Component) {
-            _inherits(Connect, _Component);
-            Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-              if (!pure) {
-                this.updateStateProps(nextProps);
-                this.updateDispatchProps(nextProps);
-                this.updateState(nextProps);
-                return true;
-              }
-              var storeChanged = nextState.storeState !== this.state.storeState;
-              var propsChanged = !_utilsShallowEqual2['default'](nextProps, this.props);
-              var mapStateProducedChange = false;
-              var dispatchPropsChanged = false;
-              if (storeChanged || propsChanged && shouldUpdateStateProps) {
-                mapStateProducedChange = this.updateStateProps(nextProps);
-              }
-              if (propsChanged && shouldUpdateDispatchProps) {
-                dispatchPropsChanged = this.updateDispatchProps(nextProps);
-              }
-              if (propsChanged || mapStateProducedChange || dispatchPropsChanged) {
-                this.updateState(nextProps);
-                return true;
-              }
-              return false;
-            };
-            function Connect(props, context) {
-              _classCallCheck(this, Connect);
-              _Component.call(this, props, context);
-              this.version = version;
-              this.store = props.store || context.store;
-              _invariant2['default'](this.store, 'Could not find "store" in either the context or ' + ('props of "' + this.constructor.displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + this.constructor.displayName + '".'));
-              this.stateProps = computeStateProps(this.store, props);
-              this.dispatchProps = computeDispatchProps(this.store, props);
-              this.state = {storeState: null};
-              this.updateState();
-            }
-            Connect.prototype.computeNextState = function computeNextState() {
-              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-              return _computeNextState(this.stateProps, this.dispatchProps, props);
-            };
-            Connect.prototype.updateStateProps = function updateStateProps() {
-              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-              var nextStateProps = computeStateProps(this.store, props);
-              if (_utilsShallowEqual2['default'](nextStateProps, this.stateProps)) {
-                return false;
-              }
-              this.stateProps = nextStateProps;
-              return true;
-            };
-            Connect.prototype.updateDispatchProps = function updateDispatchProps() {
-              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-              var nextDispatchProps = computeDispatchProps(this.store, props);
-              if (_utilsShallowEqual2['default'](nextDispatchProps, this.dispatchProps)) {
-                return false;
-              }
-              this.dispatchProps = nextDispatchProps;
-              return true;
-            };
-            Connect.prototype.updateState = function updateState() {
-              var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-              this.nextState = this.computeNextState(props);
-            };
-            Connect.prototype.isSubscribed = function isSubscribed() {
-              return typeof this.unsubscribe === 'function';
-            };
-            Connect.prototype.trySubscribe = function trySubscribe() {
-              if (shouldSubscribe && !this.unsubscribe) {
-                this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
-                this.handleChange();
-              }
-            };
-            Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
-              if (this.unsubscribe) {
-                this.unsubscribe();
-                this.unsubscribe = null;
-              }
-            };
-            Connect.prototype.componentDidMount = function componentDidMount() {
-              this.trySubscribe();
-            };
-            Connect.prototype.componentWillUnmount = function componentWillUnmount() {
-              this.tryUnsubscribe();
-            };
-            Connect.prototype.handleChange = function handleChange() {
-              if (!this.unsubscribe) {
-                return;
-              }
-              this.setState({storeState: this.store.getState()});
-            };
-            Connect.prototype.getWrappedInstance = function getWrappedInstance() {
-              return this.refs.wrappedInstance;
-            };
-            Connect.prototype.render = function render() {
-              return React.createElement(WrappedComponent, _extends({ref: 'wrappedInstance'}, this.nextState));
-            };
-            return Connect;
-          })(Component);
-          Connect.displayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
-          Connect.WrappedComponent = WrappedComponent;
-          Connect.contextTypes = {store: storeShape};
-          Connect.propTypes = {store: storeShape};
-          if (process.env.NODE_ENV !== 'production') {
-            Connect.prototype.componentWillUpdate = function componentWillUpdate() {
-              if (this.version === version) {
-                return;
-              }
-              this.version = version;
-              this.trySubscribe();
-              this.updateStateProps();
-              this.updateDispatchProps();
-              this.updateState();
-            };
-          }
-          return _hoistNonReactStatics2['default'](Connect, WrappedComponent);
-        };
-      };
-    }
-    module.exports = exports['default'];
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("14e", ["13b", "14d"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  exports['default'] = createAll;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _createProvider = $__require('13b');
-  var _createProvider2 = _interopRequireDefault(_createProvider);
-  var _createConnect = $__require('14d');
-  var _createConnect2 = _interopRequireDefault(_createConnect);
-  function createAll(React) {
-    var Provider = _createProvider2['default'](React);
-    var connect = _createConnect2['default'](React);
-    return {
-      Provider: Provider,
-      connect: connect
-    };
-  }
-  module.exports = exports['default'];
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("14f", ["4", "14e"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports.__esModule = true;
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {'default': obj};
-  }
-  var _react = $__require('4');
-  var _react2 = _interopRequireDefault(_react);
-  var _componentsCreateAll = $__require('14e');
-  var _componentsCreateAll2 = _interopRequireDefault(_componentsCreateAll);
-  var _createAll = _componentsCreateAll2['default'](_react2['default']);
-  var Provider = _createAll.Provider;
-  var connect = _createAll.connect;
-  exports.Provider = Provider;
-  exports.connect = connect;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("9", ["14f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('14f');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("150", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "format cjs";
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("151", ["152", "92"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = $__require('152'),
-      defined = $__require('92');
-  module.exports = function(TO_STRING) {
-    return function(that, pos) {
-      var s = String(defined(that)),
-          i = toInteger(pos),
-          l = s.length,
-          a,
-          b;
-      if (i < 0 || i >= l)
-        return TO_STRING ? '' : undefined;
-      a = s.charCodeAt(i);
-      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("153", ["151", "154"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $at = $__require('151')(true);
-  $__require('154')(String, 'String', function(iterated) {
-    this._t = String(iterated);
-    this._i = 0;
-  }, function() {
-    var O = this._t,
-        index = this._i,
-        point;
-    if (index >= O.length)
+      var pathname = location.pathname || '/';
+      var search = location.search || '';
+      var hash = location.hash || '';
+      var state = location.state || null;
       return {
-        value: undefined,
-        done: true
+        pathname: pathname,
+        search: search,
+        hash: hash,
+        state: state,
+        action: action,
+        key: key
       };
-    point = $at(O, index);
-    this._i += point.length;
-    return {
-      value: point,
-      done: false
-    };
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("155", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function() {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("156", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(done, value) {
-    return {
-      value: value,
-      done: !!done
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("94", ["157"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = $__require('157');
-  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("92", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    if (it == undefined)
-      throw TypeError("Can't call method on  " + it);
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("38", ["94", "92"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var IObject = $__require('94'),
-      defined = $__require('92');
-  module.exports = function(it) {
-    return IObject(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("158", ["3a", "159", "15a", "15b", "15c"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a'),
-      descriptor = $__require('159'),
-      setToStringTag = $__require('15a'),
-      IteratorPrototype = {};
-  $__require('15b')(IteratorPrototype, $__require('15c')('iterator'), function() {
-    return this;
-  });
-  module.exports = function(Constructor, NAME, next) {
-    Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
-    setToStringTag(Constructor, NAME + ' Iterator');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("154", ["15d", "35", "15e", "15b", "15f", "160", "158", "15a", "3a", "15c"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var LIBRARY = $__require('15d'),
-      $export = $__require('35'),
-      redefine = $__require('15e'),
-      hide = $__require('15b'),
-      has = $__require('15f'),
-      Iterators = $__require('160'),
-      $iterCreate = $__require('158'),
-      setToStringTag = $__require('15a'),
-      getProto = $__require('3a').getProto,
-      ITERATOR = $__require('15c')('iterator'),
-      BUGGY = !([].keys && 'next' in [].keys()),
-      FF_ITERATOR = '@@iterator',
-      KEYS = 'keys',
-      VALUES = 'values';
-  var returnThis = function() {
-    return this;
-  };
-  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
-    $iterCreate(Constructor, NAME, next);
-    var getMethod = function(kind) {
-      if (!BUGGY && kind in proto)
-        return proto[kind];
-      switch (kind) {
-        case KEYS:
-          return function keys() {
-            return new Constructor(this, kind);
-          };
-        case VALUES:
-          return function values() {
-            return new Constructor(this, kind);
-          };
-      }
-      return function entries() {
-        return new Constructor(this, kind);
-      };
-    };
-    var TAG = NAME + ' Iterator',
-        DEF_VALUES = DEFAULT == VALUES,
-        VALUES_BUG = false,
-        proto = Base.prototype,
-        $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
-        $default = $native || getMethod(DEFAULT),
-        methods,
-        key;
-    if ($native) {
-      var IteratorPrototype = getProto($default.call(new Base));
-      setToStringTag(IteratorPrototype, TAG, true);
-      if (!LIBRARY && has(proto, FF_ITERATOR))
-        hide(IteratorPrototype, ITERATOR, returnThis);
-      if (DEF_VALUES && $native.name !== VALUES) {
-        VALUES_BUG = true;
-        $default = function values() {
-          return $native.call(this);
-        };
-      }
     }
-    if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
-      hide(proto, ITERATOR, $default);
-    }
-    Iterators[NAME] = $default;
-    Iterators[TAG] = returnThis;
-    if (DEFAULT) {
-      methods = {
-        values: DEF_VALUES ? $default : getMethod(VALUES),
-        keys: IS_SET ? $default : getMethod(KEYS),
-        entries: !DEF_VALUES ? $default : getMethod('entries')
-      };
-      if (FORCED)
-        for (key in methods) {
-          if (!(key in proto))
-            redefine(proto, key, methods[key]);
-        }
-      else
-        $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-    }
-    return methods;
-  };
+    exports['default'] = createLocation;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("161", ["155", "156", "160", "38", "154"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var addToUnscopables = $__require('155'),
-      step = $__require('156'),
-      Iterators = $__require('160'),
-      toIObject = $__require('38');
-  module.exports = $__require('154')(Array, 'Array', function(iterated, kind) {
-    this._t = toIObject(iterated);
-    this._i = 0;
-    this._k = kind;
-  }, function() {
-    var O = this._t,
-        kind = this._k,
-        index = this._i++;
-    if (!O || index >= O.length) {
-      this._t = undefined;
-      return step(1);
-    }
-    if (kind == 'keys')
-      return step(0, index);
-    if (kind == 'values')
-      return step(0, O[index]);
-    return step(0, [index, O[index]]);
-  }, 'values');
-  Iterators.Arguments = Iterators.Array;
-  addToUnscopables('keys');
-  addToUnscopables('values');
-  addToUnscopables('entries');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("162", ["161", "160"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('161');
-  var Iterators = $__require('160');
-  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15d", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("35", ["163", "26", "164"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = $__require('163'),
-      core = $__require('26'),
-      ctx = $__require('164'),
-      PROTOTYPE = 'prototype';
-  var $export = function(type, name, source) {
-    var IS_FORCED = type & $export.F,
-        IS_GLOBAL = type & $export.G,
-        IS_STATIC = type & $export.S,
-        IS_PROTO = type & $export.P,
-        IS_BIND = type & $export.B,
-        IS_WRAP = type & $export.W,
-        exports = IS_GLOBAL ? core : core[name] || (core[name] = {}),
-        target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE],
-        key,
-        own,
-        out;
-    if (IS_GLOBAL)
-      source = name;
-    for (key in source) {
-      own = !IS_FORCED && target && key in target;
-      if (own && key in exports)
-        continue;
-      out = own ? target[key] : source[key];
-      exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key] : IS_BIND && own ? ctx(out, global) : IS_WRAP && target[key] == out ? (function(C) {
-        var F = function(param) {
-          return this instanceof C ? new C(param) : C(param);
-        };
-        F[PROTOTYPE] = C[PROTOTYPE];
-        return F;
-      })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-      if (IS_PROTO)
-        (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-    }
-  };
-  $export.F = 1;
-  $export.G = 2;
-  $export.S = 4;
-  $export.P = 8;
-  $export.B = 16;
-  $export.W = 32;
-  module.exports = $export;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("165", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it, Constructor, name) {
-    if (!(it instanceof Constructor))
-      throw TypeError(name + ": use the 'new' operator!");
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("166", ["167"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var anObject = $__require('167');
-  module.exports = function(iterator, fn, value, entries) {
-    try {
-      return entries ? fn(anObject(value)[0], value[1]) : fn(value);
-    } catch (e) {
-      var ret = iterator['return'];
-      if (ret !== undefined)
-        anObject(ret.call(iterator));
-      throw e;
-    }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("168", ["160", "15c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var Iterators = $__require('160'),
-      ITERATOR = $__require('15c')('iterator'),
-      ArrayProto = Array.prototype;
-  module.exports = function(it) {
-    return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("152", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ceil = Math.ceil,
-      floor = Math.floor;
-  module.exports = function(it) {
-    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("169", ["152"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = $__require('152'),
-      min = Math.min;
-  module.exports = function(it) {
-    return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16a", ["157", "15c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = $__require('157'),
-      TAG = $__require('15c')('toStringTag'),
-      ARG = cof(function() {
-        return arguments;
-      }()) == 'Arguments';
-  module.exports = function(it) {
-    var O,
-        T,
-        B;
-    return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("160", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16b", ["16a", "15c", "160", "26"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = $__require('16a'),
-      ITERATOR = $__require('15c')('iterator'),
-      Iterators = $__require('160');
-  module.exports = $__require('26').getIteratorMethod = function(it) {
-    if (it != undefined)
-      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16c", ["164", "166", "168", "167", "169", "16b"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ctx = $__require('164'),
-      call = $__require('166'),
-      isArrayIter = $__require('168'),
-      anObject = $__require('167'),
-      toLength = $__require('169'),
-      getIterFn = $__require('16b');
-  module.exports = function(iterable, entries, fn, that) {
-    var iterFn = getIterFn(iterable),
-        f = ctx(fn, that, entries ? 2 : 1),
-        index = 0,
-        length,
-        step,
-        iterator;
-    if (typeof iterFn != 'function')
-      throw TypeError(iterable + ' is not iterable!');
-    if (isArrayIter(iterFn))
-      for (length = toLength(iterable.length); length > index; index++) {
-        entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
-      }
-    else
-      for (iterator = iterFn.call(iterable); !(step = iterator.next()).done; ) {
-        call(iterator, f, step.value, entries);
-      }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3f", ["3a", "16d", "167", "164"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var getDesc = $__require('3a').getDesc,
-      isObject = $__require('16d'),
-      anObject = $__require('167');
-  var check = function(O, proto) {
-    anObject(O);
-    if (!isObject(proto) && proto !== null)
-      throw TypeError(proto + ": can't set as prototype!");
-  };
-  module.exports = {
-    set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
-      try {
-        set = $__require('164')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
-        set(test, []);
-        buggy = !(test instanceof Array);
-      } catch (e) {
-        buggy = true;
-      }
-      return function setPrototypeOf(O, proto) {
-        check(O, proto);
-        if (buggy)
-          O.__proto__ = proto;
-        else
-          set(O, proto);
-        return O;
-      };
-    }({}, false) : undefined),
-    check: check
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16e", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = Object.is || function is(x, y) {
-    return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("167", ["16d"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = $__require('16d');
-  module.exports = function(it) {
-    if (!isObject(it))
-      throw TypeError(it + ' is not an object!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16f", ["167", "170", "15c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var anObject = $__require('167'),
-      aFunction = $__require('170'),
-      SPECIES = $__require('15c')('species');
-  module.exports = function(O, D) {
-    var C = anObject(O).constructor,
-        S;
-    return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("170", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    if (typeof it != 'function')
-      throw TypeError(it + ' is not a function!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("164", ["170"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var aFunction = $__require('170');
-  module.exports = function(fn, that, length) {
-    aFunction(fn);
-    if (that === undefined)
-      return fn;
-    switch (length) {
-      case 1:
-        return function(a) {
-          return fn.call(that, a);
-        };
-      case 2:
-        return function(a, b) {
-          return fn.call(that, a, b);
-        };
-      case 3:
-        return function(a, b, c) {
-          return fn.call(that, a, b, c);
-        };
-    }
-    return function() {
-      return fn.apply(that, arguments);
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("171", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(fn, args, that) {
-    var un = that === undefined;
-    switch (args.length) {
-      case 0:
-        return un ? fn() : fn.call(that);
-      case 1:
-        return un ? fn(args[0]) : fn.call(that, args[0]);
-      case 2:
-        return un ? fn(args[0], args[1]) : fn.call(that, args[0], args[1]);
-      case 3:
-        return un ? fn(args[0], args[1], args[2]) : fn.call(that, args[0], args[1], args[2]);
-      case 4:
-        return un ? fn(args[0], args[1], args[2], args[3]) : fn.call(that, args[0], args[1], args[2], args[3]);
-    }
-    return fn.apply(that, args);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("172", ["163"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('163').document && document.documentElement;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("16d", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    return typeof it === 'object' ? it !== null : typeof it === 'function';
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("173", ["16d", "163"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = $__require('16d'),
-      document = $__require('163').document,
-      is = isObject(document) && isObject(document.createElement);
-  module.exports = function(it) {
-    return is ? document.createElement(it) : {};
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("174", ["164", "171", "172", "173", "163", "157", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("11c", ["10f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
-    var ctx = $__require('164'),
-        invoke = $__require('171'),
-        html = $__require('172'),
-        cel = $__require('173'),
-        global = $__require('163'),
-        process = global.process,
-        setTask = global.setImmediate,
-        clearTask = global.clearImmediate,
-        MessageChannel = global.MessageChannel,
-        counter = 0,
-        queue = {},
-        ONREADYSTATECHANGE = 'onreadystatechange',
-        defer,
-        channel,
-        port;
-    var run = function() {
-      var id = +this;
-      if (queue.hasOwnProperty(id)) {
-        var fn = queue[id];
-        delete queue[id];
-        fn();
-      }
-    };
-    var listner = function(event) {
-      run.call(event.data);
-    };
-    if (!setTask || !clearTask) {
-      setTask = function setImmediate(fn) {
-        var args = [],
-            i = 1;
-        while (arguments.length > i)
-          args.push(arguments[i++]);
-        queue[++counter] = function() {
-          invoke(typeof fn == 'function' ? fn : Function(fn), args);
-        };
-        defer(counter);
-        return counter;
-      };
-      clearTask = function clearImmediate(id) {
-        delete queue[id];
-      };
-      if ($__require('157')(process) == 'process') {
-        defer = function(id) {
-          process.nextTick(ctx(run, id, 1));
-        };
-      } else if (MessageChannel) {
-        channel = new MessageChannel;
-        port = channel.port2;
-        channel.port1.onmessage = listner;
-        defer = ctx(port.postMessage, port, 1);
-      } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
-        defer = function(id) {
-          global.postMessage(id + '', '*');
-        };
-        global.addEventListener('message', listner, false);
-      } else if (ONREADYSTATECHANGE in cel('script')) {
-        defer = function(id) {
-          html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function() {
-            html.removeChild(this);
-            run.call(id);
-          };
-        };
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    function runTransitionHook(hook, location, callback) {
+      var result = hook(location, callback);
+      if (hook.length < 2) {
+        callback(result);
       } else {
-        defer = function(id) {
-          setTimeout(ctx(run, id, 1), 0);
-        };
+        "production" !== 'production' ? _warning2['default'](result === undefined, 'You should not "return" in a transition hook with a callback argument; call the callback instead') : undefined;
       }
     }
-    module.exports = {
-      set: setTask,
-      clear: clearTask
-    };
-  })($__require('29'));
+    exports['default'] = runTransitionHook;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("157", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toString = {}.toString;
-  module.exports = function(it) {
-    return toString.call(it).slice(8, -1);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("175", ["163", "174", "157", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("11e", ["10f", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
-    var global = $__require('163'),
-        macrotask = $__require('174').set,
-        Observer = global.MutationObserver || global.WebKitMutationObserver,
-        process = global.process,
-        Promise = global.Promise,
-        isNode = $__require('157')(process) == 'process',
-        head,
-        last,
-        notify;
-    var flush = function() {
-      var parent,
-          domain,
-          fn;
-      if (isNode && (parent = process.domain)) {
-        process.domain = null;
-        parent.exit();
-      }
-      while (head) {
-        domain = head.domain;
-        fn = head.fn;
-        if (domain)
-          domain.enter();
-        fn();
-        if (domain)
-          domain.exit();
-        head = head.next;
-      }
-      last = undefined;
-      if (parent)
-        parent.enter();
-    };
-    if (isNode) {
-      notify = function() {
-        process.nextTick(flush);
-      };
-    } else if (Observer) {
-      var toggle = 1,
-          node = document.createTextNode('');
-      new Observer(flush).observe(node, {characterData: true});
-      notify = function() {
-        node.data = toggle = -toggle;
-      };
-    } else if (Promise && Promise.resolve) {
-      notify = function() {
-        Promise.resolve().then(flush);
-      };
-    } else {
-      notify = function() {
-        macrotask.call(global, flush);
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    function deprecate(fn, message) {
+      return function() {
+        "production" !== 'production' ? _warning2['default'](false, '[history] ' + message) : undefined;
+        return fn.apply(this, arguments);
       };
     }
-    module.exports = function asap(fn) {
-      var task = {
-        fn: fn,
-        next: undefined,
-        domain: isNode && process.domain
-      };
-      if (last)
-        last.next = task;
-      if (!head) {
-        head = task;
-        notify();
+    exports['default'] = deprecate;
+    module.exports = exports['default'];
+  })($__require('1d'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("11a", ["10f", "129", "12a", "73", "12b", "11c", "117", "11e", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
       }
-      last = task;
+      return target;
     };
-  })($__require('29'));
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("159", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(bitmap, value) {
-    return {
-      enumerable: !(bitmap & 1),
-      configurable: !(bitmap & 2),
-      writable: !(bitmap & 4),
-      value: value
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15b", ["3a", "159", "176"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('3a'),
-      createDesc = $__require('159');
-  module.exports = $__require('176') ? function(object, key, value) {
-    return $.setDesc(object, key, createDesc(1, value));
-  } : function(object, key, value) {
-    object[key] = value;
-    return object;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15e", ["15b"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('15b');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("177", ["15e"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var redefine = $__require('15e');
-  module.exports = function(target, src) {
-    for (var key in src)
-      redefine(target, key, src[key]);
-    return target;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15f", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var hasOwnProperty = {}.hasOwnProperty;
-  module.exports = function(it, key) {
-    return hasOwnProperty.call(it, key);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15a", ["3a", "15f", "15c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var def = $__require('3a').setDesc,
-      has = $__require('15f'),
-      TAG = $__require('15c')('toStringTag');
-  module.exports = function(it, tag, stat) {
-    if (it && !has(it = stat ? it : it.prototype, TAG))
-      def(it, TAG, {
-        configurable: true,
-        value: tag
-      });
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3a", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("36", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(exec) {
-    try {
-      return !!exec();
-    } catch (e) {
-      return true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
     }
-  };
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _deepEqual = $__require('129');
+    var _deepEqual2 = _interopRequireDefault(_deepEqual);
+    var _AsyncUtils = $__require('12a');
+    var _Actions = $__require('73');
+    var _createLocation2 = $__require('12b');
+    var _createLocation3 = _interopRequireDefault(_createLocation2);
+    var _runTransitionHook = $__require('11c');
+    var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    var _deprecate = $__require('11e');
+    var _deprecate2 = _interopRequireDefault(_deprecate);
+    function createRandomKey(length) {
+      return Math.random().toString(36).substr(2, length);
+    }
+    function locationsAreEqual(a, b) {
+      return a.pathname === b.pathname && a.search === b.search && a.key === b.key && _deepEqual2['default'](a.state, b.state);
+    }
+    var DefaultKeyLength = 6;
+    function createHistory() {
+      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var getCurrentLocation = options.getCurrentLocation;
+      var finishTransition = options.finishTransition;
+      var saveState = options.saveState;
+      var go = options.go;
+      var keyLength = options.keyLength;
+      var getUserConfirmation = options.getUserConfirmation;
+      if (typeof keyLength !== 'number')
+        keyLength = DefaultKeyLength;
+      var transitionHooks = [];
+      function listenBefore(hook) {
+        transitionHooks.push(hook);
+        return function() {
+          transitionHooks = transitionHooks.filter(function(item) {
+            return item !== hook;
+          });
+        };
+      }
+      var allKeys = [];
+      var changeListeners = [];
+      var location = undefined;
+      function getCurrent() {
+        if (pendingLocation && pendingLocation.action === _Actions.POP) {
+          return allKeys.indexOf(pendingLocation.key);
+        } else if (location) {
+          return allKeys.indexOf(location.key);
+        } else {
+          return -1;
+        }
+      }
+      function updateLocation(newLocation) {
+        var current = getCurrent();
+        location = newLocation;
+        if (location.action === _Actions.PUSH) {
+          allKeys = [].concat(allKeys.slice(0, current + 1), [location.key]);
+        } else if (location.action === _Actions.REPLACE) {
+          allKeys[current] = location.key;
+        }
+        changeListeners.forEach(function(listener) {
+          listener(location);
+        });
+      }
+      function listen(listener) {
+        changeListeners.push(listener);
+        if (location) {
+          listener(location);
+        } else {
+          var _location = getCurrentLocation();
+          allKeys = [_location.key];
+          updateLocation(_location);
+        }
+        return function() {
+          changeListeners = changeListeners.filter(function(item) {
+            return item !== listener;
+          });
+        };
+      }
+      function confirmTransitionTo(location, callback) {
+        _AsyncUtils.loopAsync(transitionHooks.length, function(index, next, done) {
+          _runTransitionHook2['default'](transitionHooks[index], location, function(result) {
+            if (result != null) {
+              done(result);
+            } else {
+              next();
+            }
+          });
+        }, function(message) {
+          if (getUserConfirmation && typeof message === 'string') {
+            getUserConfirmation(message, function(ok) {
+              callback(ok !== false);
+            });
+          } else {
+            callback(message !== false);
+          }
+        });
+      }
+      var pendingLocation = undefined;
+      function transitionTo(nextLocation) {
+        if (location && locationsAreEqual(location, nextLocation))
+          return;
+        pendingLocation = nextLocation;
+        confirmTransitionTo(nextLocation, function(ok) {
+          if (pendingLocation !== nextLocation)
+            return;
+          if (ok) {
+            if (nextLocation.action === _Actions.PUSH) {
+              var prevPath = createPath(location);
+              var nextPath = createPath(nextLocation);
+              if (nextPath === prevPath)
+                nextLocation.action = _Actions.REPLACE;
+            }
+            if (finishTransition(nextLocation) !== false)
+              updateLocation(nextLocation);
+          } else if (location && nextLocation.action === _Actions.POP) {
+            var prevIndex = allKeys.indexOf(location.key);
+            var nextIndex = allKeys.indexOf(nextLocation.key);
+            if (prevIndex !== -1 && nextIndex !== -1)
+              go(prevIndex - nextIndex);
+          }
+        });
+      }
+      function push(location) {
+        transitionTo(createLocation(location, _Actions.PUSH, createKey()));
+      }
+      function replace(location) {
+        transitionTo(createLocation(location, _Actions.REPLACE, createKey()));
+      }
+      function goBack() {
+        go(-1);
+      }
+      function goForward() {
+        go(1);
+      }
+      function createKey() {
+        return createRandomKey(keyLength);
+      }
+      function createPath(location) {
+        if (location == null || typeof location === 'string')
+          return location;
+        var pathname = location.pathname;
+        var search = location.search;
+        var hash = location.hash;
+        var result = pathname;
+        if (search)
+          result += search;
+        if (hash)
+          result += hash;
+        return result;
+      }
+      function createHref(location) {
+        return createPath(location);
+      }
+      function createLocation(location, action) {
+        var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
+        if (typeof action === 'object') {
+          "production" !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to history.createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
+          if (typeof location === 'string')
+            location = _parsePath2['default'](location);
+          location = _extends({}, location, {state: action});
+          action = key;
+          key = arguments[3] || createKey();
+        }
+        return _createLocation3['default'](location, action, key);
+      }
+      function setState(state) {
+        if (location) {
+          updateLocationState(location, state);
+          updateLocation(location);
+        } else {
+          updateLocationState(getCurrentLocation(), state);
+        }
+      }
+      function updateLocationState(location, state) {
+        location.state = _extends({}, location.state, state);
+        saveState(location.key, location.state);
+      }
+      function registerTransitionHook(hook) {
+        if (transitionHooks.indexOf(hook) === -1)
+          transitionHooks.push(hook);
+      }
+      function unregisterTransitionHook(hook) {
+        transitionHooks = transitionHooks.filter(function(item) {
+          return item !== hook;
+        });
+      }
+      function pushState(state, path) {
+        if (typeof path === 'string')
+          path = _parsePath2['default'](path);
+        push(_extends({state: state}, path));
+      }
+      function replaceState(state, path) {
+        if (typeof path === 'string')
+          path = _parsePath2['default'](path);
+        replace(_extends({state: state}, path));
+      }
+      return {
+        listenBefore: listenBefore,
+        listen: listen,
+        transitionTo: transitionTo,
+        push: push,
+        replace: replace,
+        go: go,
+        goBack: goBack,
+        goForward: goForward,
+        createKey: createKey,
+        createPath: createPath,
+        createHref: createHref,
+        createLocation: createLocation,
+        setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
+        registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
+        unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
+        pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+        replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+      };
+    }
+    exports['default'] = createHistory;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("176", ["36"], true, function($__require, exports, module) {
+$__System.registerDynamic("12c", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = !$__require('36')(function() {
-    return Object.defineProperty({}, 'a', {get: function() {
-        return 7;
-      }}).a != 7;
-  });
+  (function(process) {
+    'use strict';
+    var warning = function() {};
+    if ("production" !== 'production') {
+      warning = function(condition, format, args) {
+        var len = arguments.length;
+        args = new Array(len > 2 ? len - 2 : 0);
+        for (var key = 2; key < len; key++) {
+          args[key - 2] = arguments[key];
+        }
+        if (format === undefined) {
+          throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+        }
+        if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+          throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
+        }
+        if (!condition) {
+          var argIndex = 0;
+          var message = 'Warning: ' + format.replace(/%s/g, function() {
+            return args[argIndex++];
+          });
+          if (typeof console !== 'undefined') {
+            console.error(message);
+          }
+          try {
+            throw new Error(message);
+          } catch (x) {}
+        }
+      };
+    }
+    module.exports = warning;
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("178", ["26", "3a", "176", "15c"], true, function($__require, exports, module) {
+$__System.registerDynamic("10f", ["12c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('12c');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("11d", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var core = $__require('26'),
-      $ = $__require('3a'),
-      DESCRIPTORS = $__require('176'),
-      SPECIES = $__require('15c')('species');
-  module.exports = function(KEY) {
-    var C = core[KEY];
-    if (DESCRIPTORS && C && !C[SPECIES])
-      $.setDesc(C, SPECIES, {
-        configurable: true,
-        get: function() {
-          return this;
-        }
-      });
-  };
+  exports.__esModule = true;
+  function extractPath(string) {
+    var match = string.match(/^https?:\/\/[^\/]*/);
+    if (match == null)
+      return string;
+    return string.substring(match[0].length);
+  }
+  exports["default"] = extractPath;
+  module.exports = exports["default"];
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("179", ["163"], true, function($__require, exports, module) {
+$__System.registerDynamic("117", ["10f", "11d", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = $__require('163'),
-      SHARED = '__core-js_shared__',
-      store = global[SHARED] || (global[SHARED] = {});
-  module.exports = function(key) {
-    return store[key] || (store[key] = {});
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("17a", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var id = 0,
-      px = Math.random();
-  module.exports = function(key) {
-    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("163", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-  if (typeof __g == 'number')
-    __g = global;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("15c", ["179", "17a", "163"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var store = $__require('179')('wks'),
-      uid = $__require('17a'),
-      Symbol = $__require('163').Symbol;
-  module.exports = function(name) {
-    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("17b", ["15c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ITERATOR = $__require('15c')('iterator'),
-      SAFE_CLOSING = false;
-  try {
-    var riter = [7][ITERATOR]();
-    riter['return'] = function() {
-      SAFE_CLOSING = true;
-    };
-    Array.from(riter, function() {
-      throw 2;
-    });
-  } catch (e) {}
-  module.exports = function(exec, skipClosing) {
-    if (!skipClosing && !SAFE_CLOSING)
-      return false;
-    var safe = false;
-    try {
-      var arr = [7],
-          iter = arr[ITERATOR]();
-      iter.next = function() {
-        safe = true;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _extractPath = $__require('11d');
+    var _extractPath2 = _interopRequireDefault(_extractPath);
+    function parsePath(path) {
+      var pathname = _extractPath2['default'](path);
+      var search = '';
+      var hash = '';
+      "production" !== 'production' ? _warning2['default'](path === pathname, 'A path must be pathname + search + hash only, not a fully qualified URL like "%s"', path) : undefined;
+      var hashIndex = pathname.indexOf('#');
+      if (hashIndex !== -1) {
+        hash = pathname.substring(hashIndex);
+        pathname = pathname.substring(0, hashIndex);
+      }
+      var searchIndex = pathname.indexOf('?');
+      if (searchIndex !== -1) {
+        search = pathname.substring(searchIndex);
+        pathname = pathname.substring(0, searchIndex);
+      }
+      if (pathname === '')
+        pathname = '/';
+      return {
+        pathname: pathname,
+        search: search,
+        hash: hash
       };
-      arr[ITERATOR] = function() {
-        return iter;
-      };
-      exec(arr);
-    } catch (e) {}
-    return safe;
-  };
+    }
+    exports['default'] = parsePath;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17c", [], true, function($__require, exports, module) {
+$__System.registerDynamic("12d", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -21965,467 +20514,421 @@ $__System.registerDynamic("17c", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("17d", ["17c"], true, function($__require, exports, module) {
+$__System.registerDynamic("12e", ["12d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('17c');
+  module.exports = $__require('12d');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17e", ["17d"], true, function($__require, exports, module) {
+$__System.registerDynamic("12f", ["12e"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : $__require('17d');
+  module.exports = $__System._nodeRequire ? process : $__require('12e');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["17e"], true, function($__require, exports, module) {
+$__System.registerDynamic("1d", ["12f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('17e');
+  module.exports = $__require('12f');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17f", ["3a", "15d", "163", "164", "16a", "35", "16d", "167", "170", "165", "16c", "3f", "16e", "15c", "16f", "175", "176", "177", "15a", "178", "26", "17b", "29"], true, function($__require, exports, module) {
+$__System.registerDynamic("130", ["10f", "52", "73", "11a", "117", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = $__require('3a'),
-        LIBRARY = $__require('15d'),
-        global = $__require('163'),
-        ctx = $__require('164'),
-        classof = $__require('16a'),
-        $export = $__require('35'),
-        isObject = $__require('16d'),
-        anObject = $__require('167'),
-        aFunction = $__require('170'),
-        strictNew = $__require('165'),
-        forOf = $__require('16c'),
-        setProto = $__require('3f').set,
-        same = $__require('16e'),
-        SPECIES = $__require('15c')('species'),
-        speciesConstructor = $__require('16f'),
-        asap = $__require('175'),
-        PROMISE = 'Promise',
-        process = global.process,
-        isNode = classof(process) == 'process',
-        P = global[PROMISE],
-        Wrapper;
-    var testResolve = function(sub) {
-      var test = new P(function() {});
-      if (sub)
-        test.constructor = Object;
-      return P.resolve(test) === test;
-    };
-    var USE_NATIVE = function() {
-      var works = false;
-      function P2(x) {
-        var self = new P(x);
-        setProto(self, P2.prototype);
-        return self;
-      }
-      try {
-        works = P && P.resolve && testResolve();
-        setProto(P2, P);
-        P2.prototype = $.create(P.prototype, {constructor: {value: P2}});
-        if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
-          works = false;
-        }
-        if (works && $__require('176')) {
-          var thenableThenGotten = false;
-          P.resolve($.setDesc({}, 'then', {get: function() {
-              thenableThenGotten = true;
-            }}));
-          works = thenableThenGotten;
-        }
-      } catch (e) {
-        works = false;
-      }
-      return works;
-    }();
-    var sameConstructor = function(a, b) {
-      if (LIBRARY && a === P && b === Wrapper)
-        return true;
-      return same(a, b);
-    };
-    var getConstructor = function(C) {
-      var S = anObject(C)[SPECIES];
-      return S != undefined ? S : C;
-    };
-    var isThenable = function(it) {
-      var then;
-      return isObject(it) && typeof(then = it.then) == 'function' ? then : false;
-    };
-    var PromiseCapability = function(C) {
-      var resolve,
-          reject;
-      this.promise = new C(function($$resolve, $$reject) {
-        if (resolve !== undefined || reject !== undefined)
-          throw TypeError('Bad Promise constructor');
-        resolve = $$resolve;
-        reject = $$reject;
-      });
-      this.resolve = aFunction(resolve), this.reject = aFunction(reject);
-    };
-    var perform = function(exec) {
-      try {
-        exec();
-      } catch (e) {
-        return {error: e};
-      }
-    };
-    var notify = function(record, isReject) {
-      if (record.n)
-        return;
-      record.n = true;
-      var chain = record.c;
-      asap(function() {
-        var value = record.v,
-            ok = record.s == 1,
-            i = 0;
-        var run = function(reaction) {
-          var handler = ok ? reaction.ok : reaction.fail,
-              resolve = reaction.resolve,
-              reject = reaction.reject,
-              result,
-              then;
-          try {
-            if (handler) {
-              if (!ok)
-                record.h = true;
-              result = handler === true ? value : handler(value);
-              if (result === reaction.promise) {
-                reject(TypeError('Promise-chain cycle'));
-              } else if (then = isThenable(result)) {
-                then.call(result, resolve, reject);
-              } else
-                resolve(result);
-            } else
-              reject(value);
-          } catch (e) {
-            reject(e);
+    exports.__esModule = true;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
           }
-        };
-        while (chain.length > i)
-          run(chain[i++]);
-        chain.length = 0;
-        record.n = false;
-        if (isReject)
-          setTimeout(function() {
-            var promise = record.p,
-                handler,
-                console;
-            if (isUnhandled(promise)) {
-              if (isNode) {
-                process.emit('unhandledRejection', value, promise);
-              } else if (handler = global.onunhandledrejection) {
-                handler({
-                  promise: promise,
-                  reason: value
-                });
-              } else if ((console = global.console) && console.error) {
-                console.error('Unhandled promise rejection', value);
-              }
-            }
-            record.a = undefined;
-          }, 1);
-      });
-    };
-    var isUnhandled = function(promise) {
-      var record = promise._d,
-          chain = record.a || record.c,
-          i = 0,
-          reaction;
-      if (record.h)
-        return false;
-      while (chain.length > i) {
-        reaction = chain[i++];
-        if (reaction.fail || !isUnhandled(reaction.promise))
-          return false;
+        }
       }
-      return true;
+      return target;
     };
-    var $reject = function(value) {
-      var record = this;
-      if (record.d)
-        return;
-      record.d = true;
-      record = record.r || record;
-      record.v = value;
-      record.s = 2;
-      record.a = record.c.slice();
-      notify(record, true);
-    };
-    var $resolve = function(value) {
-      var record = this,
-          then;
-      if (record.d)
-        return;
-      record.d = true;
-      record = record.r || record;
-      try {
-        if (record.p === value)
-          throw TypeError("Promise can't be resolved itself");
-        if (then = isThenable(value)) {
-          asap(function() {
-            var wrapper = {
-              r: record,
-              d: false
-            };
-            try {
-              then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
-            } catch (e) {
-              $reject.call(wrapper, e);
-            }
-          });
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _warning = $__require('10f');
+    var _warning2 = _interopRequireDefault(_warning);
+    var _invariant = $__require('52');
+    var _invariant2 = _interopRequireDefault(_invariant);
+    var _Actions = $__require('73');
+    var _createHistory = $__require('11a');
+    var _createHistory2 = _interopRequireDefault(_createHistory);
+    var _parsePath = $__require('117');
+    var _parsePath2 = _interopRequireDefault(_parsePath);
+    function createStateStorage(entries) {
+      return entries.filter(function(entry) {
+        return entry.state;
+      }).reduce(function(memo, entry) {
+        memo[entry.key] = entry.state;
+        return memo;
+      }, {});
+    }
+    function createMemoryHistory() {
+      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      if (Array.isArray(options)) {
+        options = {entries: options};
+      } else if (typeof options === 'string') {
+        options = {entries: [options]};
+      }
+      var history = _createHistory2['default'](_extends({}, options, {
+        getCurrentLocation: getCurrentLocation,
+        finishTransition: finishTransition,
+        saveState: saveState,
+        go: go
+      }));
+      var _options = options;
+      var entries = _options.entries;
+      var current = _options.current;
+      if (typeof entries === 'string') {
+        entries = [entries];
+      } else if (!Array.isArray(entries)) {
+        entries = ['/'];
+      }
+      entries = entries.map(function(entry) {
+        var key = history.createKey();
+        if (typeof entry === 'string')
+          return {
+            pathname: entry,
+            key: key
+          };
+        if (typeof entry === 'object' && entry)
+          return _extends({}, entry, {key: key});
+        !false ? "production" !== 'production' ? _invariant2['default'](false, 'Unable to create history entry from %s', entry) : _invariant2['default'](false) : undefined;
+      });
+      if (current == null) {
+        current = entries.length - 1;
+      } else {
+        !(current >= 0 && current < entries.length) ? "production" !== 'production' ? _invariant2['default'](false, 'Current index must be >= 0 and < %s, was %s', entries.length, current) : _invariant2['default'](false) : undefined;
+      }
+      var storage = createStateStorage(entries);
+      function saveState(key, state) {
+        storage[key] = state;
+      }
+      function readState(key) {
+        return storage[key];
+      }
+      function getCurrentLocation() {
+        var entry = entries[current];
+        var key = entry.key;
+        var basename = entry.basename;
+        var pathname = entry.pathname;
+        var search = entry.search;
+        var path = (basename || '') + pathname + (search || '');
+        var state = undefined;
+        if (key) {
+          state = readState(key);
         } else {
-          record.v = value;
-          record.s = 1;
-          notify(record, false);
+          state = null;
+          key = history.createKey();
+          entry.key = key;
         }
-      } catch (e) {
-        $reject.call({
-          r: record,
-          d: false
-        }, e);
+        var location = _parsePath2['default'](path);
+        return history.createLocation(_extends({}, location, {state: state}), undefined, key);
       }
-    };
-    if (!USE_NATIVE) {
-      P = function Promise(executor) {
-        aFunction(executor);
-        var record = this._d = {
-          p: strictNew(this, P, PROMISE),
-          c: [],
-          a: undefined,
-          s: 0,
-          d: false,
-          v: undefined,
-          h: false,
-          n: false
-        };
-        try {
-          executor(ctx($resolve, record, 1), ctx($reject, record, 1));
-        } catch (err) {
-          $reject.call(record, err);
+      function canGo(n) {
+        var index = current + n;
+        return index >= 0 && index < entries.length;
+      }
+      function go(n) {
+        if (n) {
+          if (!canGo(n)) {
+            "production" !== 'production' ? _warning2['default'](false, 'Cannot go(%s) there is not enough history', n) : undefined;
+            return;
+          }
+          current += n;
+          var currentLocation = getCurrentLocation();
+          history.transitionTo(_extends({}, currentLocation, {action: _Actions.POP}));
         }
-      };
-      $__require('177')(P.prototype, {
-        then: function then(onFulfilled, onRejected) {
-          var reaction = new PromiseCapability(speciesConstructor(this, P)),
-              promise = reaction.promise,
-              record = this._d;
-          reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
-          reaction.fail = typeof onRejected == 'function' && onRejected;
-          record.c.push(reaction);
-          if (record.a)
-            record.a.push(reaction);
-          if (record.s)
-            notify(record, false);
-          return promise;
-        },
-        'catch': function(onRejected) {
-          return this.then(undefined, onRejected);
+      }
+      function finishTransition(location) {
+        switch (location.action) {
+          case _Actions.PUSH:
+            current += 1;
+            if (current < entries.length)
+              entries.splice(current);
+            entries.push(location);
+            saveState(location.key, location.state);
+            break;
+          case _Actions.REPLACE:
+            entries[current] = location;
+            saveState(location.key, location.state);
+            break;
         }
-      });
+      }
+      return history;
     }
-    $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
-    $__require('15a')(P, PROMISE);
-    $__require('178')(PROMISE);
-    Wrapper = $__require('26')[PROMISE];
-    $export($export.S + $export.F * !USE_NATIVE, PROMISE, {reject: function reject(r) {
-        var capability = new PromiseCapability(this),
-            $$reject = capability.reject;
-        $$reject(r);
-        return capability.promise;
-      }});
-    $export($export.S + $export.F * (!USE_NATIVE || testResolve(true)), PROMISE, {resolve: function resolve(x) {
-        if (x instanceof P && sameConstructor(x.constructor, this))
-          return x;
-        var capability = new PromiseCapability(this),
-            $$resolve = capability.resolve;
-        $$resolve(x);
-        return capability.promise;
-      }});
-    $export($export.S + $export.F * !(USE_NATIVE && $__require('17b')(function(iter) {
-      P.all(iter)['catch'](function() {});
-    })), PROMISE, {
-      all: function all(iterable) {
-        var C = getConstructor(this),
-            capability = new PromiseCapability(C),
-            resolve = capability.resolve,
-            reject = capability.reject,
-            values = [];
-        var abrupt = perform(function() {
-          forOf(iterable, false, values.push, values);
-          var remaining = values.length,
-              results = Array(remaining);
-          if (remaining)
-            $.each.call(values, function(promise, index) {
-              var alreadyCalled = false;
-              C.resolve(promise).then(function(value) {
-                if (alreadyCalled)
-                  return;
-                alreadyCalled = true;
-                results[index] = value;
-                --remaining || resolve(results);
-              }, reject);
-            });
-          else
-            resolve(results);
-        });
-        if (abrupt)
-          reject(abrupt.error);
-        return capability.promise;
-      },
-      race: function race(iterable) {
-        var C = getConstructor(this),
-            capability = new PromiseCapability(C),
-            reject = capability.reject;
-        var abrupt = perform(function() {
-          forOf(iterable, false, function(promise) {
-            C.resolve(promise).then(capability.resolve, reject);
-          });
-        });
-        if (abrupt)
-          reject(abrupt.error);
-        return capability.promise;
-      }
-    });
-  })($__require('29'));
+    exports['default'] = createMemoryHistory;
+    module.exports = exports['default'];
+  })($__require('1d'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("26", [], true, function($__require, exports, module) {
+$__System.registerDynamic("111", ["5e", "130"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var core = module.exports = {version: '1.2.6'};
-  if (typeof __e == 'number')
-    __e = core;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("180", ["150", "153", "162", "17f", "26"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('150');
-  $__require('153');
-  $__require('162');
-  $__require('17f');
-  module.exports = $__require('26').Promise;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("8d", ["180"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('180'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.register("181", ["8d"], function (_export) {
-  var _Promise;
-
-  function fetchComponentData(dispatch, components, params) {
-    var needs = components.reduce(function (prev, current) {
-      return (current.needs || []).
-      // .concat((current.WrappedComponent ? current.WrappedComponent.needs : []) || []) // Not sure I need this yet? Causing double up of calls..figure this out later
-      concat(prev);
-    }, []);
-
-    var promises = needs.map(function (need) {
-      return dispatch(need(params));
-    });
-
-    return _Promise.all(promises);
+  exports.__esModule = true;
+  exports['default'] = createMemoryHistory;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
   }
-
-  return {
-    setters: [function (_d) {
-      _Promise = _d["default"];
-    }],
-    execute: function () {
-      "use strict";
-
-      _export("default", fetchComponentData);
-    }
-  };
+  var _historyLibUseQueries = $__require('5e');
+  var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+  var _historyLibCreateMemoryHistory = $__require('130');
+  var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
+  function createMemoryHistory(options) {
+    var memoryHistory = _historyLibCreateMemoryHistory2['default'](options);
+    var createHistory = function createHistory() {
+      return memoryHistory;
+    };
+    var history = _historyLibUseQueries2['default'](createHistory)(options);
+    history.__v2_compatible__ = true;
+    return history;
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('1', ['2', '4', '5', '9', '84', '87', '181', '9f'], function (_export) {
+$__System.registerDynamic("131", ["56", "5f", "60", "61", "63", "62", "65", "66", "67", "68", "69", "5a", "59", "6c", "58", "110", "11f", "64", "118", "120", "111"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _Router2 = $__require('56');
+  var _Router3 = _interopRequireDefault(_Router2);
+  exports.Router = _Router3['default'];
+  var _Link2 = $__require('5f');
+  var _Link3 = _interopRequireDefault(_Link2);
+  exports.Link = _Link3['default'];
+  var _IndexLink2 = $__require('60');
+  var _IndexLink3 = _interopRequireDefault(_IndexLink2);
+  exports.IndexLink = _IndexLink3['default'];
+  var _IndexRedirect2 = $__require('61');
+  var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
+  exports.IndexRedirect = _IndexRedirect3['default'];
+  var _IndexRoute2 = $__require('63');
+  var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
+  exports.IndexRoute = _IndexRoute3['default'];
+  var _Redirect2 = $__require('62');
+  var _Redirect3 = _interopRequireDefault(_Redirect2);
+  exports.Redirect = _Redirect3['default'];
+  var _Route2 = $__require('65');
+  var _Route3 = _interopRequireDefault(_Route2);
+  exports.Route = _Route3['default'];
+  var _History2 = $__require('66');
+  var _History3 = _interopRequireDefault(_History2);
+  exports.History = _History3['default'];
+  var _Lifecycle2 = $__require('67');
+  var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
+  exports.Lifecycle = _Lifecycle3['default'];
+  var _RouteContext2 = $__require('68');
+  var _RouteContext3 = _interopRequireDefault(_RouteContext2);
+  exports.RouteContext = _RouteContext3['default'];
+  var _useRoutes2 = $__require('69');
+  var _useRoutes3 = _interopRequireDefault(_useRoutes2);
+  exports.useRoutes = _useRoutes3['default'];
+  var _RouteUtils = $__require('5a');
+  exports.createRoutes = _RouteUtils.createRoutes;
+  var _RouterContext2 = $__require('59');
+  var _RouterContext3 = _interopRequireDefault(_RouterContext2);
+  exports.RouterContext = _RouterContext3['default'];
+  var _RoutingContext2 = $__require('6c');
+  var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
+  exports.RoutingContext = _RoutingContext3['default'];
+  var _PropTypes2 = $__require('58');
+  var _PropTypes3 = _interopRequireDefault(_PropTypes2);
+  exports.PropTypes = _PropTypes3['default'];
+  var _match2 = $__require('110');
+  var _match3 = _interopRequireDefault(_match2);
+  exports.match = _match3['default'];
+  var _useRouterHistory2 = $__require('11f');
+  var _useRouterHistory3 = _interopRequireDefault(_useRouterHistory2);
+  exports.useRouterHistory = _useRouterHistory3['default'];
+  var _PatternUtils = $__require('64');
+  exports.formatPattern = _PatternUtils.formatPattern;
+  var _browserHistory2 = $__require('118');
+  var _browserHistory3 = _interopRequireDefault(_browserHistory2);
+  exports.browserHistory = _browserHistory3['default'];
+  var _hashHistory2 = $__require('120');
+  var _hashHistory3 = _interopRequireDefault(_hashHistory2);
+  exports.hashHistory = _hashHistory3['default'];
+  var _createMemoryHistory2 = $__require('111');
+  var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
+  exports.createMemoryHistory = _createMemoryHistory3['default'];
+  var _Router4 = _interopRequireDefault(_Router2);
+  exports['default'] = _Router4['default'];
+  global.define = __define;
+  return module.exports;
+});
 
-  // const history = createHistory();
-  'use strict';
+$__System.registerDynamic("5", ["131"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('131');
+  global.define = __define;
+  return module.exports;
+});
 
-  var React, Router, browserHistory, RouterContext, Provider, routes, ReactDOM, fetchComponentData, configureStore, store;
+$__System.registerDynamic("132", ["4", "5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRouter = $__require('5');
+  var _reactRouter2 = _interopRequireDefault(_reactRouter);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var LoadingContainer = function(_Component) {
+    _inherits(LoadingContainer, _Component);
+    function LoadingContainer(props) {
+      _classCallCheck(this, LoadingContainer);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(LoadingContainer).call(this, props));
+    }
+    _createClass(LoadingContainer, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(_reactRouter.RouterContext, this.props);
+      }
+    }]);
+    return LoadingContainer;
+  }(_react.Component);
+  LoadingContainer.propTypes = {
+    components: _react.PropTypes.array.isRequired,
+    params: _react.PropTypes.object.isRequired,
+    location: _react.PropTypes.object.isRequired
+  };
+  exports.default = LoadingContainer;
+  global.define = __define;
+  return module.exports;
+});
 
+$__System.registerDynamic("1", ["2", "4", "5", "2c", "2f", "3f", "9", "55", "132"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  $__require('2');
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRouter = $__require('5');
+  var _reactRouter2 = _interopRequireDefault(_reactRouter);
+  var _routes = $__require('2c');
+  var _routes2 = _interopRequireDefault(_routes);
+  var _reactDom = $__require('2f');
+  var _reactDom2 = _interopRequireDefault(_reactDom);
+  var _index = $__require('3f');
+  var _index2 = _interopRequireDefault(_index);
+  var _reactRedux = $__require('9');
+  var _fetchComponentData = $__require('55');
+  var _fetchComponentData2 = _interopRequireDefault(_fetchComponentData);
+  var _LoadingContainer = $__require('132');
+  var _LoadingContainer2 = _interopRequireDefault(_LoadingContainer);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var store = (0, _index2.default)(window.__INITIAL_DATA__ || {}, _reactRouter.browserHistory);
   function createElement(Component, props) {
     if (Component.needs) {
-      fetchComponentData(store.dispatch, [Component], props.params);
+      (0, _fetchComponentData2.default)(store.dispatch, [Component], props.params);
     }
-    return React.createElement(Component, props);
+    return _react2.default.createElement(Component, props);
   }
-
   function testRender(props) {
-    console.log('in test render');
     console.log(props);
-    return React.createElement(RouterContext, props);
+    return _react2.default.createElement(_LoadingContainer2.default, props);
   }
-
-  return {
-    setters: [function (_) {}, function (_2) {
-      React = _2['default'];
-    }, function (_3) {
-      Router = _3['default'];
-      browserHistory = _3.browserHistory;
-      RouterContext = _3.RouterContext;
-    }, function (_6) {
-      Provider = _6.Provider;
-    }, function (_4) {
-      routes = _4['default'];
-    }, function (_5) {
-      ReactDOM = _5['default'];
-    }, function (_7) {
-      fetchComponentData = _7['default'];
-    }, function (_f) {
-      configureStore = _f['default'];
-    }],
-    execute: function () {
-      store = configureStore(window.__INITIAL_DATA__ || {}, browserHistory);
-      ReactDOM.render(React.createElement(
-        Provider,
-        { store: store },
-        React.createElement(Router, { children: routes, store: store, history: browserHistory, createElement: createElement, render: testRender })
-      ), document.getElementById('app'));
-    }
-  };
+  _reactDom2.default.render(_react2.default.createElement(_reactRedux.Provider, {store: store}, _react2.default.createElement(_reactRouter2.default, {
+    children: _routes2.default,
+    store: store,
+    history: _reactRouter.browserHistory,
+    createElement: createElement,
+    render: testRender
+  })), document.getElementById('app'));
+  global.define = __define;
+  return module.exports;
 });
 
-$__System.register('github:twbs/bootstrap@4.0.0-alpha.2/css/bootstrap.css!github:systemjs/plugin-css@0.1.20', [], false, function() {});
+$__System.register('github:twbs/bootstrap@4.0.0-alpha.2/css/bootstrap.css!github:systemjs/plugin-css@0.1.20.js', [], false, function() {});
 })
 (function(factory) {
   factory();
