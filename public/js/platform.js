@@ -742,7 +742,7 @@ $__System.registerDynamic("12", ["4", "10"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("13", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("13", ["4", "14"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -770,6 +770,8 @@ $__System.registerDynamic("13", ["4"], true, function($__require, exports, modul
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
+  var _Button = $__require('14');
+  var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
@@ -806,12 +808,24 @@ $__System.registerDynamic("13", ["4"], true, function($__require, exports, modul
     _createClass(Part, [{
       key: 'render',
       value: function render() {
-        return _react2.default.createElement('li', null, this.props.data.name);
+        return _react2.default.createElement('li', null, _react2.default.createElement('span', null, this.props.data.name), _react2.default.createElement(_Button2.default, {
+          text: 'Remove',
+          onButtonClick: this.handleRemove.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleRemove',
+      value: function handleRemove(event) {
+        event.stopPropagation();
+        this.props.onRemove(this.props.data.id);
       }
     }], [{
       key: 'propTypes',
       get: function get() {
-        return {data: _react.PropTypes.object.isRequired};
+        return {
+          data: _react.PropTypes.object.isRequired,
+          onRemove: _react.PropTypes.func.isRequired
+        };
       }
     }]);
     return Part;
@@ -821,7 +835,7 @@ $__System.registerDynamic("13", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["4", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("15", ["4", "13"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -894,7 +908,8 @@ $__System.registerDynamic("14", ["4", "13"], true, function($__require, exports,
         return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), partsToRender.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, partsToRender.length > 0 ? _react2.default.createElement('ul', null, ' ', partsToRender.map(function(result) {
           return _react2.default.createElement(_Part2.default, {
             key: result.id,
-            data: result
+            data: result,
+            onRemove: _this2.props.onRemovePart
           });
         }), ' ') : null));
       }
@@ -903,7 +918,8 @@ $__System.registerDynamic("14", ["4", "13"], true, function($__require, exports,
   }(_react.Component);
   Parts.propTypes = {
     parts: _react.PropTypes.object.isRequired,
-    partIds: _react.PropTypes.array.isRequired
+    partIds: _react.PropTypes.array.isRequired,
+    onRemovePart: _react.PropTypes.func.isRequired
   };
   Parts.defaultProps = {
     parts: {},
@@ -914,7 +930,7 @@ $__System.registerDynamic("14", ["4", "13"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "14", "5"], true, function($__require, exports, module) {
+$__System.registerDynamic("16", ["4", "17", "18", "f", "12", "14", "19", "1a", "15", "5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -953,21 +969,21 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _TextInput = $__require('16');
+  var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
-  var _Textarea = $__require('17');
+  var _Textarea = $__require('18');
   var _Textarea2 = _interopRequireDefault(_Textarea);
   var _Static = $__require('f');
   var _Static2 = _interopRequireDefault(_Static);
   var _Checkboxes = $__require('12');
   var _Checkboxes2 = _interopRequireDefault(_Checkboxes);
-  var _Button = $__require('18');
+  var _Button = $__require('14');
   var _Button2 = _interopRequireDefault(_Button);
   var _AddCustomField = $__require('19');
   var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
   var _Form = $__require('1a');
   var _Form2 = _interopRequireDefault(_Form);
-  var _Parts = $__require('14');
+  var _Parts = $__require('15');
   var _Parts2 = _interopRequireDefault(_Parts);
   var _reactRouter = $__require('5');
   function _interopRequireDefault(obj) {
@@ -1013,7 +1029,8 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
           removeField: _react.PropTypes.func.isRequired,
           validate: _react.PropTypes.func.isRequired,
           onSave: _react.PropTypes.func.isRequired,
-          parts: _react.PropTypes.object.isRequired
+          parts: _react.PropTypes.object.isRequired,
+          onRemovePart: _react.PropTypes.func.isRequired
         };
       }
     }]);
@@ -1088,7 +1105,8 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
           }, result));
         }), _react2.default.createElement('h3', null, 'Diagram'), _react2.default.createElement(_reactRouter.Link, {to: createPartLink}, 'Create New Part'), _react2.default.createElement(_Parts2.default, {
           partIds: this.props.form.parts,
-          parts: this.props.parts
+          parts: this.props.parts,
+          onRemovePart: this.props.onRemovePart
         }), _react2.default.createElement(_Button2.default, {
           text: 'Save',
           onButtonClick: this.handleSave.bind(this)
@@ -1120,7 +1138,7 @@ $__System.registerDynamic("15", ["4", "16", "17", "f", "12", "18", "19", "1a", "
   return module.exports;
 });
 
-$__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__require, exports, module) {
+$__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -1149,7 +1167,7 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRedux = $__require('9');
-  var _PlatformForm = $__require('15');
+  var _PlatformForm = $__require('16');
   var _PlatformForm2 = _interopRequireDefault(_PlatformForm);
   var _platform = $__require('d');
   var PlatformActions = _interopRequireWildcard(_platform);
@@ -1220,8 +1238,14 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
         return _react2.default.createElement('div', null, _react2.default.createElement(_PlatformForm2.default, {
           form: this.props.platform,
           onSave: this.handleSave.bind(this),
+          onRemovePart: this.handleRemovePart.bind(this),
           parts: this.props.parts
         }));
+      }
+    }, {
+      key: 'handleRemovePart',
+      value: function handleRemovePart(partId) {
+        console.log(partId);
       }
     }, {
       key: 'handleSave',
@@ -1248,7 +1272,7 @@ $__System.registerDynamic("1b", ["4", "9", "15", "d", "e"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("17", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("18", ["4", "11"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2166,7 +2190,7 @@ $__System.registerDynamic("11", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("17", ["4", "11"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2272,7 +2296,7 @@ $__System.registerDynamic("16", ["4", "11"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["4", "16", "28", "18"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["4", "17", "28", "14"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2300,11 +2324,11 @@ $__System.registerDynamic("27", ["4", "16", "28", "18"], true, function($__requi
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _TextInput = $__require('16');
+  var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
   var _Repeatable = $__require('28');
   var _Repeatable2 = _interopRequireDefault(_Repeatable);
-  var _Button = $__require('18');
+  var _Button = $__require('14');
   var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -2377,7 +2401,7 @@ $__System.registerDynamic("27", ["4", "16", "28", "18"], true, function($__requi
   return module.exports;
 });
 
-$__System.registerDynamic("18", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("14", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2567,7 +2591,7 @@ $__System.registerDynamic("28", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["4", "26", "16", "27", "18", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("19", ["4", "26", "17", "27", "14", "28"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2608,11 +2632,11 @@ $__System.registerDynamic("19", ["4", "26", "16", "27", "18", "28"], true, funct
   var _react2 = _interopRequireDefault(_react);
   var _Select = $__require('26');
   var _Select2 = _interopRequireDefault(_Select);
-  var _TextInput = $__require('16');
+  var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
   var _AddCustomFieldOptions = $__require('27');
   var _AddCustomFieldOptions2 = _interopRequireDefault(_AddCustomFieldOptions);
-  var _Button = $__require('18');
+  var _Button = $__require('14');
   var _Button2 = _interopRequireDefault(_Button);
   var _Repeatable = $__require('28');
   var _Repeatable2 = _interopRequireDefault(_Repeatable);
@@ -2727,7 +2751,7 @@ $__System.registerDynamic("19", ["4", "26", "16", "27", "18", "28"], true, funct
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["4", "16", "17", "1a", "18", "19"], true, function($__require, exports, module) {
+$__System.registerDynamic("29", ["4", "17", "18", "1a", "14", "19"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2766,13 +2790,13 @@ $__System.registerDynamic("29", ["4", "16", "17", "1a", "18", "19"], true, funct
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _TextInput = $__require('16');
+  var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
-  var _Textarea = $__require('17');
+  var _Textarea = $__require('18');
   var _Textarea2 = _interopRequireDefault(_Textarea);
   var _Form = $__require('1a');
   var _Form2 = _interopRequireDefault(_Form);
-  var _Button = $__require('18');
+  var _Button = $__require('14');
   var _Button2 = _interopRequireDefault(_Button);
   var _AddCustomField = $__require('19');
   var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
@@ -2882,7 +2906,7 @@ $__System.registerDynamic("29", ["4", "16", "17", "1a", "18", "19"], true, funct
   return module.exports;
 });
 
-$__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function($__require, exports, module) {
+$__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -2915,8 +2939,6 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function
   var _AddPartForm2 = _interopRequireDefault(_AddPartForm);
   var _platform = $__require('d');
   var PlatformActions = _interopRequireWildcard(_platform);
-  var _part = $__require('2b');
-  var PartActions = _interopRequireWildcard(_part);
   var _reactRouter = $__require('5');
   function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
@@ -2989,7 +3011,6 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function
       key: 'handleSave',
       value: function handleSave(model) {
         this.props.dispatch(PlatformActions.createPartAndSavePlatform(Object.assign({}, model)));
-        console.log(model);
       }
     }], [{
       key: 'needs',
@@ -3010,7 +3031,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["3", "6", "7", "8", "c", "1b", "2a"], true, function($__require, exports, module) {
+$__System.registerDynamic("2b", ["3", "6", "7", "8", "c", "1b", "2a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3058,18 +3079,8 @@ $__System.registerDynamic("2c", ["3", "6", "7", "8", "c", "1b", "2a"], true, fun
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["2e"], true, function($__require, exports, module) {
+$__System.registerDynamic("2c", ["2d"], true, function($__require, exports, module) {
   "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('2e');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2f", ["2d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3079,7 +3090,17 @@ $__System.registerDynamic("2f", ["2d"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("30", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2e", ["2c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('2c');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2f", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3099,17 +3120,17 @@ $__System.registerDynamic("30", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["30"], true, function($__require, exports, module) {
+$__System.registerDynamic("30", ["2f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('30');
+  module.exports = $__require('2f');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("32", [], true, function($__require, exports, module) {
+$__System.registerDynamic("31", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3282,17 +3303,17 @@ $__System.registerDynamic("32", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("33", ["32"], true, function($__require, exports, module) {
+$__System.registerDynamic("32", ["31"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('32');
+  module.exports = $__require('31');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("34", ["d"], true, function($__require, exports, module) {
+$__System.registerDynamic("33", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3384,7 +3405,7 @@ $__System.registerDynamic("34", ["d"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("e", ["35"], true, function($__require, exports, module) {
+$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3393,7 +3414,7 @@ $__System.registerDynamic("e", ["35"], true, function($__require, exports, modul
   Object.defineProperty(exports, "__esModule", {value: true});
   exports.FETCHED_CATEGOIRES = undefined;
   exports.getCategories = getCategories;
-  var _isomorphicFetch = $__require('35');
+  var _isomorphicFetch = $__require('34');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -3431,7 +3452,7 @@ $__System.registerDynamic("e", ["35"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("36", ["e"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3469,7 +3490,7 @@ $__System.registerDynamic("36", ["e"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["35"], true, function($__require, exports, module) {
+$__System.registerDynamic("36", ["34"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3479,7 +3500,7 @@ $__System.registerDynamic("2b", ["35"], true, function($__require, exports, modu
   exports.FETCHED_PART = exports.SAVING_PART = exports.SAVED_PART = undefined;
   exports.savePart = savePart;
   exports.fetchPart = fetchPart;
-  var _isomorphicFetch = $__require('35');
+  var _isomorphicFetch = $__require('34');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -3912,7 +3933,7 @@ $__System.registerDynamic("39", ["38"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("35", ["39"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["39"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3922,7 +3943,7 @@ $__System.registerDynamic("35", ["39"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["35"], true, function($__require, exports, module) {
+$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3935,7 +3956,7 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
   exports.createPart = createPart;
   exports.createPartAndSavePlatform = createPartAndSavePlatform;
   exports.fetchPlatform = fetchPlatform;
-  var _isomorphicFetch = $__require('35');
+  var _isomorphicFetch = $__require('34');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -4093,7 +4114,7 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("3a", ["2b", "d"], true, function($__require, exports, module) {
+$__System.registerDynamic("3a", ["36", "d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4101,7 +4122,7 @@ $__System.registerDynamic("3a", ["2b", "d"], true, function($__require, exports,
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
   exports.partsById = partsById;
-  var _part = $__require('2b');
+  var _part = $__require('36');
   var _platform = $__require('d');
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -4164,7 +4185,7 @@ $__System.registerDynamic("3a", ["2b", "d"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("3b", ["3c", "34", "36", "3a"], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", ["3c", "33", "35", "3a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4172,8 +4193,8 @@ $__System.registerDynamic("3b", ["3c", "34", "36", "3a"], true, function($__requ
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
   var _redux = $__require('3c');
-  var _platforms = $__require('34');
-  var _categories = $__require('36');
+  var _platforms = $__require('33');
+  var _categories = $__require('35');
   var _categories2 = _interopRequireDefault(_categories);
   var _parts = $__require('3a');
   function _interopRequireDefault(obj) {
@@ -4248,7 +4269,7 @@ $__System.registerDynamic("3e", ["3d"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("3f", ["3c", "31", "33", "3b", "3e"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["3c", "30", "32", "3b", "3e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4257,9 +4278,9 @@ $__System.registerDynamic("3f", ["3c", "31", "33", "3b", "3e"], true, function($
   Object.defineProperty(exports, "__esModule", {value: true});
   exports.default = configureStore;
   var _redux = $__require('3c');
-  var _reduxThunk = $__require('31');
+  var _reduxThunk = $__require('30');
   var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-  var _reduxLogger = $__require('33');
+  var _reduxLogger = $__require('32');
   var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
   var _index = $__require('3b');
   var _index2 = _interopRequireDefault(_index);
@@ -6989,7 +7010,7 @@ $__System.registerDynamic("74", ["75"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("2e", ["76", "77", "78", "79", "75", "7a", "7b", "7c", "7d", "7e", "74", "7f", "80", "1d"], true, function($__require, exports, module) {
+$__System.registerDynamic("2d", ["76", "77", "78", "79", "75", "7a", "7b", "7c", "7d", "7e", "74", "7f", "80", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -18246,13 +18267,13 @@ $__System.registerDynamic("10c", ["83", "7f", "1d"], true, function($__require, 
   return module.exports;
 });
 
-$__System.registerDynamic("10d", ["2e", "103", "10b", "83", "10c"], true, function($__require, exports, module) {
+$__System.registerDynamic("10d", ["2d", "103", "10b", "83", "10c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactDOM = $__require('2e');
+  var ReactDOM = $__require('2d');
   var ReactDOMServer = $__require('103');
   var ReactIsomorphic = $__require('10b');
   var assign = $__require('83');
@@ -20914,7 +20935,7 @@ $__System.registerDynamic("132", ["4", "5"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("1", ["2", "4", "5", "2c", "2f", "3f", "9", "55", "132"], true, function($__require, exports, module) {
+$__System.registerDynamic("1", ["2", "4", "5", "2b", "2e", "3f", "9", "55", "132"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -20925,9 +20946,9 @@ $__System.registerDynamic("1", ["2", "4", "5", "2c", "2f", "3f", "9", "55", "132
   var _react2 = _interopRequireDefault(_react);
   var _reactRouter = $__require('5');
   var _reactRouter2 = _interopRequireDefault(_reactRouter);
-  var _routes = $__require('2c');
+  var _routes = $__require('2b');
   var _routes2 = _interopRequireDefault(_routes);
-  var _reactDom = $__require('2f');
+  var _reactDom = $__require('2e');
   var _reactDom2 = _interopRequireDefault(_reactDom);
   var _index = $__require('3f');
   var _index2 = _interopRequireDefault(_index);

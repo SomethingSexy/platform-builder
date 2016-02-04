@@ -23,7 +23,7 @@ class UpdatePlatform extends Component {
   render() {
     return (
       <div>
-        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} parts={this.props.parts} />
+        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} onRemovePart={this.handleRemovePart.bind(this)} parts={this.props.parts} />
       </div>
     );
   }
@@ -32,9 +32,13 @@ class UpdatePlatform extends Component {
     return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
   }
 
+  // this will be handled here because we might have
+  // to do some special handling with it
+  handleRemovePart(partId) {
+    console.log(partId);
+  }
+
   handleSave(model) {
-    // the platform is the data coming from the form, merge it with the current
-    // platform data we have
     this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
   }
 }

@@ -2,7 +2,6 @@ import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import AddPartForm from '../components/platform/parts/AddPartForm.js';
 import * as PlatformActions  from '../actions/platform.js';
-import * as PartActions  from '../actions/part.js';
 import { Link } from 'react-router';
 
 class CreatePart extends Component {
@@ -35,7 +34,6 @@ class CreatePart extends Component {
 
   handleSave(model) {
     this.props.dispatch(PlatformActions.createPartAndSavePlatform(Object.assign({}, model)));
-    console.log(model);
   }
 }
 
