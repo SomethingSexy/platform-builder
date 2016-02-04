@@ -1,6 +1,8 @@
 import {
-  CREATING_PART, CREATED_PART, SAVING_PART, SAVED_PART, FETCHED_PART
+  SAVING_PART, SAVED_PART, FETCHED_PART
 } from '../actions/part.js';
+
+import { CREATING_PART, CREATED_PART } from '../actions/platform.js';
 
 function parts(state = {}, action) {
   switch (action.type) {

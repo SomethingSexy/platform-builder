@@ -1,31 +1,9 @@
+// TODO: It might make sense to put some of these part methods in actions/platform.js
 import fetch from 'isomorphic-fetch';
 
-export const CREATED_PART = 'CREATED_PART';
-export const CREATING_PART = 'CREATING_PART';
 export const SAVED_PART = 'SAVED_PART';
 export const SAVING_PART = 'SAVING_PART';
 export const FETCHED_PART = 'FETCHED_PART';
-
-function creatingPart(part) {
-  return {
-    type: CREATING_PART,
-    part
-  };
-}
-
-function createdPart(part) {
-  return {
-    type: CREATED_PART,
-    part,
-    receivedAt: Date.now(),
-    meta: {
-      transition: (prevState, nextState, action) => ({
-        path: `/platform/${action.part.createdPlatformId}/build`
-      })
-    }
-  };
-}
-
 
 function savingPart(part) {
   return {
@@ -47,22 +25,6 @@ function fetchedPart(part) {
     type: FETCHED_PART,
     part,
     receivedAt: Date.now()
-  };
-}
-
-
-function postPart(part) {
-  return dispatch => {
-    dispatch(creatingPart(part));
-    return fetch('/api/platform/' + part.createdPlatformId + '/part', {
-      method: 'post',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(part)
-    })
-      .then(response => response.json())
-      .then(json => dispatch(createdPart(json)));
   };
 }
 
@@ -89,12 +51,6 @@ function getPart(platformId) {
       .catch(error => {
         console.log('fetch platform failed ' + error);
       });
-  };
-}
-
-export function createPart(part) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(postPart(part));
   };
 }
 

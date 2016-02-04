@@ -2988,7 +2988,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "2b", "5"], true, function
     }, {
       key: 'handleSave',
       value: function handleSave(model) {
-        this.props.dispatch(PartActions.createPart(Object.assign({}, model)));
+        this.props.dispatch(PlatformActions.createPartAndSavePlatform(Object.assign({}, model)));
         console.log(model);
       }
     }], [{
@@ -3292,131 +3292,7 @@ $__System.registerDynamic("33", ["32"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  Object.defineProperty(exports, "__esModule", {value: true});
-  exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
-  exports.createPlatform = createPlatform;
-  exports.savePlatform = savePlatform;
-  exports.fetchPlatform = fetchPlatform;
-  var _isomorphicFetch = $__require('34');
-  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {default: obj};
-  }
-  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
-  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
-  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
-  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
-  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
-  function creatingPlatform(platform) {
-    return {
-      type: CREATING_PLATFORM,
-      platform: platform
-    };
-  }
-  function createdPlatform(platform) {
-    return {
-      type: CREATED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now(),
-      meta: {transition: function transition(prevState, nextState, action) {
-          return {
-            path: '/platform/' + action.platform.id + '/build',
-            query: {some: 'queryParam'},
-            state: {some: 'state'}
-          };
-        }}
-    };
-  }
-  function savingPlatform(platform) {
-    return {
-      type: SAVING_PLATFORM,
-      platform: platform
-    };
-  }
-  function savedPlatform(platform) {
-    return {
-      type: SAVED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now()
-    };
-  }
-  function fetchedPlatform(platform) {
-    return {
-      type: FETCHED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now()
-    };
-  }
-  function postPlatform(platform) {
-    return function(dispatch) {
-      dispatch(creatingPlatform(platform));
-      return (0, _isomorphicFetch2.default)('/api/platform', {
-        method: 'post',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(platform)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(createdPlatform(json));
-      });
-    };
-  }
-  function putPlatform(platform) {
-    return function(dispatch) {
-      dispatch(savingPlatform(platform));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
-        method: 'put',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(platform)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(savedPlatform(json));
-      });
-    };
-  }
-  function getPlatform(platformId) {
-    return function(dispatch) {
-      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(fetchedPlatform(json));
-      }).catch(function(error) {
-        console.log('fetch platform failed ' + error);
-      });
-    };
-  }
-  function createPlatform(platform) {
-    return function(dispatch, getState) {
-      return dispatch(postPlatform(platform));
-    };
-  }
-  function savePlatform(platform) {
-    return function(dispatch, getState) {
-      return dispatch(putPlatform(platform));
-    };
-  }
-  function fetchPlatform(params) {
-    return function(dispatch, getState) {
-      var state = getState();
-      var isFetch = true;
-      if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
-        isFetch = false;
-      }
-      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
-    };
-  }
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3426,7 +3302,6 @@ $__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports,
   exports.platformsById = platformsById;
   exports.workingPlatformId = workingPlatformId;
   var _platform = $__require('d');
-  var _part = $__require('2b');
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -3462,7 +3337,7 @@ $__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports,
           didInvalidate: false,
           lastUpdated: action.receivedAt
         }, action.platform);
-      case _part.CREATED_PART:
+      case _platform.CREATED_PART:
         if (!state.parts) {
           state.parts = [];
         }
@@ -3486,7 +3361,7 @@ $__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports,
         return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
       case _platform.FETCHED_PLATFORM:
         return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
-      case _part.CREATED_PART:
+      case _platform.CREATED_PART:
         var platformId = action.part.createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
       default:
@@ -3509,7 +3384,7 @@ $__System.registerDynamic("35", ["d", "2b"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
+$__System.registerDynamic("e", ["35"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3518,7 +3393,7 @@ $__System.registerDynamic("e", ["34"], true, function($__require, exports, modul
   Object.defineProperty(exports, "__esModule", {value: true});
   exports.FETCHED_CATEGOIRES = undefined;
   exports.getCategories = getCategories;
-  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch = $__require('35');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -3590,6 +3465,88 @@ $__System.registerDynamic("36", ["e"], true, function($__require, exports, modul
     }
   }
   exports.default = categories;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2b", ["35"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_PART = exports.SAVING_PART = exports.SAVED_PART = undefined;
+  exports.savePart = savePart;
+  exports.fetchPart = fetchPart;
+  var _isomorphicFetch = $__require('35');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var SAVED_PART = exports.SAVED_PART = 'SAVED_PART';
+  var SAVING_PART = exports.SAVING_PART = 'SAVING_PART';
+  var FETCHED_PART = exports.FETCHED_PART = 'FETCHED_PART';
+  function savingPart(part) {
+    return {
+      type: SAVING_PART,
+      part: part
+    };
+  }
+  function savedPart(part) {
+    return {
+      type: SAVED_PART,
+      part: part,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchedPart(part) {
+    return {
+      type: FETCHED_PART,
+      part: part,
+      receivedAt: Date.now()
+    };
+  }
+  function putPart(part) {
+    return function(dispatch) {
+      dispatch(savingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/part/' + part.createdPlatformId + '/part/' + part.id, {
+        method: 'put',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(part)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(savedPart(json));
+      });
+    };
+  }
+  function getPart(platformId) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedPart(json));
+      }).catch(function(error) {
+        console.log('fetch platform failed ' + error);
+      });
+    };
+  }
+  function savePart(part) {
+    return function(dispatch, getState) {
+      return dispatch(putPart(part));
+    };
+  }
+  function fetchPart(params) {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.partsById && state.partsById[params.partId] && !state.partsById[params.partId].didInvalidate) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(getPart(params.partId)) : Promise.resolve();
+    };
+  }
   global.define = __define;
   return module.exports;
 });
@@ -3955,7 +3912,7 @@ $__System.registerDynamic("39", ["38"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("34", ["39"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["39"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3965,27 +3922,71 @@ $__System.registerDynamic("34", ["39"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["34"], true, function($__require, exports, module) {
+$__System.registerDynamic("d", ["35"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.FETCHED_PART = exports.SAVING_PART = exports.SAVED_PART = exports.CREATING_PART = exports.CREATED_PART = undefined;
+  exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.createPlatform = createPlatform;
+  exports.savePlatform = savePlatform;
   exports.createPart = createPart;
-  exports.savePart = savePart;
-  exports.fetchPart = fetchPart;
-  var _isomorphicFetch = $__require('34');
+  exports.createPartAndSavePlatform = createPartAndSavePlatform;
+  exports.fetchPlatform = fetchPlatform;
+  var _isomorphicFetch = $__require('35');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
+  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
+  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
+  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
+  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
+  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
   var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
   var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
-  var SAVED_PART = exports.SAVED_PART = 'SAVED_PART';
-  var SAVING_PART = exports.SAVING_PART = 'SAVING_PART';
-  var FETCHED_PART = exports.FETCHED_PART = 'FETCHED_PART';
+  function creatingPlatform(platform) {
+    return {
+      type: CREATING_PLATFORM,
+      platform: platform
+    };
+  }
+  function createdPlatform(platform) {
+    return {
+      type: CREATED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now(),
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {
+            path: '/platform/' + action.platform.id + '/build',
+            query: {some: 'queryParam'},
+            state: {some: 'state'}
+          };
+        }}
+    };
+  }
+  function savingPlatform(platform) {
+    return {
+      type: SAVING_PLATFORM,
+      platform: platform
+    };
+  }
+  function savedPlatform(platform) {
+    return {
+      type: SAVED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchedPlatform(platform) {
+    return {
+      type: FETCHED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now()
+    };
+  }
   function creatingPart(part) {
     return {
       type: CREATING_PART,
@@ -4002,24 +4003,43 @@ $__System.registerDynamic("2b", ["34"], true, function($__require, exports, modu
         }}
     };
   }
-  function savingPart(part) {
-    return {
-      type: SAVING_PART,
-      part: part
+  function postPlatform(platform) {
+    return function(dispatch) {
+      dispatch(creatingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(createdPlatform(json));
+      });
     };
   }
-  function savedPart(part) {
-    return {
-      type: SAVED_PART,
-      part: part,
-      receivedAt: Date.now()
+  function putPlatform(platform) {
+    return function(dispatch) {
+      dispatch(savingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
+        method: 'put',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(savedPlatform(json));
+      });
     };
   }
-  function fetchedPart(part) {
-    return {
-      type: FETCHED_PART,
-      part: part,
-      receivedAt: Date.now()
+  function getPlatform(platformId) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedPlatform(json));
+      }).catch(function(error) {
+        console.log('fetch platform failed ' + error);
+      });
     };
   }
   function postPart(part) {
@@ -4036,29 +4056,14 @@ $__System.registerDynamic("2b", ["34"], true, function($__require, exports, modu
       });
     };
   }
-  function putPart(part) {
-    return function(dispatch) {
-      dispatch(savingPart(part));
-      return (0, _isomorphicFetch2.default)('/api/part/' + part.createdPlatformId + '/part/' + part.id, {
-        method: 'put',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(part)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(savedPart(json));
-      });
+  function createPlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(postPlatform(platform));
     };
   }
-  function getPart(platformId) {
-    return function(dispatch) {
-      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(fetchedPart(json));
-      }).catch(function(error) {
-        console.log('fetch platform failed ' + error);
-      });
+  function savePlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(putPlatform(platform));
     };
   }
   function createPart(part) {
@@ -4066,26 +4071,29 @@ $__System.registerDynamic("2b", ["34"], true, function($__require, exports, modu
       return dispatch(postPart(part));
     };
   }
-  function savePart(part) {
+  function createPartAndSavePlatform(part) {
     return function(dispatch, getState) {
-      return dispatch(putPart(part));
+      return dispatch(createPart(part)).then(function() {
+        var platform = getState().platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
     };
   }
-  function fetchPart(params) {
+  function fetchPlatform(params) {
     return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-      if (state.partsById && state.partsById[params.partId] && !state.partsById[params.partId].didInvalidate) {
+      if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
         isFetch = false;
       }
-      return isFetch ? dispatch(getPart(params.partId)) : Promise.resolve();
+      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
     };
   }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3a", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("3a", ["2b", "d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4094,6 +4102,7 @@ $__System.registerDynamic("3a", ["2b"], true, function($__require, exports, modu
   Object.defineProperty(exports, "__esModule", {value: true});
   exports.partsById = partsById;
   var _part = $__require('2b');
+  var _platform = $__require('d');
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -4111,7 +4120,7 @@ $__System.registerDynamic("3a", ["2b"], true, function($__require, exports, modu
     var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     var action = arguments[1];
     switch (action.type) {
-      case _part.CREATED_PART:
+      case _platform.CREATED_PART:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: false,
@@ -4137,9 +4146,9 @@ $__System.registerDynamic("3a", ["2b"], true, function($__require, exports, modu
     var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     var action = arguments[1];
     switch (action.type) {
-      case _part.CREATING_PART:
+      case _platform.CREATING_PART:
         return state;
-      case _part.CREATED_PART:
+      case _platform.CREATED_PART:
         return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
       case _part.SAVING_PART:
         return state;
@@ -4155,7 +4164,7 @@ $__System.registerDynamic("3a", ["2b"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("3b", ["3c", "35", "36", "3a"], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", ["3c", "34", "36", "3a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -4163,7 +4172,7 @@ $__System.registerDynamic("3b", ["3c", "35", "36", "3a"], true, function($__requ
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
   var _redux = $__require('3c');
-  var _platforms = $__require('35');
+  var _platforms = $__require('34');
   var _categories = $__require('36');
   var _categories2 = _interopRequireDefault(_categories);
   var _parts = $__require('3a');

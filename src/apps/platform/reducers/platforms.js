@@ -1,7 +1,6 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART
 } from '../actions/platform.js';
-import { CREATED_PART } from '../actions/part.js';
 
 function platforms(state = {}, action) {
   switch (action.type) {

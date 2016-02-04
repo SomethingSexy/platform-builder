@@ -5,6 +5,8 @@ export const CREATING_PLATFORM = 'CREATING_PLATFORM';
 export const SAVED_PLATFORM = 'SAVED_PLATFORM';
 export const SAVING_PLATFORM = 'SAVING_PLATFORM';
 export const FETCHED_PLATFORM = 'FETCHED_PLATFORM';
+export const CREATED_PART = 'CREATED_PART';
+export const CREATING_PART = 'CREATING_PART';
 
 function creatingPlatform(platform) {
   return {
@@ -56,6 +58,25 @@ function fetchedPlatform(platform) {
   };
 }
 
+function creatingPart(part) {
+  return {
+    type: CREATING_PART,
+    part
+  };
+}
+
+function createdPart(part) {
+  return {
+    type: CREATED_PART,
+    part,
+    receivedAt: Date.now(),
+    meta: {
+      transition: (prevState, nextState, action) => ({
+        path: `/platform/${action.part.createdPlatformId}/build`
+      })
+    }
+  };
+}
 
 function postPlatform(platform) {
   return dispatch => {
@@ -98,15 +119,47 @@ function getPlatform(platformId) {
   };
 }
 
+function postPart(part) {
+  return dispatch => {
+    dispatch(creatingPart(part));
+    return fetch('/api/platform/' + part.createdPlatformId + '/part', {
+      method: 'post',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(part)
+    })
+      .then(response => response.json())
+      .then(json => dispatch(createdPart(json)));
+  };
+}
+
 export function createPlatform(platform) {
-  return (dispatch, getState) => {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(postPlatform(platform));
   };
 }
 
 export function savePlatform(platform) {
-  return (dispatch, getState) => {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(putPlatform(platform));
+  };
+}
+
+export function createPart(part) {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    return dispatch(postPart(part));
+  };
+}
+
+// Save a part and add it to the platform right away
+export function createPartAndSavePlatform(part) {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    return dispatch(createPart(part))
+    .then(() => {
+      const platform = getState().platformsById[part.createdPlatformId];
+      return dispatch(savePlatform(platform));
+    });
   };
 }
 

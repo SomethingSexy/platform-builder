@@ -34,7 +34,7 @@ class CreatePart extends Component {
   }
 
   handleSave(model) {
-    this.props.dispatch(PartActions.createPart(Object.assign({}, model)));
+    this.props.dispatch(PlatformActions.createPartAndSavePlatform(Object.assign({}, model)));
     console.log(model);
   }
 }

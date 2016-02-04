@@ -41,7 +41,7 @@ export default (app) => {
       await next();
 
       // part diagrams will be stored inpendently of a platform
-      // if part is an object we will want to save that separately      
+      // if part is an object we will want to save that separately
       ctx.body = Object.assign({}, ctx.request.body);
       ctx.status = 200;
     } catch (err) {
@@ -52,7 +52,7 @@ export default (app) => {
 
   router.get('/api/platform/:id', async (ctx, next) => {
     try {
-      await next(); // next is now a function
+      await next();
       ctx.body = Object.assign({}, {
         id: ctx.params.id,
         category: {
@@ -72,14 +72,30 @@ export default (app) => {
     try {
       await next();
       ctx.body = Object.assign({}, {
-        id: uuid.v4()
+        id: uuid.v4(),
+        active: false
       }, ctx.request.body);
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };
       ctx.status = err.status || 500;
     }
-  });  
+  });
+
+  router.del('/api/platform/:id/part/:partId', async (ctx, next) => {
+    try {
+      await next();
+      // this is what the api will do in the end
+      // 1. look up part
+      // 2. check to see if it is active
+      //    if it is active remove from platform but don't delete part in DB
+      //    if it is not active remove from DB and platform
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
 
   return router.routes();
 };
