@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -29,17 +29,21 @@ function platforms(state = {}, action) {
     }
     state.parts.push(action.part.id);
     return state;
+  case DELETED_PART:
+    // when a part is created we need to add it to the list of parts
+    if (state.parts) {
+      const index = state.parts.indexOf(action.part.id);
+      // TODO: this should be slice instead
+      if (index > -1) {
+        state.parts.splice(index, 1);
+      }
+    }
+    return state;
   default:
     return state;
   }
 }
 
-// this is used to create the state shape
-// what gets return here is at the root of the store
-// so platforms: {
-//   'key' : {}
-//
-// }
 export function platformsById(state = { }, action) {
   switch (action.type) {
   case CREATING_PLATFORM:
@@ -62,6 +66,11 @@ export function platformsById(state = { }, action) {
     const platformId = action.part.createdPlatformId;
     return Object.assign({}, state, {
       [platformId]: platforms(state[platformId], action)
+    });
+  case DELETED_PART:
+    const deleteId = action.part.createdPlatformId;
+    return Object.assign({}, state, {
+      [deleteId]: platforms(state[deleteId], action)
     });
   default:
     return state;

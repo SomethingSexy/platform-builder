@@ -91,6 +91,7 @@ export default (app) => {
       //    if it is active remove from platform but don't delete part in DB
       //    if it is not active remove from DB and platform
       ctx.status = 200;
+      ctx.body = {};
     } catch (err) {
       ctx.body = { message: err.message };
       ctx.status = err.status || 500;

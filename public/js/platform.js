@@ -1246,6 +1246,7 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
       key: 'handleRemovePart',
       value: function handleRemovePart(partId) {
         console.log(partId);
+        this.props.dispatch(PlatformActions.removePartAndSavePlatform(partId));
       }
     }, {
       key: 'handleSave',
@@ -3364,6 +3365,14 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
         }
         state.parts.push(action.part.id);
         return state;
+      case _platform.DELETED_PART:
+        if (state.parts) {
+          var index = state.parts.indexOf(action.part.id);
+          if (index > -1) {
+            state.parts.splice(index, 1);
+          }
+        }
+        return state;
       default:
         return state;
     }
@@ -3385,6 +3394,9 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
       case _platform.CREATED_PART:
         var platformId = action.part.createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
+      case _platform.DELETED_PART:
+        var deleteId = action.part.createdPlatformId;
+        return Object.assign({}, state, _defineProperty({}, deleteId, platforms(state[deleteId], action)));
       default:
         return state;
     }
@@ -3950,11 +3962,13 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
   exports.createPlatform = createPlatform;
   exports.savePlatform = savePlatform;
   exports.createPart = createPart;
+  exports.removePart = removePart;
   exports.createPartAndSavePlatform = createPartAndSavePlatform;
+  exports.removePartAndSavePlatform = removePartAndSavePlatform;
   exports.fetchPlatform = fetchPlatform;
   var _isomorphicFetch = $__require('34');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
@@ -3968,6 +3982,8 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
   var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
   var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
+  var DELETING_PART = exports.DELETING_PART = 'DELETING_PART';
+  var DELETED_PART = exports.DELETED_PART = 'DELETED_PART';
   function creatingPlatform(platform) {
     return {
       type: CREATING_PLATFORM,
@@ -3986,6 +4002,18 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
             state: {some: 'state'}
           };
         }}
+    };
+  }
+  function deletingPart(part) {
+    return {
+      type: DELETING_PART,
+      part: part
+    };
+  }
+  function deletedPart(part) {
+    return {
+      type: DELETED_PART,
+      part: part
     };
   }
   function savingPlatform(platform) {
@@ -4077,6 +4105,14 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       });
     };
   }
+  function deletePart(part) {
+    return function(dispatch) {
+      dispatch(deletingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
+        return dispatch(deletedPart(part));
+      });
+    };
+  }
   function createPlatform(platform) {
     return function(dispatch, getState) {
       return dispatch(postPlatform(platform));
@@ -4092,10 +4128,26 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       return dispatch(postPart(part));
     };
   }
+  function removePart(pardId) {
+    return function(dispatch, getState) {
+      var part = getState().partsById[pardId];
+      return dispatch(deletePart(part));
+    };
+  }
   function createPartAndSavePlatform(part) {
     return function(dispatch, getState) {
       return dispatch(createPart(part)).then(function() {
         var platform = getState().platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
+    };
+  }
+  function removePartAndSavePlatform(partId) {
+    return function(dispatch, getState) {
+      return dispatch(removePart(partId)).then(function() {
+        var state = getState();
+        var part = state.partsById[partId];
+        var platform = state.platformsById[part.createdPlatformId];
         return dispatch(savePlatform(platform));
       });
     };

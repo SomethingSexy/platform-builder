@@ -7,6 +7,8 @@ export const SAVING_PLATFORM = 'SAVING_PLATFORM';
 export const FETCHED_PLATFORM = 'FETCHED_PLATFORM';
 export const CREATED_PART = 'CREATED_PART';
 export const CREATING_PART = 'CREATING_PART';
+export const DELETING_PART = 'DELETING_PART';
+export const DELETED_PART = 'DELETED_PART';
 
 function creatingPlatform(platform) {
   return {
@@ -34,6 +36,19 @@ function createdPlatform(platform) {
   };
 }
 
+function deletingPart(part) {
+  return {
+    type: DELETING_PART,
+    part
+  };
+}
+
+function deletedPart(part) {
+  return {
+    type: DELETED_PART,
+    part
+  };
+}
 
 function savingPlatform(platform) {
   return {
@@ -134,6 +149,16 @@ function postPart(part) {
   };
 }
 
+function deletePart(part) {
+  return dispatch => {
+    dispatch(deletingPart(part));
+    return fetch('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {
+      method: 'delete'
+    })
+      .then(() => dispatch(deletedPart(part)));
+  };
+}
+
 export function createPlatform(platform) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(postPlatform(platform));
@@ -152,12 +177,35 @@ export function createPart(part) {
   };
 }
 
-// Save a part and add it to the platform right away
+
+export function removePart(pardId) {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    const part = getState().partsById[pardId];
+    return dispatch(deletePart(part));
+  };
+}
+
+// Create a part and add it to the platform right away
 export function createPartAndSavePlatform(part) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(createPart(part))
     .then(() => {
       const platform = getState().platformsById[part.createdPlatformId];
+      return dispatch(savePlatform(platform));
+    });
+  };
+}
+
+// Delete the part and remove it from the platform
+// TODO: Maybe we should just do this on the server-side, the removing it
+// from the platform
+export function removePartAndSavePlatform(partId) {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    return dispatch(removePart(partId))
+    .then(() => {
+      const state = getState();
+      const part = state.partsById[partId];
+      const platform = state.platformsById[part.createdPlatformId];
       return dispatch(savePlatform(platform));
     });
   };

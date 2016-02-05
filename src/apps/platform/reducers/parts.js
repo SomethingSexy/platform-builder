@@ -1,8 +1,9 @@
+import omit from 'lodash.omit';
 import {
   SAVING_PART, SAVED_PART, FETCHED_PART
 } from '../actions/part.js';
 
-import { CREATING_PART, CREATED_PART } from '../actions/platform.js';
+import { CREATING_PART, CREATED_PART, DELETED_PART } from '../actions/platform.js';
 
 function parts(state = {}, action) {
   switch (action.type) {
@@ -47,6 +48,8 @@ export function partsById(state = { }, action) {
     return Object.assign({}, state, {
       [action.part.id]: parts(state[action.part.id], action)
     });
+  case DELETED_PART:
+    return Object.assign({}, state, omit(state, action.part.id));
   default:
     return state;
   }
