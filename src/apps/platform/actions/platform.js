@@ -200,6 +200,8 @@ export function createPartAndSavePlatform(part) {
 // TODO: Maybe we should just do this on the server-side, the removing it
 // from the platform
 export function removePartAndSavePlatform(partId) {
+  // remove part from platform (server will determine if it should delete the part out right)
+  // then remove from partsById
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(removePart(partId))
     .then(() => {

@@ -46,6 +46,11 @@ export default (ComposedComponent, options) => {
       this.registerInputs(this.props.children);
     }
 
+    // this will get called on subsequent updates after initial happens
+    componentWillUpdate(nextProps, nextState) {
+      this.model = Object.assign({}, this.model, nextProps.form);
+    }
+
     render() {
       return (
         <form>

@@ -48,8 +48,10 @@ export function partsById(state = { }, action) {
     return Object.assign({}, state, {
       [action.part.id]: parts(state[action.part.id], action)
     });
-  case DELETED_PART:
-    return Object.assign({}, state, omit(state, action.part.id));
+  // case DELETED_PART:
+  //   // this should return the new omitted object, don't think it
+  //   // edits it in place
+  //   return omit(state, action.part.id);
   default:
     return state;
   }

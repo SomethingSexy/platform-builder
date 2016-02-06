@@ -67,6 +67,7 @@
       "history": "npm:history@^1.15.3",
       "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
       "lodash.get": "npm:lodash.get@^4.0.0",
+      "lodash.omit": "npm:lodash.omit@^4.0.2",
       "lodash.set": "npm:lodash.set@^4.0.0",
       "merge": "npm:merge@^1.2.0",
       "react": "npm:react@^0.14.0",
