@@ -20,7 +20,7 @@ $__System.registerDynamic("147", ["4", "5"], true, function($__require, exports,
     return obj && obj.__esModule ? obj : {default: obj};
   }
   exports.default = _react2.default.createClass({render: function render() {
-      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/build'}, 'Build')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/platform'}, 'Add Platform'))), this.props.children);
+      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/product'}, 'Build a Product')), _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/platform'}, 'Add Platform'))), this.props.children);
     }});
   global.define = __define;
   return module.exports;

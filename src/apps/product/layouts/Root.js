@@ -10,8 +10,8 @@ export default React.createClass({
         <h1>App</h1>
         {/* change the <a>s to <Link>s */}
         <ul>
-          <li><a href="/build">Build</a></li>
-          <li><Link to="/platform">Add Platform</Link></li>
+          <li><Link to="/product">Build a Product</Link></li>
+          <li><a href="/platform">Add Platform</a></li>
         </ul>
 
         {/*
