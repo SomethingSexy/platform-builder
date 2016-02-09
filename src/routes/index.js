@@ -3,9 +3,11 @@
 import mount from 'koa-mount';
 import convert from 'koa-convert';
 import platformRoutes from './platform.js';
+import productRoutes from './product.js';
 import apiRoutes from './api.js';
 
 export default (app) => {
   app.use(convert(mount('/', platformRoutes(app))));
   app.use(convert(mount('/', apiRoutes(app))));
+  app.use(convert(mount('/', productRoutes(app))));
 };

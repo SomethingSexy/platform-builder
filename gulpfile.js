@@ -22,6 +22,12 @@ gulp.task('build', function() {
         minify: false,
         mangle: false
       });
+    }).then(function(){
+      return builder.buildStatic('dist/apps/product/client.js', 'public/js/product.js', {
+        sourceMaps: false,
+        minify: false,
+        mangle: false
+      });
     });
 });
 

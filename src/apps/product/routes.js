@@ -9,11 +9,17 @@ export default {
   component: Build,
   childRoutes: [{
     path: 'platform', component: BuildPlatform
+  }, {
+    path: 'product',
+    component: Platform,
+    indexRoute: { component: CreatePlatform },
+    childRoutes: [{
+      path: ':productId/build',
+      component: UpdatePlatform
+    }, {
+      path: ':productId/part',
+      component: CreatePart
+    }]
   }
-  // { path: 'messages/:id',
-  //   onEnter: function (nextState, replaceState) {
-  //     replaceState(null, '/messages/' + nextState.params.id)
-  //   }
-  // }
   ]
 };

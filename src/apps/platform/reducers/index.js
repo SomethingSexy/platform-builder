@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {platformsById, workingPlatformId} from './platforms.js';
+import { platformsById, workingPlatformId } from './platforms.js';
 import categories from './categories.js';
 import { partsById } from './parts.js';
 
