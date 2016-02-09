@@ -2,10 +2,11 @@
 
 (["146"], [], function($__System) {
 
+!function(e){function n(e,n){for(var t=e.split(".");t.length;)n=n[t.shift()];return n}function t(n){if(Object.keys)Object.keys(e).forEach(n);else for(var t in e)f.call(e,t)&&n(t)}function r(n){t(function(t){if(-1==a.call(l,t)){try{var r=e[t]}catch(o){l.push(t)}n(t,r)}})}var o,i=$__System,f=Object.prototype.hasOwnProperty,a=Array.prototype.indexOf||function(e){for(var n=0,t=this.length;t>n;n++)if(this[n]===e)return n;return-1},l=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(t,i,f){var a=e.define;e.define=void 0,e.exports=void 0,e.module&&e.module.exports&&(e.module=void 0);var l;if(f){l={};for(var u in f)l[u]=e[u],e[u]=f[u]}return i||(o={},r(function(e,n){o[e]=n})),function(){var t;if(i)t=n(i,e);else{var f,u,s={};r(function(e,n){o[e]!==n&&"undefined"!=typeof n&&(s[e]=n,"undefined"!=typeof f?u||f===n||(u=!0):f=n)}),t=u?s:f}if(l)for(var c in l)e[c]=l[c];return e.define=a,t}}}))}("undefined"!=typeof self?self:global);
 !function(){var t=$__System;if("undefined"!=typeof window&&"undefined"!=typeof document&&window.location)var s=location.protocol+"//"+location.hostname+(location.port?":"+location.port:"");t.set("@@cjs-helpers",t.newModule({getPathVars:function(t){var n,o=t.lastIndexOf("!");n=-1!=o?t.substr(0,o):t;var e=n.split("/");return e.pop(),e=e.join("/"),"file:///"==n.substr(0,8)?(n=n.substr(7),e=e.substr(7),isWindows&&(n=n.substr(1),e=e.substr(1))):s&&n.substr(0,s.length)===s&&(n=n.substr(s.length),e=e.substr(s.length)),{filename:n,dirname:e}}}))}();
 $__System.register("2", [], function() { return { setters: [], execute: function() {} } });
 
-$__System.registerDynamic("147", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("147", ["4", "5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -14,65 +15,646 @@ $__System.registerDynamic("147", ["4"], true, function($__require, exports, modu
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
+  var _reactRouter = $__require('5');
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
   exports.default = _react2.default.createClass({render: function render() {
-      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Build a new '), this.props.children);
+      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/build'}, 'Build')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/platform'}, 'Add Platform'))), this.props.children);
     }});
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("148", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("148", ["4", "9"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var ProductLayout = function(_Component) {
+    _inherits(ProductLayout, _Component);
+    _createClass(ProductLayout, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {dispatch: _react.PropTypes.func.isRequired};
+      }
+    }]);
+    function ProductLayout(props) {
+      _classCallCheck(this, ProductLayout);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductLayout).call(this, props));
+    }
+    _createClass(ProductLayout, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Create a new product'), this.props.children);
+      }
+    }]);
+    return ProductLayout;
+  }(_react.Component);
+  exports.default = (0, _reactRedux.connect)()(ProductLayout);
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.createPlatform = createPlatform;
+  exports.savePlatform = savePlatform;
+  exports.createPart = createPart;
+  exports.removePart = removePart;
+  exports.createPartAndSavePlatform = createPartAndSavePlatform;
+  exports.removePartAndSavePlatform = removePartAndSavePlatform;
+  exports.fetchPlatform = fetchPlatform;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
+  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
+  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
+  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
+  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
+  var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
+  var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
+  var DELETING_PART = exports.DELETING_PART = 'DELETING_PART';
+  var DELETED_PART = exports.DELETED_PART = 'DELETED_PART';
+  function creatingPlatform(platform) {
+    return {
+      type: CREATING_PLATFORM,
+      platform: platform
+    };
+  }
+  function createdPlatform(platform) {
+    return {
+      type: CREATED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now(),
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {
+            path: '/platform/' + action.platform.id + '/build',
+            query: {some: 'queryParam'},
+            state: {some: 'state'}
+          };
+        }}
+    };
+  }
+  function deletingPart(part) {
+    return {
+      type: DELETING_PART,
+      part: part
+    };
+  }
+  function deletedPart(part) {
+    return {
+      type: DELETED_PART,
+      part: part
+    };
+  }
+  function savingPlatform(platform) {
+    return {
+      type: SAVING_PLATFORM,
+      platform: platform
+    };
+  }
+  function savedPlatform(platform) {
+    return {
+      type: SAVED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchedPlatform(platform) {
+    return {
+      type: FETCHED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now()
+    };
+  }
+  function creatingPart(part) {
+    return {
+      type: CREATING_PART,
+      part: part
+    };
+  }
+  function createdPart(part) {
+    return {
+      type: CREATED_PART,
+      part: part,
+      receivedAt: Date.now(),
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {path: '/platform/' + action.part.createdPlatformId + '/build'};
+        }}
+    };
+  }
+  function postPlatform(platform) {
+    return function(dispatch) {
+      dispatch(creatingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(createdPlatform(json));
+      });
+    };
+  }
+  function putPlatform(platform) {
+    return function(dispatch) {
+      dispatch(savingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
+        method: 'put',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(savedPlatform(json));
+      });
+    };
+  }
+  function getPlatform(platformId) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedPlatform(json));
+      }).catch(function(error) {
+        console.log('fetch platform failed ' + error);
+      });
+    };
+  }
+  function postPart(part) {
+    return function(dispatch) {
+      dispatch(creatingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(part)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(createdPart(json));
+      });
+    };
+  }
+  function deletePart(part) {
+    return function(dispatch) {
+      dispatch(deletingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
+        return dispatch(deletedPart(part));
+      });
+    };
+  }
+  function createPlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(postPlatform(platform));
+    };
+  }
+  function savePlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(putPlatform(platform));
+    };
+  }
+  function createPart(part) {
+    return function(dispatch, getState) {
+      return dispatch(postPart(part));
+    };
+  }
+  function removePart(pardId) {
+    return function(dispatch, getState) {
+      var part = getState().partsById[pardId];
+      return dispatch(deletePart(part));
+    };
+  }
+  function createPartAndSavePlatform(part) {
+    return function(dispatch, getState) {
+      return dispatch(createPart(part)).then(function() {
+        var platform = getState().platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
+    };
+  }
+  function removePartAndSavePlatform(partId) {
+    return function(dispatch, getState) {
+      return dispatch(removePart(partId)).then(function() {
+        var state = getState();
+        var part = state.partsById[partId];
+        var platform = state.platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
+    };
+  }
+  function fetchPlatform(params) {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
+    };
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("a", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
   Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
-  exports.default = _react2.default.createClass({render: function render() {
-      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Select a platform'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, 'AR'), _react2.default.createElement('li', null, 'AK')));
-    }});
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Category = function(_Component) {
+    _inherits(Category, _Component);
+    function Category() {
+      _classCallCheck(this, Category);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Category).apply(this, arguments));
+    }
+    _createClass(Category, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('li', {onClick: this.props.onClick}, this.props.category.name);
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          category: _react.PropTypes.object.isRequired,
+          onClick: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    return Category;
+  }(_react.Component);
+  exports.default = Category;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("149", ["147", "148"], true, function($__require, exports, module) {
+$__System.registerDynamic("b", ["4", "a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _Category = $__require('a');
+  var _Category2 = _interopRequireDefault(_Category);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Categories = function(_Component) {
+    _inherits(Categories, _Component);
+    function Categories() {
+      _classCallCheck(this, Categories);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Categories).apply(this, arguments));
+    }
+    _createClass(Categories, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement('ul', null, this.props.categories.map(function(result) {
+          return _react2.default.createElement(_Category2.default, {
+            key: result.id,
+            category: result,
+            onClick: function onClick() {
+              return _this2.props.handleSelect(result);
+            }
+          });
+        }));
+      }
+    }], [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          categories: _react.PropTypes.array.isRequired,
+          handleSelect: _react.PropTypes.func.isRequired
+        };
+      }
+    }]);
+    return Categories;
+  }(_react.Component);
+  exports.default = Categories;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("149", ["4", "9", "d", "e", "b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  var _reactRedux = $__require('9');
+  var _platform = $__require('d');
+  var PlatformActions = _interopRequireWildcard(_platform);
+  var _categories = $__require('e');
+  var CategoryActions = _interopRequireWildcard(_categories);
+  var _Categories = $__require('b');
+  var _Categories2 = _interopRequireDefault(_Categories);
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key))
+            newObj[key] = obj[key];
+        }
+      }
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var CreateProduct = function(_Component) {
+    _inherits(CreateProduct, _Component);
+    _createClass(CreateProduct, null, [{
+      key: 'propTypes',
+      get: function get() {
+        return {
+          dispatch: _react.PropTypes.func.isRequired,
+          categories: _react.PropTypes.array.isRequired
+        };
+      }
+    }]);
+    function CreateProduct(props) {
+      _classCallCheck(this, CreateProduct);
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CreateProduct).call(this, props));
+      _this.state = {};
+      return _this;
+    }
+    _createClass(CreateProduct, [{
+      key: 'render',
+      value: function render() {
+        if (!this.props.categories) {
+          return null;
+        }
+        return _react2.default.createElement('div', null, _react2.default.createElement('p', null, 'Select what you are trying to create'), _react2.default.createElement(_Categories2.default, {
+          categories: this.props.categories,
+          handleSelect: this.handleSelect.bind(this)
+        }));
+      }
+    }, {
+      key: 'handleSelect',
+      value: function handleSelect(category) {
+        this.props.dispatch(PlatformActions.createPlatform({category: category}));
+      }
+    }], [{
+      key: 'needs',
+      get: function get() {
+        return [CategoryActions.getCategories];
+      }
+    }]);
+    return CreateProduct;
+  }(_react.Component);
+  function select(state) {
+    return {categories: state.categories.categories};
+  }
+  exports.default = (0, _reactRedux.connect)(select)(CreateProduct);
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14a", [], false, function(__require, __exports, __module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+  (function() {
+    "use strict";
+  })();
+  return _retrieveGlobal();
+});
+
+$__System.registerDynamic("14b", ["147", "148", "149", "14a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  var _index = $__require('147');
-  var _index2 = _interopRequireDefault(_index);
-  var _platform = $__require('148');
-  var _platform2 = _interopRequireDefault(_platform);
+  var _Root = $__require('147');
+  var _Root2 = _interopRequireDefault(_Root);
+  var _Product = $__require('148');
+  var _Product2 = _interopRequireDefault(_Product);
+  var _CreateProduct = $__require('149');
+  var _CreateProduct2 = _interopRequireDefault(_CreateProduct);
+  var _UpdateProduct = $__require('14a');
+  var _UpdateProduct2 = _interopRequireDefault(_UpdateProduct);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
   exports.default = {
-    path: 'build',
-    component: _index2.default,
+    path: '/',
+    component: _Root2.default,
     childRoutes: [{
-      path: 'platform',
-      component: _platform2.default
-    }, {
       path: 'product',
-      component: Platform,
-      indexRoute: {component: CreatePlatform},
+      component: _Product2.default,
+      indexRoute: {component: _CreateProduct2.default},
       childRoutes: [{
         path: ':productId/build',
-        component: UpdatePlatform
-      }, {
-        path: ':productId/part',
-        component: CreatePart
+        component: _UpdateProduct2.default
       }]
     }]
   };
@@ -314,7 +896,463 @@ $__System.registerDynamic("32", ["31"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("14a", ["50"], true, function($__require, exports, module) {
+$__System.registerDynamic("4b", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "format cjs";
+  (function(self) {
+    'use strict';
+    if (self.fetch) {
+      return;
+    }
+    function normalizeName(name) {
+      if (typeof name !== 'string') {
+        name = String(name);
+      }
+      if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+        throw new TypeError('Invalid character in header field name');
+      }
+      return name.toLowerCase();
+    }
+    function normalizeValue(value) {
+      if (typeof value !== 'string') {
+        value = String(value);
+      }
+      return value;
+    }
+    function Headers(headers) {
+      this.map = {};
+      if (headers instanceof Headers) {
+        headers.forEach(function(value, name) {
+          this.append(name, value);
+        }, this);
+      } else if (headers) {
+        Object.getOwnPropertyNames(headers).forEach(function(name) {
+          this.append(name, headers[name]);
+        }, this);
+      }
+    }
+    Headers.prototype.append = function(name, value) {
+      name = normalizeName(name);
+      value = normalizeValue(value);
+      var list = this.map[name];
+      if (!list) {
+        list = [];
+        this.map[name] = list;
+      }
+      list.push(value);
+    };
+    Headers.prototype['delete'] = function(name) {
+      delete this.map[normalizeName(name)];
+    };
+    Headers.prototype.get = function(name) {
+      var values = this.map[normalizeName(name)];
+      return values ? values[0] : null;
+    };
+    Headers.prototype.getAll = function(name) {
+      return this.map[normalizeName(name)] || [];
+    };
+    Headers.prototype.has = function(name) {
+      return this.map.hasOwnProperty(normalizeName(name));
+    };
+    Headers.prototype.set = function(name, value) {
+      this.map[normalizeName(name)] = [normalizeValue(value)];
+    };
+    Headers.prototype.forEach = function(callback, thisArg) {
+      Object.getOwnPropertyNames(this.map).forEach(function(name) {
+        this.map[name].forEach(function(value) {
+          callback.call(thisArg, value, name, this);
+        }, this);
+      }, this);
+    };
+    function consumed(body) {
+      if (body.bodyUsed) {
+        return Promise.reject(new TypeError('Already read'));
+      }
+      body.bodyUsed = true;
+    }
+    function fileReaderReady(reader) {
+      return new Promise(function(resolve, reject) {
+        reader.onload = function() {
+          resolve(reader.result);
+        };
+        reader.onerror = function() {
+          reject(reader.error);
+        };
+      });
+    }
+    function readBlobAsArrayBuffer(blob) {
+      var reader = new FileReader();
+      reader.readAsArrayBuffer(blob);
+      return fileReaderReady(reader);
+    }
+    function readBlobAsText(blob) {
+      var reader = new FileReader();
+      reader.readAsText(blob);
+      return fileReaderReady(reader);
+    }
+    var support = {
+      blob: 'FileReader' in self && 'Blob' in self && (function() {
+        try {
+          new Blob();
+          return true;
+        } catch (e) {
+          return false;
+        }
+      })(),
+      formData: 'FormData' in self,
+      arrayBuffer: 'ArrayBuffer' in self
+    };
+    function Body() {
+      this.bodyUsed = false;
+      this._initBody = function(body) {
+        this._bodyInit = body;
+        if (typeof body === 'string') {
+          this._bodyText = body;
+        } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+          this._bodyBlob = body;
+        } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+          this._bodyFormData = body;
+        } else if (!body) {
+          this._bodyText = '';
+        } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {} else {
+          throw new Error('unsupported BodyInit type');
+        }
+        if (!this.headers.get('content-type')) {
+          if (typeof body === 'string') {
+            this.headers.set('content-type', 'text/plain;charset=UTF-8');
+          } else if (this._bodyBlob && this._bodyBlob.type) {
+            this.headers.set('content-type', this._bodyBlob.type);
+          }
+        }
+      };
+      if (support.blob) {
+        this.blob = function() {
+          var rejected = consumed(this);
+          if (rejected) {
+            return rejected;
+          }
+          if (this._bodyBlob) {
+            return Promise.resolve(this._bodyBlob);
+          } else if (this._bodyFormData) {
+            throw new Error('could not read FormData body as blob');
+          } else {
+            return Promise.resolve(new Blob([this._bodyText]));
+          }
+        };
+        this.arrayBuffer = function() {
+          return this.blob().then(readBlobAsArrayBuffer);
+        };
+        this.text = function() {
+          var rejected = consumed(this);
+          if (rejected) {
+            return rejected;
+          }
+          if (this._bodyBlob) {
+            return readBlobAsText(this._bodyBlob);
+          } else if (this._bodyFormData) {
+            throw new Error('could not read FormData body as text');
+          } else {
+            return Promise.resolve(this._bodyText);
+          }
+        };
+      } else {
+        this.text = function() {
+          var rejected = consumed(this);
+          return rejected ? rejected : Promise.resolve(this._bodyText);
+        };
+      }
+      if (support.formData) {
+        this.formData = function() {
+          return this.text().then(decode);
+        };
+      }
+      this.json = function() {
+        return this.text().then(JSON.parse);
+      };
+      return this;
+    }
+    var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+    function normalizeMethod(method) {
+      var upcased = method.toUpperCase();
+      return (methods.indexOf(upcased) > -1) ? upcased : method;
+    }
+    function Request(input, options) {
+      options = options || {};
+      var body = options.body;
+      if (Request.prototype.isPrototypeOf(input)) {
+        if (input.bodyUsed) {
+          throw new TypeError('Already read');
+        }
+        this.url = input.url;
+        this.credentials = input.credentials;
+        if (!options.headers) {
+          this.headers = new Headers(input.headers);
+        }
+        this.method = input.method;
+        this.mode = input.mode;
+        if (!body) {
+          body = input._bodyInit;
+          input.bodyUsed = true;
+        }
+      } else {
+        this.url = input;
+      }
+      this.credentials = options.credentials || this.credentials || 'omit';
+      if (options.headers || !this.headers) {
+        this.headers = new Headers(options.headers);
+      }
+      this.method = normalizeMethod(options.method || this.method || 'GET');
+      this.mode = options.mode || this.mode || null;
+      this.referrer = null;
+      if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+        throw new TypeError('Body not allowed for GET or HEAD requests');
+      }
+      this._initBody(body);
+    }
+    Request.prototype.clone = function() {
+      return new Request(this);
+    };
+    function decode(body) {
+      var form = new FormData();
+      body.trim().split('&').forEach(function(bytes) {
+        if (bytes) {
+          var split = bytes.split('=');
+          var name = split.shift().replace(/\+/g, ' ');
+          var value = split.join('=').replace(/\+/g, ' ');
+          form.append(decodeURIComponent(name), decodeURIComponent(value));
+        }
+      });
+      return form;
+    }
+    function headers(xhr) {
+      var head = new Headers();
+      var pairs = xhr.getAllResponseHeaders().trim().split('\n');
+      pairs.forEach(function(header) {
+        var split = header.trim().split(':');
+        var key = split.shift().trim();
+        var value = split.join(':').trim();
+        head.append(key, value);
+      });
+      return head;
+    }
+    Body.call(Request.prototype);
+    function Response(bodyInit, options) {
+      if (!options) {
+        options = {};
+      }
+      this.type = 'default';
+      this.status = options.status;
+      this.ok = this.status >= 200 && this.status < 300;
+      this.statusText = options.statusText;
+      this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers);
+      this.url = options.url || '';
+      this._initBody(bodyInit);
+    }
+    Body.call(Response.prototype);
+    Response.prototype.clone = function() {
+      return new Response(this._bodyInit, {
+        status: this.status,
+        statusText: this.statusText,
+        headers: new Headers(this.headers),
+        url: this.url
+      });
+    };
+    Response.error = function() {
+      var response = new Response(null, {
+        status: 0,
+        statusText: ''
+      });
+      response.type = 'error';
+      return response;
+    };
+    var redirectStatuses = [301, 302, 303, 307, 308];
+    Response.redirect = function(url, status) {
+      if (redirectStatuses.indexOf(status) === -1) {
+        throw new RangeError('Invalid status code');
+      }
+      return new Response(null, {
+        status: status,
+        headers: {location: url}
+      });
+    };
+    self.Headers = Headers;
+    self.Request = Request;
+    self.Response = Response;
+    self.fetch = function(input, init) {
+      return new Promise(function(resolve, reject) {
+        var request;
+        if (Request.prototype.isPrototypeOf(input) && !init) {
+          request = input;
+        } else {
+          request = new Request(input, init);
+        }
+        var xhr = new XMLHttpRequest();
+        function responseURL() {
+          if ('responseURL' in xhr) {
+            return xhr.responseURL;
+          }
+          if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+            return xhr.getResponseHeader('X-Request-URL');
+          }
+          return;
+        }
+        xhr.onload = function() {
+          var status = (xhr.status === 1223) ? 204 : xhr.status;
+          if (status < 100 || status > 599) {
+            reject(new TypeError('Network request failed'));
+            return;
+          }
+          var options = {
+            status: status,
+            statusText: xhr.statusText,
+            headers: headers(xhr),
+            url: responseURL()
+          };
+          var body = 'response' in xhr ? xhr.response : xhr.responseText;
+          resolve(new Response(body, options));
+        };
+        xhr.onerror = function() {
+          reject(new TypeError('Network request failed'));
+        };
+        xhr.open(request.method, request.url, true);
+        if (request.credentials === 'include') {
+          xhr.withCredentials = true;
+        }
+        if ('responseType' in xhr && support.blob) {
+          xhr.responseType = 'blob';
+        }
+        request.headers.forEach(function(value, name) {
+          xhr.setRequestHeader(name, value);
+        });
+        xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit);
+      });
+    };
+    self.fetch.polyfill = true;
+  })(typeof self !== 'undefined' ? self : this);
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4c", ["4b"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('4b');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4d", ["4c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  $__require('4c');
+  module.exports = self.fetch.bind(self);
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("34", ["4d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('4d');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_CATEGOIRES = undefined;
+  exports.getCategories = getCategories;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var FETCHED_CATEGOIRES = exports.FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
+  function fetchedCategories(json) {
+    return {
+      type: FETCHED_CATEGOIRES,
+      categories: json,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchCategories() {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)(new Request('http://localhost:5000/api/categories')).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedCategories(json));
+      }).catch(function(error) {
+        console.log('fetch categories failed ' + error);
+      });
+    };
+  }
+  function getCategories() {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(fetchCategories()) : Promise.resolve();
+    };
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14c", ["e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _categories = $__require('e');
+  function posts() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt,
+          categories: action.categories
+        });
+      default:
+        return state;
+    }
+  }
+  function categories() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, posts(state, action));
+      default:
+        return state;
+    }
+  }
+  exports.default = categories;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14d", ["50", "14c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -322,7 +1360,12 @@ $__System.registerDynamic("14a", ["50"], true, function($__require, exports, mod
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
   var _redux = $__require('50');
-  var rootReducer = (0, _redux.combineReducers)({});
+  var _categories = $__require('14c');
+  var _categories2 = _interopRequireDefault(_categories);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var rootReducer = (0, _redux.combineReducers)({categories: _categories2.default});
   exports.default = rootReducer;
   global.define = __define;
   return module.exports;
@@ -386,7 +1429,7 @@ $__System.registerDynamic("52", ["51"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("14b", ["50", "30", "32", "14a", "52"], true, function($__require, exports, module) {
+$__System.registerDynamic("14e", ["50", "30", "32", "14d", "52"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -399,7 +1442,7 @@ $__System.registerDynamic("14b", ["50", "30", "32", "14a", "52"], true, function
   var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
   var _reduxLogger = $__require('32');
   var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-  var _index = $__require('14a');
+  var _index = $__require('14d');
   var _index2 = _interopRequireDefault(_index);
   var _reduxHistoryTransitions = $__require('52');
   var _reduxHistoryTransitions2 = _interopRequireDefault(_reduxHistoryTransitions);
@@ -17041,7 +18084,7 @@ $__System.registerDynamic("145", ["4", "5"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("146", ["2", "4", "5", "149", "2e", "14b", "9", "69", "145"], true, function($__require, exports, module) {
+$__System.registerDynamic("146", ["2", "4", "5", "14b", "2e", "14e", "9", "69", "145"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -17052,11 +18095,11 @@ $__System.registerDynamic("146", ["2", "4", "5", "149", "2e", "14b", "9", "69", 
   var _react2 = _interopRequireDefault(_react);
   var _reactRouter = $__require('5');
   var _reactRouter2 = _interopRequireDefault(_reactRouter);
-  var _routes = $__require('149');
+  var _routes = $__require('14b');
   var _routes2 = _interopRequireDefault(_routes);
   var _reactDom = $__require('2e');
   var _reactDom2 = _interopRequireDefault(_reactDom);
-  var _index = $__require('14b');
+  var _index = $__require('14e');
   var _index2 = _interopRequireDefault(_index);
   var _reactRedux = $__require('9');
   var _fetchComponentData = $__require('69');

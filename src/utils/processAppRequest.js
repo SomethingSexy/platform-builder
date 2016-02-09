@@ -1,4 +1,3 @@
-import fs from 'fs';
 import React from 'react';
 import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
@@ -6,11 +5,11 @@ import fetchComponentData from './fetchComponentData.js';
 import { renderToString } from 'react-dom/server';
 import { createMemoryHistory } from 'history';
 
-const indexHTML = fs.readFileSync(__dirname + '/../apps/platform/index.html').toString();
 const htmlRegex = /¡HTML!/;
 const dataRegex = /¡DATA!/;
 
-export default function processAppRequest(req, res, url, store, routes) {
+// maybe this should have a parameter for the js/css instead?
+export default function processAppRequest(req, res, url, store, routes, indexHTML) {
   return new Promise((resolve, reject) => {
     const history = createMemoryHistory();
     const location = history.createLocation(url);
@@ -37,7 +36,6 @@ export default function processAppRequest(req, res, url, store, routes) {
           const output = indexHTML.
             replace(htmlRegex, html).
             replace(dataRegex, JSON.stringify(initialData));
-          // write(output, 'text/html', res);
           resolve(output);
         })
         .catch((fetchError) => {
