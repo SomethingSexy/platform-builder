@@ -1,8 +1,8 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import PlatformForm from '../components/platform/PlatformForm.js';
-import * as PlatformActions  from '../actions/platform.js';
-import * as CategoryActions  from '../actions/categories.js';
+import * as PlatformActions  from '../../../common/actions/platform.js';
+import * as CategoryActions  from '../../../common/actions/categories.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.

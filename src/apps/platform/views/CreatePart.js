@@ -1,7 +1,7 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import AddPartForm from '../components/platform/parts/AddPartForm.js';
-import * as PlatformActions  from '../actions/platform.js';
+import * as PlatformActions  from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
 
 class CreatePart extends Component {

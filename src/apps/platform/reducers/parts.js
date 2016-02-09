@@ -1,9 +1,9 @@
 import omit from 'lodash.omit';
 import {
   SAVING_PART, SAVED_PART, FETCHED_PART
-} from '../actions/part.js';
+} from '../../../common/actions/part.js';
 
-import { CREATING_PART, CREATED_PART, DELETED_PART } from '../actions/platform.js';
+import { CREATING_PART, CREATED_PART, DELETED_PART } from '../../../common/actions/platform.js';
 
 function parts(state = {}, action) {
   switch (action.type) {
@@ -48,6 +48,7 @@ export function partsById(state = { }, action) {
     return Object.assign({}, state, {
       [action.part.id]: parts(state[action.part.id], action)
     });
+  // TODO: Need to figure out how we want to handle this
   // case DELETED_PART:
   //   // this should return the new omitted object, don't think it
   //   // edits it in place
