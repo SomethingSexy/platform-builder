@@ -1,6 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as PlatformActions  from '../../../common/actions/platform.js';
+import * as ProductActions  from '../../../common/actions/product.js';
 import * as CategoryActions  from '../../../common/actions/categories.js';
 import Categories from '../../../common/components/Categories.js';
 import Button from '../../../common/components/Button.js';
@@ -56,7 +56,12 @@ class CreateProduct extends Component {
 
   // handles selecting the category that this new platform will be added too
   handleSelect(category) {
-    this.props.dispatch(PlatformActions.createPlatform({category}));
+    const type = this.state.type;
+    // do I really need to set state here?
+    this.props.dispatch(ProductActions.createProduct({
+      category,
+      type
+    }));
   }
 }
 

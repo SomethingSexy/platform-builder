@@ -55,6 +55,7 @@ export default (app) => {
       await next();
       ctx.body = Object.assign({}, {
         id: ctx.params.id,
+        // this really ends up being the parent platform if it has one?
         category: {
           id: 1,
           name: 'Firearm'
@@ -92,6 +93,20 @@ export default (app) => {
       //    if it is not active remove from DB and platform
       ctx.status = 200;
       ctx.body = {};
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
+
+  router.post('/api/product', async (ctx, next) => {
+    try {
+      await next();
+      ctx.body = Object.assign({}, {
+        id: uuid.v4(),
+        parts: []
+      }, ctx.request.body);
+      ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };
       ctx.status = err.status || 500;
