@@ -107,217 +107,6 @@ $__System.registerDynamic("148", ["4", "9"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  Object.defineProperty(exports, "__esModule", {value: true});
-  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
-  exports.createPlatform = createPlatform;
-  exports.savePlatform = savePlatform;
-  exports.createPart = createPart;
-  exports.removePart = removePart;
-  exports.createPartAndSavePlatform = createPartAndSavePlatform;
-  exports.removePartAndSavePlatform = removePartAndSavePlatform;
-  exports.fetchPlatform = fetchPlatform;
-  var _isomorphicFetch = $__require('34');
-  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {default: obj};
-  }
-  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
-  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
-  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
-  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
-  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
-  var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
-  var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
-  var DELETING_PART = exports.DELETING_PART = 'DELETING_PART';
-  var DELETED_PART = exports.DELETED_PART = 'DELETED_PART';
-  function creatingPlatform(platform) {
-    return {
-      type: CREATING_PLATFORM,
-      platform: platform
-    };
-  }
-  function createdPlatform(platform) {
-    return {
-      type: CREATED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now(),
-      meta: {transition: function transition(prevState, nextState, action) {
-          return {
-            path: '/platform/' + action.platform.id + '/build',
-            query: {some: 'queryParam'},
-            state: {some: 'state'}
-          };
-        }}
-    };
-  }
-  function deletingPart(part) {
-    return {
-      type: DELETING_PART,
-      part: part
-    };
-  }
-  function deletedPart(part) {
-    return {
-      type: DELETED_PART,
-      part: part
-    };
-  }
-  function savingPlatform(platform) {
-    return {
-      type: SAVING_PLATFORM,
-      platform: platform
-    };
-  }
-  function savedPlatform(platform) {
-    return {
-      type: SAVED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now()
-    };
-  }
-  function fetchedPlatform(platform) {
-    return {
-      type: FETCHED_PLATFORM,
-      platform: platform,
-      receivedAt: Date.now()
-    };
-  }
-  function creatingPart(part) {
-    return {
-      type: CREATING_PART,
-      part: part
-    };
-  }
-  function createdPart(part) {
-    return {
-      type: CREATED_PART,
-      part: part,
-      receivedAt: Date.now(),
-      meta: {transition: function transition(prevState, nextState, action) {
-          return {path: '/platform/' + action.part.createdPlatformId + '/build'};
-        }}
-    };
-  }
-  function postPlatform(platform) {
-    return function(dispatch) {
-      dispatch(creatingPlatform(platform));
-      return (0, _isomorphicFetch2.default)('/api/platform', {
-        method: 'post',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(platform)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(createdPlatform(json));
-      });
-    };
-  }
-  function putPlatform(platform) {
-    return function(dispatch) {
-      dispatch(savingPlatform(platform));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
-        method: 'put',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(platform)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(savedPlatform(json));
-      });
-    };
-  }
-  function getPlatform(platformId) {
-    return function(dispatch) {
-      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(fetchedPlatform(json));
-      }).catch(function(error) {
-        console.log('fetch platform failed ' + error);
-      });
-    };
-  }
-  function postPart(part) {
-    return function(dispatch) {
-      dispatch(creatingPart(part));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part', {
-        method: 'post',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(part)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(json) {
-        return dispatch(createdPart(json));
-      });
-    };
-  }
-  function deletePart(part) {
-    return function(dispatch) {
-      dispatch(deletingPart(part));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
-        return dispatch(deletedPart(part));
-      });
-    };
-  }
-  function createPlatform(platform) {
-    return function(dispatch, getState) {
-      return dispatch(postPlatform(platform));
-    };
-  }
-  function savePlatform(platform) {
-    return function(dispatch, getState) {
-      return dispatch(putPlatform(platform));
-    };
-  }
-  function createPart(part) {
-    return function(dispatch, getState) {
-      return dispatch(postPart(part));
-    };
-  }
-  function removePart(pardId) {
-    return function(dispatch, getState) {
-      var part = getState().partsById[pardId];
-      return dispatch(deletePart(part));
-    };
-  }
-  function createPartAndSavePlatform(part) {
-    return function(dispatch, getState) {
-      return dispatch(createPart(part)).then(function() {
-        var platform = getState().platformsById[part.createdPlatformId];
-        return dispatch(savePlatform(platform));
-      });
-    };
-  }
-  function removePartAndSavePlatform(partId) {
-    return function(dispatch, getState) {
-      return dispatch(removePart(partId)).then(function() {
-        var state = getState();
-        var part = state.partsById[partId];
-        var platform = state.platformsById[part.createdPlatformId];
-        return dispatch(savePlatform(platform));
-      });
-    };
-  }
-  function fetchPlatform(params) {
-    return function(dispatch, getState) {
-      var state = getState();
-      var isFetch = true;
-      if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
-        isFetch = false;
-      }
-      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
-    };
-  }
-  global.define = __define;
-  return module.exports;
-});
-
 $__System.registerDynamic("149", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -1056,6 +845,91 @@ $__System.registerDynamic("32", ["31"], true, function($__require, exports, modu
   return module.exports;
 });
 
+$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports.FETCHED_CATEGOIRES = undefined;
+  exports.getCategories = getCategories;
+  var _isomorphicFetch = $__require('34');
+  var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  var FETCHED_CATEGOIRES = exports.FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
+  function fetchedCategories(json) {
+    return {
+      type: FETCHED_CATEGOIRES,
+      categories: json,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchCategories() {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)(new Request('http://localhost:5000/api/categories')).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedCategories(json));
+      }).catch(function(error) {
+        console.log('fetch categories failed ' + error);
+      });
+    };
+  }
+  function getCategories() {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(fetchCategories()) : Promise.resolve();
+    };
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14d", ["e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _categories = $__require('e');
+  function posts() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt,
+          categories: action.categories
+        });
+      default:
+        return state;
+    }
+  }
+  function categories() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _categories.FETCHED_CATEGOIRES:
+        return Object.assign({}, state, posts(state, action));
+      default:
+        return state;
+    }
+  }
+  exports.default = categories;
+  global.define = __define;
+  return module.exports;
+});
+
 $__System.registerDynamic("4b", [], true, function($__require, exports, module) {
   ;
   var global = this,
@@ -1427,92 +1301,321 @@ $__System.registerDynamic("34", ["4d"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("e", ["34"], true, function($__require, exports, module) {
+$__System.registerDynamic("d", ["34"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.FETCHED_CATEGOIRES = undefined;
-  exports.getCategories = getCategories;
+  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.createPlatform = createPlatform;
+  exports.savePlatform = savePlatform;
+  exports.createPart = createPart;
+  exports.removePart = removePart;
+  exports.createPartAndSavePlatform = createPartAndSavePlatform;
+  exports.removePartAndSavePlatform = removePartAndSavePlatform;
+  exports.fetchPlatform = fetchPlatform;
   var _isomorphicFetch = $__require('34');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
-  var FETCHED_CATEGOIRES = exports.FETCHED_CATEGOIRES = 'FETCHED_CATEGOIRES';
-  function fetchedCategories(json) {
+  var CREATED_PLATFORM = exports.CREATED_PLATFORM = 'CREATED_PLATFORM';
+  var CREATING_PLATFORM = exports.CREATING_PLATFORM = 'CREATING_PLATFORM';
+  var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
+  var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
+  var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
+  var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
+  var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
+  var DELETING_PART = exports.DELETING_PART = 'DELETING_PART';
+  var DELETED_PART = exports.DELETED_PART = 'DELETED_PART';
+  function creatingPlatform(platform) {
     return {
-      type: FETCHED_CATEGOIRES,
-      categories: json,
+      type: CREATING_PLATFORM,
+      platform: platform
+    };
+  }
+  function createdPlatform(platform) {
+    return {
+      type: CREATED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now(),
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {
+            path: '/platform/' + action.platform.id + '/build',
+            query: {some: 'queryParam'},
+            state: {some: 'state'}
+          };
+        }}
+    };
+  }
+  function deletingPart(part) {
+    return {
+      type: DELETING_PART,
+      part: part
+    };
+  }
+  function deletedPart(part) {
+    return {
+      type: DELETED_PART,
+      part: part
+    };
+  }
+  function savingPlatform(platform) {
+    return {
+      type: SAVING_PLATFORM,
+      platform: platform
+    };
+  }
+  function savedPlatform(platform) {
+    return {
+      type: SAVED_PLATFORM,
+      platform: platform,
       receivedAt: Date.now()
     };
   }
-  function fetchCategories() {
+  function fetchedPlatform(platform) {
+    return {
+      type: FETCHED_PLATFORM,
+      platform: platform,
+      receivedAt: Date.now()
+    };
+  }
+  function creatingPart(part) {
+    return {
+      type: CREATING_PART,
+      part: part
+    };
+  }
+  function createdPart(part) {
+    return {
+      type: CREATED_PART,
+      part: part,
+      receivedAt: Date.now(),
+      meta: {transition: function transition(prevState, nextState, action) {
+          return {path: '/platform/' + action.part.createdPlatformId + '/build'};
+        }}
+    };
+  }
+  function postPlatform(platform) {
     return function(dispatch) {
-      return (0, _isomorphicFetch2.default)(new Request('http://localhost:5000/api/categories')).then(function(response) {
+      dispatch(creatingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
         return response.json();
       }).then(function(json) {
-        return dispatch(fetchedCategories(json));
-      }).catch(function(error) {
-        console.log('fetch categories failed ' + error);
+        return dispatch(createdPlatform(json));
       });
     };
   }
-  function getCategories() {
+  function putPlatform(platform) {
+    return function(dispatch) {
+      dispatch(savingPlatform(platform));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
+        method: 'put',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(platform)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(savedPlatform(json));
+      });
+    };
+  }
+  function getPlatform(platformId) {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platform/' + platformId).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedPlatform(json));
+      }).catch(function(error) {
+        console.log('fetch platform failed ' + error);
+      });
+    };
+  }
+  function postPart(part) {
+    return function(dispatch) {
+      dispatch(creatingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(part)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(createdPart(json));
+      });
+    };
+  }
+  function deletePart(part) {
+    return function(dispatch) {
+      dispatch(deletingPart(part));
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
+        return dispatch(deletedPart(part));
+      });
+    };
+  }
+  function createPlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(postPlatform(platform));
+    };
+  }
+  function savePlatform(platform) {
+    return function(dispatch, getState) {
+      return dispatch(putPlatform(platform));
+    };
+  }
+  function createPart(part) {
+    return function(dispatch, getState) {
+      return dispatch(postPart(part));
+    };
+  }
+  function removePart(pardId) {
+    return function(dispatch, getState) {
+      var part = getState().partsById[pardId];
+      return dispatch(deletePart(part));
+    };
+  }
+  function createPartAndSavePlatform(part) {
+    return function(dispatch, getState) {
+      return dispatch(createPart(part)).then(function() {
+        var platform = getState().platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
+    };
+  }
+  function removePartAndSavePlatform(partId) {
+    return function(dispatch, getState) {
+      return dispatch(removePart(partId)).then(function() {
+        var state = getState();
+        var part = state.partsById[partId];
+        var platform = state.platformsById[part.createdPlatformId];
+        return dispatch(savePlatform(platform));
+      });
+    };
+  }
+  function fetchPlatform(params) {
     return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-      if (state.categories && typeof state.categories.didInvalidate !== 'undefined' && !state.categories.didInvalidate) {
+      if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
         isFetch = false;
       }
-      return isFetch ? dispatch(fetchCategories()) : Promise.resolve();
+      return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
     };
   }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14d", ["e"], true, function($__require, exports, module) {
+$__System.registerDynamic("14e", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  var _categories = $__require('e');
-  function posts() {
+  exports.platformsById = platformsById;
+  exports.workingPlatformId = workingPlatformId;
+  var _platform = $__require('d');
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function platforms() {
     var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     var action = arguments[1];
     switch (action.type) {
-      case _categories.FETCHED_CATEGOIRES:
+      case _platform.CREATED_PLATFORM:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: false,
-          lastUpdated: action.receivedAt,
-          categories: action.categories
-        });
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      case _platform.SAVED_PLATFORM:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      case _platform.FETCHED_PLATFORM:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          lastUpdated: action.receivedAt
+        }, action.platform);
+      case _platform.CREATED_PART:
+        if (!state.parts) {
+          state.parts = [];
+        }
+        state.parts.push(action.part.id);
+        return state;
+      case _platform.DELETED_PART:
+        if (state.parts) {
+          var index = state.parts.indexOf(action.part.id);
+          if (index > -1) {
+            state.parts.splice(index, 1);
+          }
+        }
+        return state;
       default:
         return state;
     }
   }
-  function categories() {
+  function platformsById() {
     var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
     var action = arguments[1];
     switch (action.type) {
-      case _categories.FETCHED_CATEGOIRES:
-        return Object.assign({}, state, posts(state, action));
+      case _platform.CREATING_PLATFORM:
+        return state;
+      case _platform.CREATED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _platform.SAVING_PLATFORM:
+        return state;
+      case _platform.SAVED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _platform.FETCHED_PLATFORM:
+        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+      case _platform.CREATED_PART:
+        var platformId = action.part.createdPlatformId;
+        return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
+      case _platform.DELETED_PART:
+        var deleteId = action.part.createdPlatformId;
+        return Object.assign({}, state, _defineProperty({}, deleteId, platforms(state[deleteId], action)));
       default:
         return state;
     }
   }
-  exports.default = categories;
+  function workingPlatformId() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var action = arguments[1];
+    switch (action.type) {
+      case _platform.CREATED_PLATFORM:
+        return action.platform.id;
+      case _platform.FETCHED_PLATFORM:
+        return action.platform.id;
+      default:
+        return state || null;
+    }
+  }
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14e", ["50", "14d"], true, function($__require, exports, module) {
+$__System.registerDynamic("14f", ["50", "14d", "14e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -1522,10 +1625,14 @@ $__System.registerDynamic("14e", ["50", "14d"], true, function($__require, expor
   var _redux = $__require('50');
   var _categories = $__require('14d');
   var _categories2 = _interopRequireDefault(_categories);
+  var _platforms = $__require('14e');
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
-  var rootReducer = (0, _redux.combineReducers)({categories: _categories2.default});
+  var rootReducer = (0, _redux.combineReducers)({
+    categories: _categories2.default,
+    platformsById: _platforms.platformsById
+  });
   exports.default = rootReducer;
   global.define = __define;
   return module.exports;
@@ -1589,7 +1696,7 @@ $__System.registerDynamic("52", ["51"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("14f", ["50", "30", "32", "14e", "52"], true, function($__require, exports, module) {
+$__System.registerDynamic("150", ["50", "30", "32", "14f", "52"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -1602,7 +1709,7 @@ $__System.registerDynamic("14f", ["50", "30", "32", "14e", "52"], true, function
   var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
   var _reduxLogger = $__require('32');
   var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-  var _index = $__require('14e');
+  var _index = $__require('14f');
   var _index2 = _interopRequireDefault(_index);
   var _reduxHistoryTransitions = $__require('52');
   var _reduxHistoryTransitions2 = _interopRequireDefault(_reduxHistoryTransitions);
@@ -18244,7 +18351,7 @@ $__System.registerDynamic("145", ["4", "5"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("146", ["2", "4", "5", "14c", "2e", "14f", "9", "69", "145"], true, function($__require, exports, module) {
+$__System.registerDynamic("146", ["2", "4", "5", "14c", "2e", "150", "9", "69", "145"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -18259,7 +18366,7 @@ $__System.registerDynamic("146", ["2", "4", "5", "14c", "2e", "14f", "9", "69", 
   var _routes2 = _interopRequireDefault(_routes);
   var _reactDom = $__require('2e');
   var _reactDom2 = _interopRequireDefault(_reactDom);
-  var _index = $__require('14f');
+  var _index = $__require('150');
   var _index2 = _interopRequireDefault(_index);
   var _reactRedux = $__require('9');
   var _fetchComponentData = $__require('69');
