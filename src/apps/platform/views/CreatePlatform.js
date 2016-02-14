@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as PlatformActions  from '../../../common/actions/platform.js';
 import * as CategoryActions  from '../../../common/actions/categories.js';
 import Categories from '../../../common/components/Categories.js';
+import Button from '../../../common/components/Button.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -18,6 +19,7 @@ class CreatePlatform extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.buttonClickRoot = this.handleSelect.bind(this, null);
   }
 
   render() {
@@ -28,6 +30,7 @@ class CreatePlatform extends Component {
     return (
       <div>
         <p>Select what you are trying to create</p>
+        <Button text="Root Platform" onButtonClick={this.buttonClickRoot}/>
         <Categories categories={this.props.categories} handleSelect={this.handleSelect.bind(this)}/>
       </div>
     );

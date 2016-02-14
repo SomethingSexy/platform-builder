@@ -77,7 +77,7 @@ class PlatformForm extends Component {
     const createPartLink = '/platform/' + this.props.form.id + '/part';
     return (
       <div>
-        <Static label="Category" value={this.props.form.category.name}/>
+        {this.props.form.category ? <Static label="Category" value={this.props.form.category.name}/> : null}
         <TextInput name="name" label="Name" />
         <Textarea name="description" label="Description" />
         <Checkboxes label="Configuration" checkboxes={checkboxes}/>

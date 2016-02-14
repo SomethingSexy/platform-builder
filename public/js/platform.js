@@ -69,6 +69,7 @@ $__System.registerDynamic("8", ["4", "9"], true, function($__require, exports, m
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -88,7 +89,6 @@ $__System.registerDynamic("8", ["4", "9"], true, function($__require, exports, m
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRedux = $__require('9');
@@ -150,6 +150,7 @@ $__System.registerDynamic("a", ["4"], true, function($__require, exports, module
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -169,7 +170,6 @@ $__System.registerDynamic("a", ["4"], true, function($__require, exports, module
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
@@ -232,6 +232,7 @@ $__System.registerDynamic("b", ["4", "a"], true, function($__require, exports, m
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -251,7 +252,6 @@ $__System.registerDynamic("b", ["4", "a"], true, function($__require, exports, m
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _Category = $__require('a');
@@ -319,12 +319,13 @@ $__System.registerDynamic("b", ["4", "a"], true, function($__require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c", ["4", "9", "d", "e", "b", "f"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -344,7 +345,6 @@ $__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__requ
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRedux = $__require('9');
@@ -354,6 +354,8 @@ $__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__requ
   var CategoryActions = _interopRequireWildcard(_categories);
   var _Categories = $__require('b');
   var _Categories2 = _interopRequireDefault(_Categories);
+  var _Button = $__require('f');
+  var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
       return obj;
@@ -412,6 +414,7 @@ $__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__requ
       _classCallCheck(this, CreatePlatform);
       var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CreatePlatform).call(this, props));
       _this.state = {};
+      _this.buttonClickRoot = _this.handleSelect.bind(_this, null);
       return _this;
     }
     _createClass(CreatePlatform, [{
@@ -420,7 +423,10 @@ $__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__requ
         if (!this.props.categories) {
           return null;
         }
-        return _react2.default.createElement('div', null, _react2.default.createElement('p', null, 'Select what you are trying to create'), _react2.default.createElement(_Categories2.default, {
+        return _react2.default.createElement('div', null, _react2.default.createElement('p', null, 'Select what you are trying to create'), _react2.default.createElement(_Button2.default, {
+          text: 'Root Platform',
+          onButtonClick: this.buttonClickRoot
+        }), _react2.default.createElement(_Categories2.default, {
           categories: this.props.categories,
           handleSelect: this.handleSelect.bind(this)
         }));
@@ -446,12 +452,13 @@ $__System.registerDynamic("c", ["4", "9", "d", "e", "b"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("f", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("10", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -471,7 +478,6 @@ $__System.registerDynamic("f", ["4"], true, function($__require, exports, module
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
@@ -529,12 +535,13 @@ $__System.registerDynamic("f", ["4"], true, function($__require, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("10", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("11", ["4", "12"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -554,10 +561,9 @@ $__System.registerDynamic("10", ["4", "11"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Input2 = $__require('11');
+  var _Input2 = $__require('12');
   var _Input3 = _interopRequireDefault(_Input2);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -635,12 +641,13 @@ $__System.registerDynamic("10", ["4", "11"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("12", ["4", "10"], true, function($__require, exports, module) {
+$__System.registerDynamic("13", ["4", "11"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -671,10 +678,9 @@ $__System.registerDynamic("12", ["4", "10"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Checkbox = $__require('10');
+  var _Checkbox = $__require('11');
   var _Checkbox2 = _interopRequireDefault(_Checkbox);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -742,12 +748,13 @@ $__System.registerDynamic("12", ["4", "10"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("13", ["4", "14"], true, function($__require, exports, module) {
+$__System.registerDynamic("14", ["4", "f"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -767,10 +774,9 @@ $__System.registerDynamic("13", ["4", "14"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Button = $__require('14');
+  var _Button = $__require('f');
   var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -835,12 +841,13 @@ $__System.registerDynamic("13", ["4", "14"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("15", ["4", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("15", ["4", "14"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -860,10 +867,9 @@ $__System.registerDynamic("15", ["4", "13"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Part = $__require('13');
+  var _Part = $__require('14');
   var _Part2 = _interopRequireDefault(_Part);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -930,12 +936,13 @@ $__System.registerDynamic("15", ["4", "13"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["4", "17", "18", "f", "12", "14", "19", "1a", "15", "5"], true, function($__require, exports, module) {
+$__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "15", "5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -966,18 +973,17 @@ $__System.registerDynamic("16", ["4", "17", "18", "f", "12", "14", "19", "1a", "
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
   var _Textarea = $__require('18');
   var _Textarea2 = _interopRequireDefault(_Textarea);
-  var _Static = $__require('f');
+  var _Static = $__require('10');
   var _Static2 = _interopRequireDefault(_Static);
-  var _Checkboxes = $__require('12');
+  var _Checkboxes = $__require('13');
   var _Checkboxes2 = _interopRequireDefault(_Checkboxes);
-  var _Button = $__require('14');
+  var _Button = $__require('f');
   var _Button2 = _interopRequireDefault(_Button);
   var _AddCustomField = $__require('19');
   var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
@@ -1079,10 +1085,10 @@ $__System.registerDynamic("16", ["4", "17", "18", "f", "12", "14", "19", "1a", "
           name: 'allowAdditionalParts'
         }];
         var createPartLink = '/platform/' + this.props.form.id + '/part';
-        return _react2.default.createElement('div', null, _react2.default.createElement(_Static2.default, {
+        return _react2.default.createElement('div', null, this.props.form.category ? _react2.default.createElement(_Static2.default, {
           label: 'Category',
           value: this.props.form.category.name
-        }), _react2.default.createElement(_TextInput2.default, {
+        }) : null, _react2.default.createElement(_TextInput2.default, {
           name: 'name',
           label: 'Name'
         }), _react2.default.createElement(_Textarea2.default, {
@@ -1144,6 +1150,7 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -1163,7 +1170,6 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRedux = $__require('9');
@@ -1245,7 +1251,6 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
     }, {
       key: 'handleRemovePart',
       value: function handleRemovePart(partId) {
-        console.log(partId);
         this.props.dispatch(PlatformActions.removePartAndSavePlatform(partId));
       }
     }, {
@@ -1273,12 +1278,13 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("18", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("18", ["4", "12"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -1298,10 +1304,9 @@ $__System.registerDynamic("18", ["4", "11"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Input2 = $__require('11');
+  var _Input2 = $__require('12');
   var _Input3 = _interopRequireDefault(_Input2);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -1774,6 +1779,7 @@ $__System.registerDynamic("1a", ["4", "1e", "22", "25"], true, function($__requi
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -1804,7 +1810,6 @@ $__System.registerDynamic("1a", ["4", "1e", "22", "25"], true, function($__requi
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _lodash = $__require('1e');
@@ -1995,12 +2000,13 @@ $__System.registerDynamic("1a", ["4", "1e", "22", "25"], true, function($__requi
   return module.exports;
 });
 
-$__System.registerDynamic("26", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("26", ["4", "12"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2020,10 +2026,9 @@ $__System.registerDynamic("26", ["4", "11"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Input2 = $__require('11');
+  var _Input2 = $__require('12');
   var _Input3 = _interopRequireDefault(_Input2);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -2102,12 +2107,13 @@ $__System.registerDynamic("26", ["4", "11"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("11", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("12", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2127,7 +2133,6 @@ $__System.registerDynamic("11", ["4"], true, function($__require, exports, modul
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
@@ -2224,12 +2229,13 @@ $__System.registerDynamic("11", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("17", ["4", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("17", ["4", "12"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2249,10 +2255,9 @@ $__System.registerDynamic("17", ["4", "11"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
-  var _Input2 = $__require('11');
+  var _Input2 = $__require('12');
   var _Input3 = _interopRequireDefault(_Input2);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -2330,12 +2335,13 @@ $__System.registerDynamic("17", ["4", "11"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["4", "17", "28", "14"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["4", "17", "28", "f"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2355,14 +2361,13 @@ $__System.registerDynamic("27", ["4", "17", "28", "14"], true, function($__requi
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _TextInput = $__require('17');
   var _TextInput2 = _interopRequireDefault(_TextInput);
   var _Repeatable = $__require('28');
   var _Repeatable2 = _interopRequireDefault(_Repeatable);
-  var _Button = $__require('14');
+  var _Button = $__require('f');
   var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
@@ -2435,12 +2440,13 @@ $__System.registerDynamic("27", ["4", "17", "28", "14"], true, function($__requi
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("f", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2460,7 +2466,6 @@ $__System.registerDynamic("14", ["4"], true, function($__require, exports, modul
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
@@ -2531,6 +2536,7 @@ $__System.registerDynamic("28", ["4"], true, function($__require, exports, modul
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -2561,7 +2567,6 @@ $__System.registerDynamic("28", ["4"], true, function($__require, exports, modul
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   function _interopRequireDefault(obj) {
@@ -2625,12 +2630,13 @@ $__System.registerDynamic("28", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["4", "26", "17", "27", "14", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("19", ["4", "26", "17", "27", "f", "28"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -2661,7 +2667,6 @@ $__System.registerDynamic("19", ["4", "26", "17", "27", "14", "28"], true, funct
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _Select = $__require('26');
@@ -2670,7 +2675,7 @@ $__System.registerDynamic("19", ["4", "26", "17", "27", "14", "28"], true, funct
   var _TextInput2 = _interopRequireDefault(_TextInput);
   var _AddCustomFieldOptions = $__require('27');
   var _AddCustomFieldOptions2 = _interopRequireDefault(_AddCustomFieldOptions);
-  var _Button = $__require('14');
+  var _Button = $__require('f');
   var _Button2 = _interopRequireDefault(_Button);
   var _Repeatable = $__require('28');
   var _Repeatable2 = _interopRequireDefault(_Repeatable);
@@ -2785,12 +2790,13 @@ $__System.registerDynamic("19", ["4", "26", "17", "27", "14", "28"], true, funct
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["4", "17", "18", "1a", "14", "19"], true, function($__require, exports, module) {
+$__System.registerDynamic("29", ["4", "17", "18", "1a", "f", "19"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -2821,7 +2827,6 @@ $__System.registerDynamic("29", ["4", "17", "18", "1a", "14", "19"], true, funct
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _TextInput = $__require('17');
@@ -2830,7 +2835,7 @@ $__System.registerDynamic("29", ["4", "17", "18", "1a", "14", "19"], true, funct
   var _Textarea2 = _interopRequireDefault(_Textarea);
   var _Form = $__require('1a');
   var _Form2 = _interopRequireDefault(_Form);
-  var _Button = $__require('14');
+  var _Button = $__require('f');
   var _Button2 = _interopRequireDefault(_Button);
   var _AddCustomField = $__require('19');
   var _AddCustomField2 = _interopRequireDefault(_AddCustomField);
@@ -2946,6 +2951,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -2965,7 +2971,6 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRedux = $__require('9');
@@ -21758,6 +21763,7 @@ $__System.registerDynamic("145", ["4", "5"], true, function($__require, exports,
   var global = this,
       __define = global.define;
   global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
   var _createClass = function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -21777,7 +21783,6 @@ $__System.registerDynamic("145", ["4", "5"], true, function($__require, exports,
       return Constructor;
     };
   }();
-  Object.defineProperty(exports, "__esModule", {value: true});
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRouter = $__require('5');

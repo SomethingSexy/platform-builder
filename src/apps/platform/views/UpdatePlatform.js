@@ -35,7 +35,6 @@ class UpdatePlatform extends Component {
   // this will be handled here because we might have
   // to do some special handling with it
   handleRemovePart(partId) {
-    console.log(partId);
     // call to delete the part, which will remove it from
     this.props.dispatch(PlatformActions.removePartAndSavePlatform(partId));
   }
