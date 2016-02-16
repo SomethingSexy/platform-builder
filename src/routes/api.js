@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import 'isomorphic-fetch';
 import uuid from 'uuid';
 
 const router = new Router();
@@ -21,12 +22,11 @@ export default (app) => {
   router.post('/api/platform', async (ctx, next) => {
     try {
       await next();
-      ctx.body = Object.assign({}, {
-        id: uuid.v4(),
-        fields: [],
-        parts: [],
-        partGroups: []
-      }, ctx.request.body);
+      const response = await fetch(process.env.API_SRV_URL + 'api/platform', {
+        method: 'post',
+        body: JSON.stringify(ctx.request.body)
+      });
+      ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };

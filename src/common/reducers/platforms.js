@@ -50,17 +50,17 @@ export function platformsById(state = { }, action) {
     return state;
   case CREATED_PLATFORM:
     return Object.assign({}, state, {
-      [action.platform.id]: platforms(state[action.platform.id], action)
+      [action.platform._id]: platforms(state[action.platform._id], action)
     });
   case SAVING_PLATFORM:
     return state;
   case SAVED_PLATFORM:
     return Object.assign({}, state, {
-      [action.platform.id]: platforms(state[action.platform.id], action)
+      [action.platform._id]: platforms(state[action.platform._id], action)
     });
   case FETCHED_PLATFORM:
     return Object.assign({}, state, {
-      [action.platform.id]: platforms(state[action.platform.id], action)
+      [action.platform._id]: platforms(state[action.platform._id], action)
     });
   case CREATED_PART:
     const platformId = action.part.createdPlatformId;
@@ -81,9 +81,9 @@ export function platformsById(state = { }, action) {
 export function workingPlatformId(state = {}, action) {
   switch (action.type) {
   case CREATED_PLATFORM:
-    return action.platform.id;
+    return action.platform._id;
   case FETCHED_PLATFORM:
-    return action.platform.id;
+    return action.platform._id;
   default:
     return state || null;
   }

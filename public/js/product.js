@@ -1343,7 +1343,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       receivedAt: Date.now(),
       meta: {transition: function transition(prevState, nextState, action) {
           return {
-            path: '/platform/' + action.platform.id + '/build',
+            path: '/platform/' + action.platform._id + '/build',
             query: {some: 'queryParam'},
             state: {some: 'state'}
           };
@@ -1415,7 +1415,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   function putPlatform(platform) {
     return function(dispatch) {
       dispatch(savingPlatform(platform));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + platform.id, {
+      return (0, _isomorphicFetch2.default)('/api/platform/' + platform._id, {
         method: 'put',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(platform)
@@ -1582,13 +1582,13 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
       case _platform.CREATING_PLATFORM:
         return state;
       case _platform.CREATED_PLATFORM:
-        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
       case _platform.SAVING_PLATFORM:
         return state;
       case _platform.SAVED_PLATFORM:
-        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
       case _platform.FETCHED_PLATFORM:
-        return Object.assign({}, state, _defineProperty({}, action.platform.id, platforms(state[action.platform.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
       case _platform.CREATED_PART:
         var platformId = action.part.createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
@@ -1604,9 +1604,9 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
     var action = arguments[1];
     switch (action.type) {
       case _platform.CREATED_PLATFORM:
-        return action.platform.id;
+        return action.platform._id;
       case _platform.FETCHED_PLATFORM:
-        return action.platform.id;
+        return action.platform._id;
       default:
         return state || null;
     }

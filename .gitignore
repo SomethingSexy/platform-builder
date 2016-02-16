@@ -30,3 +30,4 @@ jspm_packages
 
 # App Files 
 dist
+.env

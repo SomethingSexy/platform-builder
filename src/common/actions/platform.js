@@ -24,7 +24,7 @@ function createdPlatform(platform) {
     receivedAt: Date.now(),
     meta: {
       transition: (prevState, nextState, action) => ({
-        path: `/platform/${action.platform.id}/build`,
+        path: `/platform/${action.platform._id}/build`,
         query: {
           some: 'queryParam'
         },
@@ -111,7 +111,7 @@ function postPlatform(platform) {
 function putPlatform(platform) {
   return dispatch => {
     dispatch(savingPlatform(platform));
-    return fetch('/api/platform/' + platform.id, {
+    return fetch('/api/platform/' + platform._id, {
       method: 'put',
       headers: new Headers({
         'Content-Type': 'application/json'
