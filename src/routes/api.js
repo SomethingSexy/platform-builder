@@ -23,9 +23,7 @@ export default (app) => {
       await next();
       ctx.body = Object.assign({}, {
         id: uuid.v4(),
-        configuration: {
-          fields: []
-        },
+        fields: [],
         parts: [],
         partGroups: []
       }, ctx.request.body);

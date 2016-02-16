@@ -1020,7 +1020,7 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
       Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
   var model = {
-    configuration: {fields: []},
+    fields: [],
     parts: [],
     partGroups: []
   };
@@ -1100,11 +1100,11 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
         }), _react2.default.createElement('h3', null, 'Custom Fields'), _react2.default.createElement(_Button2.default, {
           text: 'Add Field',
           onButtonClick: this.handleAddField.bind(this)
-        }), this.props.form.configuration.fields.map(function(result, index) {
+        }), this.props.form.fields.map(function(result, index) {
           return _react2.default.createElement(_AddCustomField2.default, _extends({
             key: result._id,
             index: index,
-            field: 'configuration.fields',
+            field: 'fields',
             onRemove: _this2.handleRemoveField.bind(_this2, index),
             addField: _this2.props.addField,
             removeField: _this2.props.removeField
@@ -1121,12 +1121,12 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
     }, {
       key: 'handleAddField',
       value: function handleAddField() {
-        this.props.addField('configuration.fields', {options: []});
+        this.props.addField('fields', {options: []});
       }
     }, {
       key: 'handleRemoveField',
       value: function handleRemoveField(index) {
-        this.props.removeField('configuration.fields', index);
+        this.props.removeField('fields', index);
       }
     }, {
       key: 'handleSave',

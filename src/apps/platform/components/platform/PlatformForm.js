@@ -10,9 +10,7 @@ import Parts from './parts/Parts.js';
 import { Link } from 'react-router';
 
 const model = {
-  configuration: {
-    fields: []
-  },
+  fields: [],
   parts: [],
   partGroups: []
 };
@@ -83,8 +81,8 @@ class PlatformForm extends Component {
         <Checkboxes label="Configuration" checkboxes={checkboxes}/>
         <h3>Custom Fields</h3>
         <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
-        {this.props.form.configuration.fields.map((result, index) => {
-          return <AddCustomField key={result._id} index={index} field="configuration.fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
+        {this.props.form.fields.map((result, index) => {
+          return <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
         })}
         <h3>Diagram</h3>
         <Link to={createPartLink}>Create New Part</Link>
@@ -95,11 +93,11 @@ class PlatformForm extends Component {
   }
 
   handleAddField() {
-    this.props.addField('configuration.fields', {options: []});
+    this.props.addField('fields', {options: []});
   }
 
   handleRemoveField(index) {
-    this.props.removeField('configuration.fields', index);
+    this.props.removeField('fields', index);
   }
 
   handleSave(event) {
