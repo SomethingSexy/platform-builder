@@ -18,7 +18,7 @@ class CreatePart extends Component {
   }
 
   render() {
-    const returnLink = '/platform/' + this.props.platform.id + '/build';
+    const returnLink = '/platform/' + this.props.platform._id + '/build';
     return (
       <div>
         <h3>Create New Part</h3>

@@ -48,7 +48,7 @@ export default (ComposedComponent, options) => {
 
     // this will get called on subsequent updates after initial happens
     componentWillUpdate(nextProps, nextState) {
-      this.model = Object.assign({}, this.model, nextProps.form);
+      this.model = Object.assign({}, nextProps.form, this.model);
     }
 
     render() {

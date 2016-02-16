@@ -4,6 +4,8 @@ import uuid from 'uuid';
 
 const router = new Router();
 
+const missingIdError = 'Id is required for this api.';
+
 // This will be temporary until we can connect to api server
 export default (app) => {
   router.get('/api/categories', async (ctx, next) => {
@@ -22,8 +24,12 @@ export default (app) => {
   router.post('/api/platform', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + 'api/platform', {
+      const response = await fetch(process.env.API_SRV_URL + '/api/platform', {
         method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(ctx.request.body)
       });
       ctx.body = await response.json();
@@ -37,10 +43,22 @@ export default (app) => {
   router.put('/api/platform/:id', async (ctx, next) => {
     try {
       await next();
-
+      if (!ctx.params.id) {
+        ctx.status = 400;
+        ctx.status = missingIdError;
+        return;
+      }
+      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id, {
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ctx.request.body)
+      });
       // part diagrams will be stored inpendently of a platform
       // if part is an object we will want to save that separately
-      ctx.body = Object.assign({}, ctx.request.body);
+      ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };
@@ -51,14 +69,13 @@ export default (app) => {
   router.get('/api/platform/:id', async (ctx, next) => {
     try {
       await next();
-      ctx.body = Object.assign({}, {
-        id: ctx.params.id,
-        // this really ends up being the parent platform if it has one?
-        category: {
-          id: 1,
-          name: 'Firearm'
-        }
-      });
+      if (!ctx.params.id) {
+        ctx.status = 400;
+        ctx.status = missingIdError;
+        return;
+      }
+      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id);
+      ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };

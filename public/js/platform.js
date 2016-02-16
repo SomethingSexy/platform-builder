@@ -1050,41 +1050,41 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
         var _this2 = this;
         var checkboxes = [{
           label: 'Allow company',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showCompany,
           name: 'showCompany'
         }, {
           label: 'Allow brands',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showBrands,
           name: 'showBrands'
         }, {
           label: 'Allow people',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showPeople,
           name: 'showPeople'
         }, {
           label: 'Allow tags',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showTags,
           name: 'showTags'
         }, {
           label: 'Allow photos',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showPhotos,
           name: 'showPhotos'
         }, {
           label: 'Allow transactions',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.showTransactions,
           name: 'showTransactions'
         }, {
           label: 'Allow additional parts',
-          value: 'true',
+          value: true,
           selectedValue: this.props.form.allowAdditionalParts,
           name: 'allowAdditionalParts'
         }];
-        var createPartLink = '/platform/' + this.props.form.id + '/part';
+        var createPartLink = '/platform/' + this.props.form._id + '/part';
         return _react2.default.createElement('div', null, this.props.form.category ? _react2.default.createElement(_Static2.default, {
           label: 'Category',
           value: this.props.form.category.name
@@ -1889,7 +1889,7 @@ $__System.registerDynamic("1a", ["4", "1e", "22", "25"], true, function($__requi
       }, {
         key: 'componentWillUpdate',
         value: function componentWillUpdate(nextProps, nextState) {
-          this.model = Object.assign({}, this.model, nextProps.form);
+          this.model = Object.assign({}, nextProps.form, this.model);
         }
       }, {
         key: 'render',
@@ -3040,7 +3040,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
     _createClass(CreatePart, [{
       key: 'render',
       value: function render() {
-        var returnLink = '/platform/' + this.props.platform.id + '/build';
+        var returnLink = '/platform/' + this.props.platform._id + '/build';
         return _react2.default.createElement('div', null, _react2.default.createElement('h3', null, 'Create New Part'), _react2.default.createElement(_reactRouter.Link, {to: returnLink}, 'Return to Platform'), _react2.default.createElement(_AddPartForm2.default, {
           form: this.props.part,
           onSave: this.handleSave.bind(this)

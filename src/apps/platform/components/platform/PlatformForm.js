@@ -38,41 +38,41 @@ class PlatformForm extends Component {
   render() {
     const checkboxes = [{
       label: 'Allow company',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showCompany,
       name: 'showCompany'
     }, {
       label: 'Allow brands',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showBrands,
       name: 'showBrands'
     }, {
       label: 'Allow people',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showPeople,
       name: 'showPeople'
     }, {
       label: 'Allow tags',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showTags,
       name: 'showTags'
     }, {
       label: 'Allow photos',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showPhotos,
       name: 'showPhotos'
     }, {
       label: 'Allow transactions',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.showTransactions,
       name: 'showTransactions'
     }, {
       label: 'Allow additional parts',
-      value: 'true',
+      value: true,
       selectedValue: this.props.form.allowAdditionalParts,
       name: 'allowAdditionalParts'
     }];
-    const createPartLink = '/platform/' + this.props.form.id + '/part';
+    const createPartLink = '/platform/' + this.props.form._id + '/part';
     return (
       <div>
         {this.props.form.category ? <Static label="Category" value={this.props.form.category.name}/> : null}
