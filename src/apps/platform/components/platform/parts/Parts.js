@@ -9,19 +9,16 @@ class Parts extends Component {
   };
 
   static defaultProps = {
-    parts: {},
-    partIds: []
+    parts: []
   };
 
   render() {
-    const partsToRender = this.props.partIds.map(id => this.props.parts[id]);
-
     return (
       <div className="row">
         <div className="col-md-12">
           <h4>Parts</h4>
-          {partsToRender.length === 0 ? <p>No parts have been added.</p> : null}
-          {partsToRender.length > 0 ?  <ul> {partsToRender.map((result) => { return <Part key={result.id} data={result} onRemove={this.props.onRemovePart}/>; })} </ul> : null}
+          {this.props.parts.length === 0 ? <p>No parts have been added.</p> : null}
+          {this.props.parts.length > 0 ?  <ul> {this.props.parts.map((result) => { return <Part key={result._id} data={result} onRemove={this.props.onRemovePart}/>; })} </ul> : null}
         </div>
       </div>
     );

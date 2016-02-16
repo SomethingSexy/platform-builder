@@ -17,7 +17,7 @@ class Part extends Component {
 
   handleRemove(event) {
     event.stopPropagation();
-    this.props.onRemove(this.props.data.id);
+    this.props.onRemove(this.props.data._id);
   }
 }
 

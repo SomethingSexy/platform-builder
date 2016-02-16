@@ -823,7 +823,7 @@ $__System.registerDynamic("14", ["4", "f"], true, function($__require, exports, 
       key: 'handleRemove',
       value: function handleRemove(event) {
         event.stopPropagation();
-        this.props.onRemove(this.props.data.id);
+        this.props.onRemove(this.props.data._id);
       }
     }], [{
       key: 'propTypes',
@@ -908,12 +908,9 @@ $__System.registerDynamic("15", ["4", "14"], true, function($__require, exports,
       key: 'render',
       value: function render() {
         var _this2 = this;
-        var partsToRender = this.props.partIds.map(function(id) {
-          return _this2.props.parts[id];
-        });
-        return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), partsToRender.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, partsToRender.length > 0 ? _react2.default.createElement('ul', null, ' ', partsToRender.map(function(result) {
+        return _react2.default.createElement('div', {className: 'row'}, _react2.default.createElement('div', {className: 'col-md-12'}, _react2.default.createElement('h4', null, 'Parts'), this.props.parts.length === 0 ? _react2.default.createElement('p', null, 'No parts have been added.') : null, this.props.parts.length > 0 ? _react2.default.createElement('ul', null, ' ', this.props.parts.map(function(result) {
           return _react2.default.createElement(_Part2.default, {
-            key: result.id,
+            key: result._id,
             data: result,
             onRemove: _this2.props.onRemovePart
           });
@@ -927,10 +924,7 @@ $__System.registerDynamic("15", ["4", "14"], true, function($__require, exports,
     partIds: _react.PropTypes.array.isRequired,
     onRemovePart: _react.PropTypes.func.isRequired
   };
-  Parts.defaultProps = {
-    parts: {},
-    partIds: []
-  };
+  Parts.defaultProps = {parts: []};
   exports.default = Parts;
   global.define = __define;
   return module.exports;
@@ -1110,8 +1104,7 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
             removeField: _this2.props.removeField
           }, result));
         }), _react2.default.createElement('h3', null, 'Diagram'), _react2.default.createElement(_reactRouter.Link, {to: createPartLink}, 'Create New Part'), _react2.default.createElement(_Parts2.default, {
-          partIds: this.props.form.parts,
-          parts: this.props.parts,
+          parts: this.props.form.parts,
           onRemovePart: this.props.onRemovePart
         }), _react2.default.createElement(_Button2.default, {
           text: 'Save',
@@ -3062,7 +3055,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
   function select(state) {
     return {
       platform: state.platformsById[state.workingPlatformId],
-      part: {createdPlatformId: state.workingPlatformId}
+      part: {_createdPlatformId: state.workingPlatformId}
     };
   }
   exports.default = (0, _reactRedux.connect)(select)(CreatePart);
@@ -3401,11 +3394,11 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
         if (!state.parts) {
           state.parts = [];
         }
-        state.parts.push(action.part.id);
+        state.parts.push(action.part);
         return state;
       case _platform.DELETED_PART:
         if (state.parts) {
-          var index = state.parts.indexOf(action.part.id);
+          var index = state.parts.indexOf(action.part._id);
           if (index > -1) {
             state.parts.splice(index, 1);
           }
@@ -3430,10 +3423,10 @@ $__System.registerDynamic("33", ["d"], true, function($__require, exports, modul
       case _platform.FETCHED_PLATFORM:
         return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
       case _platform.CREATED_PART:
-        var platformId = action.part.createdPlatformId;
+        var platformId = action.part._createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
       case _platform.DELETED_PART:
-        var deleteId = action.part.createdPlatformId;
+        var deleteId = action.part._createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, deleteId, platforms(state[deleteId], action)));
       default:
         return state;
@@ -4905,7 +4898,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       part: part,
       receivedAt: Date.now(),
       meta: {transition: function transition(prevState, nextState, action) {
-          return {path: '/platform/' + action.part.createdPlatformId + '/build'};
+          return {path: '/platform/' + action.part._createdPlatformId + '/build'};
         }}
     };
   }
@@ -4951,7 +4944,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   function postPart(part) {
     return function(dispatch) {
       dispatch(creatingPart(part));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part', {
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part._createdPlatformId + '/part', {
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(part)
@@ -4965,7 +4958,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   function deletePart(part) {
     return function(dispatch) {
       dispatch(deletingPart(part));
-      return (0, _isomorphicFetch2.default)('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
+      return (0, _isomorphicFetch2.default)('/api/platform/' + part._createdPlatformId + '/part/' + part.id, {method: 'delete'}).then(function() {
         return dispatch(deletedPart(part));
       });
     };
@@ -4993,10 +4986,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
   }
   function createPartAndSavePlatform(part) {
     return function(dispatch, getState) {
-      return dispatch(createPart(part)).then(function() {
-        var platform = getState().platformsById[part.createdPlatformId];
-        return dispatch(savePlatform(platform));
-      });
+      return dispatch(createPart(part));
     };
   }
   function removePartAndSavePlatform(partId) {
@@ -5004,7 +4994,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       return dispatch(removePart(partId)).then(function() {
         var state = getState();
         var part = state.partsById[partId];
-        var platform = state.platformsById[part.createdPlatformId];
+        var platform = state.platformsById[part._createdPlatformId];
         return dispatch(savePlatform(platform));
       });
     };
@@ -5084,13 +5074,13 @@ $__System.registerDynamic("4e", ["49", "4a", "d"], true, function($__require, ex
       case _platform.CREATING_PART:
         return state;
       case _platform.CREATED_PART:
-        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.part._id, parts(state[action.part._id], action)));
       case _part.SAVING_PART:
         return state;
       case _part.SAVED_PART:
-        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.part._id, parts(state[action.part._id], action)));
       case _part.FETCHED_PART:
-        return Object.assign({}, state, _defineProperty({}, action.part.id, parts(state[action.part.id], action)));
+        return Object.assign({}, state, _defineProperty({}, action.part._id, parts(state[action.part._id], action)));
       default:
         return state;
     }

@@ -87,7 +87,7 @@ function createdPart(part) {
     receivedAt: Date.now(),
     meta: {
       transition: (prevState, nextState, action) => ({
-        path: `/platform/${action.part.createdPlatformId}/build`
+        path: `/platform/${action.part._createdPlatformId}/build`
       })
     }
   };
@@ -137,7 +137,7 @@ function getPlatform(platformId) {
 function postPart(part) {
   return dispatch => {
     dispatch(creatingPart(part));
-    return fetch('/api/platform/' + part.createdPlatformId + '/part', {
+    return fetch('/api/platform/' + part._createdPlatformId + '/part', {
       method: 'post',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ function postPart(part) {
 function deletePart(part) {
   return dispatch => {
     dispatch(deletingPart(part));
-    return fetch('/api/platform/' + part.createdPlatformId + '/part/' + part.id, {
+    return fetch('/api/platform/' + part._createdPlatformId + '/part/' + part.id, {
       method: 'delete'
     })
       .then(() => dispatch(deletedPart(part)));
@@ -188,11 +188,11 @@ export function removePart(pardId) {
 // Create a part and add it to the platform right away
 export function createPartAndSavePlatform(part) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(createPart(part))
-    .then(() => {
-      const platform = getState().platformsById[part.createdPlatformId];
-      return dispatch(savePlatform(platform));
-    });
+    return dispatch(createPart(part));
+    // .then(() => {
+    //   // const platform = getState().platformsById[part._createdPlatformId];
+    //   return dispatch(createdPart(part));
+    // });
   };
 }
 
@@ -207,7 +207,7 @@ export function removePartAndSavePlatform(partId) {
     .then(() => {
       const state = getState();
       const part = state.partsById[partId];
-      const platform = state.platformsById[part.createdPlatformId];
+      const platform = state.platformsById[part._createdPlatformId];
       return dispatch(savePlatform(platform));
     });
   };

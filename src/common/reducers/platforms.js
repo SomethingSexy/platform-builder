@@ -27,12 +27,12 @@ function platforms(state = {}, action) {
     if (!state.parts) {
       state.parts = [];
     }
-    state.parts.push(action.part.id);
+    state.parts.push(action.part);
     return state;
   case DELETED_PART:
     // when a part is created we need to add it to the list of parts
     if (state.parts) {
-      const index = state.parts.indexOf(action.part.id);
+      const index = state.parts.indexOf(action.part._id);
       // TODO: this should be slice instead
       if (index > -1) {
         state.parts.splice(index, 1);
@@ -63,12 +63,12 @@ export function platformsById(state = { }, action) {
       [action.platform._id]: platforms(state[action.platform._id], action)
     });
   case CREATED_PART:
-    const platformId = action.part.createdPlatformId;
+    const platformId = action.part._createdPlatformId;
     return Object.assign({}, state, {
       [platformId]: platforms(state[platformId], action)
     });
   case DELETED_PART:
-    const deleteId = action.part.createdPlatformId;
+    const deleteId = action.part._createdPlatformId;
     return Object.assign({}, state, {
       [deleteId]: platforms(state[deleteId], action)
     });

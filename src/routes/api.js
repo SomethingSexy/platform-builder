@@ -87,10 +87,15 @@ export default (app) => {
   router.post('/api/platform/:id/part', async (ctx, next) => {
     try {
       await next();
-      ctx.body = Object.assign({}, {
-        id: uuid.v4(),
-        active: false
-      }, ctx.request.body);
+      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id + '/part', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ctx.request.body)
+      });
+      ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };

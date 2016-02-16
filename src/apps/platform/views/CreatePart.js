@@ -42,7 +42,7 @@ function select(state) {
     platform: state.platformsById[state.workingPlatformId],
     // something like this?
     part: {
-      createdPlatformId: state.workingPlatformId
+      _createdPlatformId: state.workingPlatformId
     }
   };
 }

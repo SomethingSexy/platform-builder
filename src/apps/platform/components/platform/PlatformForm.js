@@ -86,7 +86,7 @@ class PlatformForm extends Component {
         })}
         <h3>Diagram</h3>
         <Link to={createPartLink}>Create New Part</Link>
-        <Parts partIds={this.props.form.parts} parts={this.props.parts} onRemovePart={this.props.onRemovePart}/>
+        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart}/>
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
       </div>
     );

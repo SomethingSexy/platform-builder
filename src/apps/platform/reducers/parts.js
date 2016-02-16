@@ -36,17 +36,17 @@ export function partsById(state = { }, action) {
     return state;
   case CREATED_PART:
     return Object.assign({}, state, {
-      [action.part.id]: parts(state[action.part.id], action)
+      [action.part._id]: parts(state[action.part._id], action)
     });
   case SAVING_PART:
     return state;
   case SAVED_PART:
     return Object.assign({}, state, {
-      [action.part.id]: parts(state[action.part.id], action)
+      [action.part._id]: parts(state[action.part._id], action)
     });
   case FETCHED_PART:
     return Object.assign({}, state, {
-      [action.part.id]: parts(state[action.part.id], action)
+      [action.part._id]: parts(state[action.part._id], action)
     });
   // TODO: Need to figure out how we want to handle this
   // case DELETED_PART:
