@@ -24,13 +24,13 @@ function createdPlatform(platform) {
     receivedAt: Date.now(),
     meta: {
       transition: (prevState, nextState, action) => ({
-        path: `/platform/${action.platform._id}/build`,
-        query: {
-          some: 'queryParam'
-        },
-        state: {
-          some: 'state'
-        }
+        path: `/platform/${action.platform._id}/build`
+        // query: {
+        //   some: 'queryParam'
+        // },
+        // state: {
+        //   some: 'state'
+        // }
       })
     }
   };
@@ -189,10 +189,6 @@ export function removePart(pardId) {
 export function createPartAndSavePlatform(part) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(createPart(part));
-    // .then(() => {
-    //   // const platform = getState().platformsById[part._createdPlatformId];
-    //   return dispatch(createdPart(part));
-    // });
   };
 }
 

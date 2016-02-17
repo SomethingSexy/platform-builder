@@ -19,7 +19,7 @@ $__System.registerDynamic("3", ["4", "5"], true, function($__require, exports, m
     return obj && obj.__esModule ? obj : {default: obj};
   }
   exports.default = _react2.default.createClass({render: function render() {
-      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/product'}, 'Build a Product')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/platform'}, 'Add Platform'))), this.props.children);
+      return _react2.default.createElement('div', {className: 'container'}, _react2.default.createElement('h1', null, 'App'), _react2.default.createElement('ul', null, _react2.default.createElement('li', null, _react2.default.createElement('a', {href: '/product'}, 'Build a Product')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouter.Link, {to: '/platform/create'}, 'Add Platform'))), this.props.children);
     }});
   global.define = __define;
   return module.exports;
@@ -3097,8 +3097,11 @@ $__System.registerDynamic("2b", ["3", "6", "7", "8", "c", "1b", "2a"], true, fun
     }, {
       path: 'platform',
       component: _Platform2.default,
-      indexRoute: {component: _CreatePlatform2.default},
       childRoutes: [{
+        path: 'create',
+        component: _Platform2.default,
+        indexRoute: {component: _CreatePlatform2.default}
+      }, {
         path: ':platformId/build',
         component: _UpdatePlatform2.default
       }, {
@@ -4846,11 +4849,7 @@ $__System.registerDynamic("d", ["34"], true, function($__require, exports, modul
       platform: platform,
       receivedAt: Date.now(),
       meta: {transition: function transition(prevState, nextState, action) {
-          return {
-            path: '/platform/' + action.platform._id + '/build',
-            query: {some: 'queryParam'},
-            state: {some: 'state'}
-          };
+          return {path: '/platform/' + action.platform._id + '/build'};
         }}
     };
   }

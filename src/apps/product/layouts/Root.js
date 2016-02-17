@@ -11,7 +11,7 @@ export default React.createClass({
         {/* change the <a>s to <Link>s */}
         <ul>
           <li><Link to="/product">Build a Product</Link></li>
-          <li><a href="/platform">Add Platform</a></li>
+          <li><a href="/platform/create">Add Platform</a></li>
         </ul>
 
         {/*

@@ -17,8 +17,12 @@ export default {
   }, {
     path: 'platform',
     component: Platform,
-    indexRoute: { component: CreatePlatform },
+    // indexRoute: { component: CreatePlatform },
     childRoutes: [{
+      path: 'create',
+      component: Platform,
+      indexRoute: { component: CreatePlatform }
+    }, {
       path: ':platformId/build',
       component: UpdatePlatform
     }, {

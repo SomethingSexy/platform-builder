@@ -24,7 +24,7 @@ export default (app) => {
   router.post('/api/platform', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/platform', {
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -48,7 +48,7 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id, {
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id, {
         method: 'put',
         headers: {
           'Accept': 'application/json',
@@ -74,7 +74,7 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id);
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id);
       ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
@@ -87,7 +87,7 @@ export default (app) => {
   router.post('/api/platform/:id/part', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/platform/' + ctx.params.id + '/part', {
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id + '/part', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
