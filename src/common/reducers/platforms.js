@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, CHANGED_WORKING_PLATFORM
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -89,6 +89,8 @@ export function workingPlatformId(state = {}, action) {
   case CREATED_PLATFORM:
     return action.platform._id;
   case FETCHED_PLATFORM:
+    return action.platform._id;
+  case CHANGED_WORKING_PLATFORM:
     return action.platform._id;
   default:
     return state || null;

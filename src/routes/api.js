@@ -74,6 +74,9 @@ export default (app) => {
         },
         body: JSON.stringify(ctx.request.body)
       });
+
+      // TODO: CHECK RESPONSE STATUS HERE BEFORE CONTINUING!!!!!
+
       // part diagrams will be stored inpendently of a platform
       // if part is an object we will want to save that separately
       ctx.body = await response.json();

@@ -10,6 +10,7 @@ export const CREATED_PART = 'CREATED_PART';
 export const CREATING_PART = 'CREATING_PART';
 export const DELETING_PART = 'DELETING_PART';
 export const DELETED_PART = 'DELETED_PART';
+export const CHANGED_WORKING_PLATFORM = 'CHANGED_WORKING_PLATFORM';
 
 function creatingPlatform(platform) {
   return {
@@ -225,6 +226,18 @@ export function removePartAndSavePlatform(partId) {
       const part = state.partsById[partId];
       const platform = state.platformsById[part._createdPlatformId];
       return dispatch(savePlatform(platform));
+    });
+  };
+}
+
+export function setWorkingPlatformId(platformId) {
+  return (dispatch, getState) => {
+    // TODO check to see if platform is in platformByIds, if not, fetch first, then switch
+    return dispatch( {
+      type: CHANGED_WORKING_PLATFORM,
+      platform: {
+        _id: platformId
+      }
     });
   };
 }
