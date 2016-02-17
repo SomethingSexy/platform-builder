@@ -16,7 +16,7 @@ class PlatformHandler extends Component {
   render() {
     return (
       <div>
-        {this.props.children}
+        <h2>Platforms</h2>
       </div>
     );
   }
