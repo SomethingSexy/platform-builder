@@ -1,5 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
+import { fetchPlatforms }  from '../../../common/actions/platform.js';
 
 // not sure what this will all do yet but
 class PlatformHandler extends Component {
@@ -19,6 +20,10 @@ class PlatformHandler extends Component {
         <h2>Platforms</h2>
       </div>
     );
+  }
+
+  static get needs() {
+    return [fetchPlatforms];
   }
 }
 

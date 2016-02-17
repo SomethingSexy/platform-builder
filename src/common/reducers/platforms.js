@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -62,6 +62,12 @@ export function platformsById(state = { }, action) {
     return Object.assign({}, state, {
       [action.platform._id]: platforms(state[action.platform._id], action)
     });
+  case FETCHED_PLATFORMS:
+    const platorms = {};
+    action.platforms.forEach(platform => {
+      platorms[platform._id] = platform;
+    });
+    return Object.assign({}, state, platorms);
   case CREATED_PART:
     const platformId = action.part._createdPlatformId;
     return Object.assign({}, state, {

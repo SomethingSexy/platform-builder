@@ -1308,7 +1308,7 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
       __define = global.define;
   global.define = undefined;
   Object.defineProperty(exports, "__esModule", {value: true});
-  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+  exports.DELETED_PART = exports.DELETING_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORMS = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
   exports.createPlatform = createPlatform;
   exports.savePlatform = savePlatform;
   exports.createPart = createPart;
@@ -1316,6 +1316,7 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
   exports.createPartAndSavePlatform = createPartAndSavePlatform;
   exports.removePartAndSavePlatform = removePartAndSavePlatform;
   exports.fetchPlatform = fetchPlatform;
+  exports.fetchPlatforms = fetchPlatforms;
   var _isomorphicFetch = $__require('35');
   var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
   function _interopRequireDefault(obj) {
@@ -1326,6 +1327,7 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
   var SAVED_PLATFORM = exports.SAVED_PLATFORM = 'SAVED_PLATFORM';
   var SAVING_PLATFORM = exports.SAVING_PLATFORM = 'SAVING_PLATFORM';
   var FETCHED_PLATFORM = exports.FETCHED_PLATFORM = 'FETCHED_PLATFORM';
+  var FETCHED_PLATFORMS = exports.FETCHED_PLATFORMS = 'FETCHED_PLATFORMS';
   var CREATED_PART = exports.CREATED_PART = 'CREATED_PART';
   var CREATING_PART = exports.CREATING_PART = 'CREATING_PART';
   var DELETING_PART = exports.DELETING_PART = 'DELETING_PART';
@@ -1375,6 +1377,13 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
     return {
       type: FETCHED_PLATFORM,
       platform: platform,
+      receivedAt: Date.now()
+    };
+  }
+  function fetchedPlatforms(platforms) {
+    return {
+      type: FETCHED_PLATFORMS,
+      platforms: platforms,
       receivedAt: Date.now()
     };
   }
@@ -1430,6 +1439,17 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
         return dispatch(fetchedPlatform(json));
       }).catch(function(error) {
         console.log('fetch platform failed ' + error);
+      });
+    };
+  }
+  function getPlatforms() {
+    return function(dispatch) {
+      return (0, _isomorphicFetch2.default)('http://localhost:5000/api/platforms').then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        return dispatch(fetchedPlatforms(json));
+      }).catch(function(error) {
+        console.log('fetch platforms failed ' + error);
       });
     };
   }
@@ -1499,6 +1519,16 @@ $__System.registerDynamic("d", ["35"], true, function($__require, exports, modul
         isFetch = false;
       }
       return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
+    };
+  }
+  function fetchPlatforms() {
+    return function(dispatch, getState) {
+      var state = getState();
+      var isFetch = true;
+      if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+        isFetch = false;
+      }
+      return isFetch ? dispatch(getPlatforms()) : Promise.resolve();
     };
   }
   global.define = __define;
@@ -1582,6 +1612,12 @@ $__System.registerDynamic("34", ["d"], true, function($__require, exports, modul
         return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
       case _platform.FETCHED_PLATFORM:
         return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
+      case _platform.FETCHED_PLATFORMS:
+        var platorms = {};
+        action.platforms.forEach(function(platform) {
+          platorms[platform._id] = platform;
+        });
+        return Object.assign({}, state, platorms);
       case _platform.CREATED_PART:
         var platformId = action.part._createdPlatformId;
         return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));

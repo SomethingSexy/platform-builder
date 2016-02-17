@@ -40,6 +40,24 @@ export default (app) => {
     }
   });
 
+  router.get('/api/platforms', async (ctx, next) => {
+    try {
+      await next();
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      ctx.body = await response.json();
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
+
+
   router.put('/api/platform/:id', async (ctx, next) => {
     try {
       await next();

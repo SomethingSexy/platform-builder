@@ -5,6 +5,7 @@ export const CREATING_PLATFORM = 'CREATING_PLATFORM';
 export const SAVED_PLATFORM = 'SAVED_PLATFORM';
 export const SAVING_PLATFORM = 'SAVING_PLATFORM';
 export const FETCHED_PLATFORM = 'FETCHED_PLATFORM';
+export const FETCHED_PLATFORMS = 'FETCHED_PLATFORMS';
 export const CREATED_PART = 'CREATED_PART';
 export const CREATING_PART = 'CREATING_PART';
 export const DELETING_PART = 'DELETING_PART';
@@ -73,6 +74,14 @@ function fetchedPlatform(platform) {
   };
 }
 
+function fetchedPlatforms(platforms) {
+  return {
+    type: FETCHED_PLATFORMS,
+    platforms,
+    receivedAt: Date.now()
+  };
+}
+
 function creatingPart(part) {
   return {
     type: CREATING_PART,
@@ -103,7 +112,7 @@ function postPlatform(platform) {
       }),
       body: JSON.stringify(platform)
     })
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(response => response.json())
       .then(json => dispatch(createdPlatform(json)));
   };
 }
@@ -118,7 +127,7 @@ function putPlatform(platform) {
       }),
       body: JSON.stringify(platform)
     })
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+      .then(response => response.json())
       .then(json => dispatch(savedPlatform(json)));
   };
 }
@@ -126,10 +135,21 @@ function putPlatform(platform) {
 function getPlatform(platformId) {
   return dispatch => {
     return fetch('http://localhost:5000/api/platform/' + platformId)
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
-      .then(json => dispatch(fetchedPlatform(json))) // TODO: This last peice does not work on server because of need for window?
+      .then(response => response.json())
+      .then(json => dispatch(fetchedPlatform(json)))
       .catch(error => {
         console.log('fetch platform failed ' + error);
+      });
+  };
+}
+
+function getPlatforms() {
+  return dispatch => {
+    return fetch('http://localhost:5000/api/platforms')
+      .then(response => response.json())
+      .then(json => dispatch(fetchedPlatforms(json)))
+      .catch(error => {
+        console.log('fetch platforms failed ' + error);
       });
   };
 }
@@ -219,5 +239,19 @@ export function fetchPlatform(params) {
     }
 
     return isFetch ? dispatch(getPlatform(params.platformId)) : Promise.resolve();
+  };
+}
+
+// this will be used to fetch all platforms...at some point we will want to paginate this...TODO
+export function fetchPlatforms() {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    const state = getState();
+    let isFetch = true;
+
+    if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+      isFetch = false;
+    }
+
+    return isFetch ? dispatch(getPlatforms()) : Promise.resolve();
   };
 }
