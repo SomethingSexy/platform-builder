@@ -1259,10 +1259,11 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
     }]);
     return UpdatePlatform;
   }(_react.Component);
-  function select(state) {
+  function select(state, ownProps) {
+    console.log(ownProps);
     return {
       categories: state.categories.categories,
-      platform: state.platformsById[state.workingPlatformId],
+      platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
       parts: state.partsById
     };
   }
@@ -3052,10 +3053,10 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
     }]);
     return CreatePart;
   }(_react.Component);
-  function select(state) {
+  function select(state, ownProps) {
     return {
-      platform: state.platformsById[state.workingPlatformId],
-      part: {_createdPlatformId: state.workingPlatformId}
+      platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
+      part: {_createdPlatformId: ownProps.params.platformId || state.workingPlatformId}
     };
   }
   exports.default = (0, _reactRedux.connect)(select)(CreatePart);
@@ -3063,7 +3064,7 @@ $__System.registerDynamic("2a", ["4", "9", "29", "d", "5"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["4"], true, function($__require, exports, module) {
+$__System.registerDynamic("2b", ["4", "5"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3091,6 +3092,7 @@ $__System.registerDynamic("2b", ["4"], true, function($__require, exports, modul
   }();
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
+  var _reactRouter = $__require('5');
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
@@ -3121,29 +3123,20 @@ $__System.registerDynamic("2b", ["4"], true, function($__require, exports, modul
   var PlatformListItem = function(_Component) {
     _inherits(PlatformListItem, _Component);
     _createClass(PlatformListItem, null, [{
-      key: "propTypes",
+      key: 'propTypes',
       get: function get() {
-        return {
-          data: _react.PropTypes.object.isRequired,
-          onSelect: _react.PropTypes.func.isRequired
-        };
+        return {data: _react.PropTypes.object.isRequired};
       }
     }]);
     function PlatformListItem(props) {
       _classCallCheck(this, PlatformListItem);
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformListItem).call(this, props));
-      _this.handleOnSelect = function() {
-        _this.props.onSelect(_this.props.data._id);
-      };
-      return _this;
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformListItem).call(this, props));
     }
     _createClass(PlatformListItem, [{
-      key: "render",
+      key: 'render',
       value: function render() {
-        return _react2.default.createElement("li", null, _react2.default.createElement("span", null, _react2.default.createElement("a", {
-          href: "javascript(void);",
-          onClick: this.handleOnSelect
-        }, this.props.data._id)), _react2.default.createElement("span", null, this.props.data.name));
+        var uri = '/platform/' + this.props.data._id + '/build';
+        return _react2.default.createElement('li', null, _react2.default.createElement('span', null, _react2.default.createElement(_reactRouter.Link, {to: uri}, this.props.data._id)), _react2.default.createElement('span', null, this.props.data.name));
       }
     }]);
     return PlatformListItem;
@@ -3221,6 +3214,11 @@ $__System.registerDynamic("2c", ["4", "9", "d", "2b"], true, function($__require
           dispatch: _react.PropTypes.func.isRequired,
           platforms: _react.PropTypes.object.isRequired
         };
+      }
+    }, {
+      key: 'contextTypes',
+      get: function get() {
+        return {router: _react2.default.PropTypes.func};
       }
     }]);
     function PlatformList(props) {

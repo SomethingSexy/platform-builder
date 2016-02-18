@@ -13,6 +13,12 @@ class PlatformList extends Component {
     };
   }
 
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.func
+    };
+  }
+
   constructor(props) {
     super(props);
     this.handleOnSelect = this.handleOnSelect.bind(this);

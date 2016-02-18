@@ -37,12 +37,12 @@ class CreatePart extends Component {
   }
 }
 
-function select(state) {
+function select(state, ownProps) {
   return {
-    platform: state.platformsById[state.workingPlatformId],
+    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
     // something like this?
     part: {
-      _createdPlatformId: state.workingPlatformId
+      _createdPlatformId: ownProps.params.platformId || state.workingPlatformId
     }
   };
 }

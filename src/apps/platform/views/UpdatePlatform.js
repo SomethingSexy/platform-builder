@@ -44,10 +44,11 @@ class UpdatePlatform extends Component {
   }
 }
 
-function select(state) {
+function select(state, ownProps) {
+  console.log(ownProps);
   return {
     categories: state.categories.categories,
-    platform: state.platformsById[state.workingPlatformId],
+    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
     parts: state.partsById
   };
 }
