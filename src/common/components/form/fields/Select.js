@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Input from './Input.js';
+import field from './Field.js';
 
 class Select extends Input {
   static get propTypes() {
@@ -16,11 +17,6 @@ class Select extends Input {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isValid: true,
-      errorMessage: '',
-      value: props.value || ''
-    };
   }
 
   render() {
@@ -45,4 +41,4 @@ class Select extends Input {
   }
 }
 
-export default Select;
+export default field(Select);

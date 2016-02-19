@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Input from './Input.js';
+import field from './Field.js';
 
 class Textarea extends Input {
   static get propTypes() {
@@ -15,11 +16,6 @@ class Textarea extends Input {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isValid: true,
-      errorMessage: '',
-      value: props.value || ''
-    };
   }
 
   render() {
@@ -40,4 +36,4 @@ class Textarea extends Input {
   }
 }
 
-export default Textarea;
+export default field(Textarea);

@@ -13,10 +13,24 @@ class Input extends Component {
     };
   }
 
+  // pull these from the form
+  static get contextTypes() {
+    return {
+      attachToForm: PropTypes.func.isRequired,
+      detachFromForm: PropTypes.func.isRequired,
+      onFormFieldChange: PropTypes.func.isRequired
+    };
+  }
+
   constructor(props) {
     super(props);
 
     this.required = props.required ? true : false;
+    this.state = {
+      isValid: true,
+      errorMessage: '',
+      value: props.value || ''
+    };
   }
 
   static get defaultProps() {
@@ -60,12 +74,4 @@ class Input extends Component {
   }
 }
 
-Input.contextTypes = {
-  attachToForm: PropTypes.func.isRequired,
-  detachFromForm: PropTypes.func.isRequired,
-  onFormFieldChange: PropTypes.func.isRequired
-};
-
 export default Input;
-
-

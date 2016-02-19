@@ -76,8 +76,8 @@ class PlatformForm extends Component {
     return (
       <div>
         {this.props.form.category ? <Static label="Category" value={this.props.form.category.name}/> : null}
-        <TextInput name="name" label="Name" />
-        <Textarea name="description" label="Description" />
+        <TextInput name="name" label="Name" required />
+        <Textarea name="description" label="Description" required  />
         <Checkboxes label="Configuration" checkboxes={checkboxes}/>
         <h3>Custom Fields</h3>
         <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
