@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _get from 'lodash.get';
 import _set from 'lodash.set';
-import uuid from 'uuid';
 
 export default (ComposedComponent, options) => {
   class Form extends Component {
@@ -104,9 +103,6 @@ export default (ComposedComponent, options) => {
     }
 
     addField(name, field) {
-      if (field && !field.id) {
-        field._id = uuid.v4();
-      }
       const addTo = _get(this.model, name);
       addTo.push(field);
       this.forceUpdate();
