@@ -50,9 +50,6 @@ export default (ComposedComponent, options) => {
     componentWillMount() {
       // Map of inputs on the form
       this.inputs = {};
-
-      // now register all of the inputs for this form
-      // this.registerInputs(this.props.children);
     }
 
     // this will get called on subsequent updates after initial happens
@@ -67,25 +64,6 @@ export default (ComposedComponent, options) => {
         </form>
       );
     }
-
-    // registerInputs(children) {
-    //   // A React helper for traversing children
-    //   React.Children.forEach(children, (child) => {
-    //     // We do a simple check for "name" on the child, which indicates it is an input.
-    //     // You might consider doing a better check though
-    //     if (child.props && child.props.name) {
-    //       // We attach a method for the input to register itself to the form
-    //       // child.props.attachToForm = this.attachToForm;
-    //       // We attach a method for the input to detach itself from the form
-    //       // child.props.detachFromForm = this.detachFromForm;
-    //     }
-    //     // If the child has its own children, traverse through them also...
-    //     // in the search for inputs
-    //     if (child.props && child.props.children) {
-    //       this.registerInputs(child.props.children);
-    //     }
-    //   });
-    // }
 
     // All methods defined are bound to the component by React JS, so it is safe to use "this"
     // even though we did not bind it. We add the input component to our inputs map

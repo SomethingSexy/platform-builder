@@ -11,6 +11,8 @@ export const CREATING_PART = 'CREATING_PART';
 export const DELETING_PART = 'DELETING_PART';
 export const DELETED_PART = 'DELETED_PART';
 export const CHANGED_WORKING_PLATFORM = 'CHANGED_WORKING_PLATFORM';
+export const DELETING_PLATFORM = 'DELETING_PLATFORM';
+export const DELETED_PLATFORM = 'DELETED_PLATFORM';
 
 function creatingPlatform(platform) {
   return {
@@ -49,6 +51,20 @@ function deletedPart(part) {
   return {
     type: DELETED_PART,
     part
+  };
+}
+
+function deletingPlatform(platform) {
+  return {
+    type: DELETING_PLATFORM,
+    platform
+  };
+}
+
+function deletedPlatform(platform) {
+  return {
+    type: DELETED_PLATFORM,
+    platform
   };
 }
 
@@ -180,6 +196,16 @@ function deletePart(part) {
   };
 }
 
+function deletePlatform(platform) {
+  return dispatch => {
+    dispatch(deletingPlatform(platform));
+    return fetch('/api/platform/' + platform._id, {
+      method: 'delete'
+    })
+      .then(() => dispatch(deletedPlatform(platform)));
+  };
+}
+
 export function createPlatform(platform) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(postPlatform(platform));
@@ -198,9 +224,16 @@ export function createPart(part) {
   };
 }
 
+export function removePlatform(platformId) {
+  return (dispatch, getState) => {
+    const platform = getState().platformsById[platformId];
+    return dispatch(deletePlatform(platform));
+  };
+}
+
 
 export function removePart(pardId) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+  return (dispatch, getState) => {
     const part = getState().partsById[pardId];
     return dispatch(deletePart(part));
   };

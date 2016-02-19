@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, CHANGED_WORKING_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, CHANGED_WORKING_PLATFORM, DELETED_PLATFORM
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -39,6 +39,10 @@ function platforms(state = {}, action) {
       }
     }
     return state;
+  case DELETED_PLATFORM:
+    const deletedState = Object.assign({}, state);
+    delete deletedState[action.platform._id];
+    return deletedState;
   default:
     return state;
   }
@@ -78,6 +82,8 @@ export function platformsById(state = { }, action) {
     return Object.assign({}, state, {
       [deleteId]: platforms(state[deleteId], action)
     });
+  case DELETED_PLATFORM:
+    return platforms(state, action);
   default:
     return state;
   }

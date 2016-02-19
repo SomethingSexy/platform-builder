@@ -1,6 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import { fetchPlatforms }  from '../../../common/actions/platform.js';
+import { fetchPlatforms, removePlatform }  from '../../../common/actions/platform.js';
 import PlatformListItem from '../components/platform/PlatformListItem.js';
 
 // Will use this as a global list so we can maintain the data but this will probably
@@ -36,7 +36,7 @@ class PlatformList extends Component {
   }
 
   handleOnRemove(id) {
-    console.log(id);
+    this.props.dispatch(removePlatform(id));
   }
 }
 
