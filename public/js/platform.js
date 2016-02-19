@@ -2531,96 +2531,6 @@ $__System.registerDynamic("28", ["4", "17", "29", "f"], true, function($__requir
   return module.exports;
 });
 
-$__System.registerDynamic("f", ["4"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  Object.defineProperty(exports, "__esModule", {value: true});
-  var _createClass = function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor)
-          descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
-  var _react = $__require('4');
-  var _react2 = _interopRequireDefault(_react);
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {default: obj};
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-  }
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }});
-    if (superClass)
-      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-  var Button = function(_Component) {
-    _inherits(Button, _Component);
-    function Button(props) {
-      _classCallCheck(this, Button);
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(Button).call(this, props));
-    }
-    _createClass(Button, [{
-      key: "render",
-      value: function render() {
-        var _this2 = this;
-        return _react2.default.createElement("button", {
-          type: "button",
-          className: "btn btn-default",
-          onClick: function onClick(e) {
-            return _this2.handleClick(e);
-          }
-        }, this.props.text);
-      }
-    }, {
-      key: "handleClick",
-      value: function handleClick(event) {
-        this.props.onButtonClick(event);
-      }
-    }]);
-    return Button;
-  }(_react.Component);
-  Button.propTypes = {
-    onButtonClick: _react.PropTypes.func.isRequired,
-    text: _react.PropTypes.string.isRequired
-  };
-  exports.default = Button;
-  global.define = __define;
-  return module.exports;
-});
-
 $__System.registerDynamic("29", ["4"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -3161,7 +3071,97 @@ $__System.registerDynamic("2b", ["4", "9", "2a", "d", "5"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["4", "5"], true, function($__require, exports, module) {
+$__System.registerDynamic("f", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  var _createClass = function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+  var _react = $__require('4');
+  var _react2 = _interopRequireDefault(_react);
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var Button = function(_Component) {
+    _inherits(Button, _Component);
+    function Button(props) {
+      _classCallCheck(this, Button);
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(Button).call(this, props));
+    }
+    _createClass(Button, [{
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+        return _react2.default.createElement("button", {
+          type: "button",
+          className: "btn btn-default",
+          onClick: function onClick(e) {
+            return _this2.handleClick(e);
+          }
+        }, this.props.text);
+      }
+    }, {
+      key: "handleClick",
+      value: function handleClick(event) {
+        this.props.onButtonClick(event);
+      }
+    }]);
+    return Button;
+  }(_react.Component);
+  Button.propTypes = {
+    onButtonClick: _react.PropTypes.func.isRequired,
+    text: _react.PropTypes.string.isRequired
+  };
+  exports.default = Button;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2c", ["4", "5", "f"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -3190,6 +3190,8 @@ $__System.registerDynamic("2c", ["4", "5"], true, function($__require, exports, 
   var _react = $__require('4');
   var _react2 = _interopRequireDefault(_react);
   var _reactRouter = $__require('5');
+  var _Button = $__require('f');
+  var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
@@ -3222,7 +3224,10 @@ $__System.registerDynamic("2c", ["4", "5"], true, function($__require, exports, 
     _createClass(PlatformListItem, null, [{
       key: 'propTypes',
       get: function get() {
-        return {data: _react.PropTypes.object.isRequired};
+        return {
+          data: _react.PropTypes.object.isRequired,
+          onRemove: _react.PropTypes.func.isRequired
+        };
       }
     }]);
     function PlatformListItem(props) {
@@ -3233,7 +3238,10 @@ $__System.registerDynamic("2c", ["4", "5"], true, function($__require, exports, 
       key: 'render',
       value: function render() {
         var uri = '/platform/' + this.props.data._id + '/build';
-        return _react2.default.createElement('li', null, _react2.default.createElement('span', null, _react2.default.createElement(_reactRouter.Link, {to: uri}, this.props.data._id)), _react2.default.createElement('span', null, this.props.data.name));
+        return _react2.default.createElement('li', null, _react2.default.createElement('span', null, _react2.default.createElement(_reactRouter.Link, {to: uri}, this.props.data._id)), _react2.default.createElement('span', null, this.props.data.name), _react2.default.createElement(_Button2.default, {
+          text: 'Remove',
+          onButtonClick: this.props.onRemove
+        }));
       }
     }]);
     return PlatformListItem;
@@ -3320,9 +3328,7 @@ $__System.registerDynamic("2d", ["4", "9", "d", "2c"], true, function($__require
     }]);
     function PlatformList(props) {
       _classCallCheck(this, PlatformList);
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformList).call(this, props));
-      _this.handleOnSelect = _this.handleOnSelect.bind(_this);
-      return _this;
+      return _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformList).call(this, props));
     }
     _createClass(PlatformList, [{
       key: 'render',
@@ -3334,13 +3340,13 @@ $__System.registerDynamic("2d", ["4", "9", "d", "2c"], true, function($__require
           return _react2.default.createElement(_PlatformListItem2.default, {
             key: platforms[key]._id,
             data: platforms[key],
-            onSelect: _this2.handleOnSelect
+            onRemove: _this2.handleOnRemove.bind(_this2, platforms[key]._id)
           });
         }), ' ') : null));
       }
     }, {
-      key: 'handleOnSelect',
-      value: function handleOnSelect(id) {
+      key: 'handleOnRemove',
+      value: function handleOnRemove(id) {
         console.log(id);
       }
     }], [{

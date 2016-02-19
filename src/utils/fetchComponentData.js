@@ -1,6 +1,6 @@
 export default function fetchComponentData(dispatch, components, params) {
   const needs = components.reduce( (prev, current) => {
-    return (current.needs || [])
+    return ((current && current.needs) || [])
       // .concat((current.WrappedComponent ? current.WrappedComponent.needs : []) || []) // Not sure I need this yet? Causing double up of calls..figure this out later
       .concat(prev);
   }, []);

@@ -13,15 +13,8 @@ class PlatformList extends Component {
     };
   }
 
-  static get contextTypes() {
-    return {
-      router: React.PropTypes.func
-    };
-  }
-
   constructor(props) {
     super(props);
-    this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
   render() {
@@ -32,7 +25,7 @@ class PlatformList extends Component {
         <div className="col-md-12">
           <h2>Platforms</h2>
           {platformKeys.length === 0 ? <p>No platforms have been added.</p> : null}
-          {platformKeys.length > 0 ?  <ul> {platformKeys.map((key) => { return <PlatformListItem key={platforms[key]._id} data={platforms[key]} onSelect={this.handleOnSelect}/>; })} </ul> : null}
+          {platformKeys.length > 0 ?  <ul> {platformKeys.map((key) => { return <PlatformListItem key={platforms[key]._id} data={platforms[key]} onRemove={this.handleOnRemove.bind(this, platforms[key]._id)}/>; })} </ul> : null}
         </div>
       </div>
     );
@@ -42,7 +35,7 @@ class PlatformList extends Component {
     return [fetchPlatforms];
   }
 
-  handleOnSelect (id) {
+  handleOnRemove(id) {
     console.log(id);
   }
 }
