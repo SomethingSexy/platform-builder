@@ -11,7 +11,14 @@ export default (app) => {
   router.get('/api/categories', async (ctx, next) => {
     try {
       await next();
-      ctx.body = [{id: 1, name: 'Firearm'}];
+      const response = await fetch(process.env.API_SRV_URL + '/api/categories', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      ctx.body = await response.json();
+      console.log(ctx.body);
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };
