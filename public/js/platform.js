@@ -1030,7 +1030,9 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
           validate: _react.PropTypes.func.isRequired,
           onSave: _react.PropTypes.func.isRequired,
           parts: _react.PropTypes.object.isRequired,
-          onRemovePart: _react.PropTypes.func.isRequired
+          onRemovePart: _react.PropTypes.func.isRequired,
+          onActivate: _react.PropTypes.func.isRequired,
+          onDeactivate: _react.PropTypes.func.isRequired
         };
       }
     }]);
@@ -1111,6 +1113,9 @@ $__System.registerDynamic("16", ["4", "17", "18", "10", "13", "f", "19", "1a", "
         }), _react2.default.createElement(_Button2.default, {
           text: 'Save',
           onButtonClick: this.handleSave.bind(this)
+        }), _react2.default.createElement(_Button2.default, {
+          text: 'Activate',
+          onButtonClick: this.props.onActivate
         }));
       }
     }, {
@@ -1231,17 +1236,23 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
     }]);
     function UpdatePlatform(props) {
       _classCallCheck(this, UpdatePlatform);
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(UpdatePlatform).call(this, props));
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UpdatePlatform).call(this, props));
+      _this.handleActivateBind = _this.handleActivate.bind(_this);
+      _this.handleDeactivateBind = _this.handleDeactivate.bind(_this);
+      return _this;
     }
     _createClass(UpdatePlatform, [{
       key: 'render',
       value: function render() {
-        return _react2.default.createElement('div', null, _react2.default.createElement(_PlatformForm2.default, {
+        var props = {
           form: this.props.platform,
           onSave: this.handleSave.bind(this),
           onRemovePart: this.handleRemovePart.bind(this),
-          parts: this.props.parts
-        }));
+          parts: this.props.parts,
+          onActivate: this.handleActivateBind,
+          onDeactive: this.handleActivateBind
+        };
+        return _react2.default.createElement('div', null, _react2.default.createElement(_PlatformForm2.default, props));
       }
     }, {
       key: 'handleRemovePart',
@@ -1253,6 +1264,12 @@ $__System.registerDynamic("1b", ["4", "9", "16", "d", "e"], true, function($__re
       value: function handleSave(model) {
         this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
       }
+    }, {
+      key: 'handleActivate',
+      value: function handleActivate() {}
+    }, {
+      key: 'handleDeactivate',
+      value: function handleDeactivate() {}
     }], [{
       key: 'needs',
       get: function get() {

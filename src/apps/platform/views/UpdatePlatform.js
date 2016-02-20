@@ -18,12 +18,23 @@ class UpdatePlatform extends Component {
 
   constructor(props) {
     super(props);
+    this.handleActivateBind = this.handleActivate.bind(this);
+    this.handleDeactivateBind = this.handleDeactivate.bind(this);
   }
 
   render() {
+    const props = {
+      form: this.props.platform,
+      onSave: this.handleSave.bind(this),
+      onRemovePart: this.handleRemovePart.bind(this),
+      parts: this.props.parts,
+      onActivate: this.handleActivateBind,
+      onDeactive: this.handleActivateBind
+    };
+
     return (
       <div>
-        <PlatformForm form={this.props.platform} onSave={this.handleSave.bind(this)} onRemovePart={this.handleRemovePart.bind(this)} parts={this.props.parts} />
+        <PlatformForm {...props}/>
       </div>
     );
   }
@@ -41,6 +52,14 @@ class UpdatePlatform extends Component {
 
   handleSave(model) {
     this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
+  }
+
+  handleActivate() {
+
+  }
+
+  handleDeactivate() {
+
   }
 }
 
