@@ -10,13 +10,17 @@ class TreeNode extends Component {
     const children = [];
     if (Array.isArray(this.props.data.children)) {
       this.props.data.children.forEach(node => {
-        children.push(<TreeNode key={node._id} data={node} onClick={() => this.props.onClick(node)}/>);
+        children.push(<TreeNode key={node._id} data={node} onClick={this.props.onClick}/>);
       });
     }
 
     return (
-      <li onClick={this.props.onClick}>{this.props.data.name}<ul>{children}</ul></li>
+      <li><span onClick={this.handleOnClick.bind(this)}>{this.props.data.name}</span><ul>{children}</ul></li>
     );
+  }
+
+  handleOnClick() {
+    this.props.onClick(this.props.data);
   }
 }
 
