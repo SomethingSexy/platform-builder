@@ -43,7 +43,8 @@ class CreatePlatform extends Component {
 
   // handles selecting the category that this new platform will be added too
   handleSelect(category) {
-    this.props.dispatch(PlatformActions.createPlatform({category}));
+    // can add a root platform
+    this.props.dispatch(PlatformActions.createPlatform(category ? { _parentCategoryId: category._id} : {}));
   }
 }
 

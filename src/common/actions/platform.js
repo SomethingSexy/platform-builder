@@ -10,7 +10,6 @@ export const CREATED_PART = 'CREATED_PART';
 export const CREATING_PART = 'CREATING_PART';
 export const DELETING_PART = 'DELETING_PART';
 export const DELETED_PART = 'DELETED_PART';
-export const CHANGED_WORKING_PLATFORM = 'CHANGED_WORKING_PLATFORM';
 export const DELETING_PLATFORM = 'DELETING_PLATFORM';
 export const DELETED_PLATFORM = 'DELETED_PLATFORM';
 
@@ -252,25 +251,13 @@ export function createPartAndSavePlatform(part) {
 export function removePartAndSavePlatform(partId) {
   // remove part from platform (server will determine if it should delete the part out right)
   // then remove from partsById
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+  return (dispatch, getState) => {
     return dispatch(removePart(partId))
     .then(() => {
       const state = getState();
       const part = state.partsById[partId];
       const platform = state.platformsById[part._createdPlatformId];
       return dispatch(savePlatform(platform));
-    });
-  };
-}
-
-export function setWorkingPlatformId(platformId) {
-  return (dispatch, getState) => {
-    // TODO check to see if platform is in platformByIds, if not, fetch first, then switch
-    return dispatch( {
-      type: CHANGED_WORKING_PLATFORM,
-      platform: {
-        _id: platformId
-      }
     });
   };
 }
@@ -290,7 +277,7 @@ export function fetchPlatform(params) {
 
 // this will be used to fetch all platforms...at some point we will want to paginate this...TODO
 export function fetchPlatforms() {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+  return (dispatch, getState) => {
     const state = getState();
     let isFetch = true;
 
@@ -299,5 +286,17 @@ export function fetchPlatforms() {
     }
 
     return isFetch ? dispatch(getPlatforms()) : Promise.resolve();
+  };
+}
+
+export function activatePlatform(platformId) {
+  return (dispatch) => {
+    // I think this should be fine for now, just use put
+    // to update the active flag
+    // TODO: Might need to fetch categories again after this
+    return dispatch(putPlatform({
+      _id: platformId,
+      active: true
+    }));
   };
 }

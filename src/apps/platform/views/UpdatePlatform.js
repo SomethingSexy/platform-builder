@@ -1,8 +1,8 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
 import PlatformForm from '../components/platform/PlatformForm.js';
-import * as PlatformActions  from '../../../common/actions/platform.js';
-import * as CategoryActions  from '../../../common/actions/categories.js';
+import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform } from '../../../common/actions/platform.js';
+import { getCategories }  from '../../../common/actions/categories.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -40,22 +40,22 @@ class UpdatePlatform extends Component {
   }
 
   static get needs() {
-    return [CategoryActions.getCategories, PlatformActions.fetchPlatform];
+    return [getCategories, fetchPlatform];
   }
 
   // this will be handled here because we might have
   // to do some special handling with it
   handleRemovePart(partId) {
     // call to delete the part, which will remove it from
-    this.props.dispatch(PlatformActions.removePartAndSavePlatform(partId));
+    this.props.dispatch(removePartAndSavePlatform(partId));
   }
 
   handleSave(model) {
-    this.props.dispatch(PlatformActions.savePlatform(Object.assign({}, model)));
+    this.props.dispatch(savePlatform(Object.assign({}, model)));
   }
 
   handleActivate() {
-
+    this.props.dispatch(activatePlatform(this.props.platform._id));
   }
 
   handleDeactivate() {

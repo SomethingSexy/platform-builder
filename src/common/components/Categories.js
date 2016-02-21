@@ -1,22 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import Category from './Category.js';
+import TreeView from './TreeView.js';
 
 class Categories extends Component {
-  static get propTypes() {
-    return {
-      categories: PropTypes.array.isRequired,
-      handleSelect: PropTypes.func.isRequired
-    };
+  static propTypes = {
+    categories: PropTypes.array.isRequired,
+    handleSelect: PropTypes.func.isRequired
   }
 
   render() {
-    return (
-      <ul>
-        {this.props.categories.map((result) => {
-          return <Category key={result.id} category={result} onClick={() => this.props.handleSelect(result)}/>;
-        })}
-      </ul>
-    );
+    return (<TreeView tree={this.props.categories} onClick={this.props.handleSelect.bind(this)}/>);
   }
 }
 

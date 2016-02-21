@@ -1,5 +1,5 @@
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, CHANGED_WORKING_PLATFORM, DELETED_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -90,15 +90,15 @@ export function platformsById(state = { }, action) {
 }
 
 // this will be used to store the current platform that is being worked on
-export function workingPlatformId(state = {}, action) {
-  switch (action.type) {
-  case CREATED_PLATFORM:
-    return action.platform._id;
-  case FETCHED_PLATFORM:
-    return action.platform._id;
-  case CHANGED_WORKING_PLATFORM:
-    return action.platform._id;
-  default:
-    return state || null;
-  }
-}
+// export function workingPlatformId(state = {}, action) {
+//   switch (action.type) {
+//   case CREATED_PLATFORM:
+//     return action.platform._id;
+//   case FETCHED_PLATFORM:
+//     return action.platform._id;
+//   case CHANGED_WORKING_PLATFORM:
+//     return action.platform._id;
+//   default:
+//     return state || null;
+//   }
+// }
