@@ -1,4 +1,5 @@
 import React, {Component,  PropTypes} from 'react';
+import _find from 'lodash.find';
 import {connect} from 'react-redux';
 import AddPartForm from '../components/platform/AddPartForm.js';
 import * as PlatformActions  from '../../../common/actions/platform.js';
@@ -38,12 +39,19 @@ class CreatePart extends Component {
 }
 
 function select(state, ownProps) {
+  const platform = state.platformsById[ownProps.params.platformId];
+  let part;
+  if (ownProps.params.partId) {
+    part = _find(platform.parts, { _id: ownProps.params.partId});
+  } else {
+    part = {
+      _createdPlatformId: ownProps.params.platformId
+    };
+  }
+
   return {
-    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
-    // something like this?
-    part: {
-      _createdPlatformId: ownProps.params.platformId || state.workingPlatformId
-    }
+    platform,
+    part
   };
 }
 

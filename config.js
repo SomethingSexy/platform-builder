@@ -22,6 +22,7 @@ System.config({
     "events": "npm:events@1.1.0",
     "history": "npm:history@1.17.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
+    "lodash.find": "npm:lodash.find@4.2.0",
     "lodash.get": "npm:lodash.get@4.0.2",
     "lodash.omit": "npm:lodash.omit@4.0.2",
     "lodash.set": "npm:lodash.set@4.0.0",
@@ -343,11 +344,23 @@ System.config({
       "node-fetch": "npm:node-fetch@1.3.3",
       "whatwg-fetch": "npm:whatwg-fetch@0.11.0"
     },
+    "npm:lodash._baseeach@4.0.2": {
+      "lodash.keys": "npm:lodash.keys@4.0.3"
+    },
+    "npm:lodash._baseiteratee@4.5.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:lodash._baseset@4.0.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:lodash._setcache@4.0.1": {
       "lodash._mapcache": "npm:lodash._mapcache@4.0.1"
+    },
+    "npm:lodash.find@4.2.0": {
+      "lodash._baseeach": "npm:lodash._baseeach@4.0.2",
+      "lodash._basefind": "npm:lodash._basefind@3.0.0",
+      "lodash._basefindindex": "npm:lodash._basefindindex@3.6.0",
+      "lodash._baseiteratee": "npm:lodash._baseiteratee@4.5.0"
     },
     "npm:lodash.get@4.0.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
