@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../../../../../common/components/Button.js';
+import Button from '../Button.js';
 
 class Part extends Component {
   static get propTypes() {

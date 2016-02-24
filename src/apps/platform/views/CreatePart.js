@@ -1,6 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
-import AddPartForm from '../components/platform/parts/AddPartForm.js';
+import AddPartForm from '../components/platform/AddPartForm.js';
 import * as PlatformActions  from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
 

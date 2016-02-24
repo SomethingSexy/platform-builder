@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../../../../../common/components/form/fields/TextInput.js';
-import Textarea from '../../../../../common/components/form/fields/Textarea.js';
-import form from '../../../../../common/components/form/Form.js';
-import Button from '../../../../../common/components/Button.js';
-import AddCustomField from '../fields/AddCustomField';
+import TextInput from '../../../../common/components/form/fields/TextInput.js';
+import Textarea from '../../../../common/components/form/fields/Textarea.js';
+import form from '../../../../common/components/form/Form.js';
+import Button from '../../../../common/components/Button.js';
+import AddCustomField from './AddCustomField.js';
 
 const model = {
   name: '',

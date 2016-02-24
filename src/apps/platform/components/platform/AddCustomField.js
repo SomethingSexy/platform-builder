@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import Select from '../../../../../common/components/form/fields/Select.js';
-import TextInput from '../../../../../common/components/form/fields/TextInput.js';
+import Select from '../../../../common/components/form/fields/Select.js';
+import TextInput from '../../../../common/components/form/fields/TextInput.js';
 import AddCustomFieldOptions from './AddCustomFieldOptions.js';
-import Button from '../../../../../common/components/Button.js';
-import repeatable from '../../../../../common/components/form/Repeatable.js';
+import Button from '../../../../common/components/Button.js';
+import repeatable from '../../../../common/components/form/Repeatable.js';
 
 const fieldTypes = [{
   label: '',

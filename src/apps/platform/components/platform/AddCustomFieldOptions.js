@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../../../../../common/components/form/fields/TextInput.js';
-import repeatable from '../../../../../common/components/form/Repeatable.js';
-import Button from '../../../../../common/components/Button.js';
+import TextInput from '../../../../common/components/form/fields/TextInput.js';
+import repeatable from '../../../../common/components/form/Repeatable.js';
+import Button from '../../../../common/components/Button.js';
 
 
 class AddCustomFieldOptions extends Component {

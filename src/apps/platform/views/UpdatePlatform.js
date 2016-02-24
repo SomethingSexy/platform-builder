@@ -11,8 +11,8 @@ class UpdatePlatform extends Component {
     return {
       dispatch: PropTypes.func.isRequired,
       categories: PropTypes.array.isRequired,
-      platform: PropTypes.object.isRequired,
-      parts: PropTypes.object.isRequired
+      platform: PropTypes.object.isRequired
+      // parts: PropTypes.array.isRequired
     };
   }
 
@@ -27,7 +27,7 @@ class UpdatePlatform extends Component {
       form: this.props.platform,
       onSave: this.handleSave.bind(this),
       onRemovePart: this.handleRemovePart.bind(this),
-      parts: this.props.parts,
+      parts: this.props.platform.parts,
       onActivate: this.handleActivateBind,
       onDeactive: this.handleActivateBind
     };
@@ -66,8 +66,8 @@ class UpdatePlatform extends Component {
 function select(state, ownProps) {
   return {
     categories: state.categories.categories,
-    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId],
-    parts: state.partsById
+    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId]
+    // parts: state.partsById
   };
 }
 

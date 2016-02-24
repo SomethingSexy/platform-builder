@@ -4,9 +4,9 @@ import Textarea from '../../../../common/components/form/fields/Textarea.js';
 import Static from '../../../../common/components/form/fields/Static.js';
 import Checkboxes from '../../../../common/components/form/fields/Checkboxes.js';
 import Button from '../../../../common/components/Button.js';
-import AddCustomField from './fields/AddCustomField';
+import AddCustomField from './AddCustomField.js';
 import form from '../../../../common/components/form/Form.js';
-import Parts from './parts/Parts.js';
+import Parts from '../../../../common/components/parts/Parts.js';
 import { Link } from 'react-router';
 
 const model = {
@@ -23,7 +23,7 @@ class PlatformForm extends Component {
       removeField: PropTypes.func.isRequired,
       validate: PropTypes.func.isRequired,
       onSave: PropTypes.func.isRequired,
-      parts: PropTypes.object.isRequired,
+      parts: PropTypes.array.isRequired,
       onRemovePart: PropTypes.func.isRequired,
       onActivate: PropTypes.func.isRequired,
       onDeactivate: PropTypes.func.isRequired
@@ -38,46 +38,50 @@ class PlatformForm extends Component {
   }
 
   render() {
+    const propForm = this.props.form;
     const checkboxes = [{
       label: 'Allow company',
       value: true,
-      selectedValue: this.props.form.showCompany,
+      selectedValue: propForm.showCompany,
       name: 'showCompany'
     }, {
       label: 'Allow brands',
       value: true,
-      selectedValue: this.props.form.showBrands,
+      selectedValue: propForm.showBrands,
       name: 'showBrands'
     }, {
       label: 'Allow people',
       value: true,
-      selectedValue: this.props.form.showPeople,
+      selectedValue: propForm.showPeople,
       name: 'showPeople'
     }, {
       label: 'Allow tags',
       value: true,
-      selectedValue: this.props.form.showTags,
+      selectedValue: propForm.showTags,
       name: 'showTags'
     }, {
       label: 'Allow photos',
       value: true,
-      selectedValue: this.props.form.showPhotos,
+      selectedValue: propForm.showPhotos,
       name: 'showPhotos'
     }, {
       label: 'Allow transactions',
       value: true,
-      selectedValue: this.props.form.showTransactions,
+      selectedValue: propForm.showTransactions,
       name: 'showTransactions'
     }, {
       label: 'Allow additional parts',
       value: true,
-      selectedValue: this.props.form.allowAdditionalParts,
+      selectedValue: propForm.allowAdditionalParts,
       name: 'allowAdditionalParts'
     }];
     const createPartLink = '/platform/' + this.props.form._id + '/part';
+    const category = propForm._category;
+    const hasChildren = (category && category.children && category.children.length > 0);
     return (
       <div>
-        {this.props.form.category ? <Static label="Category" value={this.props.form.category.name}/> : null}
+        {hasChildren ? <div className="alert alert-info"><strong>Heads up!</strong> This platform has child platforms.</div> : null }
+        {this.props.form._parentCategory ? <Static label="Category" value={this.props.form._parentCategory.name}/> : null}
         <TextInput name="name" label="Name" required />
         <Textarea name="description" label="Description" required  />
         <Checkboxes label="Configuration" checkboxes={checkboxes}/>
