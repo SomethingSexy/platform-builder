@@ -1,5 +1,6 @@
 import React, {Component,  PropTypes} from 'react';
 import {connect} from 'react-redux';
+import { browserHistory } from 'react-router';
 import PlatformForm from '../components/platform/PlatformForm.js';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform } from '../../../common/actions/platform.js';
 import { getCategories }  from '../../../common/actions/categories.js';
@@ -7,13 +8,10 @@ import { getCategories }  from '../../../common/actions/categories.js';
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
 class UpdatePlatform extends Component {
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func.isRequired,
-      categories: PropTypes.array.isRequired,
-      platform: PropTypes.object.isRequired
-      // parts: PropTypes.array.isRequired
-    };
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,
+    platform: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -27,6 +25,7 @@ class UpdatePlatform extends Component {
       form: this.props.platform,
       onSave: this.handleSave.bind(this),
       onRemovePart: this.handleRemovePart.bind(this),
+      onEditPart: this.handleEditPart.bind(this),
       parts: this.props.platform.parts,
       onActivate: this.handleActivateBind,
       onDeactive: this.handleActivateBind
@@ -48,6 +47,10 @@ class UpdatePlatform extends Component {
   handleRemovePart(partId) {
     // call to delete the part, which will remove it from
     this.props.dispatch(removePartAndSavePlatform(partId));
+  }
+
+  handleEditPart(partId) {
+    browserHistory.push('/platform/' + this.props.platform._id + '/part/' + partId);
   }
 
   handleSave(model) {

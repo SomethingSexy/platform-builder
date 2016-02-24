@@ -3,10 +3,15 @@ var jspm = require('jspm');
 
 var paths = {
   scripts: ['app/**/*.js'],
+  styles: ['src/**/*.css'],
   images: 'client/img/**/*'
 };
 
 gulp.task('build', function() {
+  // copy over styles
+  gulp.src(paths.styles)
+  .pipe(gulp.dest('dist'));
+
   var builder = new jspm.Builder();
 
   builder.reset(System);

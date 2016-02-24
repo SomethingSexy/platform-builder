@@ -1,13 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 
 class Button extends Component {
+  static propTypes = {
+    onButtonClick: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    buttonClass: PropTypes.string
+  }
+
+  static defaultProps = {
+    buttonClass: 'btn-default'
+  }
+
   constructor(props) {
     super(props);
   }
 
   render() {
+    let clazz = 'btn';
+    if (this.props.buttonClass) {
+      clazz = clazz + ' ' + this.props.buttonClass;
+    }
+
     return (
-      <button type="button" className="btn btn-default" onClick={(e) => this.handleClick(e)}>{this.props.text}</button>
+      <button type="button" className={clazz} onClick={(e) => this.handleClick(e)}>{this.props.text}</button>
     );
   }
 
@@ -16,9 +31,6 @@ class Button extends Component {
   }
 }
 
-Button.propTypes = {
-  onButtonClick: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
-};
+
 
 export default Button;

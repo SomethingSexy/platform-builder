@@ -27,7 +27,11 @@ export default {
       component: UpdatePlatform
     }, {
       path: ':platformId/part',
-      component: CreatePart
+      component: CreatePart,
+      childRoutes: [{
+        path: ':partId',
+        component: CreatePart
+      }]
     }]
   }]
 };

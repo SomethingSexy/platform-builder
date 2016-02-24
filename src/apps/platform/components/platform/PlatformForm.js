@@ -25,6 +25,7 @@ class PlatformForm extends Component {
       onSave: PropTypes.func.isRequired,
       parts: PropTypes.array.isRequired,
       onRemovePart: PropTypes.func.isRequired,
+      onEditPart: PropTypes.func.isRequired,
       onActivate: PropTypes.func.isRequired,
       onDeactivate: PropTypes.func.isRequired
     };
@@ -92,7 +93,7 @@ class PlatformForm extends Component {
         })}
         <h3>Diagram</h3>
         <Link to={createPartLink}>Create New Part</Link>
-        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart}/>
+        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart}/>
         <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
         <Button text="Activate" onButtonClick={this.props.onActivate} />
       </div>
