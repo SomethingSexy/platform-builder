@@ -1,5 +1,6 @@
+import _find from 'lodash.find';
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM
+  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM, SAVED_PART
 } from '../actions/platform.js';
 
 function platforms(state = {}, action) {
@@ -29,6 +30,12 @@ function platforms(state = {}, action) {
     }
     state.parts.push(action.part);
     return state;
+  case SAVED_PART:
+    // this might just shallow copy so it would still be changing original state?
+    const savedPartState = Object.assign({}, state);
+    Object.assign(_find(savedPartState.parts, { _id: action.part._id}), action.part);
+
+    return savedPartState;
   case DELETED_PART:
     // when a part is created we need to add it to the list of parts
     if (state.parts) {
@@ -76,6 +83,10 @@ export function platformsById(state = { }, action) {
     const platformId = action.part._createdPlatformId;
     return Object.assign({}, state, {
       [platformId]: platforms(state[platformId], action)
+    });
+  case SAVED_PART:
+    return Object.assign({}, state, {
+      [action.part._createdPlatformId]: platforms(state[action.part._createdPlatformId], action)
     });
   case DELETED_PART:
     const deleteId = action.part._createdPlatformId;

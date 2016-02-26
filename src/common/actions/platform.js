@@ -8,6 +8,8 @@ export const FETCHED_PLATFORM = 'FETCHED_PLATFORM';
 export const FETCHED_PLATFORMS = 'FETCHED_PLATFORMS';
 export const CREATED_PART = 'CREATED_PART';
 export const CREATING_PART = 'CREATING_PART';
+export const SAVED_PART = 'SAVED_PART';
+export const SAVING_PART = 'SAVING_PART';
 export const DELETING_PART = 'DELETING_PART';
 export const DELETED_PART = 'DELETED_PART';
 export const DELETING_PLATFORM = 'DELETING_PLATFORM';
@@ -118,6 +120,21 @@ function createdPart(part) {
   };
 }
 
+function savingPart(part) {
+  return {
+    type: SAVING_PART,
+    part
+  };
+}
+
+function savedPart(part) {
+  return {
+    type: SAVED_PART,
+    part,
+    receivedAt: Date.now()
+  };
+}
+
 function postPlatform(platform) {
   return dispatch => {
     dispatch(creatingPlatform(platform));
@@ -185,6 +202,21 @@ function postPart(part) {
   };
 }
 
+function putPart(part) {
+  return dispatch => {
+    dispatch(savingPart(part));
+    return fetch('/api/platform/' + part._createdPlatformId + '/part/' + part._id, {
+      method: 'put',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(part)
+    })
+      .then(response => response.json())
+      .then(json => dispatch(savedPart(json)));
+  };
+}
+
 function deletePart(part) {
   return dispatch => {
     dispatch(deletingPart(part));
@@ -220,6 +252,12 @@ export function savePlatform(platform) {
 export function createPart(part) {
   return (dispatch, getState) => { // eslint-disable-line no-unused-vars
     return dispatch(postPart(part));
+  };
+}
+
+export function savePart(part) {
+  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
+    return dispatch(putPart(part));
   };
 }
 

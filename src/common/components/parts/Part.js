@@ -10,7 +10,7 @@ class Part extends Component {
 
   render() {
     return (
-      <li className="list-group-item clearfix">
+      <li className="list-group-item clearfix part">
         <h5 className="list-group-item-heading">{this.props.data.name}</h5>
         <p className="list-group-item-text">{this.props.data.description}</p>
         <div className="btn-group pull-lg-right" role="group" aria-label="Basic example">

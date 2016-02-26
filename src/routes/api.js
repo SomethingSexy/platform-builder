@@ -94,6 +94,31 @@ export default (app) => {
     }
   });
 
+  router.put('/api/platform/:id/part/:partId', async (ctx, next) => {
+    try {
+      await next();
+      if (!ctx.params.id) {
+        ctx.status = 400;
+        ctx.status = missingIdError;
+        return;
+      }
+      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id + '/parts/' + ctx.params.partId, {
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ctx.request.body)
+      });
+
+      ctx.body = await response.json();
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
+
   router.get('/api/platform/:id', async (ctx, next) => {
     try {
       await next();

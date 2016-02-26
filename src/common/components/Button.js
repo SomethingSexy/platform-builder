@@ -8,7 +8,7 @@ class Button extends Component {
   }
 
   static defaultProps = {
-    buttonClass: 'btn-default'
+    buttonClass: 'btn-secondary'
   }
 
   constructor(props) {
@@ -30,7 +30,5 @@ class Button extends Component {
     this.props.onButtonClick(event);
   }
 }
-
-
 
 export default Button;

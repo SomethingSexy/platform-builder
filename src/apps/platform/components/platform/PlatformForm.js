@@ -81,21 +81,22 @@ class PlatformForm extends Component {
     const hasChildren = (category && category.children && category.children.length > 0);
     return (
       <div>
+        <h3>Platform</h3>
         {hasChildren ? <div className="alert alert-info"><strong>Heads up!</strong> This platform has child platforms.</div> : null }
         {this.props.form._parentCategory ? <Static label="Category" value={this.props.form._parentCategory.name}/> : null}
         <TextInput name="name" label="Name" required />
         <Textarea name="description" label="Description" required  />
         <Checkboxes label="Configuration" checkboxes={checkboxes}/>
-        <h3>Custom Fields</h3>
-        <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
+        <h4>Custom Fields</h4>
+        <Button text="Add Field" buttonClass="btn-link" onButtonClick={this.handleAddField.bind(this)}/>
         {this.props.form.fields.map((result, index) => {
           return <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
         })}
-        <h3>Diagram</h3>
+        <h4>Diagram</h4>
         <Link to={createPartLink}>Create New Part</Link>
         <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart}/>
-        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
-        <Button text="Activate" onButtonClick={this.props.onActivate} />
+        <Button text="Save" buttonClass="btn-primary" onButtonClick={this.handleSave.bind(this)} />
+        <Button text="Activate" buttonClass="btn-secondary" onButtonClick={this.props.onActivate} />
       </div>
     );
   }

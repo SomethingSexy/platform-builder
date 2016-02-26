@@ -5,7 +5,7 @@ import AddPartForm from '../components/platform/AddPartForm.js';
 import * as PlatformActions  from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
 
-class CreatePart extends Component {
+class UpdatePart extends Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func.isRequired,
@@ -22,7 +22,7 @@ class CreatePart extends Component {
     const returnLink = '/platform/' + this.props.platform._id + '/build';
     return (
       <div>
-        <h3>Create New Part</h3>
+        <h3>Modify Part</h3>
         <Link to={returnLink}>Return to Platform</Link>
         <AddPartForm form={this.props.part} onSave={this.handleSave.bind(this)} />
       </div>
@@ -34,15 +34,13 @@ class CreatePart extends Component {
   }
 
   handleSave(model) {
-    this.props.dispatch(PlatformActions.createPartAndSavePlatform(Object.assign({}, model)));
+    this.props.dispatch(PlatformActions.savePart(Object.assign({}, model)));
   }
 }
 
 function select(state, ownProps) {
   const platform = state.platformsById[ownProps.params.platformId];
-  const part = {
-    _createdPlatformId: ownProps.params.platformId
-  };
+  const part = _find(platform.parts, { _id: ownProps.params.partId});
 
   return {
     platform,
@@ -51,4 +49,4 @@ function select(state, ownProps) {
 }
 
 // not sure what this would all need yet
-export default connect(select)(CreatePart);
+export default connect(select)(UpdatePart);

@@ -5,6 +5,7 @@ import Platform from './layouts/Platform.js';
 import CreatePlatform from './views/CreatePlatform.js';
 import UpdatePlatform from './views/UpdatePlatform.js';
 import CreatePart from './views/CreatePart.js';
+import UpdatePart from './views/UpdatePart.js';
 import PlatformList from './views/PlatformList.js';
 // routes should only interface with layouts
 // layouts will then interface with views which are smart components
@@ -27,10 +28,10 @@ export default {
       component: UpdatePlatform
     }, {
       path: ':platformId/part',
-      component: CreatePart,
+      indexRoute: { component: CreatePart },
       childRoutes: [{
         path: ':partId',
-        component: CreatePart
+        component: UpdatePart
       }]
     }]
   }]
