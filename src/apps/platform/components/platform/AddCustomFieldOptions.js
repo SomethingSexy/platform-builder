@@ -5,28 +5,31 @@ import Button from '../../../../common/components/Button.js';
 
 
 class AddCustomFieldOptions extends Component {
-  static get propTypes() {
-    return {
-      field: PropTypes.string,
-      index: PropTypes.number.isRequired,
-      onRemove: PropTypes.func.isRequired
-    };
+  static propTypes = {
+    field: PropTypes.string,
+    index: PropTypes.number.isRequired,
+    onRemove: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
     // just a local state for storing the form data
     this.state = {};
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  handleRemove() {
+    this.props.onRemove(this.props.index);
   }
 
   render() {
-    const valueName = this.props.field + '.type';
-    const labelName = this.props.field + '.label';
+    const valueName = `${this.props.field}.type`;
+    const labelName = `${this.props.field}.label`;
     return (
       <fieldset className="form-inline">
-        <TextInput label="Label" name={labelName} required/>
-        <TextInput label="Value" name={valueName} required/>
-        <Button text="Remove" onButtonClick={this.props.onRemove}  />
+        <TextInput label="Label" name={labelName} required />
+        <TextInput label="Value" name={valueName} required />
+        <Button text="Remove" onButtonClick={this.handleRemove} />
       </fieldset>
     );
   }

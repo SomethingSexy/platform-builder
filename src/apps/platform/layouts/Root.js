@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-// Then we delete a bunch of code from App and
-// add some <Link> elements...
-export default React.createClass({
+class Root extends React.Component {
+  static propTypes = {
+    children: PropTypes.object
+  }
+
   render() {
     return (
       <div className="container">
@@ -22,4 +24,6 @@ export default React.createClass({
       </div>
     );
   }
-});
+}
+
+export default Root;

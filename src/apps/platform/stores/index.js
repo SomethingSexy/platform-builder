@@ -8,7 +8,7 @@ import storeEnhancer from 'redux-history-transitions';
 
 export default function configureStore(initialState, history) {
   // pulled my hair out with this one, need to set node logger
-  const logger = createLogger({logger: console});
+  const logger = createLogger({ logger: console });
   const createStoreWithMiddleware = compose(
     applyMiddleware(thunk, logger),
     storeEnhancer(history)

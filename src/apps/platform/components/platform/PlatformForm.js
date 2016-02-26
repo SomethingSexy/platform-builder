@@ -16,19 +16,17 @@ const model = {
 };
 
 class PlatformForm extends Component {
-  static get propTypes() {
-    return {
-      form: PropTypes.object.isRequired,
-      addField: PropTypes.func.isRequired,
-      removeField: PropTypes.func.isRequired,
-      validate: PropTypes.func.isRequired,
-      onSave: PropTypes.func.isRequired,
-      parts: PropTypes.array.isRequired,
-      onRemovePart: PropTypes.func.isRequired,
-      onEditPart: PropTypes.func.isRequired,
-      onActivate: PropTypes.func.isRequired,
-      onDeactivate: PropTypes.func.isRequired
-    };
+  static propTypes = {
+    form: PropTypes.object.isRequired,
+    addField: PropTypes.func.isRequired,
+    removeField: PropTypes.func.isRequired,
+    validate: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    parts: PropTypes.array.isRequired,
+    onRemovePart: PropTypes.func.isRequired,
+    onEditPart: PropTypes.func.isRequired,
+    onActivate: PropTypes.func.isRequired,
+    onDeactivate: PropTypes.func.isRequired
   }
   // For the model, we really only need to set the deep properties and arrays.  If I create
   // a multi-component (what AddcustomField would be) or some sort of deepComponent, than that
@@ -36,6 +34,24 @@ class PlatformForm extends Component {
   // TODO: I will probably need to end up generating unique ids for the fields, parts, otherwise figure out the best way to update/remove server-side
   constructor(props) {
     super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleAddField = this.handleAddField.bind(this);
+    this.handleRemoveField = this.handleRemoveField.bind(this);
+  }
+
+  handleAddField() {
+    this.props.addField('fields', { options: [] });
+  }
+
+  handleRemoveField(index) {
+    this.props.removeField('fields', index);
+  }
+
+  handleSave(event) {
+    // PROBABLY not the best way to do this but it will work for now
+    this.props.validate(event, data => {
+      this.props.onSave(data);
+    });
   }
 
   render() {
@@ -76,44 +92,27 @@ class PlatformForm extends Component {
       selectedValue: propForm.allowAdditionalParts,
       name: 'allowAdditionalParts'
     }];
-    const createPartLink = '/platform/' + this.props.form._id + '/part';
+    const createPartLink = `/platform/${this.props.form._id}/part`;
     const category = propForm._category;
     const hasChildren = (category && category.children && category.children.length > 0);
     return (
       <div>
         <h3>Platform</h3>
         {hasChildren ? <div className="alert alert-info"><strong>Heads up!</strong> This platform has child platforms.</div> : null }
-        {this.props.form._parentCategory ? <Static label="Category" value={this.props.form._parentCategory.name}/> : null}
+        {this.props.form._parentCategory ? <Static label="Category" value={this.props.form._parentCategory.name} /> : null}
         <TextInput name="name" label="Name" required />
-        <Textarea name="description" label="Description" required  />
-        <Checkboxes label="Configuration" checkboxes={checkboxes}/>
+        <Textarea name="description" label="Description" required />
+        <Checkboxes label="Configuration" checkboxes={checkboxes} />
         <h4>Custom Fields</h4>
-        <Button text="Add Field" buttonClass="btn-link" onButtonClick={this.handleAddField.bind(this)}/>
-        {this.props.form.fields.map((result, index) => {
-          return <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
-        })}
+        <Button text="Add Field" buttonClass="btn-link" onButtonClick={this.handleAddField} />
+        {this.props.form.fields.map((result, index) => <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField} addField={this.props.addField} removeField={this.props.removeField} {...result} />)}
         <h4>Diagram</h4>
         <Link to={createPartLink}>Create New Part</Link>
-        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart}/>
-        <Button text="Save" buttonClass="btn-primary" onButtonClick={this.handleSave.bind(this)} />
+        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart} />
+        <Button text="Save" buttonClass="btn-primary" onButtonClick={this.handleSave} />
         <Button text="Activate" buttonClass="btn-secondary" onButtonClick={this.props.onActivate} />
       </div>
     );
-  }
-
-  handleAddField() {
-    this.props.addField('fields', {options: []});
-  }
-
-  handleRemoveField(index) {
-    this.props.removeField('fields', index);
-  }
-
-  handleSave(event) {
-    // PROBABLY not the best way to do this but it will work for now
-    this.props.validate(event, data => {
-      this.props.onSave(data);
-    });
   }
 }
 

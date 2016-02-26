@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default React.createClass({
+class Dashboard extends React.Component {
   render() {
-    return <div>Welcome to the app!</div>
+    return <div>Welcome to the app!</div>;
   }
-});
+}
+
+export default Dashboard;

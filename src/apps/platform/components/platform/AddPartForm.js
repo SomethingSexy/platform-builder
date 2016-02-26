@@ -14,33 +14,23 @@ const model = {
 };
 
 class AddPartForm extends Component {
-  static get propTypes() {
-    return {
-      addField: PropTypes.func.isRequired,
-      removeField: PropTypes.func.isRequired,
-      form: PropTypes.object.isRequired,
-      validate: PropTypes.func.isRequired,
-      onSave: PropTypes.func.isRequired
-    };
+  static propTypes = {
+    addField: PropTypes.func.isRequired,
+    removeField: PropTypes.func.isRequired,
+    form: PropTypes.object.isRequired,
+    validate: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired
   }
 
-  render() {
-    return (
-      <div>
-        <TextInput name="name" label="Name" required/>
-        <Textarea name="description" label="Description" required/>
-        <h3>Custom Fields</h3>
-        <Button text="Add Field" onButtonClick={this.handleAddField.bind(this)}/>
-        {this.props.form.fields.map((result, index) => {
-          return <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField.bind(this, index)} addField={this.props.addField} removeField={this.props.removeField} {...result} />;
-        })}
-        <Button text="Save" onButtonClick={this.handleSave.bind(this)} />
-      </div>
-    );
+  constructor(props) {
+    super(props);
+    this.handleAddField = this.handleAddField.bind(this);
+    this.handleRemoveField = this.handleRemoveField.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleAddField() {
-    this.props.addField('fields', {options: []});
+    this.props.addField('fields', { options: [] });
   }
 
   handleRemoveField(index) {
@@ -52,6 +42,19 @@ class AddPartForm extends Component {
     this.props.validate(event, data => {
       this.props.onSave(data);
     });
+  }
+
+  render() {
+    return (
+      <div>
+        <TextInput name="name" label="Name" required />
+        <Textarea name="description" label="Description" required />
+        <h3>Custom Fields</h3>
+        <Button text="Add Field" onButtonClick={this.handleAddField} />
+        {this.props.form.fields.map((result, index) => <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField} addField={this.props.addField} removeField={this.props.removeField} {...result} />)}
+        <Button text="Save" onButtonClick={this.handleSave} />
+      </div>
+    );
   }
 }
 
