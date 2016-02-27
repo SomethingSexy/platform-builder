@@ -31,7 +31,7 @@ function fetchedPart(part) {
 function putPart(part) {
   return dispatch => {
     dispatch(savingPart(part));
-    return fetch('/api/parts/' + part._id, {
+    return fetch(`/api/parts/${part._id}`, {
       method: 'put',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -44,20 +44,16 @@ function putPart(part) {
 }
 
 function getPart(platformId) {
-  return dispatch => {
-    return fetch('http://localhost:5000/api/platform/' + platformId)
-      .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
-      .then(json => dispatch(fetchedPart(json))) // TODO: This last peice does not work on server because of need for window?
-      .catch(error => {
-        console.log('fetch platform failed ' + error);
-      });
-  };
+  return dispatch => fetch(`http://localhost:5000/api/platform/${platformId}`)
+    .then(response => response.json()) // response.json returns a promise so it can return chunked data (I assume)
+    .then(json => dispatch(fetchedPart(json))) // TODO: This last peice does not work on server because of need for window?
+    .catch(error => {
+      console.log(`fetch part failed ${error}`);
+    });
 }
 
 export function savePart(part) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(putPart(part));
-  };
+  return (dispatch) => dispatch(putPart(part));
 }
 
 export function fetchPart(params) {

@@ -153,7 +153,7 @@ function postPlatform(platform) {
 function putPlatform(platform) {
   return dispatch => {
     dispatch(savingPlatform(platform));
-    return fetch('/api/platform/' + platform._id, {
+    return fetch(`/api/platform/${platform._id}`, {
       method: 'put',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -166,31 +166,27 @@ function putPlatform(platform) {
 }
 
 function getPlatform(platformId) {
-  return dispatch => {
-    return fetch('http://localhost:5000/api/platform/' + platformId)
+  return dispatch => fetch(`http://localhost:5000/api/platform/${platformId}`)
       .then(response => response.json())
       .then(json => dispatch(fetchedPlatform(json)))
       .catch(error => {
-        console.log('fetch platform failed ' + error);
+        console.log(`fetch platform failed ${error}`);
       });
-  };
 }
 
 function getPlatforms() {
-  return dispatch => {
-    return fetch('http://localhost:5000/api/platforms')
+  return dispatch => fetch('http://localhost:5000/api/platforms')
       .then(response => response.json())
       .then(json => dispatch(fetchedPlatforms(json)))
       .catch(error => {
-        console.log('fetch platforms failed ' + error);
+        console.log(`fetch platforms failed ${error}`);
       });
-  };
 }
 
 function postPart(part) {
   return dispatch => {
     dispatch(creatingPart(part));
-    return fetch('/api/platform/' + part._createdPlatformId + '/part', {
+    return fetch(`/api/platform/${part._createdPlatformId}/part`, {
       method: 'post',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -205,7 +201,7 @@ function postPart(part) {
 function putPart(part) {
   return dispatch => {
     dispatch(savingPart(part));
-    return fetch('/api/platform/' + part._createdPlatformId + '/part/' + part._id, {
+    return fetch(`/api/platform/${part._createdPlatformId}/part/${part._id}`, {
       method: 'put',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -220,7 +216,7 @@ function putPart(part) {
 function deletePart(part) {
   return dispatch => {
     dispatch(deletingPart(part));
-    return fetch('/api/platform/' + part._createdPlatformId + '/part/' + part.id, {
+    return fetch(`/api/platform/${part._createdPlatformId}/part/${part.id}`, {
       method: 'delete'
     })
       .then(() => dispatch(deletedPart(part)));
@@ -230,7 +226,7 @@ function deletePart(part) {
 function deletePlatform(platform) {
   return dispatch => {
     dispatch(deletingPlatform(platform));
-    return fetch('/api/platform/' + platform._id, {
+    return fetch(`/api/platform/${platform._id}`, {
       method: 'delete'
     })
       .then(() => dispatch(deletedPlatform(platform)));
@@ -238,27 +234,19 @@ function deletePlatform(platform) {
 }
 
 export function createPlatform(platform) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(postPlatform(platform));
-  };
+  return (dispatch) => dispatch(postPlatform(platform));
 }
 
 export function savePlatform(platform) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(putPlatform(platform));
-  };
+  return (dispatch) => dispatch(putPlatform(platform));
 }
 
 export function createPart(part) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(postPart(part));
-  };
+  return (dispatch) => dispatch(postPart(part));
 }
 
 export function savePart(part) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(putPart(part));
-  };
+  return (dispatch) => dispatch(putPart(part));
 }
 
 export function removePlatform(platformId) {
@@ -278,9 +266,7 @@ export function removePart(pardId) {
 
 // Create a part and add it to the platform right away
 export function createPartAndSavePlatform(part) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(createPart(part));
-  };
+  return (dispatch) => dispatch(createPart(part));
 }
 
 // Delete the part and remove it from the platform
@@ -289,15 +275,13 @@ export function createPartAndSavePlatform(part) {
 export function removePartAndSavePlatform(partId) {
   // remove part from platform (server will determine if it should delete the part out right)
   // then remove from partsById
-  return (dispatch, getState) => {
-    return dispatch(removePart(partId))
+  return (dispatch, getState) => dispatch(removePart(partId))
     .then(() => {
       const state = getState();
       const part = state.partsById[partId];
       const platform = state.platformsById[part._createdPlatformId];
       return dispatch(savePlatform(platform));
     });
-  };
 }
 
 export function fetchPlatform(params) {
@@ -328,13 +312,8 @@ export function fetchPlatforms() {
 }
 
 export function activatePlatform(platformId) {
-  return (dispatch) => {
     // I think this should be fine for now, just use put
     // to update the active flag
     // TODO: Might need to fetch categories again after this
-    return dispatch(putPlatform({
-      _id: platformId,
-      active: true
-    }));
-  };
+  return (dispatch) => dispatch(putPlatform({ _id: platformId, active: true }));
 }

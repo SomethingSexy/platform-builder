@@ -35,17 +35,12 @@ function postProduct(product) {
       body: JSON.stringify(product)
     })
       .then(response => response.json())
-      .then(json => {
-        return dispatch(fetchPlatform({platformId: product.category.id}))
-        .then(dispatch(createdProduct(json)));
-      });
+      .then(json => dispatch(fetchPlatform({ platformId: product.category.id })).then(dispatch(createdProduct(json))));
   };
 }
 
 // when we create the product we will probably want to also fetch
 // the platform then we can transition to the next component
 export function createProduct(product) {
-  return (dispatch, getState) => { // eslint-disable-line no-unused-vars
-    return dispatch(postProduct(product));
-  };
+  return (dispatch) => dispatch(postProduct(product));
 }
