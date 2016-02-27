@@ -1,20 +1,27 @@
-import React, {Component,  PropTypes} from 'react';
-import {connect} from 'react-redux';
-import { fetchPlatforms, removePlatform }  from '../../../common/actions/platform.js';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { fetchPlatforms, removePlatform } from '../../../common/actions/platform.js';
 import PlatformListItem from '../components/platform/PlatformListItem.js';
 
 // Will use this as a global list so we can maintain the data but this will probably
 // get turned into showing platforms as categories or an admin list
 class PlatformList extends Component {
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func.isRequired,
-      platforms: PropTypes.object.isRequired
-    };
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    platforms: PropTypes.object.isRequired
+  }
+
+  static get needs() {
+    return [fetchPlatforms];
   }
 
   constructor(props) {
     super(props);
+    this.handleOnRemove = this.handleOnRemove.bind(this);
+  }
+
+  handleOnRemove(id) {
+    this.props.dispatch(removePlatform(id));
   }
 
   render() {
@@ -25,18 +32,10 @@ class PlatformList extends Component {
         <div className="col-md-12">
           <h2>Platforms</h2>
           {platformKeys.length === 0 ? <p>No platforms have been added.</p> : null}
-          {platformKeys.length > 0 ?  <ul> {platformKeys.map((key) => { return <PlatformListItem key={platforms[key]._id} data={platforms[key]} onRemove={this.handleOnRemove.bind(this, platforms[key]._id)}/>; })} </ul> : null}
+          {platformKeys.length > 0 ? <ul> {platformKeys.map((key) => <PlatformListItem key={platforms[key]._id} data={platforms[key]} onRemove={this.handleOnRemove} />)} </ul> : null}
         </div>
       </div>
     );
-  }
-
-  static get needs() {
-    return [fetchPlatforms];
-  }
-
-  handleOnRemove(id) {
-    this.props.dispatch(removePlatform(id));
   }
 }
 

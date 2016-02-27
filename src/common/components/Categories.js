@@ -8,7 +8,7 @@ class Categories extends Component {
   }
 
   render() {
-    return (<TreeView tree={this.props.categories} onClick={this.props.handleSelect.bind(this)}/>);
+    return (<TreeView tree={this.props.categories} onClick={this.props.handleSelect} />);
   }
 }
 

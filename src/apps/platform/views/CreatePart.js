@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react';
-import _find from 'lodash.find';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import AddPartForm from '../components/platform/AddPartForm.js';
 import * as PlatformActions from '../../../common/actions/platform.js';

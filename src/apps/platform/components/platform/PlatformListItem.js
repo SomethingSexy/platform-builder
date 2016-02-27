@@ -10,10 +10,19 @@ class PlatformListItem extends Component {
     onRemove: PropTypes.func.isRequired
   }
 
+  constructor(props) {
+    super(props);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  handleRemove() {
+    this.props.onRemove(this.props.data._id);
+  }
+
   render() {
     const uri = `/platform/${this.props.data._id}/build`;
     return (
-      <li><span><Link to={uri}>{this.props.data._id}</Link></span><span>{this.props.data.name}</span><Button text="Remove" onButtonClick={this.props.onRemove} /></li>
+      <li><span><Link to={uri}>{this.props.data._id}</Link></span><span>{this.props.data.name}</span><Button text="Remove" onButtonClick={this.handleRemove} /></li>
     );
   }
 }

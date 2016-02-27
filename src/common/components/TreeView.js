@@ -9,7 +9,7 @@ class TreeView extends Component {
 
   static defaultProps = {
     tree: []
-  };
+  }
 
   render() {
     const children = [];
