@@ -2,7 +2,7 @@
 import 'bootstrap/css/bootstrap.css!';
 import '../../common/components/parts/parts.css!';
 import React from 'react';
-import Router, { browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import routes from './routes.js';
 import ReactDOM from 'react-dom';
 import configureStore from './stores/index.js';
