@@ -12,7 +12,7 @@ const store = configureStore(window.__INITIAL_DATA__ || {}, browserHistory);
 
 function createElement(Component, props) {
   if (Component.needs) {
-    fetchComponentData(store.dispatch, [Component], props.params);
+    fetchComponentData(store.dispatch, [Component], props.params); // eslint-disable-line react/prop-types
   }
   return React.createElement(Component, props);
 }
@@ -20,8 +20,7 @@ function createElement(Component, props) {
 // TODO: This method will return our LoadingContainer component which will
 // fetch data and display loading animation
 function testRender(props) {
-  console.log(props);
   return <LoadingContainer {...props} />;
 }
 
-ReactDOM.render( <Provider store={store}><Router children={routes} store={store} history={browserHistory} createElement={createElement} render={testRender} /></Provider>, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><Router children={routes} store={store} history={browserHistory} createElement={createElement} render={testRender} /></Provider>, document.getElementById('app'));

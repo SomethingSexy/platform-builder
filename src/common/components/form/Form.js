@@ -92,10 +92,6 @@ export default (ComposedComponent, options) => {
       } else {
         console.log('Form is not valid');
       }
-
-      // if valid call outside method
-
-      // else if not valid display errors
     }
 
     validateForm() {
@@ -128,6 +124,11 @@ export default (ComposedComponent, options) => {
           component.setState({
             isValid: false,
             errorMessage: 'This field is required' // TODO: pull this from someplace else
+          });
+        } else {
+          component.setState({
+            isValid: true,
+            errorMessage: null
           });
         }
       }

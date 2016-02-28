@@ -30,6 +30,7 @@ class Select extends Input {
         <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange}>
           {this.props.options.map((result) => <option key={result.value} value={result.value}>{result.label}</option>)}
         </select>
+        {!this.state.isValid ? <span id="helpBlock2" className="help-block">{this.state.errorMessage}</span> : null }
       </fieldset>
     );
   }

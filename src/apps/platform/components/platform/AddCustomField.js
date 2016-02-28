@@ -29,7 +29,7 @@ class AddCustomField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAddOptions: false
+      showAddOptions: this.props.type === 'select'
     };
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
@@ -64,8 +64,8 @@ class AddCustomField extends Component {
       <div>
         <fieldset className="form-inline">
           <legend>{`Custom Field #${fieldCount}`}</legend>
-          <Select name={typeName} label="Type" onChange={this.handleTypeChange} options={fieldTypes} />
-          <TextInput name={labelName} label="Label" />
+          <Select name={typeName} label="Type" onChange={this.handleTypeChange} options={fieldTypes} required />
+          <TextInput name={labelName} label="Label" required />
           <Button text="Remove" onButtonClick={this.props.onRemove} />
         </fieldset>
         {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddOption} /> : null}
