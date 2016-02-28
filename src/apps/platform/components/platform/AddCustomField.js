@@ -63,7 +63,7 @@ class AddCustomField extends Component {
     return (
       <div>
         <fieldset className="form-inline">
-          <legend>`Custom Field #${fieldCount}`</legend>
+          <legend>{`Custom Field #${fieldCount}`}</legend>
           <Select name={typeName} label="Type" onChange={this.handleTypeChange} options={fieldTypes} />
           <TextInput name={labelName} label="Label" />
           <Button text="Remove" onButtonClick={this.props.onRemove} />
