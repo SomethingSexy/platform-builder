@@ -1,14 +1,13 @@
-import Root from './layouts/Root.js';
-import Dashboard from './layouts/Dashboard.js';
-import About from './layouts/About.js';
-import Platform from './layouts/Platform.js';
-import CreatePlatform from './views/CreatePlatform.js';
-import UpdatePlatform from './views/UpdatePlatform.js';
-import CreatePart from './views/CreatePart.js';
-import UpdatePart from './views/UpdatePart.js';
-import PlatformList from './views/PlatformList.js';
-// routes should only interface with layouts
-// layouts will then interface with views which are smart components
+import Root from './components/Root.js';
+import Dashboard from './components/Dashboard.js';
+import About from './components/About.js';
+import Platform from './components/Platform.js';
+import CreatePlatform from './containers/CreatePlatform.js';
+import UpdatePlatform from './containers/UpdatePlatform.js';
+import CreatePart from './containers/CreatePart.js';
+import UpdatePart from './containers/UpdatePart.js';
+import PlatformList from './containers/PlatformList.js';
+
 export default {
   path: '/',
   component: Root,

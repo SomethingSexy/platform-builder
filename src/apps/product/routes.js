@@ -1,9 +1,8 @@
-import Root from './layouts/Root.js';
-import ProductLayout from './layouts/Product.js';
-import CreateProduct from './views/CreateProduct.js';
-import UpdateProduct from './views/UpdateProduct.js';
-// routes should only interface with layouts
-// layouts will then interface with views which are smart components
+import Root from './components/Root.js';
+import ProductLayout from './components/Product.js';
+import CreateProduct from './containers/CreateProduct.js';
+import UpdateProduct from './containers/UpdateProduct.js';
+
 export default {
   path: '/',
   component: Root,
