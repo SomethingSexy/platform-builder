@@ -15,10 +15,6 @@ class Select extends Input {
     }, Input.propTypes);
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let className = 'form-group';
 
@@ -31,10 +27,8 @@ class Select extends Input {
     return (
       <fieldset className={className}>
         <label htmlFor="">{this.props.label}</label>
-        <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange.bind(this)}>
-          {this.props.options.map((result) => {
-            return <option key={result.value} value={result.value}>{result.label}</option>;
-          })}
+        <select name={this.props.name} className="form-control" value={value} onChange={this.handleChange}>
+          {this.props.options.map((result) => <option key={result.value} value={result.value}>{result.label}</option>)}
         </select>
       </fieldset>
     );

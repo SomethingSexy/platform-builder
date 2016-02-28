@@ -4,10 +4,11 @@ import processAppRequest from '../utils/processAppRequest.js';
 import productStore from '../apps/product/stores/index.js';
 import productRoutes from '../apps/product/routes.js';
 
-const indexHTML = fs.readFileSync(__dirname + '/../apps/product/index.html').toString();
+const indexHTML = fs.readFileSync(`${__dirname}/../apps/product/index.html`).toString();
 
 const router = new Router();
 
+/* eslint-disable no-param-reassign */
 export default (app) => {
   router.get('/product', async (ctx, next) => {
     try {

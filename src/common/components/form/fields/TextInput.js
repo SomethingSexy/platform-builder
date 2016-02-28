@@ -14,10 +14,6 @@ class TextInput extends Input {
     }, Input.propTypes);
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let className = 'form-group';
 
@@ -28,12 +24,11 @@ class TextInput extends Input {
     return (
       <fieldset className={className}>
         <label htmlFor="">{this.props.label}</label>
-        <input type="text"  name={this.props.name} className ="form-control" id="" placeholder="" value={this.state.value} onChange={this.handleChange.bind(this)} />
+        <input type="text" name={this.props.name} className ="form-control" id="" placeholder="" value={this.state.value} onChange={this.handleChange} />
         {!this.state.isValid ? <span id="helpBlock2" className="help-block">{this.state.errorMessage}</span> : null }
       </fieldset>
     );
   }
-
 }
 
 export default field(TextInput);

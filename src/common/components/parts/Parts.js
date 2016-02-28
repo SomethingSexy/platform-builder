@@ -18,7 +18,7 @@ class Parts extends Component {
         <div className="col-md-12">
           <h4>Parts</h4>
           {this.props.parts.length === 0 ? <p>No parts have been added.</p> : null}
-          {this.props.parts.length > 0 ?  <ul className="parts list-group"> {this.props.parts.map((result) => { return <Part key={result._id} data={result} onRemove={this.props.onRemovePart} onEdit={this.props.onEditPart}/>; })} </ul> : null}
+          {this.props.parts.length > 0 ? <ul className="parts list-group"> {this.props.parts.map((result) => <Part key={result._id} data={result} onRemove={this.props.onRemovePart} onEdit={this.props.onEditPart} />)} </ul> : null}
         </div>
       </div>
     );

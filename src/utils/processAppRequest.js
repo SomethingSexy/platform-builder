@@ -10,14 +10,14 @@ const dataRegex = /¡DATA!/;
 
 // maybe this should have a parameter for the js/css instead?
 export default function processAppRequest(req, res, url, store, routes, indexHTML) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const history = createMemoryHistory();
     const location = history.createLocation(url);
     // give the location we need to load
     // the corret router and store
 
     // if we don't load the exact same router file it seems to blow up on the checksum
-    match({routes, location}, (error, redirectLocation, renderProps) => {
+    match({ routes, location }, (error, redirectLocation, renderProps) => {
       // I think at this point we could add custom data to the renderProps to pass
       // to our components
       if (redirectLocation) {
@@ -32,10 +32,10 @@ export default function processAppRequest(req, res, url, store, routes, indexHTM
         return fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
           const initialData = store.getState();
-          const html = renderToString(<Provider store={store}><RouterContext {...renderProps}/></Provider>);
-          const output = indexHTML.
-            replace(htmlRegex, html).
-            replace(dataRegex, JSON.stringify(initialData));
+          const html = renderToString(<Provider store={store}><RouterContext {...renderProps} /></Provider>);
+          const output = indexHTML
+            .replace(htmlRegex, html)
+            .replace(dataRegex, JSON.stringify(initialData));
           resolve(output);
         })
         .catch((fetchError) => {
@@ -46,5 +46,4 @@ export default function processAppRequest(req, res, url, store, routes, indexHTM
       }
     });
   });
-
 }

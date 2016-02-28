@@ -1,19 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 class StaticField extends Component {
-  static get propTypes() {
-    return {
-      label: PropTypes.string.isRequired,
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool
-      ])
-    };
-  }
-
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+      React.PropTypes.bool
+    ])
   }
 
   render() {

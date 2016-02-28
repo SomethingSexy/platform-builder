@@ -1,42 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 
 class Input extends Component {
-  static get propTypes() {
-    return {
-      name: PropTypes.string.isRequired,
-      onChange: PropTypes.func,
-      validations: React.PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array
-      ]),
-      inline: PropTypes.bool
-    };
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    validations: React.PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array
+    ]),
+    inline: PropTypes.bool
   }
 
   // pull these from the form
-  static get contextTypes() {
-    return {
-      attachToForm: PropTypes.func.isRequired,
-      detachFromForm: PropTypes.func.isRequired,
-      onFormFieldChange: PropTypes.func.isRequired
-    };
+  static contextTypes = {
+    attachToForm: PropTypes.func.isRequired,
+    detachFromForm: PropTypes.func.isRequired,
+    onFormFieldChange: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    inline: false
   }
 
   constructor(props) {
     super(props);
 
-    this.required = props.required ? true : false;
+    this.required = props.required;
     this.state = {
       isValid: true,
       errorMessage: '',
       value: props.value || ''
     };
-  }
-
-  static get defaultProps() {
-    return {
-      inline: false
-    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {

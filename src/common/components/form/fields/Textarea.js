@@ -14,10 +14,6 @@ class Textarea extends Input {
     }, Input.propTypes);
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const value = this.state.value;
     let className = 'form-group';
@@ -29,7 +25,7 @@ class Textarea extends Input {
     return (
       <fieldset className={className}>
         <label htmlFor="">{this.props.label}</label>
-        <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange.bind(this)} />
+        <textarea type="email" className ="form-control" id="" placeholder="" value={value} onChange={this.handleChange} />
         {!this.state.isValid ? <span id="helpBlock2" className="help-block">{this.state.errorMessage}</span> : null }
       </fieldset>
     );

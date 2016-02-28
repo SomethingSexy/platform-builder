@@ -38,7 +38,7 @@ class Checkbox extends Input {
     return (
       <div className="checkbox">
         <label>
-          <input type="checkbox" name={name} checked={checked} value={value} onChange={this.handleChange.bind(this)}></input>
+          <input type="checkbox" name={name} checked={checked} value={value} onChange={this.handleChange}></input>
           {this.props.label}
         </label>
       </div>

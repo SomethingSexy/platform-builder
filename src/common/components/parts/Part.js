@@ -8,17 +8,10 @@ class Part extends Component {
     onEdit: PropTypes.func.isRequired
   }
 
-  render() {
-    return (
-      <li className="list-group-item clearfix part">
-        <h5 className="list-group-item-heading">{this.props.data.name}</h5>
-        <p className="list-group-item-text">{this.props.data.description}</p>
-        <div className="btn-group pull-lg-right" role="group" aria-label="Basic example">
-          <Button text="Edit" buttonClass="btn-secondary" onButtonClick={this.handleEdit.bind(this)} />
-          <Button text="Remove" buttonClass="btn-secondary" onButtonClick={this.handleRemove.bind(this)} />
-        </div>
-      </li>
-    );
+  constructor(props) {
+    super(props);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleRemove(event) {
@@ -29,6 +22,19 @@ class Part extends Component {
   handleEdit(event) {
     event.stopPropagation();
     this.props.onEdit(this.props.data._id);
+  }
+
+  render() {
+    return (
+      <li className="list-group-item clearfix part">
+        <h5 className="list-group-item-heading">{this.props.data.name}</h5>
+        <p className="list-group-item-text">{this.props.data.description}</p>
+        <div className="btn-group pull-lg-right" role="group" aria-label="Basic example">
+          <Button text="Edit" buttonClass="btn-secondary" onButtonClick={this.handleEdit} />
+          <Button text="Remove" buttonClass="btn-secondary" onButtonClick={this.handleRemove} />
+        </div>
+      </li>
+    );
   }
 }
 

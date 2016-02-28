@@ -6,5 +6,3 @@ export default (string, type, res) => {
   res.write(string);
   res.end();
 };
-
-

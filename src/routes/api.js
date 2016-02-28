@@ -6,19 +6,18 @@ const router = new Router();
 
 const missingIdError = 'Id is required for this api.';
 
-// This will be temporary until we can connect to api server
+/* eslint-disable no-param-reassign */
 export default (app) => {
   router.get('/api/categories', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/categories', {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/categories`, {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         }
       });
       ctx.body = await response.json();
-      console.log(ctx.body);
       ctx.status = 200;
     } catch (err) {
       ctx.body = { message: err.message };
@@ -31,10 +30,10 @@ export default (app) => {
   router.post('/api/platform', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms', {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms`, {
         method: 'post',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(ctx.request.body)
@@ -50,9 +49,9 @@ export default (app) => {
   router.get('/api/platforms', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms', {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms`, {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         }
       });
@@ -73,10 +72,10 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id, {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}`, {
         method: 'put',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(ctx.request.body)
@@ -102,10 +101,10 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id + '/parts/' + ctx.params.partId, {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}/parts/${ctx.params.partId}`, {
         method: 'put',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(ctx.request.body)
@@ -127,7 +126,7 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id);
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}`);
       ctx.body = await response.json();
       ctx.status = 200;
     } catch (err) {
@@ -140,10 +139,10 @@ export default (app) => {
   router.post('/api/platform/:id/part', async (ctx, next) => {
     try {
       await next();
-      const response = await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id + '/part', {
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}/part`, {
         method: 'post',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(ctx.request.body)
@@ -164,7 +163,7 @@ export default (app) => {
         ctx.status = missingIdError;
         return;
       }
-      await fetch(process.env.API_SRV_URL + '/api/platforms/' + ctx.params.id, {
+      await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}`, {
         method: 'delete'
       });
       ctx.status = 200;

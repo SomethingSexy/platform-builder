@@ -4,29 +4,23 @@ import _set from 'lodash.set';
 
 export default (ComposedComponent, options) => {
   class Form extends Component {
-    static get propTypes() {
-      return {
-        children: PropTypes.oneOfType([
-          PropTypes.arrayOf(PropTypes.node),
-          PropTypes.node
-        ]),
-        form: PropTypes.object
-      };
+    static propTypes = {
+      children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+      ]),
+      form: PropTypes.object
     }
 
-    static get childContextTypes() {
-      return {
-        attachToForm: PropTypes.func.isRequired,
-        detachFromForm: PropTypes.func.isRequired,
-        onFormFieldChange: PropTypes.func.isRequired,
-        form: PropTypes.object.isRequired
-      };
+    static childContextTypes = {
+      attachToForm: PropTypes.func.isRequired,
+      detachFromForm: PropTypes.func.isRequired,
+      onFormFieldChange: PropTypes.func.isRequired,
+      form: PropTypes.object.isRequired
     }
 
-    static get defaultProps() {
-      return {
-        showSaveButton: true
-      };
+    static defaultProps = {
+      showSaveButton: true
     }
 
     constructor(props) {
@@ -35,6 +29,10 @@ export default (ComposedComponent, options) => {
       if (options.model) {
         this.model = Object.assign({}, options.model, this.props.form);
       }
+
+      this.validate = this.validate.bind(this);
+      this.addField = this.addField.bind(this);
+      this.removeField = this.removeField.bind(this);
     }
 
     getChildContext() {
@@ -53,16 +51,8 @@ export default (ComposedComponent, options) => {
     }
 
     // this will get called on subsequent updates after initial happens
-    componentWillUpdate(nextProps, nextState) {
+    componentWillUpdate(nextProps) {
       this.model = Object.assign({}, nextProps.form, this.model);
-    }
-
-    render() {
-      return (
-        <form>
-          <ComposedComponent {...this.props} form={this.model} validate={this.validate.bind(this)} addField={this.addField.bind(this)} removeField={this.removeField.bind(this)} />
-        </form>
-      );
     }
 
     // All methods defined are bound to the component by React JS, so it is safe to use "this"
@@ -143,6 +133,14 @@ export default (ComposedComponent, options) => {
       }
 
       return isValid;
+    }
+
+    render() {
+      return (
+        <form>
+          <ComposedComponent {...this.props} form={this.model} validate={this.validate} addField={this.addField} removeField={this.removeField} />
+        </form>
+      );
     }
   }
 

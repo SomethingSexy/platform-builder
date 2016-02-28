@@ -8,6 +8,7 @@ const indexHTML = fs.readFileSync(__dirname + '/../apps/platform/index.html').to
 
 const router = new Router();
 
+/* eslint-disable no-param-reassign */
 export default (app) => {
   router.get('/platform', async (ctx, next) => {
     try {

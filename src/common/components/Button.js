@@ -13,21 +13,22 @@ class Button extends Component {
 
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.props.onButtonClick(event);
   }
 
   render() {
     let clazz = 'btn';
     if (this.props.buttonClass) {
-      clazz = clazz + ' ' + this.props.buttonClass;
+      clazz = `${clazz} ${this.props.buttonClass}`;
     }
 
     return (
-      <button type="button" className={clazz} onClick={(e) => this.handleClick(e)}>{this.props.text}</button>
+      <button type="button" className={clazz} onClick={this.handleClick}>{this.props.text}</button>
     );
-  }
-
-  handleClick(event) {
-    this.props.onButtonClick(event);
   }
 }
 
