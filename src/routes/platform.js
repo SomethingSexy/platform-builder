@@ -4,7 +4,7 @@ import processAppRequest from '../utils/processAppRequest.js';
 import platformStore from '../apps/platform/stores/index.js';
 import platformRoutes from '../apps/platform/routes.js';
 
-const indexHTML = fs.readFileSync(__dirname + '/../apps/platform/index.html').toString();
+const indexHTML = fs.readFileSync(`${__dirname}/../apps/platform/index.html`).toString();
 
 const router = new Router();
 

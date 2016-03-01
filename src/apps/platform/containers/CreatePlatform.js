@@ -38,7 +38,7 @@ class CreatePlatform extends Component {
       <div>
         <h2>Create a new platform</h2>
         <p>Select what you are trying to create</p>
-        <Button text="Root Platform" onButtonClick={this.buttonClickRoot} />
+        <Button onButtonClick={this.buttonClickRoot}>Root Platform</Button>
         <Categories categories={this.props.categories} handleSelect={this.handleSelectCategory} />
       </div>
     );

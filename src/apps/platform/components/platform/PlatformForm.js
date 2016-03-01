@@ -7,7 +7,6 @@ import Button from '../../../../common/components/Button.js';
 import AddCustomField from './AddCustomField.js';
 import form from '../../../../common/components/form/Form.js';
 import Parts from '../../../../common/components/parts/Parts.js';
-import { Link } from 'react-router';
 
 const model = {
   fields: [],
@@ -92,7 +91,6 @@ class PlatformForm extends Component {
       selectedValue: propForm.allowAdditionalParts,
       name: 'allowAdditionalParts'
     }];
-    const createPartLink = `/platform/${this.props.form._id}/part`;
     const category = propForm._category;
     const hasChildren = (category && category.children && category.children.length > 0);
     return (
@@ -104,13 +102,12 @@ class PlatformForm extends Component {
         <Textarea name="description" label="Description" required />
         <Checkboxes label="Configuration" checkboxes={checkboxes} />
         <h4>Custom Fields</h4>
-        <Button text="Add Field" buttonClass="btn-link" onButtonClick={this.handleAddField} />
+        <Button buttonClass="btn-link" onButtonClick={this.handleAddField}>Add Field</Button>
         {this.props.form.fields.map((result, index) => <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField} addField={this.props.addField} removeField={this.props.removeField} {...result} />)}
         <h4>Diagram</h4>
-        <Link to={createPartLink}>Create New Part</Link>
-        <Parts parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart} />
-        <Button text="Save" buttonClass="btn-primary" onButtonClick={this.handleSave} />
-        <Button text="Activate" buttonClass="btn-secondary" onButtonClick={this.props.onActivate} />
+        <Parts platformId={this.props.form._id} parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart} />
+        <Button buttonClass="btn-primary" onButtonClick={this.handleSave}>Save</Button>
+        <Button buttonClass="btn-secondary" onButtonClick={this.props.onActivate}>Activate</Button>
       </div>
     );
   }

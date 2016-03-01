@@ -35,8 +35,8 @@ class Part extends Component {
           {this.props.data.fields.map((result) => <Field key={result._id} data={result} />)}
         </ul>
         <div className="btn-group pull-lg-right" role="group" aria-label="Basic example">
-          <Button text="Edit" buttonClass="btn-secondary" onButtonClick={this.handleEdit} />
-          <Button text="Remove" buttonClass="btn-secondary" onButtonClick={this.handleRemove} />
+          <Button buttonClass="btn-secondary" onButtonClick={this.handleEdit}>Edit</Button>
+          <Button buttonClass="btn-secondary" onButtonClick={this.handleRemove}>Remove</Button>
         </div>
       </li>
     );

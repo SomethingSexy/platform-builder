@@ -23,7 +23,8 @@ class AddCustomField extends Component {
     onRemove: PropTypes.func.isRequired,
     addField: PropTypes.func.isRequired,
     options: PropTypes.array.isRequired,
-    removeField: PropTypes.func.isRequired
+    removeField: PropTypes.func.isRequired,
+    type: PropTypes.string
   }
 
   constructor(props) {
@@ -66,9 +67,9 @@ class AddCustomField extends Component {
           <legend>{`Custom Field #${fieldCount}`}</legend>
           <Select name={typeName} label="Type" onChange={this.handleTypeChange} options={fieldTypes} required />
           <TextInput name={labelName} label="Label" required />
-          <Button text="Remove" onButtonClick={this.props.onRemove} />
+          <Button onButtonClick={this.props.onRemove}>Remove</Button>
         </fieldset>
-        {this.state.showAddOptions ? <Button text="Add Option" onButtonClick={this.handleAddOption} /> : null}
+        {this.state.showAddOptions ? <Button onButtonClick={this.handleAddOption}>Add Option</Button> : null}
         {this.state.showAddOptions ? this.props.options.map((result, index) => <AddCustomFieldOptions key={result._id} index={index} field={optionsField} onRemove={this.handleRemoveOption} {...result} />) : null}
       </div>
     );

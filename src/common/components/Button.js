@@ -3,8 +3,8 @@ import React, { Component, PropTypes } from 'react';
 class Button extends Component {
   static propTypes = {
     onButtonClick: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
-    buttonClass: PropTypes.string
+    buttonClass: PropTypes.string,
+    children: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -27,7 +27,7 @@ class Button extends Component {
     }
 
     return (
-      <button type="button" className={clazz} onClick={this.handleClick}>{this.props.text}</button>
+      <button type="button" className={clazz} onClick={this.handleClick}>{this.props.children}</button>
     );
   }
 }

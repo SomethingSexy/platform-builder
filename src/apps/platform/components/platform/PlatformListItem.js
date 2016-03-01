@@ -22,7 +22,7 @@ class PlatformListItem extends Component {
   render() {
     const uri = `/platform/${this.props.data._id}/build`;
     return (
-      <li><span><Link to={uri}>{this.props.data._id}</Link></span><span>{this.props.data.name}</span><Button text="Remove" onButtonClick={this.handleRemove} /></li>
+      <li><span><Link to={uri}>{this.props.data._id}</Link></span><span>{this.props.data.name}</span><Button onButtonClick={this.handleRemove}>Remove</Button></li>
     );
   }
 }
