@@ -317,3 +317,7 @@ export function activatePlatform(platformId) {
     // TODO: Might need to fetch categories again after this
   return (dispatch) => dispatch(putPlatform({ _id: platformId, active: true }));
 }
+
+export function addPartGroup(platformId, partGroup) {
+  
+}
