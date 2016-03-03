@@ -29,7 +29,7 @@ class AddCustomFieldOptions extends Component {
       <fieldset className="form-inline">
         <TextInput label="Label" name={labelName} required />
         <TextInput label="Value" name={valueName} required />
-        <Button onButtonClick={this.handleRemove}>Remove</Button>
+        <Button onClick={this.handleRemove}>Remove</Button>
       </fieldset>
     );
   }

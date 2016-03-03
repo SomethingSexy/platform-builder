@@ -25,7 +25,8 @@ class PlatformForm extends Component {
     onRemovePart: PropTypes.func.isRequired,
     onEditPart: PropTypes.func.isRequired,
     onActivate: PropTypes.func.isRequired,
-    onDeactivate: PropTypes.func.isRequired
+    onDeactivate: PropTypes.func.isRequired,
+    onAddPartGroup: PropTypes.func.isRequired
   }
   // For the model, we really only need to set the deep properties and arrays.  If I create
   // a multi-component (what AddcustomField would be) or some sort of deepComponent, than that
@@ -102,12 +103,12 @@ class PlatformForm extends Component {
         <Textarea name="description" label="Description" required />
         <Checkboxes label="Configuration" checkboxes={checkboxes} />
         <h4>Custom Fields</h4>
-        <Button buttonClass="btn-link" onButtonClick={this.handleAddField}>Add Field</Button>
+        <Button buttonClass="btn-link" onClick={this.handleAddField}>Add Field</Button>
         {this.props.form.fields.map((result, index) => <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField} addField={this.props.addField} removeField={this.props.removeField} {...result} />)}
         <h4>Diagram</h4>
-        <Parts platformId={this.props.form._id} parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart} />
-        <Button buttonClass="btn-primary" onButtonClick={this.handleSave}>Save</Button>
-        <Button buttonClass="btn-secondary" onButtonClick={this.props.onActivate}>Activate</Button>
+        <Parts platformId={this.props.form._id} parts={this.props.form.parts} onRemovePart={this.props.onRemovePart} onEditPart={this.props.onEditPart} onAddPartGroup={this.props.onAddPartGroup} />
+        <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
+        <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
       </div>
     );
   }

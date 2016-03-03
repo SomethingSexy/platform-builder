@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 class Button extends Component {
   static propTypes = {
-    onButtonClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
     buttonClass: PropTypes.string,
     children: PropTypes.string.isRequired
   }
@@ -17,7 +17,7 @@ class Button extends Component {
   }
 
   handleClick(event) {
-    this.props.onButtonClick(event);
+    this.props.onClick(event);
   }
 
   render() {

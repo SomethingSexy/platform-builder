@@ -32,7 +32,7 @@ class CreateProduct extends Component {
     if (!this.state.type) {
       return (
         <div>
-          <Button onButtonClick={this.buttonClickMass}>Mass-Produced Product</Button> <Button onButtonClick={this.buttonClickPersonal}>Personal Product</Button>
+          <Button onButtonClick={this.buttonClickMass}>Mass-Produced Product</Button> <Button onClick={this.buttonClickPersonal}>Personal Product</Button>
         </div>
       );
     }

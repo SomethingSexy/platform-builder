@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import PlatformForm from '../components/platform/PlatformForm.js';
-import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform } from '../../../common/actions/platform.js';
+import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 
 // I think we want create an initial platform first so that whatever the user
@@ -22,6 +22,7 @@ class UpdatePlatform extends Component {
     super(props);
     this.handleActivateBind = this.handleActivate.bind(this);
     this.handleDeactivateBind = this.handleDeactivate.bind(this);
+    this.handleAddPartGroup = this.handleAddPartGroup.bind(this);
   }
 
   // this will be handled here because we might have
@@ -47,6 +48,10 @@ class UpdatePlatform extends Component {
 
   }
 
+  handleAddPartGroup(partGroup) {
+    this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
+  }
+
   render() {
     const props = {
       form: this.props.platform,
@@ -55,7 +60,8 @@ class UpdatePlatform extends Component {
       onEditPart: this.handleEditPart.bind(this),
       parts: this.props.platform.parts,
       onActivate: this.handleActivateBind,
-      onDeactive: this.handleActivateBind
+      onDeactive: this.handleActivateBind,
+      onAddPartGroup: this.handleAddPartGroup
     };
 
     return (

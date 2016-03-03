@@ -25,3 +25,9 @@
 .part > .fields {
   margin-top: 5px;
 }
+
+.create-part-group {
+  border: 1px solid #ddd;
+  padding: 30px;
+  margin-top: 10px;
+}

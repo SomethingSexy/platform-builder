@@ -67,9 +67,9 @@ class AddCustomField extends Component {
           <legend>{`Custom Field #${fieldCount}`}</legend>
           <Select name={typeName} label="Type" onChange={this.handleTypeChange} options={fieldTypes} required />
           <TextInput name={labelName} label="Label" required />
-          <Button onButtonClick={this.props.onRemove}>Remove</Button>
+          <Button onClick={this.props.onRemove}>Remove</Button>
         </fieldset>
-        {this.state.showAddOptions ? <Button onButtonClick={this.handleAddOption}>Add Option</Button> : null}
+        {this.state.showAddOptions ? <Button onClick={this.handleAddOption}>Add Option</Button> : null}
         {this.state.showAddOptions ? this.props.options.map((result, index) => <AddCustomFieldOptions key={result._id} index={index} field={optionsField} onRemove={this.handleRemoveOption} {...result} />) : null}
       </div>
     );

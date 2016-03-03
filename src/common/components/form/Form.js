@@ -30,6 +30,10 @@ export default (ComposedComponent, options) => {
         this.model = Object.assign({}, options.model, this.props.form);
       }
 
+      if (options.className) {
+        this.className = options.className;
+      }
+
       this.validate = this.validate.bind(this);
       this.addField = this.addField.bind(this);
       this.removeField = this.removeField.bind(this);
@@ -138,7 +142,7 @@ export default (ComposedComponent, options) => {
 
     render() {
       return (
-        <form>
+        <form className={this.className}>
           <ComposedComponent {...this.props} form={this.model} validate={this.validate} addField={this.addField} removeField={this.removeField} />
         </form>
       );

@@ -50,9 +50,9 @@ class AddPartForm extends Component {
         <TextInput name="name" label="Name" required />
         <Textarea name="description" label="Description" required />
         <h3>Custom Fields</h3>
-        <Button onButtonClick={this.handleAddField}>Add Field</Button>
+        <Button onClick={this.handleAddField}>Add Field</Button>
         {this.props.form.fields.map((result, index) => <AddCustomField key={result._id} index={index} field="fields" onRemove={this.handleRemoveField} addField={this.props.addField} removeField={this.props.removeField} {...result} />)}
-        <Button onButtonClick={this.handleSave}>Save</Button>
+        <Button onClick={this.handleSave}>Save</Button>
       </div>
     );
   }
