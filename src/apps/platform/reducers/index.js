@@ -5,7 +5,7 @@ import categories from './categories.js';
 
 const platforms = combineReducers({
   platformsById,
-  workingPlatform: modeled(workingPlatform, 'workingPlatform')
+  workingPlatform: modeled(workingPlatform, 'platforms.workingPlatform')
 });
 
 const rootReducer = combineReducers({

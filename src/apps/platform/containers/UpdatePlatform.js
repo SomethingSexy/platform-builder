@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import PlatformForm from '../components/platform/PlatformForm.js';
+import { Field, actions } from 'react-redux-form';
+// import PlatformForm from '../components/platform/PlatformForm.js';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 
@@ -52,22 +53,41 @@ class UpdatePlatform extends Component {
     this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
   }
 
+  handleSubmit() {
+    let { user, dispatch } = this.props;
+    console.log(this.props);
+
+    // Do whatever you like in here.
+    // You can use redux simple form actions such as:
+    // actions.setPending('user', true);
+    // actions.setValidity('user.firstName', user.firstName.length > 0);
+    // actions.setSubmitted('user', true);
+    // etc.
+  }
+
   render() {
-    const props = {
-      form: this.props.platform,
-      onSave: this.handleSave.bind(this),
-      onRemovePart: this.handleRemovePart.bind(this),
-      onEditPart: this.handleEditPart.bind(this),
-      parts: this.props.platform.parts,
-      onActivate: this.handleActivateBind,
-      onDeactive: this.handleActivateBind,
-      onAddPartGroup: this.handleAddPartGroup
-    };
+    // const props = {
+    //   form: this.props.platform,
+    //   onSave: this.handleSave.bind(this),
+    //   onRemovePart: this.handleRemovePart.bind(this),
+    //   onEditPart: this.handleEditPart.bind(this),
+    //   parts: this.props.platform.parts,
+    //   onActivate: this.handleActivateBind,
+    //   onDeactive: this.handleActivateBind,
+    //   onAddPartGroup: this.handleAddPartGroup
+    // };
 
     return (
-      <div>
-        <PlatformForm {...props} />
-      </div>
+      <form onSubmit={() => this.handleSubmit()}>
+        <Field model="platforms.workingPlatform.name">
+          <label>Name:</label>
+          <input type="text" />
+        </Field>
+
+        <button type="submit">
+          Finish registration!
+        </button>
+      </form>
     );
   }
 }
@@ -75,7 +95,9 @@ class UpdatePlatform extends Component {
 function select(state, ownProps) {
   return {
     categories: state.categories.categories,
-    platform: state.platforms.workingPlatform
+    platforms: {
+      workingPlatform: state.platforms.workingPlatform
+    }
   };
 }
 
