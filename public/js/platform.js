@@ -698,7 +698,7 @@ $__System.registerDynamic("e", ["5", "a", "f", "10", "d", "11"], true, function(
   return module.exports;
 });
 
-$__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function($__require, exports, module) {
+$__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10", "11"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define;
@@ -731,6 +731,8 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function
   var _reactReduxForm = $__require('13');
   var _platform = $__require('f');
   var _categories = $__require('10');
+  var _Button = $__require('11');
+  var _Button2 = _interopRequireDefault(_Button);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {default: obj};
   }
@@ -772,6 +774,7 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function
       _this.handleActivateBind = _this.handleActivate.bind(_this);
       _this.handleDeactivateBind = _this.handleDeactivate.bind(_this);
       _this.handleAddPartGroup = _this.handleAddPartGroup.bind(_this);
+      _this.handleSave = _this.handleSave.bind(_this);
       return _this;
     }
     _createClass(UpdatePlatform, [{
@@ -786,8 +789,9 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function
       }
     }, {
       key: 'handleSave',
-      value: function handleSave(model) {
-        this.props.dispatch((0, _platform.savePlatform)(Object.assign({}, model)));
+      value: function handleSave(event) {
+        event.stopPropagation();
+        console.log(this.props.platforms.workingPlatform);
       }
     }, {
       key: 'handleActivate',
@@ -803,20 +807,33 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function
         this.props.dispatch((0, _platform.addPartGroup)(this.props.platform._id, partGroup));
       }
     }, {
-      key: 'handleSubmit',
-      value: function handleSubmit() {
-        var _props = this.props;
-        var user = _props.user;
-        var dispatch = _props.dispatch;
-        console.log(this.props);
-      }
-    }, {
       key: 'render',
       value: function render() {
-        var _this2 = this;
-        return _react2.default.createElement('form', {onSubmit: function onSubmit() {
-            return _this2.handleSubmit();
-          }}, _react2.default.createElement(_reactReduxForm.Field, {model: 'platforms.workingPlatform.name'}, _react2.default.createElement('label', null, 'Name:'), _react2.default.createElement('input', {type: 'text'})), _react2.default.createElement('button', {type: 'submit'}, 'Finish registration!'));
+        var isNameValid = (0, _reactReduxForm.getField)(this.props.platforms.workingPlatformForm, 'name').valid;
+        return _react2.default.createElement('form', null, _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.name',
+          validators: {required: function required(val) {
+              return val && val.length;
+            }}
+        }, _react2.default.createElement('fieldset', {className: isNameValid ? 'form-group' : 'form-group has-error'}, _react2.default.createElement('label', {htmlFor: ''}, 'Name'), _react2.default.createElement('input', {
+          type: 'text',
+          className: 'form-control',
+          placeholder: ''
+        }), !isNameValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }) : '')), _react2.default.createElement(_reactReduxForm.Field, {model: 'platforms.workingPlatform.description'}, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Description'), _react2.default.createElement('textarea', {
+          type: 'email',
+          className: 'form-control',
+          id: '',
+          placeholder: ''
+        }))), _react2.default.createElement(_Button2.default, {
+          buttonClass: 'btn-primary',
+          onClick: this.handleSave
+        }, 'Save'), _react2.default.createElement(_Button2.default, {
+          buttonClass: 'btn-secondary',
+          onClick: this.props.onActivate
+        }, 'Activate'));
       }
     }]);
     return UpdatePlatform;
@@ -824,12 +841,15 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10"], true, function
   UpdatePlatform.propTypes = {
     dispatch: _react.PropTypes.func.isRequired,
     categories: _react.PropTypes.array.isRequired,
-    platform: _react.PropTypes.object.isRequired
+    platforms: _react.PropTypes.object.isRequired
   };
   function select(state, ownProps) {
     return {
       categories: state.categories.categories,
-      platforms: {workingPlatform: state.platforms.workingPlatform}
+      platforms: {
+        workingPlatform: state.platforms.workingPlatform,
+        workingPlatformForm: state.platforms.workingPlatformForm
+      }
     };
   }
   exports.default = (0, _reactRedux.connect)(select)(UpdatePlatform);
@@ -9737,7 +9757,8 @@ $__System.registerDynamic("e2", ["e3", "13", "dd", "e1"], true, function($__requ
   }
   var platforms = (0, _redux.combineReducers)({
     platformsById: _platforms.platformsById,
-    workingPlatform: (0, _reactReduxForm.modeled)(_platforms.workingPlatform, 'platforms.workingPlatform')
+    workingPlatform: (0, _reactReduxForm.modeled)(_platforms.workingPlatform, 'platforms.workingPlatform'),
+    workingPlatformForm: (0, _reactReduxForm.createFormReducer)('platforms.workingPlatform')
   });
   var rootReducer = (0, _redux.combineReducers)({
     platforms: platforms,

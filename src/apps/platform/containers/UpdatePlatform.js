@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Field, actions } from 'react-redux-form';
+import { Field, actions, getField } from 'react-redux-form';
 // import PlatformForm from '../components/platform/PlatformForm.js';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
+import Button from '../../../common/components/Button.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -12,7 +13,7 @@ class UpdatePlatform extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
-    platform: PropTypes.object.isRequired
+    platforms: PropTypes.object.isRequired
   }
 
   static get needs() {
@@ -24,6 +25,7 @@ class UpdatePlatform extends Component {
     this.handleActivateBind = this.handleActivate.bind(this);
     this.handleDeactivateBind = this.handleDeactivate.bind(this);
     this.handleAddPartGroup = this.handleAddPartGroup.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   // this will be handled here because we might have
@@ -37,8 +39,10 @@ class UpdatePlatform extends Component {
     browserHistory.push(`/platform/${this.props.platform._id}/part/${partId}`);
   }
 
-  handleSave(model) {
-    this.props.dispatch(savePlatform(Object.assign({}, model)));
+  handleSave(event) {
+    event.stopPropagation();
+    console.log(this.props.platforms.workingPlatform);
+    // this.props.dispatch(savePlatform(Object.assign({}, model)));
   }
 
   handleActivate() {
@@ -53,40 +57,36 @@ class UpdatePlatform extends Component {
     this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
   }
 
-  handleSubmit() {
-    let { user, dispatch } = this.props;
-    console.log(this.props);
-
-    // Do whatever you like in here.
-    // You can use redux simple form actions such as:
-    // actions.setPending('user', true);
-    // actions.setValidity('user.firstName', user.firstName.length > 0);
-    // actions.setSubmitted('user', true);
-    // etc.
-  }
-
   render() {
-    // const props = {
-    //   form: this.props.platform,
-    //   onSave: this.handleSave.bind(this),
-    //   onRemovePart: this.handleRemovePart.bind(this),
-    //   onEditPart: this.handleEditPart.bind(this),
-    //   parts: this.props.platform.parts,
-    //   onActivate: this.handleActivateBind,
-    //   onDeactive: this.handleActivateBind,
-    //   onAddPartGroup: this.handleAddPartGroup
-    // };
-
+    // console.log(this.props.platforms.workingPlatformForm);
+    // const workingPlatform = ;
+    const isNameValid = getField(this.props.platforms.workingPlatformForm, 'name').valid;
+    const isDescriptionValid = getField(this.props.platforms.workingPlatformForm, 'description').valid;
+    // console.log(isNameValid);
+    // const isNameValid = true;
     return (
-      <form onSubmit={() => this.handleSubmit()}>
-        <Field model="platforms.workingPlatform.name">
-          <label>Name:</label>
-          <input type="text" />
+      <form>
+        <Field model="platforms.workingPlatform.name"
+          validators={{
+            required: (val) => val && val.length
+          }}
+        >
+          <fieldset className={isNameValid ? 'form-group' : 'form-group has-error'}>
+            <label htmlFor="">Name</label>
+            <input type="text" className ="form-control" placeholder="" />
+            {!isNameValid ? <span id="helpBlock2" className="help-block">Invalid field</span> : '' }
+          </fieldset>
+        </Field>
+        <Field model="platforms.workingPlatform.description">
+          <fieldset className="form-group">
+            <label htmlFor="">Description</label>
+            <textarea type="email" className ="form-control" id="" placeholder="" />
+            {!isDescriptionValid ? <span id="helpBlock2" className="help-block">Invalid field</span> : '' }
+          </fieldset>
         </Field>
 
-        <button type="submit">
-          Finish registration!
-        </button>
+        <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
+        <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
       </form>
     );
   }
@@ -96,7 +96,8 @@ function select(state, ownProps) {
   return {
     categories: state.categories.categories,
     platforms: {
-      workingPlatform: state.platforms.workingPlatform
+      workingPlatform: state.platforms.workingPlatform,
+      workingPlatformForm: state.platforms.workingPlatformForm
     }
   };
 }

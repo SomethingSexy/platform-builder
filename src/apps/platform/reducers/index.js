@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import { modeled } from 'react-redux-form';
+import { modeled, createFormReducer } from 'react-redux-form';
 import { platformsById, workingPlatform } from '../../../common/reducers/platforms.js';
 import categories from './categories.js';
 
 const platforms = combineReducers({
   platformsById,
-  workingPlatform: modeled(workingPlatform, 'platforms.workingPlatform')
+  workingPlatform: modeled(workingPlatform, 'platforms.workingPlatform'),
+  workingPlatformForm: createFormReducer('platforms.workingPlatform')
 });
 
 const rootReducer = combineReducers({
