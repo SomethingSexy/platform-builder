@@ -289,7 +289,7 @@ export function fetchPlatform(params) {
     const state = getState();
     let isFetch = true;
 
-    if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
+    if (state.platforms.platformsById && state.platforms.platformsById[params.platformId] && !state.platforms.platformsById[params.platformId].didInvalidate) {
       isFetch = false;
     }
 

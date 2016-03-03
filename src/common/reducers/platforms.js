@@ -105,6 +105,21 @@ export function platformsById(state = { }, action) {
   }
 }
 
+export function workingPlatform(state = { }, action) {
+  switch (action.type) {
+    case FETCHED_PLATFORM: {
+      return Object.assign({}, state, action.platform);
+    }
+    case CREATED_PLATFORM:
+      // just reset the entire state right?
+      return Object.assign({}, action.platform);
+    case SAVED_PLATFORM:
+      return Object.assign({}, state, action.platform);
+    default:
+      return state;
+  }
+}
+
 // this will be used to store the current platform that is being worked on
 // export function workingPlatformId(state = {}, action) {
 //   switch (action.type) {

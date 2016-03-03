@@ -75,8 +75,7 @@ class UpdatePlatform extends Component {
 function select(state, ownProps) {
   return {
     categories: state.categories.categories,
-    platform: state.platformsById[ownProps.params.platformId || state.workingPlatformId]
-    // parts: state.partsById
+    platform: state.platforms.workingPlatform
   };
 }
 

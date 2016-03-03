@@ -31,7 +31,8 @@ System.config({
     "react-addons-update": "npm:react-addons-update@0.14.7",
     "react-bootstrap": "npm:react-bootstrap@0.28.3",
     "react-dom": "npm:react-dom@0.14.7",
-    "react-redux": "npm:react-redux@3.1.2",
+    "react-redux": "npm:react-redux@4.4.0",
+    "react-redux-form": "npm:react-redux-form@0.7.1",
     "react-router": "npm:react-router@2.0.0",
     "redux": "npm:redux@3.3.1",
     "redux-history-transitions": "npm:redux-history-transitions@1.0.0",
@@ -324,6 +325,9 @@ System.config({
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"
     },
+    "npm:icepick@1.1.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:iconv-lite@0.4.13": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -381,7 +385,7 @@ System.config({
     "npm:lodash.tostring@4.1.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:lodash@4.5.1": {
+    "npm:lodash@4.6.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -495,10 +499,23 @@ System.config({
     "npm:react-prop-types@0.3.0": {
       "warning": "npm:warning@2.1.0"
     },
-    "npm:react-redux@3.1.2": {
+    "npm:react-redux-form@0.7.1": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "icepick": "npm:icepick@1.1.0",
+      "lodash": "npm:lodash@4.6.1",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.7",
+      "react-redux": "npm:react-redux@4.4.0",
+      "redux": "npm:redux@3.3.1"
+    },
+    "npm:react-redux@4.4.0": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
+      "lodash": "npm:lodash@4.6.1",
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.7",
       "redux": "npm:redux@3.3.1"
     },
     "npm:react-router@2.0.0": {
@@ -538,8 +555,8 @@ System.config({
       "deep-equal": "npm:deep-equal@1.0.1"
     },
     "npm:redux@3.3.1": {
-      "lodash": "npm:lodash@4.5.1",
-      "lodash-es": "npm:lodash-es@4.5.1",
+      "lodash": "npm:lodash@4.6.1",
+      "lodash-es": "npm:lodash-es@4.6.1",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
