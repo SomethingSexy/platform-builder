@@ -2716,7 +2716,7 @@ $__System.registerDynamic("f", ["dc"], true, function($__require, exports, modul
     return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-      if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+      if (state.platforms.platformsById && Object.keys(state.platforms.platformsById).length > 0) {
         isFetch = false;
       }
       return isFetch ? dispatch(getPlatforms()) : Promise.resolve();

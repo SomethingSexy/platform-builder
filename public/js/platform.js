@@ -760,6 +760,16 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10", "11"], true, fu
     if (superClass)
       Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
+  var fieldTypes = [{
+    label: '',
+    value: ''
+  }, {
+    label: 'Select',
+    value: 'select'
+  }, {
+    label: 'Textbox',
+    value: 'text'
+  }];
   var UpdatePlatform = function(_Component) {
     _inherits(UpdatePlatform, _Component);
     _createClass(UpdatePlatform, null, [{
@@ -775,6 +785,7 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10", "11"], true, fu
       _this.handleDeactivateBind = _this.handleDeactivate.bind(_this);
       _this.handleAddPartGroup = _this.handleAddPartGroup.bind(_this);
       _this.handleSave = _this.handleSave.bind(_this);
+      _this.handleAddField = _this.handleAddField.bind(_this);
       return _this;
     }
     _createClass(UpdatePlatform, [{
@@ -807,9 +818,23 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10", "11"], true, fu
         this.props.dispatch((0, _platform.addPartGroup)(this.props.platform._id, partGroup));
       }
     }, {
+      key: 'handleAddField',
+      value: function handleAddField() {
+        this.props.dispatch(_reactReduxForm.actions.push('platforms.workingPlatform.fields'));
+      }
+    }, {
+      key: 'handleAddFieldOption',
+      value: function handleAddFieldOption(fieldIndex) {
+        this.props.dispatch(_reactReduxForm.actions.push('platforms.workingPlatform.fields[' + fieldIndex + '].options'));
+      }
+    }, {
       key: 'render',
       value: function render() {
-        var isNameValid = (0, _reactReduxForm.getField)(this.props.platforms.workingPlatformForm, 'name').valid;
+        var _props$platforms = this.props.platforms;
+        var workingPlatformForm = _props$platforms.workingPlatformForm;
+        var workingPlatform = _props$platforms.workingPlatform;
+        var isNameValid = (0, _reactReduxForm.getField)(workingPlatformForm, 'name').valid;
+        var isDescriptionValid = (0, _reactReduxForm.getField)(workingPlatformForm, 'description').valid;
         return _react2.default.createElement('form', null, _react2.default.createElement(_reactReduxForm.Field, {
           model: 'platforms.workingPlatform.name',
           validators: {required: function required(val) {
@@ -822,12 +847,66 @@ $__System.registerDynamic("12", ["5", "a", "6", "13", "f", "10", "11"], true, fu
         }), !isNameValid ? _react2.default.createElement('span', {
           id: 'helpBlock2',
           className: 'help-block'
-        }) : '')), _react2.default.createElement(_reactReduxForm.Field, {model: 'platforms.workingPlatform.description'}, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Description'), _react2.default.createElement('textarea', {
+        }, 'Invalid field') : '')), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.description',
+          validators: {required: function required(val) {
+              return val && val.length;
+            }}
+        }, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Description'), _react2.default.createElement('textarea', {
           type: 'email',
           className: 'form-control',
           id: '',
           placeholder: ''
-        }))), _react2.default.createElement(_Button2.default, {
+        }), !isDescriptionValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, 'Invalid field') : '')), _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('legend', null, 'Configuration'), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showCompany',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow company'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showBrands',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow brands'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showPeople',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow people'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showTags',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow tags'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showPhotos',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow photos'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.showTransactions',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow transactions'))), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPlatform.allowAdditionalParts',
+          updateOn: 'change'
+        }, _react2.default.createElement('div', {className: 'checkbox'}, _react2.default.createElement('label', null, _react2.default.createElement('input', {type: 'checkbox'}), 'Allow additional parts')))), _react2.default.createElement('h4', null, 'Custom Fields'), _react2.default.createElement(_Button2.default, {onClick: this.handleAddField}, 'Add Field'), workingPlatform.fields.map(function(result, index) {
+          return _react2.default.createElement('div', {key: index}, _react2.default.createElement(_reactReduxForm.Field, {
+            model: 'platforms.workingPlatform.fields[' + index + '].type',
+            validators: {required: function required(val) {
+                return val && val.length;
+              }}
+          }, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Type'), _react2.default.createElement('select', {className: 'form-control'}, fieldTypes.map(function(option) {
+            return _react2.default.createElement('option', {
+              key: option.value,
+              value: option.value
+            }, option.label);
+          })))), _react2.default.createElement(_reactReduxForm.Field, {
+            model: 'platforms.workingPlatform.fields[' + index + '].label',
+            validators: {required: function required(val) {
+                return val && val.length;
+              }}
+          }, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Label'), _react2.default.createElement('input', {
+            type: 'text',
+            className: 'form-control'
+          }))), function(result) {
+            if (result.type === 'select') {
+              return _react2.default.createElement('div', null, 'balls');
+            }
+            return '';
+          }(result));
+        }), _react2.default.createElement(_Button2.default, {
           buttonClass: 'btn-primary',
           onClick: this.handleSave
         }, 'Save'), _react2.default.createElement(_Button2.default, {
@@ -2843,7 +2922,7 @@ $__System.registerDynamic("2b", ["5", "a", "f", "2a"], true, function($__require
     platforms: _react.PropTypes.object.isRequired
   };
   function select(state) {
-    return {platforms: state.platformsById};
+    return {platforms: state.platforms.platformsById};
   }
   exports.default = (0, _reactRedux.connect)(select)(PlatformList);
   return module.exports;
@@ -9124,7 +9203,7 @@ $__System.registerDynamic("f", ["dc"], true, function($__require, exports, modul
     return function(dispatch, getState) {
       var state = getState();
       var isFetch = true;
-      if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+      if (state.platforms.platformsById && Object.keys(state.platforms.platformsById).length > 0) {
         isFetch = false;
       }
       return isFetch ? dispatch(getPlatforms()) : Promise.resolve();

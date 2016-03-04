@@ -303,7 +303,7 @@ export function fetchPlatforms() {
     const state = getState();
     let isFetch = true;
 
-    if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+    if (state.platforms.platformsById && Object.keys(state.platforms.platformsById).length > 0) {
       isFetch = false;
     }
 

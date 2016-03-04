@@ -41,7 +41,7 @@ class PlatformList extends Component {
 
 function select(state) {
   return {
-    platforms: state.platformsById
+    platforms: state.platforms.platformsById
   };
 }
 
