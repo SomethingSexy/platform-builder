@@ -6,17 +6,7 @@ import { Field, actions, getField } from 'react-redux-form';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 import Button from '../../../common/components/Button.js';
-
-const fieldTypes = [{
-  label: '',
-  value: ''
-}, {
-  label: 'Select',
-  value: 'select'
-}, {
-  label: 'Textbox',
-  value: 'text'
-}];
+import FieldForm from '../components/FieldForm.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -38,6 +28,7 @@ class UpdatePlatform extends Component {
     this.handleAddPartGroup = this.handleAddPartGroup.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleAddField = this.handleAddField.bind(this);
+    this.handleAddFieldOption = this.handleAddFieldOption.bind(this);
   }
 
   // this will be handled here because we might have
@@ -70,7 +61,7 @@ class UpdatePlatform extends Component {
   }
 
   handleAddField() {
-    this.props.dispatch(actions.push('platforms.workingPlatform.fields'));
+    this.props.dispatch(actions.push('platforms.workingPlatform.fields', { options: []}));
   }
 
   handleAddFieldOption(fieldIndex) {
@@ -166,39 +157,7 @@ class UpdatePlatform extends Component {
         </fieldset>
         <h4>Custom Fields</h4>
         <Button onClick={this.handleAddField}>Add Field</Button>
-        {workingPlatform.fields.map((result, index) =>
-          <div key={index}>
-            <Field model={`platforms.workingPlatform.fields[${index}].type`}
-              validators={{
-                required: (val) => val && val.length
-              }}
-            >
-              <fieldset className="form-group">
-                <label htmlFor="">Type</label>
-                <select className="form-control">
-                  {fieldTypes.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
-                </select>
-              </fieldset>
-            </Field>
-            <Field model={`platforms.workingPlatform.fields[${index}].label`}
-              validators={{
-                required: (val) => val && val.length
-              }}
-            >
-              <fieldset className="form-group">
-                <label htmlFor="">Label</label>
-                <input type="text" className="form-control" />
-              </fieldset>
-            </Field>
-            {((result) => {
-              if (result.type === 'select') {
-                return <div>balls</div>;
-              }
-
-              return '';
-            })(result)}
-          </div>
-        )}
+        {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} platforms={this.props.platforms} onFieldAddOption={this.handleAddFieldOption} field={result} />)}
         <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
         <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
       </form>
