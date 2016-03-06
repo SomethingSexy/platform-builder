@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Field, actions, getField } from 'react-redux-form';
-// import PlatformForm from '../components/platform/PlatformForm.js';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 import Button from '../../../common/components/Button.js';
 import FieldForm from '../components/FieldForm.js';
+import Parts from '../../../common/components/parts/Parts.js';
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -29,6 +29,7 @@ class UpdatePlatform extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleAddField = this.handleAddField.bind(this);
     this.handleAddFieldOption = this.handleAddFieldOption.bind(this);
+    this.handleEditPart = this.handleEditPart.bind(this);
   }
 
   // this will be handled here because we might have
@@ -39,7 +40,7 @@ class UpdatePlatform extends Component {
   }
 
   handleEditPart(partId) {
-    browserHistory.push(`/platform/${this.props.platform._id}/part/${partId}`);
+    browserHistory.push(`/platform/${this.props.platforms.workingPlatform._id}/part/${partId}`);
   }
 
   handleSave(event) {
@@ -49,7 +50,7 @@ class UpdatePlatform extends Component {
   }
 
   handleActivate() {
-    this.props.dispatch(activatePlatform(this.props.platform._id));
+    this.props.dispatch(activatePlatform(this.props.platforms.workingPlatform._id));
   }
 
   handleDeactivate() {
@@ -57,11 +58,11 @@ class UpdatePlatform extends Component {
   }
 
   handleAddPartGroup(partGroup) {
-    this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
+    this.props.dispatch(addPartGroup(this.props.platforms.workingPlatform._id, partGroup));
   }
 
   handleAddField() {
-    this.props.dispatch(actions.push('platforms.workingPlatform.fields', { options: []}));
+    this.props.dispatch(actions.push('platforms.workingPlatform.fields', { options: [] }));
   }
 
   handleAddFieldOption(fieldIndex) {
@@ -158,6 +159,7 @@ class UpdatePlatform extends Component {
         <h4>Custom Fields</h4>
         <Button onClick={this.handleAddField}>Add Field</Button>
         {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} platforms={this.props.platforms} onFieldAddOption={this.handleAddFieldOption} field={result} />)}
+        <Parts platformId={workingPlatform._id} parts={workingPlatform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
         <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
         <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
       </form>

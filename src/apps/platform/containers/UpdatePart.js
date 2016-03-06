@@ -38,7 +38,7 @@ class UpdatePart extends Component {
 }
 
 function select(state, ownProps) {
-  const platform = state.platformsById[ownProps.params.platformId];
+  const platform = state.platforms.platformsById[ownProps.params.platformId];
   const part = _find(platform.parts, { _id: ownProps.params.partId });
 
   return {
