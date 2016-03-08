@@ -24,7 +24,8 @@ class CreatePart extends Component {
   }
 
   handleSave(model) {
-    this.props.dispatch(PlatformActions.createPartAndSavePlatform({ ...model, _createdPlatformId: this.props.platform._id }));
+    this.props.dispatch(PlatformActions.createPartAndSavePlatform({ ...model, _createdPlatformId: this.props.platform._id }))
+    .then(() => this.props.dispatch(actions.reset('platforms.workingPart')));
   }
 
   handleAddField() {
