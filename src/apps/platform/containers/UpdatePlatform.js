@@ -45,8 +45,8 @@ class UpdatePlatform extends Component {
 
   handleSave(event) {
     event.stopPropagation();
-    console.log(this.props.platforms.workingPlatform);
-    // this.props.dispatch(savePlatform(Object.assign({}, model)));
+    // Not sure if it is the best way to do it this way or have the action pull it from the working one?
+    this.props.dispatch(savePlatform(this.props.platforms.workingPlatform));
   }
 
   handleActivate() {
@@ -158,7 +158,7 @@ class UpdatePlatform extends Component {
         </fieldset>
         <h4>Custom Fields</h4>
         <Button onClick={this.handleAddField}>Add Field</Button>
-        {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} platforms={this.props.platforms} onFieldAddOption={this.handleAddFieldOption} field={result} />)}
+        {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} onFieldAddOption={this.handleAddFieldOption} field={result} fieldKey="platforms.workingPlatform" />)}
         <Parts platformId={workingPlatform._id} parts={workingPlatform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
         <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
         <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>

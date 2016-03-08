@@ -33,7 +33,7 @@ function platforms(state = {}, action) {
     case SAVED_PART: {
       // this might just shallow copy so it would still be changing original state?
       const savedPartState = Object.assign({}, state);
-      Object.assign(_find(savedPartState.parts, { _id: action.part._id}), action.part);
+      Object.assign(_find(savedPartState.parts, { _id: action.part._id }), action.part);
 
       return savedPartState;
     }
@@ -105,7 +105,7 @@ export function platformsById(state = { }, action) {
   }
 }
 
-export function workingPlatform(state = { }, action) {
+export function workingPlatform(state = { fields: [] }, action) {
   switch (action.type) {
     case FETCHED_PLATFORM: {
       return Object.assign({}, state, action.platform);
@@ -120,16 +120,9 @@ export function workingPlatform(state = { }, action) {
   }
 }
 
-// this will be used to store the current platform that is being worked on
-// export function workingPlatformId(state = {}, action) {
-//   switch (action.type) {
-//   case CREATED_PLATFORM:
-//     return action.platform._id;
-//   case FETCHED_PLATFORM:
-//     return action.platform._id;
-//   case CHANGED_WORKING_PLATFORM:
-//     return action.platform._id;
-//   default:
-//     return state || null;
-//   }
-// }
+export function workingPart(state = { fields: [] }, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}

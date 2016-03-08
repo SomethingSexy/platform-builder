@@ -15,10 +15,10 @@ const fieldTypes = [{
 
 class FieldForm extends Component {
   static propTypes = {
-    platforms: PropTypes.object.isRequired,
     field: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    onFieldAddOption: PropTypes.func.isRequired
+    onFieldAddOption: PropTypes.func.isRequired,
+    fieldKey: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -33,7 +33,7 @@ class FieldForm extends Component {
   render() {
     return (
       <div>
-        <Field model={`platforms.workingPlatform.fields[${this.props.index}].type`}
+        <Field model={`${this.props.fieldKey}.fields[${this.props.index}].type`}
           validators={{
             required: (val) => val && val.length
           }}
@@ -45,7 +45,7 @@ class FieldForm extends Component {
             </select>
           </fieldset>
         </Field>
-        <Field model={`platforms.workingPlatform.fields[${this.props.index}].label`}
+        <Field model={`${this.props.fieldKey}.fields[${this.props.index}].label`}
           validators={{
             required: (val) => val && val.length
           }}

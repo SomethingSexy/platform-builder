@@ -25,6 +25,14 @@ class UpdatePart extends Component {
     this.props.dispatch(PlatformActions.savePart(Object.assign({}, model)));
   }
 
+  handleAddField() {
+    this.props.dispatch(actions.push('platforms.workingPart.fields', { options: [] }));
+  }
+
+  handleAddFieldOption(fieldIndex) {
+    this.props.dispatch(actions.push(`platforms.workingPart.fields[${fieldIndex}].options`));
+  }  
+
   render() {
     const returnLink = `/platform/${this.props.platform._id}/build`;
     return (
