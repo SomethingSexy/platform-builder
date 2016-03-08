@@ -251,7 +251,7 @@ export function savePart(part) {
 
 export function removePlatform(platformId) {
   return (dispatch, getState) => {
-    const platform = getState().platformsById[platformId];
+    const platform = getState().platforms.platformsById[platformId];
     return dispatch(deletePlatform(platform));
   };
 }
@@ -259,7 +259,7 @@ export function removePlatform(platformId) {
 
 export function removePart(pardId) {
   return (dispatch, getState) => {
-    const part = getState().partsById[pardId];
+    const part = getState().platforms.partsById[pardId];
     return dispatch(deletePart(part));
   };
 }

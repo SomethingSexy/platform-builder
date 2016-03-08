@@ -30,6 +30,7 @@ class UpdatePlatform extends Component {
     this.handleAddField = this.handleAddField.bind(this);
     this.handleAddFieldOption = this.handleAddFieldOption.bind(this);
     this.handleEditPart = this.handleEditPart.bind(this);
+    this.handleRemovePart = this.handleRemovePart.bind(this);
   }
 
   // this will be handled here because we might have

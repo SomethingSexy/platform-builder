@@ -1,4 +1,5 @@
 import _find from 'lodash.find';
+import update from 'react/lib/update';
 import {
   CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM, SAVED_PART
 } from '../actions/platform.js';
@@ -115,6 +116,11 @@ export function workingPlatform(state = { fields: [] }, action) {
       return Object.assign({}, action.platform);
     case SAVED_PLATFORM:
       return Object.assign({}, state, action.platform);
+    case CREATED_PART: {
+      return update(state, {
+        parts: {$push: [action.part]}
+      });      
+    }
     default:
       return state;
   }

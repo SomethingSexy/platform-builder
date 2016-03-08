@@ -24,9 +24,7 @@ class PartForm extends Component {
   }
 
   handleSave() {
-    if (this.props.partForm.valid) {
-      this.props.onSave(this.props.part);      
-    }
+    this.props.onSave(this.props.part);      
   }
 
   render() {
