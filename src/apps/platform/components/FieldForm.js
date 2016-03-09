@@ -39,10 +39,12 @@ class FieldForm extends Component {
           <select className="form-control" {...type}>
             {fieldTypes.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
           </select>
+          {type.touched && type.error && <span id="helpBlock2" className="help-block">{type.error}</span>}
         </fieldset>
         <fieldset className="form-group">
           <label htmlFor="">Label</label>
           <input type="text" className="form-control" {...label} />
+          {label.touched && label.error && <span id="helpBlock2" className="help-block">{label.error}</span>}
         </fieldset>
   
       </div>

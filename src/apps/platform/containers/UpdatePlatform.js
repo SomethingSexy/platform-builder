@@ -8,13 +8,19 @@ import Button from '../../../common/components/Button.js';
 import FieldForm from '../components/FieldForm.js';
 import Parts from '../../../common/components/parts/Parts.js';
 
+const requireFields = (...names) => data =>
+  names.reduce((errors, name) => {
+    if (!data[name]) {
+      errors[name] = 'Required';
+    }
+    return errors;
+  }, {});
+
+const validateFields = requireFields('type', 'label');
 const validate = values => {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (!values.description) {
-    errors.description = 'Required';
-  }
+  const errors = requireFields('name', 'description')(values);
+  errors.fields = values.fields.map(validateFields);
+
   return errors;
 };
 

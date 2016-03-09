@@ -800,10 +800,16 @@ $__System.registerDynamic("12", ["5", "11"], true, function($__require, exports,
             key: option.value,
             value: option.value
           }, option.label);
-        }))), _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Label'), _react2.default.createElement('input', _extends({
+        })), type.touched && type.error && _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, type.error)), _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Label'), _react2.default.createElement('input', _extends({
           type: 'text',
           className: 'form-control'
-        }, label))));
+        }, label)), label.touched && label.error && _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, label.error)));
       }
     }]);
     return FieldForm;
@@ -2003,13 +2009,25 @@ $__System.registerDynamic("24", ["5", "a", "6", "25", "f", "10", "11", "12", "23
     if (superClass)
       Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
-  var validate = function validate(values) {
-    var errors = {};
-    if (!values.name) {
-      errors.name = 'Required';
-    } else if (!values.description) {
-      errors.description = 'Required';
+  var requireFields = function requireFields() {
+    for (var _len = arguments.length,
+        names = Array(_len),
+        _key = 0; _key < _len; _key++) {
+      names[_key] = arguments[_key];
     }
+    return function(data) {
+      return names.reduce(function(errors, name) {
+        if (!data[name]) {
+          errors[name] = 'Required';
+        }
+        return errors;
+      }, {});
+    };
+  };
+  var validateFields = requireFields('type', 'label');
+  var validate = function validate(values) {
+    var errors = requireFields('name', 'description')(values);
+    errors.fields = values.fields.map(validateFields);
     return errors;
   };
   var fields = ['name', 'description', 'showCompany', 'showBrands', 'showPeople', 'showTags', 'showPhotos', 'showTransactions', 'allowAdditionalParts', 'fields[].type', 'fields[].label', 'fields[].options[].label', 'fields[].options[].value'];
