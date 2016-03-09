@@ -42,7 +42,7 @@ class CreatePart extends Component {
       <div>
         <h3>Create New Part</h3>
         <Link to={returnLink}>Return to Platform</Link>
-        <PartForm part={this.props.part} partForm={this.props.workingPartForm} onSave={this.handleSave} onFieldAdd={this.handleAddField} />
+        <PartForm onSave={this.handleSave} part={this.props.part} onFieldAdd={this.handleAddField} />
       </div>
     );
   }

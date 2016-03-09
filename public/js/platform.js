@@ -2155,9 +2155,8 @@ $__System.registerDynamic("26", ["5", "a", "27", "f", "6", "25"], true, function
       value: function render() {
         var returnLink = '/platform/' + this.props.platform._id + '/build';
         return _react2.default.createElement('div', null, _react2.default.createElement('h3', null, 'Create New Part'), _react2.default.createElement(_reactRouter.Link, {to: returnLink}, 'Return to Platform'), _react2.default.createElement(_PartForm2.default, {
-          part: this.props.part,
-          partForm: this.props.workingPartForm,
           onSave: this.handleSave,
+          part: this.props.part,
           onFieldAdd: this.handleAddField
         }));
       }
@@ -2267,6 +2266,8 @@ $__System.registerDynamic("24", ["5", "25", "11"], true, function($__require, ex
     }, {
       key: 'render',
       value: function render() {
+        var isTypeValid = (0, _reactReduxForm.getField)(this.props.partForm, 'type').valid;
+        var isLabelValid = (0, _reactReduxForm.getField)(this.props.partForm, 'label').valid;
         return _react2.default.createElement('div', null, _react2.default.createElement(_reactReduxForm.Field, {
           model: this.props.fieldKey + '.fields[' + this.props.index + '].type',
           validators: {required: function required(val) {
@@ -2277,7 +2278,10 @@ $__System.registerDynamic("24", ["5", "25", "11"], true, function($__require, ex
             key: option.value,
             value: option.value
           }, option.label);
-        })))), _react2.default.createElement(_reactReduxForm.Field, {
+        })), !isTypeValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, 'Invalid field') : '')), _react2.default.createElement(_reactReduxForm.Field, {
           model: this.props.fieldKey + '.fields[' + this.props.index + '].label',
           validators: {required: function required(val) {
               return val && val.length;
@@ -2285,7 +2289,10 @@ $__System.registerDynamic("24", ["5", "25", "11"], true, function($__require, ex
         }, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Label'), _react2.default.createElement('input', {
           type: 'text',
           className: 'form-control'
-        }))), this.props.field.type === 'select' ? _react2.default.createElement(_Button2.default, {onClick: this.handleAddFieldOption}, 'Add Option') : '');
+        }), !isLabelValid ? _react2.default.createElement('span', {
+          id: 'helpBlock2',
+          className: 'help-block'
+        }, 'Invalid field') : '')), this.props.field.type === 'select' ? _react2.default.createElement(_Button2.default, {onClick: this.handleAddFieldOption}, 'Add Option') : '');
       }
     }]);
     return FieldForm;
@@ -2294,13 +2301,14 @@ $__System.registerDynamic("24", ["5", "25", "11"], true, function($__require, ex
     field: _react.PropTypes.object.isRequired,
     index: _react.PropTypes.number.isRequired,
     onFieldAddOption: _react.PropTypes.func.isRequired,
-    fieldKey: _react.PropTypes.string.isRequired
+    fieldKey: _react.PropTypes.string.isRequired,
+    partForm: _react.PropTypes.object.isRequired
   };
   exports.default = FieldForm;
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6", "a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define;
@@ -2336,6 +2344,7 @@ $__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, functio
   var _FieldForm = $__require('24');
   var _FieldForm2 = _interopRequireDefault(_FieldForm);
   var _reactRouter = $__require('6');
+  var _reactRedux = $__require('a');
   function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
       return obj;
@@ -2395,7 +2404,9 @@ $__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, functio
     _createClass(PartForm, [{
       key: 'handleSave',
       value: function handleSave() {
-        this.props.onSave(this.props.part);
+        this.props.dispatch(_reactReduxForm.actions.setValidity('platforms.workingPart', true));
+        console.log(this.props.part);
+        console.log(this.props.partForm);
       }
     }, {
       key: 'render',
@@ -2403,26 +2414,24 @@ $__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, functio
         var _this2 = this;
         var isNameValid = (0, _reactReduxForm.getField)(this.props.partForm, 'name').valid;
         var isDescriptionValid = (0, _reactReduxForm.getField)(this.props.partForm, 'description').valid;
-        return _react2.default.createElement(_reactReduxForm.Form, {
-          model: 'platforms.workingPart',
-          onSubmit: this.handleSave,
-          validators: {
-            name: function name(val) {
-              return val !== null && val !== undefined;
-            },
-            description: function description(val) {
-              return val !== null && val !== undefined;
-            }
-          },
-          validateOn: 'submit'
-        }, _react2.default.createElement(_reactReduxForm.Field, {model: 'platforms.workingPart.name'}, _react2.default.createElement('fieldset', {className: isNameValid ? 'form-group' : 'form-group has-error'}, _react2.default.createElement('label', {htmlFor: ''}, 'Name'), _react2.default.createElement('input', {
+        return _react2.default.createElement(_reactReduxForm.Form, null, _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPart.name',
+          validators: {required: function required(val) {
+              return val && val.length;
+            }}
+        }, _react2.default.createElement('fieldset', {className: isNameValid ? 'form-group' : 'form-group has-error'}, _react2.default.createElement('label', {htmlFor: ''}, 'Name'), _react2.default.createElement('input', {
           type: 'text',
           className: 'form-control',
           placeholder: ''
         }), !isNameValid ? _react2.default.createElement('span', {
           id: 'helpBlock2',
           className: 'help-block'
-        }, 'Invalid field') : '')), _react2.default.createElement(_reactReduxForm.Field, {model: 'platforms.workingPart.description'}, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Description'), _react2.default.createElement('textarea', {
+        }, 'Invalid field') : '')), _react2.default.createElement(_reactReduxForm.Field, {
+          model: 'platforms.workingPart.description',
+          validators: {required: function required(val) {
+              return val && val.length;
+            }}
+        }, _react2.default.createElement('fieldset', {className: 'form-group'}, _react2.default.createElement('label', {htmlFor: ''}, 'Description'), _react2.default.createElement('textarea', {
           type: 'email',
           className: 'form-control',
           id: '',
@@ -2436,11 +2445,13 @@ $__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, functio
             key: index,
             onFieldAddOption: _this2.handleAddFieldOption,
             field: result,
-            fieldKey: 'platforms.workingPart'
+            fieldKey: 'platforms.workingPart',
+            partForm: _this2.props.partForm
           });
         }), _react2.default.createElement('button', {
-          type: 'submit',
-          className: 'btn btn-primary'
+          type: 'input',
+          className: 'btn btn-primary',
+          onClick: this.handleSave
         }, 'Save'));
       }
     }]);
@@ -2453,7 +2464,10 @@ $__System.registerDynamic("27", ["5", "25", "f", "11", "24", "6"], true, functio
     onSave: _react.PropTypes.func.isRequired,
     onFieldAdd: _react.PropTypes.func.isRequired
   };
-  exports.default = PartForm;
+  function select(state, ownProps) {
+    return {partForm: state.platforms.workingPartForm};
+  }
+  exports.default = (0, _reactRedux.connect)(select)(PartForm);
   return module.exports;
 });
 
