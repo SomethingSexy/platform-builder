@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PartForm from './PartForm.js';
 import * as PlatformActions from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
-import { actions } from 'react-redux-form';
+// import { actions } from 'react-redux-form';
 
 class UpdatePart extends Component {
   static propTypes = {

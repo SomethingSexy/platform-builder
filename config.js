@@ -19,7 +19,7 @@ System.config({
     "clean-css": "npm:clean-css@3.4.10",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
-    "events": "npm:events@1.1.0",
+    "events": "npm:events@1.0.2",
     "history": "npm:history@1.17.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
     "lodash.find": "npm:lodash.find@4.2.0",
@@ -32,9 +32,9 @@ System.config({
     "react-bootstrap": "npm:react-bootstrap@0.28.3",
     "react-dom": "npm:react-dom@0.14.7",
     "react-redux": "npm:react-redux@4.4.0",
-    "react-redux-form": "npm:react-redux-form@0.8.1",
     "react-router": "npm:react-router@2.0.0",
     "redux": "npm:redux@3.3.1",
+    "redux-form": "npm:redux-form@4.2.1",
     "redux-history-transitions": "npm:redux-history-transitions@1.0.0",
     "redux-logger": "npm:redux-logger@2.6.1",
     "redux-router": "npm:redux-router@1.0.0-beta3",
@@ -298,9 +298,6 @@ System.config({
     "npm:fbjs@0.6.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:flat@2.0.0": {
-      "is-buffer": "npm:is-buffer@1.1.3"
-    },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
@@ -326,9 +323,6 @@ System.config({
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"
     },
-    "npm:icepick@1.1.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:iconv-lite@0.4.13": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -342,9 +336,6 @@ System.config({
     "npm:invariant@2.2.0": {
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:is-buffer@1.1.3": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
@@ -488,6 +479,9 @@ System.config({
     "npm:react-dom@0.14.7": {
       "react": "npm:react@0.14.7"
     },
+    "npm:react-lazy-cache@3.0.1": {
+      "deep-equal": "npm:deep-equal@1.0.1"
+    },
     "npm:react-overlays@0.6.0": {
       "classnames": "npm:classnames@2.2.3",
       "dom-helpers": "npm:dom-helpers@2.4.0",
@@ -501,17 +495,6 @@ System.config({
     },
     "npm:react-prop-types@0.3.0": {
       "warning": "npm:warning@2.1.0"
-    },
-    "npm:react-redux-form@0.8.1": {
-      "flat": "npm:flat@2.0.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "icepick": "npm:icepick@1.1.0",
-      "lodash": "npm:lodash@4.6.1",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.7",
-      "react-redux": "npm:react-redux@4.4.0",
-      "redux": "npm:redux@3.3.1"
     },
     "npm:react-redux@4.4.0": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
@@ -554,6 +537,15 @@ System.config({
       "process-nextick-args": "npm:process-nextick-args@1.0.6",
       "string_decoder": "npm:string_decoder@0.10.31",
       "util-deprecate": "npm:util-deprecate@1.0.2"
+    },
+    "npm:redux-form@4.2.1": {
+      "deep-equal": "npm:deep-equal@1.0.1",
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
+      "is-promise": "npm:is-promise@2.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react-lazy-cache": "npm:react-lazy-cache@3.0.1",
+      "react-redux": "npm:react-redux@4.4.0",
+      "redux": "npm:redux@3.3.1"
     },
     "npm:redux-router@1.0.0-beta3": {
       "deep-equal": "npm:deep-equal@1.0.1"

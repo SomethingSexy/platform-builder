@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Form, Field, actions, getField } from 'react-redux-form';
+// import { Form, Field, actions, getField } from 'react-redux-form';
 import * as PlatformActions from '../../../common/actions/platform.js';
 import Button from '../../../common/components/Button.js';
-import FieldForm from '../components/FieldForm.js';
+// import FieldForm from '../components/FieldForm.js';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 

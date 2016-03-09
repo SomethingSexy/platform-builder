@@ -1,12 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Field, actions, getField } from 'react-redux-form';
+import { reduxForm, addArrayValue } from 'redux-form';
 import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 import Button from '../../../common/components/Button.js';
 import FieldForm from '../components/FieldForm.js';
 import Parts from '../../../common/components/parts/Parts.js';
+
+const validate = values => {
+  const errors = {};
+  if (!values.name) {
+    errors.name = 'Required';
+  } else if (!values.description) {
+    errors.description = 'Required';
+  }
+  return errors;
+};
+
+const fields =  [
+  'name', 
+  'description', 
+  'showCompany', 
+  'showBrands', 
+  'showPeople', 
+  'showTags', 
+  'showPhotos', 
+  'showTransactions', 
+  'allowAdditionalParts', 
+  'fields[].type',
+  'fields[].label',
+  'fields[].options[].label',
+  'fields[].options[].value']
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -71,97 +96,80 @@ class UpdatePlatform extends Component {
   }
 
   render() {
-    const { workingPlatformForm, workingPlatform } = this.props.platforms;
-    const isNameValid = getField(workingPlatformForm, 'name').valid;
-    const isDescriptionValid = getField(workingPlatformForm, 'description').valid;
+    const {
+      fields: {name, description, fields},
+      handleSubmit,
+      resetForm,
+      submitting
+      } = this.props;
     return (
-      <form>
-        <Field model="platforms.workingPlatform.name"
-          validators={{
-            required: (val) => val && val.length
-          }}
-        >
-          <fieldset className={isNameValid ? 'form-group' : 'form-group has-error'}>
-            <label htmlFor="">Name</label>
-            <input type="text" className ="form-control" placeholder="" />
-            {!isNameValid ? <span id="helpBlock2" className="help-block">Invalid field</span> : '' }
-          </fieldset>
-        </Field>
-        <Field model="platforms.workingPlatform.description"
-          validators={{
-            required: (val) => val && val.length
-          }}
-        >
-          <fieldset className="form-group">
-            <label htmlFor="">Description</label>
-            <textarea type="email" className ="form-control" id="" placeholder="" />
-            {!isDescriptionValid ? <span id="helpBlock2" className="help-block">Invalid field</span> : '' }
-          </fieldset>
-        </Field>
+      <form onSubmit={handleSubmit}>
+        <fieldset className="form-group">
+          <label htmlFor="">Name</label>
+          <input type="text" className ="form-control" {...name}/>
+          {name.touched && name.error && <span id="helpBlock2" className="help-block">{name.error}</span>}
+        </fieldset>
+        <fieldset className="form-group">
+          <label htmlFor="">Description</label>
+          <textarea className ="form-control" {...description}/>
+          {description.touched && description.error && <span id="helpBlock2" className="help-block">{description.error}</span>}
+        </fieldset>
         <fieldset className="form-group">
           <legend>Configuration</legend>
-          <Field model="platforms.workingPlatform.showCompany" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showCompany}></input>
                 Allow company
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.showBrands" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showBrands}></input>
                 Allow brands
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.showPeople" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showPeople}></input>
                 Allow people
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.showTags" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showTags}></input>
                 Allow tags
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.showPhotos" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showPhotos}></input>
                 Allow photos
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.showTransactions" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.showTransactions}></input>
                 Allow transactions
               </label>
             </div>
-          </Field>
-          <Field model="platforms.workingPlatform.allowAdditionalParts" updateOn="change">
             <div className="checkbox">
               <label>
-                <input type="checkbox" ></input>
+                <input type="checkbox" {...this.props.fields.allowAdditionalParts}></input>
                 Allow additional parts
               </label>
             </div>
-          </Field>
         </fieldset>
         <h4>Custom Fields</h4>
-        <Button onClick={this.handleAddField}>Add Field</Button>
-        {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} onFieldAddOption={this.handleAddFieldOption} field={result} fieldKey="platforms.workingPlatform" />)}
-        <Parts platformId={workingPlatform._id} parts={workingPlatform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
-        <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
+          <button type="button" onClick={() => {
+            fields.addField();
+          }}><i/> Add Field
+          </button>
+        {fields.map((field, index) => <FieldForm key={index} {...field}/>)}
+        <button className="btn btn-primary" type="submit"onClick={handleSubmit(data => {
+            // do something with data. validation will have been called at this point,
+            // so you know the data is valid
+            console.log(data);
+          })}>Save</button>
         <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
       </form>
     );
@@ -178,5 +186,22 @@ function select(state, ownProps) {
   };
 }
 
+UpdatePlatform = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
+  form: 'platform',                           // a unique name for this form
+  fields,
+  validate
+}, (state, ownProps) => {
+  return {
+    initialValues: state.platforms.platformsById[ownProps.params.platformId]
+  };
+},{
+  addValue: addArrayValue
+})(UpdatePlatform);
+
 // not sure what this would all need yet
 export default connect(select)(UpdatePlatform);
+
+
+        // <Button onClick={this.handleAddField}>Add Field</Button>
+        // {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} onFieldAddOption={this.handleAddFieldOption} field={result} fieldKey="platforms.workingPlatform" />)}
+        // <Parts platformId={workingPlatform._id} parts={workingPlatform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
