@@ -23,6 +23,7 @@ System.config({
     "history": "npm:history@1.17.0",
     "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
     "lodash.find": "npm:lodash.find@4.2.0",
+    "lodash.findindex": "npm:lodash.findindex@4.2.0",
     "lodash.get": "npm:lodash.get@4.1.2",
     "lodash.omit": "npm:lodash.omit@4.1.0",
     "lodash.set": "npm:lodash.set@4.0.0",
@@ -359,6 +360,10 @@ System.config({
     "npm:lodash.find@4.2.0": {
       "lodash._baseeach": "npm:lodash._baseeach@4.1.1",
       "lodash._basefind": "npm:lodash._basefind@3.0.0",
+      "lodash._basefindindex": "npm:lodash._basefindindex@3.6.0",
+      "lodash._baseiteratee": "npm:lodash._baseiteratee@4.5.2"
+    },
+    "npm:lodash.findindex@4.2.0": {
       "lodash._basefindindex": "npm:lodash._basefindindex@3.6.0",
       "lodash._baseiteratee": "npm:lodash._baseiteratee@4.5.2"
     },

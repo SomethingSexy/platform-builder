@@ -65,11 +65,8 @@ class UpdatePlatform extends Component {
     this.handleRemovePart = this.handleRemovePart.bind(this);
   }
 
-  // this will be handled here because we might have
-  // to do some special handling with it
   handleRemovePart(partId) {
-    // call to delete the part, which will remove it from
-    this.props.dispatch(removePartAndSavePlatform(partId));
+    this.props.dispatch(removePartAndSavePlatform(this.props.platform._id, partId));
   }
 
   handleEditPart(partId) {

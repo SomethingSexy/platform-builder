@@ -14,12 +14,16 @@ export default (app) => {
     try {
       await next(); // next is now a function
       const store = productStore();
-      const html = await processAppRequest(null, null, ctx.request.url, store, productRoutes, indexHTML);
+      const html = await processAppRequest(ctx.request.url, store, productRoutes, indexHTML);
       ctx.body = html;
       ctx.status = 200;
       ctx.type = 'text/html';
     } catch (err) {
-      ctx.body = { message: err.message };
+      if (err.status === 301) {
+        ctx.redirect(err.uri);
+      } else {
+        ctx.body = { message: err.message };
+      }
       ctx.status = err.status || 500;
     }
   });
@@ -28,12 +32,16 @@ export default (app) => {
     try {
       await next(); // next is now a function
       const store = productStore();
-      const html = await processAppRequest(null, null, ctx.request.url, store, productRoutes, indexHTML);
+      const html = await processAppRequest(ctx.request.url, store, productRoutes, indexHTML);
       ctx.body = html;
       ctx.status = 200;
       ctx.type = 'text/html';
     } catch (err) {
-      ctx.body = { message: err.message };
+      if (err.status === 301) {
+        ctx.redirect(err.uri);
+      } else {
+        ctx.body = { message: err.message };
+      }
       ctx.status = err.status || 500;
     }
   });
@@ -42,12 +50,16 @@ export default (app) => {
     try {
       await next(); // next is now a function
       const store = productStore();
-      const html = await processAppRequest(null, null, ctx.request.url, store, productRoutes, indexHTML);
+      const html = await processAppRequest(ctx.request.url, store, productRoutes, indexHTML);
       ctx.body = html;
       ctx.status = 200;
       ctx.type = 'text/html';
     } catch (err) {
-      ctx.body = { message: err.message };
+      if (err.status === 301) {
+        ctx.redirect(err.uri);
+      } else {
+        ctx.body = { message: err.message };
+      }
       ctx.status = err.status || 500;
     }
   });

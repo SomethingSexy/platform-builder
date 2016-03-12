@@ -176,13 +176,15 @@ export default (app) => {
   router.del('/api/platform/:id/part/:partId', async (ctx, next) => {
     try {
       await next();
-      // this is what the api will do in the end
-      // 1. look up part
-      // 2. check to see if it is active
-      //    if it is active remove from platform but don't delete part in DB
-      //    if it is not active remove from DB and platform
+      if (!ctx.params.id) {
+        ctx.status = 400;
+        ctx.status = missingIdError;
+        return;
+      }
+      await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}/part/${ctx.params.partId}`, {
+        method: 'delete'
+      });
       ctx.status = 200;
-      ctx.body = {};
     } catch (err) {
       ctx.body = { message: err.message };
       ctx.status = err.status || 500;

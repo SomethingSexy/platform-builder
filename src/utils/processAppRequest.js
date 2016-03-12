@@ -9,8 +9,8 @@ const htmlRegex = /¡HTML!/;
 const dataRegex = /¡DATA!/;
 
 // maybe this should have a parameter for the js/css instead?
-export default function processAppRequest(req, res, url, store, routes, indexHTML) {
-  return new Promise((resolve) => {
+export default function processAppRequest(url, store, routes, indexHTML) {
+  return new Promise((resolve, reject) => {
     const history = createMemoryHistory();
     const location = history.createLocation(url);
     // give the location we need to load
@@ -21,27 +21,34 @@ export default function processAppRequest(req, res, url, store, routes, indexHTM
       // I think at this point we could add custom data to the renderProps to pass
       // to our components
       if (redirectLocation) {
-        res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+        reject({
+          status: 301,
+          uri: redirectLocation.pathname + redirectLocation.search
+        });
       } else if (error) {
-        res.send(500, error.message);
-        res.end();
+        reject({
+          status: 500,
+          message: error.message
+        });
       } else if (renderProps === null) {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end();
+        reject({
+          status: 404
+        });
       } else {
         return fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
           const initialData = store.getState();
           const html = renderToString(<Provider store={store}><RouterContext {...renderProps} /></Provider>);
-          const output = indexHTML
-            .replace(htmlRegex, html)
-            .replace(dataRegex, JSON.stringify(initialData));
+          const output = indexHTML.
+            replace(htmlRegex, html).
+            replace(dataRegex, JSON.stringify(initialData));
           resolve(output);
         })
         .catch((fetchError) => {
-          console.log('fetcherror ' + fetchError);
-          res.send(500, 'Fetch failed');
-          res.end();
+          reject({
+            status: 500,
+            message: fetchError
+          });
         });
       }
     });

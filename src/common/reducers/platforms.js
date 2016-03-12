@@ -1,4 +1,5 @@
 import _find from 'lodash.find';
+import _findindex from 'lodash.findindex';
 import update from 'react/lib/update';
 import {
   CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM, SAVED_PART
@@ -41,7 +42,7 @@ function platforms(state = {}, action) {
     case DELETED_PART:
       // when a part is created we need to add it to the list of parts
       if (state.parts) {
-        const index = state.parts.indexOf(action.part._id);
+        const index = _findindex(state.parts, { _id: action.partId });
         // TODO: this should be slice instead
         if (index > -1) {
           state.parts.splice(index, 1);
@@ -94,9 +95,8 @@ export function platformsById(state = { }, action) {
         [action.part._createdPlatformId]: platforms(state[action.part._createdPlatformId], action)
       });
     case DELETED_PART: {
-      const deleteId = action.part._createdPlatformId;
       return Object.assign({}, state, {
-        [deleteId]: platforms(state[deleteId], action)
+        [action.platformId]: platforms(state[action.platformId], action)
       });
     }
     case DELETED_PLATFORM:
@@ -105,30 +105,3 @@ export function platformsById(state = { }, action) {
       return state;
   }
 }
-
-// export function workingPlatform(state = { fields: [] }, action) {
-//   switch (action.type) {
-//     case FETCHED_PLATFORM: {
-//       return Object.assign({}, state, action.platform);
-//     }
-//     case CREATED_PLATFORM:
-//       // just reset the entire state right?
-//       return Object.assign({}, action.platform);
-//     case SAVED_PLATFORM:
-//       return Object.assign({}, state, action.platform);
-//     case CREATED_PART: {
-//       return update(state, {
-//         parts: {$push: [action.part]}
-//       });      
-//     }
-//     default:
-//       return state;
-//   }
-// }
-
-// export function workingPart(state = { fields: [] }, action) {
-//   switch (action.type) {
-//     default:
-//       return state;
-//   }
-// }

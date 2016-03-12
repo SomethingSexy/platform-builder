@@ -41,17 +41,19 @@ function createdPlatform(platform) {
   };
 }
 
-function deletingPart(part) {
+function deletingPart(platformId, partId) {
   return {
     type: DELETING_PART,
-    part
+    platformId,
+    partId
   };
 }
 
-function deletedPart(part) {
+function deletedPart(platformId, partId) {
   return {
     type: DELETED_PART,
-    part
+    platformId,
+    partId
   };
 }
 
@@ -213,13 +215,13 @@ function putPart(part) {
   };
 }
 
-function deletePart(part) {
+function deletePart(platformId, partId) {
   return dispatch => {
-    dispatch(deletingPart(part));
-    return fetch(`/api/platform/${part._createdPlatformId}/part/${part.id}`, {
+    dispatch(deletingPart(platformId, partId));
+    return fetch(`/api/platform/${platformId}/part/${partId}`, {
       method: 'delete'
     })
-      .then(() => dispatch(deletedPart(part)));
+      .then(() => dispatch(deletedPart(platformId, partId)));
   };
 }
 
@@ -257,31 +259,17 @@ export function removePlatform(platformId) {
 }
 
 
-export function removePart(pardId) {
-  return (dispatch, getState) => {
-    const part = getState().platforms.partsById[pardId];
-    return dispatch(deletePart(part));
-  };
+export function removePart(platformId, partId) {
+  return dispatch => dispatch(deletePart(platformId, partId));
 }
 
 // Create a part and add it to the platform right away
 export function createPartAndSavePlatform(part) {
-  return (dispatch) => dispatch(createPart(part));
+  return dispatch => dispatch(createPart(part));
 }
 
-// Delete the part and remove it from the platform
-// TODO: Maybe we should just do this on the server-side, the removing it
-// from the platform
-export function removePartAndSavePlatform(partId) {
-  // remove part from platform (server will determine if it should delete the part out right)
-  // then remove from partsById
-  return (dispatch, getState) => dispatch(removePart(partId))
-    .then(() => {
-      const state = getState();
-      const part = state.partsById[partId];
-      const platform = state.platformsById[part._createdPlatformId];
-      return dispatch(savePlatform(platform));
-    });
+export function removePartAndSavePlatform(platformId, partId) {
+  return dispatch => dispatch(removePart(platformId, partId));
 }
 
 export function fetchPlatform(params) {
