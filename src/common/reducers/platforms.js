@@ -47,8 +47,14 @@ function platforms(state = {}, action) {
         if (index > -1) {
           state.parts.splice(index, 1);
         }
+        return {
+          ...state,
+          ...state.parts.slice(index, index + 1)
+        };
       }
+
       return state;
+
     case DELETED_PLATFORM: {
       const deletedState = Object.assign({}, state);
       delete deletedState[action.platform._id];
