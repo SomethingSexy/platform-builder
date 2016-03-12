@@ -1,4 +1,5 @@
 import _find from 'lodash.find';
+import update from 'react/lib/update';
 import {
   CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM, SAVED_PART
 } from '../actions/platform.js';
@@ -33,7 +34,7 @@ function platforms(state = {}, action) {
     case SAVED_PART: {
       // this might just shallow copy so it would still be changing original state?
       const savedPartState = Object.assign({}, state);
-      Object.assign(_find(savedPartState.parts, { _id: action.part._id}), action.part);
+      Object.assign(_find(savedPartState.parts, { _id: action.part._id }), action.part);
 
       return savedPartState;
     }
@@ -105,16 +106,29 @@ export function platformsById(state = { }, action) {
   }
 }
 
-// this will be used to store the current platform that is being worked on
-// export function workingPlatformId(state = {}, action) {
+// export function workingPlatform(state = { fields: [] }, action) {
 //   switch (action.type) {
-//   case CREATED_PLATFORM:
-//     return action.platform._id;
-//   case FETCHED_PLATFORM:
-//     return action.platform._id;
-//   case CHANGED_WORKING_PLATFORM:
-//     return action.platform._id;
-//   default:
-//     return state || null;
+//     case FETCHED_PLATFORM: {
+//       return Object.assign({}, state, action.platform);
+//     }
+//     case CREATED_PLATFORM:
+//       // just reset the entire state right?
+//       return Object.assign({}, action.platform);
+//     case SAVED_PLATFORM:
+//       return Object.assign({}, state, action.platform);
+//     case CREATED_PART: {
+//       return update(state, {
+//         parts: {$push: [action.part]}
+//       });      
+//     }
+//     default:
+//       return state;
+//   }
+// }
+
+// export function workingPart(state = { fields: [] }, action) {
+//   switch (action.type) {
+//     default:
+//       return state;
 //   }
 // }

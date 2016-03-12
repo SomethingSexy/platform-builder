@@ -251,7 +251,7 @@ export function savePart(part) {
 
 export function removePlatform(platformId) {
   return (dispatch, getState) => {
-    const platform = getState().platformsById[platformId];
+    const platform = getState().platforms.platformsById[platformId];
     return dispatch(deletePlatform(platform));
   };
 }
@@ -259,7 +259,7 @@ export function removePlatform(platformId) {
 
 export function removePart(pardId) {
   return (dispatch, getState) => {
-    const part = getState().partsById[pardId];
+    const part = getState().platforms.partsById[pardId];
     return dispatch(deletePart(part));
   };
 }
@@ -289,7 +289,7 @@ export function fetchPlatform(params) {
     const state = getState();
     let isFetch = true;
 
-    if (state.platformsById && state.platformsById[params.platformId] && !state.platformsById[params.platformId].didInvalidate) {
+    if (state.platforms.platformsById && state.platforms.platformsById[params.platformId] && !state.platforms.platformsById[params.platformId].didInvalidate) {
       isFetch = false;
     }
 
@@ -303,7 +303,7 @@ export function fetchPlatforms() {
     const state = getState();
     let isFetch = true;
 
-    if (state.platformsById && Object.keys(state.platformsById).length > 0) {
+    if (state.platforms.platformsById && Object.keys(state.platforms.platformsById).length > 0) {
       isFetch = false;
     }
 
