@@ -1,16 +1,41 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PartForm from './PartForm.js';
+import PartForm from '../components/PartForm.js';
 import * as PlatformActions from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
-// import { actions } from 'react-redux-form';
+import { reduxForm, addArrayValue } from 'redux-form';
+
+const requireFields = (...names) => data =>
+  names.reduce((errors, name) => {
+    if (!data[name]) {
+      errors[name] = 'Required';
+    }
+    return errors;
+  }, {});
+
+const validateFields = requireFields('type', 'label');
+const validate = values => {
+  const errors = requireFields('name', 'description')(values);
+  errors.fields = values.fields.map(validateFields);
+
+  return errors;
+};
+
+const fields = [
+  'name',
+  'description',
+  'fields[].type',
+  'fields[].label',
+  'fields[].options[].label',
+  'fields[].options[].value'];
 
 class CreatePart extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     platform: PropTypes.object.isRequired,
-    part: PropTypes.object.isRequired,
-    workingPartForm: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool
   }
 
   static get needs() {
@@ -20,21 +45,11 @@ class CreatePart extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
-    this.handleAddField = this.handleAddField.bind(this);
   }
 
   handleSave(model) {
-    this.props.dispatch(PlatformActions.createPartAndSavePlatform({ ...model, _createdPlatformId: this.props.platform._id }))
-    .then(() => this.props.dispatch(actions.reset('platforms.workingPart')));
+    this.props.dispatch(PlatformActions.createPartAndSavePlatform({ ...model, _createdPlatformId: this.props.platform._id }));
   }
-
-  handleAddField() {
-    this.props.dispatch(actions.push('platforms.workingPart.fields', { options: [] }));
-  }
-
-  handleAddFieldOption(fieldIndex) {
-    this.props.dispatch(actions.push(`platforms.workingPart.fields[${fieldIndex}].options`));
-  }    
 
   render() {
     const returnLink = `/platform/${this.props.platform._id}/build`;
@@ -42,7 +57,7 @@ class CreatePart extends Component {
       <div>
         <h3>Create New Part</h3>
         <Link to={returnLink}>Return to Platform</Link>
-        <PartForm onSave={this.handleSave} part={this.props.part} onFieldAdd={this.handleAddField} />
+        <PartForm {...this.props.fields} handleSubmit={this.props.handleSubmit(this.handleSave)} submitting={this.props.submitting} />
       </div>
     );
   }
@@ -50,14 +65,19 @@ class CreatePart extends Component {
 
 function select(state, ownProps) {
   const platform = state.platforms.platformsById[ownProps.params.platformId];
-  const part = state.platforms.workingPart;
 
   return {
-    platform,
-    part,
-    workingPartForm: state.platforms.workingPartForm
+    platform
   };
 }
+
+CreatePart = reduxForm({
+  form: 'part',
+  fields,
+  validate
+}, null, {
+  addValue: addArrayValue
+})(CreatePart);
 
 // not sure what this would all need yet
 export default connect(select)(CreatePart);

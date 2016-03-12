@@ -179,8 +179,8 @@ function select(state, ownProps) {
   };
 }
 
-UpdatePlatform = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
-  form: 'platform',                           // a unique name for this form
+UpdatePlatform = reduxForm({
+  form: 'platform',
   fields,
   validate
 }, (state, ownProps) => {
