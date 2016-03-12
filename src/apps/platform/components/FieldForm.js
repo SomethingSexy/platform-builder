@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../../../common/components/Button.js';
+import FieldOptionForm from './FieldOptionsForm.js';
 
 const fieldTypes = [{
   label: '',
@@ -14,24 +14,13 @@ const fieldTypes = [{
 
 class FieldForm extends Component {
   static propTypes = {
-    field: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
-    onFieldAddOption: PropTypes.func.isRequired,
-    fieldKey: PropTypes.string.isRequired,
-    partForm: PropTypes.object.isRequired
-  }
-
-  constructor(props) {
-    super(props);
-    this.handleAddFieldOption = this.handleAddFieldOption.bind(this);
-  }
-
-  handleAddFieldOption() {
-    this.props.onFieldAddOption(this.props.index);
+    type: PropTypes.object,
+    label: PropTypes.object,
+    options: PropTypes.object
   }
 
   render() {
-    const {type, label} = this.props;
+    const { type, label, options } = this.props;
     return (
       <div>
         <fieldset className="form-group">
@@ -46,12 +35,11 @@ class FieldForm extends Component {
           <input type="text" className="form-control" {...label} />
           {label.touched && label.error && <span id="helpBlock2" className="help-block">{label.error}</span>}
         </fieldset>
-  
+        {this.props.type.value === 'select' ? <button type="button" onClick={() => { options.addField(); }}><i /> Add Option</button> : null}
+        {this.props.type.value === 'select' ? this.props.options.map((option, index) => <FieldOptionForm key={index} {...option} />) : null}
       </div>
     );
   }
 }
 
 export default FieldForm;
-
-//      {this.props.field.type === 'select' ? <Button onClick={this.handleAddFieldOption}>Add Option</Button> : ''}

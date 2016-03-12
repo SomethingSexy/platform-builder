@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchPlatforms, removePlatform } from '../../../common/actions/platform.js';
-import PlatformListItem from '../components/platform/PlatformListItem.js';
+import PlatformListItem from '../components/PlatformListItem.js';
 
 // Will use this as a global list so we can maintain the data but this will probably
 // get turned into showing platforms as categories or an admin list

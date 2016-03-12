@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import Button from '../../../../common/components/Button.js';
+import Button from '../../../common/components/Button.js';
 
 // Will use this as a global list so we can maintain the data but this will probably
 // get turned into showing platforms as categories or an admin list

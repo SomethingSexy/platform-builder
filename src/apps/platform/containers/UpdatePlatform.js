@@ -24,20 +24,20 @@ const validate = values => {
   return errors;
 };
 
-const fields =  [
-  'name', 
-  'description', 
-  'showCompany', 
-  'showBrands', 
-  'showPeople', 
-  'showTags', 
-  'showPhotos', 
-  'showTransactions', 
-  'allowAdditionalParts', 
+const fields = [
+  'name',
+  'description',
+  'showCompany',
+  'showBrands',
+  'showPeople',
+  'showTags',
+  'showPhotos',
+  'showTransactions',
+  'allowAdditionalParts',
   'fields[].type',
   'fields[].label',
   'fields[].options[].label',
-  'fields[].options[].value']
+  'fields[].options[].value'];
 
 // I think we want create an initial platform first so that whatever the user
 // does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -45,7 +45,10 @@ class UpdatePlatform extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
-    platforms: PropTypes.object.isRequired
+    platform: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool
   }
 
   static get needs() {
@@ -58,8 +61,6 @@ class UpdatePlatform extends Component {
     this.handleDeactivateBind = this.handleDeactivate.bind(this);
     this.handleAddPartGroup = this.handleAddPartGroup.bind(this);
     this.handleSave = this.handleSave.bind(this);
-    this.handleAddField = this.handleAddField.bind(this);
-    this.handleAddFieldOption = this.handleAddFieldOption.bind(this);
     this.handleEditPart = this.handleEditPart.bind(this);
     this.handleRemovePart = this.handleRemovePart.bind(this);
   }
@@ -72,17 +73,15 @@ class UpdatePlatform extends Component {
   }
 
   handleEditPart(partId) {
-    browserHistory.push(`/platform/${this.props.platforms.workingPlatform._id}/part/${partId}`);
+    browserHistory.push(`/platform/${this.props.platform._id}/part/${partId}`);
   }
 
-  handleSave(event) {
-    event.stopPropagation();
-    // Not sure if it is the best way to do it this way or have the action pull it from the working one?
-    this.props.dispatch(savePlatform(this.props.platforms.workingPlatform));
+  handleSave(platform) {
+    this.props.dispatch(savePlatform({ ...platform, _id: this.props.platform._id }));
   }
 
   handleActivate() {
-    this.props.dispatch(activatePlatform(this.props.platforms.workingPlatform._id));
+    this.props.dispatch(activatePlatform(this.props.platform._id));
   }
 
   handleDeactivate() {
@@ -90,34 +89,25 @@ class UpdatePlatform extends Component {
   }
 
   handleAddPartGroup(partGroup) {
-    this.props.dispatch(addPartGroup(this.props.platforms.workingPlatform._id, partGroup));
-  }
-
-  handleAddField() {
-    this.props.dispatch(actions.push('platforms.workingPlatform.fields', { options: [] }));
-  }
-
-  handleAddFieldOption(fieldIndex) {
-    this.props.dispatch(actions.push(`platforms.workingPlatform.fields[${fieldIndex}].options`));
+    this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
   }
 
   render() {
     const {
-      fields: {name, description, fields},
+      fields: { name, description, fields },
       handleSubmit,
-      resetForm,
       submitting
       } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(this.handleSave)}>
         <fieldset className="form-group">
           <label htmlFor="">Name</label>
-          <input type="text" className ="form-control" {...name}/>
+          <input type="text" className ="form-control" {...name} />
           {name.touched && name.error && <span id="helpBlock2" className="help-block">{name.error}</span>}
         </fieldset>
         <fieldset className="form-group">
           <label htmlFor="">Description</label>
-          <textarea className ="form-control" {...description}/>
+          <textarea className ="form-control" {...description} />
           {description.touched && description.error && <span id="helpBlock2" className="help-block">{description.error}</span>}
         </fieldset>
         <fieldset className="form-group">
@@ -167,16 +157,16 @@ class UpdatePlatform extends Component {
         </fieldset>
         <h4>Custom Fields</h4>
           <button type="button" onClick={() => {
-            fields.addField();
-          }}><i/> Add Field
+            fields.addField({ options: [] });
+          }}
+          ><i /> Add Field
           </button>
-        {fields.map((field, index) => <FieldForm key={index} {...field}/>)}
-        <button className="btn btn-primary" type="submit"onClick={handleSubmit(data => {
-            // do something with data. validation will have been called at this point,
-            // so you know the data is valid
-            console.log(data);
-          })}>Save</button>
-        <Button buttonClass="btn-secondary" onClick={this.props.onActivate}>Activate</Button>
+        {fields.map((field, index) => <FieldForm key={index} {...field} />)}
+        <Parts platformId={this.props.platform._id} parts={this.props.platform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
+        <button type="submit" disabled={submitting}>
+          {submitting ? <i /> : <i />} Save
+        </button>
+        <Button buttonClass="btn-secondary" onClick={this.onActivate}>Activate</Button>
       </form>
     );
   }
@@ -185,10 +175,7 @@ class UpdatePlatform extends Component {
 function select(state, ownProps) {
   return {
     categories: state.categories.categories,
-    platforms: {
-      workingPlatform: state.platforms.workingPlatform,
-      workingPlatformForm: state.platforms.workingPlatformForm
-    }
+    platform: state.platforms.platformsById[ownProps.params.platformId]
   };
 }
 
@@ -200,14 +187,9 @@ UpdatePlatform = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   return {
     initialValues: state.platforms.platformsById[ownProps.params.platformId]
   };
-},{
+}, {
   addValue: addArrayValue
 })(UpdatePlatform);
 
 // not sure what this would all need yet
 export default connect(select)(UpdatePlatform);
-
-
-        // <Button onClick={this.handleAddField}>Add Field</Button>
-        // {workingPlatform.fields.map((result, index) => <FieldForm index={index} key={index} onFieldAddOption={this.handleAddFieldOption} field={result} fieldKey="platforms.workingPlatform" />)}
-        // <Parts platformId={workingPlatform._id} parts={workingPlatform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
