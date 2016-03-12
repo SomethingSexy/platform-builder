@@ -2,6 +2,31 @@ import React, { Component, PropTypes } from 'react';
 import Button from '../../../common/components/Button.js';
 import FieldForm from './FieldForm.js';
 
+const requireFields = (...names) => data =>
+  names.reduce((errors, name) => {
+    if (!data[name]) {
+      errors[name] = 'Required';
+    }
+    return errors;
+  }, {});
+
+const validateFields = requireFields('type', 'label');
+export const validate = values => {
+  const errors = requireFields('name', 'description')(values);
+  errors.fields = values.fields.map(validateFields);
+
+  return errors;
+};
+
+export const fields = [
+  'name',
+  'description',
+  'fields[].type',
+  'fields[].label',
+  'fields[].options[].label',
+  'fields[].options[].value'
+];
+
 class PartForm extends Component {
   static propTypes = {
     fields: PropTypes.array.isRequired,

@@ -1,33 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PartForm from '../components/PartForm.js';
+import PartForm, { validate, fields } from '../components/PartForm.js';
 import * as PlatformActions from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
 import { reduxForm, addArrayValue } from 'redux-form';
-
-const requireFields = (...names) => data =>
-  names.reduce((errors, name) => {
-    if (!data[name]) {
-      errors[name] = 'Required';
-    }
-    return errors;
-  }, {});
-
-const validateFields = requireFields('type', 'label');
-const validate = values => {
-  const errors = requireFields('name', 'description')(values);
-  errors.fields = values.fields.map(validateFields);
-
-  return errors;
-};
-
-const fields = [
-  'name',
-  'description',
-  'fields[].type',
-  'fields[].label',
-  'fields[].options[].label',
-  'fields[].options[].value'];
 
 class CreatePart extends Component {
   static propTypes = {

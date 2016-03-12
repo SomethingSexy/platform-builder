@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PartForm from '../components/PartForm.js';
+import PartForm, { validate, fields } from '../components/PartForm.js';
 import * as PlatformActions from '../../../common/actions/platform.js';
 import { Link } from 'react-router';
-// import { actions } from 'react-redux-form';
+import { reduxForm, addArrayValue } from 'redux-form';
+import _find from 'lodash.find';
 
 class UpdatePart extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     platform: PropTypes.object.isRequired,
     part: PropTypes.object.isRequired,
-    workingPartForm: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool
   }
 
   static get needs() {
@@ -20,28 +23,19 @@ class UpdatePart extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
-    this.handleAddField = this.handleAddField.bind(this);
   }
 
   handleSave(model) {
-    this.props.dispatch(PlatformActions.savePart({...model}));
+    this.props.dispatch(PlatformActions.savePart({ ...this.props.part, ...model }));
   }
-
-  handleAddField() {
-    this.props.dispatch(actions.push('platforms.workingPart.fields', { options: [] }));
-  }
-
-  handleAddFieldOption(fieldIndex) {
-    this.props.dispatch(actions.push(`platforms.workingPart.fields[${fieldIndex}].options`));
-  }    
 
   render() {
     const returnLink = `/platform/${this.props.platform._id}/build`;
     return (
       <div>
-        <h3>Create New Part</h3>
+        <h3>Update Part</h3>
         <Link to={returnLink}>Return to Platform</Link>
-        <PartForm part={this.props.part} partForm={this.props.workingPartForm} onSave={this.handleSave} onFieldAdd={this.handleAddField} />
+        <PartForm {...this.props.fields} handleSubmit={this.props.handleSubmit(this.handleSave)} submitting={this.props.submitting} />
       </div>
     );
   }
@@ -49,14 +43,25 @@ class UpdatePart extends Component {
 
 function select(state, ownProps) {
   const platform = state.platforms.platformsById[ownProps.params.platformId];
-  const part = state.platforms.workingPart;
+  const part = _find(platform.parts, { _id: ownProps.params.partId });
 
   return {
     platform,
-    part,
-    workingPartForm: state.platforms.workingPartForm
+    part
   };
 }
+
+UpdatePart = reduxForm({
+  form: 'part',
+  fields,
+  validate
+}, (state, ownProps) => {
+  return {
+    initialValues: _find(state.platforms.platformsById[ownProps.params.platformId].parts, { _id: ownProps.params.partId })
+  };
+}, {
+  addValue: addArrayValue
+})(UpdatePart);
 
 // not sure what this would all need yet
 export default connect(select)(UpdatePart);

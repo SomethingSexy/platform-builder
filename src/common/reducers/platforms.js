@@ -27,30 +27,36 @@ function platforms(state = {}, action) {
       }, action.platform);
     case CREATED_PART:
       // when a part is created we need to add it to the list of parts
-      if (!state.parts) {
-        state.parts = [];
-      }
-      state.parts.push(action.part);
-      return state;
+      return update(state, {
+        parts: { $push: [action.part] }
+      });
     case SAVED_PART: {
-      // this might just shallow copy so it would still be changing original state?
-      const savedPartState = Object.assign({}, state);
-      Object.assign(_find(savedPartState.parts, { _id: action.part._id }), action.part);
+      const parts = state.parts.map(part => {
+        if (part._id !== action.part._id) {
+          return part;
+        }
 
-      return savedPartState;
+        return {
+          ...part,
+          ...action.part
+        };
+      });
+
+      return {
+        ...state,
+        parts
+      };
     }
     case DELETED_PART:
       // when a part is created we need to add it to the list of parts
       if (state.parts) {
         const index = _findindex(state.parts, { _id: action.partId });
-        // TODO: this should be slice instead
         if (index > -1) {
-          state.parts.splice(index, 1);
+          return {
+            ...state,
+            ...state.parts.slice(index, index + 1)
+          };
         }
-        return {
-          ...state,
-          ...state.parts.slice(index, index + 1)
-        };
       }
 
       return state;
