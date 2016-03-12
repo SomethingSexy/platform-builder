@@ -1,13 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import form from '../form/Form.js';
-import TextInput from '../form/fields/TextInput.js';
 import Button from '../Button.js';
+import { reduxForm } from 'redux-form';
+
+const requireFields = (...names) => data =>
+  names.reduce((errors, name) => {
+    if (!data[name]) {
+      errors[name] = 'Required';
+    }
+    return errors;
+  }, {});
+
+export const validate = values => {
+  const errors = requireFields('name', 'description')(values);
+  return errors;
+};
+
+export const fields = [
+  'name',
+  'description'
+];
 
 class PartGroupForm extends Component {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     validate: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired,
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool
   }
 
   constructor(props) {
@@ -15,31 +35,46 @@ class PartGroupForm extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleSave(event) {
-    // PROBABLY not the best way to do this but it will work for now
-    this.props.validate(event, data => {
-      this.props.onSave(data);
-    });
+  handleSave(model) {
+    this.props.onSave(model);
   }
 
   render() {
+    const {
+      fields: { name, description },
+      handleSubmit,
+      submitting
+      } = this.props;
     return (
       <div>
         <h5>Create Part Group</h5>
         <p>A part group is a way to organize parts into logical groupings.  Groupings can contain parts or other groupings.  Products can also be created from groupings.</p>
         <hr />
-        <TextInput name="name" label="Name" required />
-        <TextInput name="description" label="Description" required />
-        <div className="btn-group">
-          <Button buttonClass="btn-primary" onClick={this.handleSave}>Save</Button>
-          <Button buttonClass="btn-secondary" onClick={this.props.onCancel}>Cancel</Button>
+        <form onSubmit={handleSubmit(this.handleSave)}>
+          <fieldset className="form-group">
+            <label htmlFor="">Name</label>
+            <input type="text" className ="form-control" {...name} />
+            {name.touched && name.error && <span id="helpBlock2" className="help-block">{name.error}</span>}
+          </fieldset>
+          <fieldset className="form-group">
+            <label htmlFor="">Description</label>
+            <textarea className ="form-control" {...description} />
+            {description.touched && description.error && <span id="helpBlock2" className="help-block">{description.error}</span>}
+          </fieldset>
+          <div className="btn-group">
+            <button type="input" className="btn btn-primary" onClick={ this.handleSave } disabled={submitting}>{submitting ? 'Saving' : 'Save'}</button>
+            <Button buttonClass="btn-secondary" onClick={this.props.onCancel}>Cancel</Button>
         </div>
+        </form>
       </div>
     );
   }
 }
 
-export default form(PartGroupForm, {
-  model: {},
-  className: 'create-part-group'
-});
+PartGroupForm = reduxForm({
+  form: 'partGroup',
+  fields,
+  validate
+})(PartGroupForm);
+
+export default PartGroupForm;
