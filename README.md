@@ -1,17 +1,16 @@
 # platform-builder
 
 ## Tech Stack
-* React
-* SystemJS
-* webpack
+* react
 * react-router
 * redux
+* webpack
 
 ## Run
 
 ``` 
 npm install
-gulp build
+npm run compile
 npm start
 ```
 
