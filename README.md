@@ -3,7 +3,7 @@
 ## Tech Stack
 * React
 * SystemJS
-* JSPM
+* webpack
 * react-router
 * redux
 
