@@ -37,7 +37,7 @@ class Parts extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row parts-container">
         <div className="col-md-12">
           <h4>Parts</h4>
           <div className="clearfix"><div className="btn-group pull-lg-right"><Link className="btn btn-secondary" to={this.createPartLink}>Create New Part</Link><Button onClick={this.open}>Create Part Group</Button></div></div>

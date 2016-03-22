@@ -490,7 +490,7 @@
 
 
 	// module
-	exports.push([module.id, ".part {\r\n  -moz-box-shadow: 2px 2px 2px #ebebeb;\r\n  -webkit-box-shadow: 2px 2px 2px #ebebeb;\r\n  box-shadow: 2px 2px 2px #ebebeb;\r\n  background-color: #f7f7f7;\r\n  padding: 30px 30px;\r\n  margin: 25px 0px;\r\n}\r\n\r\n.mint-card > header {\r\n  position: relative;\r\n  background-color: #e4e4e4;\r\n  opacity: 0;\r\n  max-height: 0;\r\n  -moz-transition: all 0.3s ease-in-out;\r\n  -o-transition: all 0.3s ease-in-out;\r\n  -webkit-transition: all 0.3s ease-in-out;\r\n  transition: all 0.3s ease-in-out;\r\n}\r\n\r\n.part > .fields-header {\r\n  margin-top: 5px;\r\n}\r\n\r\n.part > .fields {\r\n  margin-top: 5px;\r\n}\r\n\r\n.create-part-group {\r\n  border: 1px solid #ddd;\r\n  padding: 30px;\r\n  margin-top: 10px;\r\n}", ""]);
+	exports.push([module.id, ".parts-container {\r\n  border: 1px solid #ddd;\r\n  padding: 5px;\r\n  margin-top: 10px;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.part {\r\n  -moz-box-shadow: 2px 2px 2px #ebebeb;\r\n  -webkit-box-shadow: 2px 2px 2px #ebebeb;\r\n  box-shadow: 2px 2px 2px #ebebeb;\r\n  background-color: #f7f7f7;\r\n  padding: 30px 30px;\r\n  margin: 25px 0px;\r\n}\r\n\r\n.mint-card > header {\r\n  position: relative;\r\n  background-color: #e4e4e4;\r\n  opacity: 0;\r\n  max-height: 0;\r\n  -moz-transition: all 0.3s ease-in-out;\r\n  -o-transition: all 0.3s ease-in-out;\r\n  -webkit-transition: all 0.3s ease-in-out;\r\n  transition: all 0.3s ease-in-out;\r\n}\r\n\r\n.part > .fields-header {\r\n  margin-top: 5px;\r\n}\r\n\r\n.part > .fields {\r\n  margin-top: 5px;\r\n}\r\n\r\n.create-part-group {\r\n  border: 1px solid #ddd;\r\n  padding: 30px;\r\n  margin-top: 10px;\r\n}", ""]);
 
 	// exports
 
@@ -28344,7 +28344,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'button', onClick: function onClick() {
+	          { className: 'btn btn-secondary btn-sm', type: 'button', onClick: function onClick() {
 	              fields.addField({ options: [] });
 	            }
 	          },
@@ -28356,15 +28356,19 @@
 	        }),
 	        _react2.default.createElement(_Parts2.default, { platformId: this.props.platform._id, parts: this.props.platform.parts, onRemovePart: this.handleRemovePart, onEditPart: this.handleEditPart, onAddPartGroup: this.handleAddPartGroup }),
 	        _react2.default.createElement(
-	          'button',
-	          { type: 'submit', disabled: submitting },
-	          submitting ? _react2.default.createElement('i', null) : _react2.default.createElement('i', null),
-	          ' Save'
-	        ),
-	        _react2.default.createElement(
-	          _Button2.default,
-	          { buttonClass: 'btn-secondary', onClick: this.onActivate },
-	          'Activate'
+	          'div',
+	          { className: 'btn-group' },
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-primary', type: 'submit', disabled: submitting },
+	            submitting ? _react2.default.createElement('i', null) : _react2.default.createElement('i', null),
+	            ' Save'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-secondary', onClick: this.onActivate },
+	            'Activate'
+	          )
 	        )
 	      );
 	    }
@@ -31432,7 +31436,7 @@
 	        ),
 	        this.props.type.value === 'select' ? _react2.default.createElement(
 	          'button',
-	          { type: 'button', onClick: function onClick() {
+	          { className: 'btn btn-secondary btn-sm', type: 'button', onClick: function onClick() {
 	              options.addField();
 	            } },
 	          _react2.default.createElement('i', null),
@@ -31440,7 +31444,8 @@
 	        ) : null,
 	        this.props.type.value === 'select' ? this.props.options.map(function (option, index) {
 	          return _react2.default.createElement(_FieldOptionsForm2.default, _extends({ key: index }, option));
-	        }) : null
+	        }) : null,
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -31605,7 +31610,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        { className: 'row parts-container' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-md-12' },
@@ -32234,7 +32239,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'button', onClick: function onClick() {
+	          { className: 'btn btn-secondary btn-sm', type: 'button', onClick: function onClick() {
 	              fields.addField({ options: [] });
 	            }
 	          },
@@ -32244,6 +32249,7 @@
 	        fields.map(function (field, index) {
 	          return _react2.default.createElement(_FieldForm2.default, _extends({ key: index }, field));
 	        }),
+	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(
 	          'button',
 	          { type: 'input', className: 'btn btn-primary', onClick: this.handleSave, disabled: this.props.submitting },
@@ -35725,11 +35731,12 @@
 	        });
 	      }
 	    case _platform.DELETED_PART:
-	      // when a part is created we need to add it to the list of parts
 	      if (state.parts) {
 	        var index = (0, _lodash4.default)(state.parts, { _id: action.partId });
 	        if (index > -1) {
-	          return _extends({}, state, state.parts.slice(index, index + 1));
+	          return (0, _update2.default)(state, {
+	            parts: { $splice: [[index, 1]] }
+	          });
 	        }
 	      }
 

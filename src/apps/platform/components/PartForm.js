@@ -51,12 +51,13 @@ class PartForm extends Component {
           {description.touched && description.error && <span id="helpBlock2" className="help-block">{description.error}</span>}
         </fieldset>
         <h4>Custom Fields</h4>
-          <button type="button" onClick={() => {
+          <button className="btn btn-secondary btn-sm" type="button" onClick={() => {
             fields.addField({ options: [] });
           }}
           ><i /> Add Field
           </button>
         {fields.map((field, index) => <FieldForm key={index} {...field} />)}
+        <hr />
         <button type="input" className="btn btn-primary" onClick={ this.handleSave } disabled={this.props.submitting}>{this.props.submitting ? 'Saving' : 'Save'}</button>
       </form>
     );

@@ -153,17 +153,19 @@ class UpdatePlatform extends Component {
             </div>
         </fieldset>
         <h4>Custom Fields</h4>
-          <button type="button" onClick={() => {
+          <button className="btn btn-secondary btn-sm" type="button" onClick={() => {
             fields.addField({ options: [] });
           }}
           ><i /> Add Field
           </button>
         {fields.map((field, index) => <FieldForm key={index} {...field} />)}
         <Parts platformId={this.props.platform._id} parts={this.props.platform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
-        <button type="submit" disabled={submitting}>
-          {submitting ? <i /> : <i />} Save
-        </button>
-        <Button buttonClass="btn-secondary" onClick={this.onActivate}>Activate</Button>
+        <div className="btn-group">
+          <button className="btn btn-primary" type="submit" disabled={submitting}>
+            {submitting ? <i /> : <i />} Save
+          </button>
+          <button className="btn btn-secondary" onClick={this.onActivate}>Activate</button>
+        </div>
       </form>
     );
   }

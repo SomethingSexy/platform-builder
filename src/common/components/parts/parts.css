@@ -1,3 +1,10 @@
+.parts-container {
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .part {
   -moz-box-shadow: 2px 2px 2px #ebebeb;
   -webkit-box-shadow: 2px 2px 2px #ebebeb;

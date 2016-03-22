@@ -48,14 +48,12 @@ function platforms(state = {}, action) {
       };
     }
     case DELETED_PART:
-      // when a part is created we need to add it to the list of parts
       if (state.parts) {
         const index = _findindex(state.parts, { _id: action.partId });
         if (index > -1) {
-          return {
-            ...state,
-            ...state.parts.slice(index, index + 1)
-          };
+          return update(state, {
+            parts: { $splice: [[index, 1]] }
+          });
         }
       }
 

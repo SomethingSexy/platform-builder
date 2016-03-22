@@ -35,8 +35,9 @@ class FieldForm extends Component {
           <input type="text" className="form-control" {...label} />
           {label.touched && label.error && <span id="helpBlock2" className="help-block">{label.error}</span>}
         </fieldset>
-        {this.props.type.value === 'select' ? <button type="button" onClick={() => { options.addField(); }}><i /> Add Option</button> : null}
+        {this.props.type.value === 'select' ? <button className="btn btn-secondary btn-sm" type="button" onClick={() => { options.addField(); }}><i /> Add Option</button> : null}
         {this.props.type.value === 'select' ? this.props.options.map((option, index) => <FieldOptionForm key={index} {...option} />) : null}
+        <hr />
       </div>
     );
   }
