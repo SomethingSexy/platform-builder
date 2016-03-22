@@ -23,20 +23,9 @@ export const fields = [
 class PartGroupForm extends Component {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
-    validate: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool
-  }
-
-  constructor(props) {
-    super(props);
-    this.handleSave = this.handleSave.bind(this);
-  }
-
-  handleSave(model) {
-    this.props.onSave(model);
   }
 
   render() {
@@ -50,7 +39,7 @@ class PartGroupForm extends Component {
         <h5>Create Part Group</h5>
         <p>A part group is a way to organize parts into logical groupings.  Groupings can contain parts or other groupings.  Products can also be created from groupings.</p>
         <hr />
-        <form onSubmit={handleSubmit(this.handleSave)}>
+        <form onSubmit={handleSubmit}>
           <fieldset className="form-group">
             <label htmlFor="">Name</label>
             <input type="text" className ="form-control" {...name} />

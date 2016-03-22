@@ -60,21 +60,21 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _reactDom = __webpack_require__(317);
+	var _reactDom = __webpack_require__(318);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _index = __webpack_require__(318);
+	var _index = __webpack_require__(319);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	var _reactRedux = __webpack_require__(226);
 
-	var _fetchComponentData = __webpack_require__(327);
+	var _fetchComponentData = __webpack_require__(328);
 
 	var _fetchComponentData2 = _interopRequireDefault(_fetchComponentData);
 
-	var _LoadingContainer = __webpack_require__(328);
+	var _LoadingContainer = __webpack_require__(329);
 
 	var _LoadingContainer2 = _interopRequireDefault(_LoadingContainer);
 
@@ -25184,15 +25184,15 @@
 
 	var _UpdatePlatform2 = _interopRequireDefault(_UpdatePlatform);
 
-	var _CreatePart = __webpack_require__(306);
+	var _CreatePart = __webpack_require__(307);
 
 	var _CreatePart2 = _interopRequireDefault(_CreatePart);
 
-	var _UpdatePart = __webpack_require__(308);
+	var _UpdatePart = __webpack_require__(309);
 
 	var _UpdatePart2 = _interopRequireDefault(_UpdatePart);
 
-	var _PlatformList = __webpack_require__(315);
+	var _PlatformList = __webpack_require__(316);
 
 	var _PlatformList2 = _interopRequireDefault(_PlatformList);
 
@@ -28108,23 +28108,17 @@
 
 	var _reactRouter = __webpack_require__(164);
 
-	var _reduxForm = __webpack_require__(256);
-
 	var _platform = __webpack_require__(247);
 
 	var _categories = __webpack_require__(250);
 
-	var _Button = __webpack_require__(254);
-
-	var _Button2 = _interopRequireDefault(_Button);
-
-	var _FieldForm = __webpack_require__(300);
-
-	var _FieldForm2 = _interopRequireDefault(_FieldForm);
-
-	var _Parts = __webpack_require__(302);
+	var _Parts = __webpack_require__(256);
 
 	var _Parts2 = _interopRequireDefault(_Parts);
+
+	var _PlatformForm = __webpack_require__(304);
+
+	var _PlatformForm2 = _interopRequireDefault(_PlatformForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28133,31 +28127,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var requireFields = function requireFields() {
-	  for (var _len = arguments.length, names = Array(_len), _key = 0; _key < _len; _key++) {
-	    names[_key] = arguments[_key];
-	  }
-
-	  return function (data) {
-	    return names.reduce(function (errors, name) {
-	      if (!data[name]) {
-	        errors[name] = 'Required';
-	      }
-	      return errors;
-	    }, {});
-	  };
-	};
-
-	var validateFields = requireFields('type', 'label');
-	var validate = function validate(values) {
-	  var errors = requireFields('name', 'description')(values);
-	  errors.fields = values.fields.map(validateFields);
-
-	  return errors;
-	};
-
-	var fields = ['name', 'description', 'showCompany', 'showBrands', 'showPeople', 'showTags', 'showPhotos', 'showTransactions', 'allowAdditionalParts', 'fields[].type', 'fields[].label', 'fields[].options[].label', 'fields[].options[].value'];
 
 	// I think we want create an initial platform first so that whatever the user
 	// does is automatically saved somewhere to the server.  Don't have to worry about losing their data, etc.
@@ -28183,6 +28152,7 @@
 	    _this.handleSave = _this.handleSave.bind(_this);
 	    _this.handleEditPart = _this.handleEditPart.bind(_this);
 	    _this.handleRemovePart = _this.handleRemovePart.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    return _this;
 	  }
 
@@ -28215,154 +28185,25 @@
 	      this.props.dispatch((0, _platform.addPartGroup)(this.props.platform._id, partGroup));
 	    }
 	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit() {
+	      this.refs.form.submit();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var _props$fields = _props.fields;
-	      var name = _props$fields.name;
-	      var description = _props$fields.description;
-	      var fields = _props$fields.fields;
-	      var handleSubmit = _props.handleSubmit;
-	      var submitting = _props.submitting;
-
 	      return _react2.default.createElement(
-	        'form',
-	        { onSubmit: handleSubmit(this.handleSave) },
-	        _react2.default.createElement(
-	          'fieldset',
-	          { className: 'form-group' },
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '' },
-	            'Name'
-	          ),
-	          _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control' }, name)),
-	          name.touched && name.error && _react2.default.createElement(
-	            'span',
-	            { id: 'helpBlock2', className: 'help-block' },
-	            name.error
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'fieldset',
-	          { className: 'form-group' },
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '' },
-	            'Description'
-	          ),
-	          _react2.default.createElement('textarea', _extends({ className: 'form-control' }, description)),
-	          description.touched && description.error && _react2.default.createElement(
-	            'span',
-	            { id: 'helpBlock2', className: 'help-block' },
-	            description.error
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'fieldset',
-	          { className: 'form-group' },
-	          _react2.default.createElement(
-	            'legend',
-	            null,
-	            'Configuration'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showCompany)),
-	              'Allow company'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showBrands)),
-	              'Allow brands'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showPeople)),
-	              'Allow people'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showTags)),
-	              'Allow tags'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showPhotos)),
-	              'Allow photos'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showTransactions)),
-	              'Allow transactions'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'checkbox' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.allowAdditionalParts)),
-	              'Allow additional parts'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          'Custom Fields'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'btn btn-secondary btn-sm', type: 'button', onClick: function onClick() {
-	              fields.addField({ options: [] });
-	            }
-	          },
-	          _react2.default.createElement('i', null),
-	          ' Add Field'
-	        ),
-	        fields.map(function (field, index) {
-	          return _react2.default.createElement(_FieldForm2.default, _extends({ key: index }, field));
-	        }),
+	        'div',
+	        null,
+	        _react2.default.createElement(_PlatformForm2.default, { platform: this.props.platform, onSubmit: this.handleSave, ref: 'form' }),
 	        _react2.default.createElement(_Parts2.default, { platformId: this.props.platform._id, parts: this.props.platform.parts, onRemovePart: this.handleRemovePart, onEditPart: this.handleEditPart, onAddPartGroup: this.handleAddPartGroup }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'btn-group' },
 	          _react2.default.createElement(
 	            'button',
-	            { className: 'btn btn-primary', type: 'submit', disabled: submitting },
-	            submitting ? _react2.default.createElement('i', null) : _react2.default.createElement('i', null),
-	            ' Save'
+	            { className: 'btn btn-primary', type: 'button', onClick: this.handleSubmit },
+	            'Save'
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -28380,10 +28221,7 @@
 	UpdatePlatform.propTypes = {
 	  dispatch: _react.PropTypes.func.isRequired,
 	  categories: _react.PropTypes.array.isRequired,
-	  platform: _react.PropTypes.object.isRequired,
-	  fields: _react.PropTypes.object.isRequired,
-	  handleSubmit: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool
+	  platform: _react.PropTypes.object.isRequired
 	};
 
 
@@ -28394,23 +28232,466 @@
 	  };
 	}
 
-	UpdatePlatform = (0, _reduxForm.reduxForm)({
-	  form: 'platform',
-	  fields: fields,
-	  validate: validate
-	}, function (state, ownProps) {
-	  return {
-	    initialValues: state.platforms.platformsById[ownProps.params.platformId]
-	  };
-	}, {
-	  addValue: _reduxForm.addArrayValue
-	})(UpdatePlatform);
-
 	// not sure what this would all need yet
 	exports.default = (0, _reactRedux.connect)(select)(UpdatePlatform);
 
 /***/ },
 /* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(7);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Part = __webpack_require__(257);
+
+	var _Part2 = _interopRequireDefault(_Part);
+
+	var _Button = __webpack_require__(254);
+
+	var _Button2 = _interopRequireDefault(_Button);
+
+	var _reactRouter = __webpack_require__(164);
+
+	var _PartGroupForm = __webpack_require__(259);
+
+	var _PartGroupForm2 = _interopRequireDefault(_PartGroupForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Parts = function (_Component) {
+	  _inherits(Parts, _Component);
+
+	  function Parts(props) {
+	    _classCallCheck(this, Parts);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Parts).call(this, props));
+
+	    _this.createPartLink = '/platform/' + _this.props.platformId + '/part';
+	    _this.close = _this.close.bind(_this);
+	    _this.open = _this.open.bind(_this);
+	    _this.state = {
+	      showModal: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Parts, [{
+	    key: 'close',
+	    value: function close() {
+	      this.setState({ showModal: false });
+	    }
+	  }, {
+	    key: 'open',
+	    value: function open() {
+	      this.setState({ showModal: true });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row parts-container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-12' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Parts'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'clearfix' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'btn-group pull-lg-right' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { className: 'btn btn-secondary', to: this.createPartLink },
+	                'Create New Part'
+	              ),
+	              _react2.default.createElement(
+	                _Button2.default,
+	                { onClick: this.open },
+	                'Create Part Group'
+	              )
+	            )
+	          ),
+	          this.state.showModal ? _react2.default.createElement(_PartGroupForm2.default, { onCancel: this.close, onSave: this.onAddPartGroup }) : null,
+	          this.props.parts.length === 0 ? _react2.default.createElement(
+	            'p',
+	            null,
+	            'No parts have been added.'
+	          ) : null,
+	          this.props.parts.length > 0 ? _react2.default.createElement(
+	            'ul',
+	            { className: 'parts list-group' },
+	            ' ',
+	            this.props.parts.map(function (result) {
+	              return _react2.default.createElement(_Part2.default, { key: result._id, data: result, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
+	            }),
+	            ' '
+	          ) : null
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Parts;
+	}(_react.Component);
+
+	Parts.propTypes = {
+	  parts: _react.PropTypes.array.isRequired,
+	  onRemovePart: _react.PropTypes.func.isRequired,
+	  onEditPart: _react.PropTypes.func.isRequired,
+	  platformId: _react.PropTypes.string.isRequired,
+	  onAddPartGroup: _react.PropTypes.func.isRequired
+	};
+	Parts.defaultProps = {
+	  parts: []
+	};
+	exports.default = Parts;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(7);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Button = __webpack_require__(254);
+
+	var _Button2 = _interopRequireDefault(_Button);
+
+	var _Field = __webpack_require__(258);
+
+	var _Field2 = _interopRequireDefault(_Field);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Part = function (_Component) {
+	  _inherits(Part, _Component);
+
+	  function Part(props) {
+	    _classCallCheck(this, Part);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Part).call(this, props));
+
+	    _this.handleRemove = _this.handleRemove.bind(_this);
+	    _this.handleEdit = _this.handleEdit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Part, [{
+	    key: 'handleRemove',
+	    value: function handleRemove(event) {
+	      event.stopPropagation();
+	      this.props.onRemove(this.props.data._id);
+	    }
+	  }, {
+	    key: 'handleEdit',
+	    value: function handleEdit(event) {
+	      event.stopPropagation();
+	      this.props.onEdit(this.props.data._id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        { className: 'list-group-item clearfix part' },
+	        _react2.default.createElement(
+	          'h5',
+	          { className: 'list-group-item-heading' },
+	          this.props.data.name
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'list-group-item-text' },
+	          this.props.data.description
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'fields-header' },
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'Fields'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'fields' },
+	          this.props.data.fields.map(function (result) {
+	            return _react2.default.createElement(_Field2.default, { key: result._id, data: result });
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'btn-group pull-lg-right', role: 'group', 'aria-label': 'Basic example' },
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { buttonClass: 'btn-secondary', onClick: this.handleEdit },
+	            'Edit'
+	          ),
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { buttonClass: 'btn-secondary', onClick: this.handleRemove },
+	            'Remove'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Part;
+	}(_react.Component);
+
+	Part.propTypes = {
+	  data: _react.PropTypes.object.isRequired,
+	  onRemove: _react.PropTypes.func.isRequired,
+	  onEdit: _react.PropTypes.func.isRequired
+	};
+	exports.default = Part;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(7);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Field = function Field(props) {
+	  return _react2.default.createElement(
+	    'li',
+	    null,
+	    props.data.type,
+	    ' - ',
+	    props.data.label,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      props.data.options.map(function (result) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: result._id },
+	          result.label,
+	          ' - ',
+	          result.type
+	        );
+	      })
+	    )
+	  );
+	};
+
+	Field.propTypes = {
+	  data: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = Field;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.fields = exports.validate = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(7);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Button = __webpack_require__(254);
+
+	var _Button2 = _interopRequireDefault(_Button);
+
+	var _reduxForm = __webpack_require__(260);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var requireFields = function requireFields() {
+	  for (var _len = arguments.length, names = Array(_len), _key = 0; _key < _len; _key++) {
+	    names[_key] = arguments[_key];
+	  }
+
+	  return function (data) {
+	    return names.reduce(function (errors, name) {
+	      if (!data[name]) {
+	        errors[name] = 'Required';
+	      }
+	      return errors;
+	    }, {});
+	  };
+	};
+
+	var validate = exports.validate = function validate(values) {
+	  var errors = requireFields('name', 'description')(values);
+	  return errors;
+	};
+
+	var fields = exports.fields = ['name', 'description'];
+
+	var PartGroupForm = function (_Component) {
+	  _inherits(PartGroupForm, _Component);
+
+	  function PartGroupForm() {
+	    _classCallCheck(this, PartGroupForm);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PartGroupForm).apply(this, arguments));
+	  }
+
+	  _createClass(PartGroupForm, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var _props$fields = _props.fields;
+	      var name = _props$fields.name;
+	      var description = _props$fields.description;
+	      var handleSubmit = _props.handleSubmit;
+	      var submitting = _props.submitting;
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Create Part Group'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'A part group is a way to organize parts into logical groupings.  Groupings can contain parts or other groupings.  Products can also be created from groupings.'
+	        ),
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: handleSubmit },
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: '' },
+	              'Name'
+	            ),
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control' }, name)),
+	            name.touched && name.error && _react2.default.createElement(
+	              'span',
+	              { id: 'helpBlock2', className: 'help-block' },
+	              name.error
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'fieldset',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: '' },
+	              'Description'
+	            ),
+	            _react2.default.createElement('textarea', _extends({ className: 'form-control' }, description)),
+	            description.touched && description.error && _react2.default.createElement(
+	              'span',
+	              { id: 'helpBlock2', className: 'help-block' },
+	              description.error
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'btn-group' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'input', className: 'btn btn-primary', onClick: this.handleSave, disabled: submitting },
+	              submitting ? 'Saving' : 'Save'
+	            ),
+	            _react2.default.createElement(
+	              _Button2.default,
+	              { buttonClass: 'btn-secondary', onClick: this.props.onCancel },
+	              'Cancel'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PartGroupForm;
+	}(_react.Component);
+
+	PartGroupForm.propTypes = {
+	  onCancel: _react.PropTypes.func.isRequired,
+	  fields: _react.PropTypes.object.isRequired,
+	  handleSubmit: _react.PropTypes.func.isRequired,
+	  submitting: _react.PropTypes.bool
+	};
+
+
+	PartGroupForm = (0, _reduxForm.reduxForm)({
+	  form: 'partGroup',
+	  fields: fields,
+	  validate: validate
+	})(PartGroupForm);
+
+	exports.default = PartGroupForm;
+
+/***/ },
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28424,7 +28705,7 @@
 
 	var _reactRedux = __webpack_require__(226);
 
-	var _createAll2 = __webpack_require__(257);
+	var _createAll2 = __webpack_require__(261);
 
 	var _createAll3 = _interopRequireDefault(_createAll2);
 
@@ -28484,7 +28765,7 @@
 	exports.untouchWithKey = untouchWithKey;
 
 /***/ },
-/* 257 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28495,35 +28776,35 @@
 
 	exports.default = createAll;
 
-	var _reducer = __webpack_require__(258);
+	var _reducer = __webpack_require__(262);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _createReduxForm = __webpack_require__(269);
+	var _createReduxForm = __webpack_require__(273);
 
 	var _createReduxForm2 = _interopRequireDefault(_createReduxForm);
 
-	var _mapValues = __webpack_require__(260);
+	var _mapValues = __webpack_require__(264);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
-	var _bindActionData = __webpack_require__(276);
+	var _bindActionData = __webpack_require__(280);
 
 	var _bindActionData2 = _interopRequireDefault(_bindActionData);
 
-	var _actions = __webpack_require__(275);
+	var _actions = __webpack_require__(279);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _actionTypes = __webpack_require__(259);
+	var _actionTypes = __webpack_require__(263);
 
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 
-	var _createPropTypes = __webpack_require__(299);
+	var _createPropTypes = __webpack_require__(303);
 
 	var _createPropTypes2 = _interopRequireDefault(_createPropTypes);
 
-	var _getValuesFromState = __webpack_require__(263);
+	var _getValuesFromState = __webpack_require__(267);
 
 	var _getValuesFromState2 = _interopRequireDefault(_getValuesFromState);
 
@@ -28629,7 +28910,7 @@
 	}
 
 /***/ },
-/* 258 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28641,39 +28922,39 @@
 
 	var _initialState, _behaviors;
 
-	var _actionTypes = __webpack_require__(259);
+	var _actionTypes = __webpack_require__(263);
 
-	var _mapValues = __webpack_require__(260);
+	var _mapValues = __webpack_require__(264);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
-	var _read = __webpack_require__(261);
+	var _read = __webpack_require__(265);
 
 	var _read2 = _interopRequireDefault(_read);
 
-	var _write = __webpack_require__(262);
+	var _write = __webpack_require__(266);
 
 	var _write2 = _interopRequireDefault(_write);
 
-	var _getValuesFromState = __webpack_require__(263);
+	var _getValuesFromState = __webpack_require__(267);
 
 	var _getValuesFromState2 = _interopRequireDefault(_getValuesFromState);
 
-	var _initializeState = __webpack_require__(265);
+	var _initializeState = __webpack_require__(269);
 
 	var _initializeState2 = _interopRequireDefault(_initializeState);
 
-	var _resetState = __webpack_require__(266);
+	var _resetState = __webpack_require__(270);
 
 	var _resetState2 = _interopRequireDefault(_resetState);
 
-	var _setErrors = __webpack_require__(267);
+	var _setErrors = __webpack_require__(271);
 
 	var _setErrors2 = _interopRequireDefault(_setErrors);
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
-	var _normalizeFields = __webpack_require__(268);
+	var _normalizeFields = __webpack_require__(272);
 
 	var _normalizeFields2 = _interopRequireDefault(_normalizeFields);
 
@@ -28950,7 +29231,7 @@
 	exports.default = decorate(formReducer);
 
 /***/ },
-/* 259 */
+/* 263 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28974,7 +29255,7 @@
 	var UNTOUCH = exports.UNTOUCH = 'redux-form/UNTOUCH';
 
 /***/ },
-/* 260 */
+/* 264 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28996,7 +29277,7 @@
 	}
 
 /***/ },
-/* 261 */
+/* 265 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29042,7 +29323,7 @@
 	exports.default = read;
 
 /***/ },
-/* 262 */
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29148,14 +29429,14 @@
 	exports.default = write;
 
 /***/ },
-/* 263 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
 	/**
 	 * A different version of getValues() that does not need the fields array
@@ -29194,7 +29475,7 @@
 	exports.default = getValuesFromState;
 
 /***/ },
-/* 264 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29219,7 +29500,7 @@
 	}
 
 /***/ },
-/* 265 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29228,7 +29509,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
 	var makeEntry = function makeEntry(value) {
 	  return (0, _fieldValue.makeFieldValue)(value === undefined ? {} : { initial: value, value: value });
@@ -29296,14 +29577,14 @@
 	exports.default = initializeState;
 
 /***/ },
-/* 266 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
 	var reset = function reset(value) {
 	  return (0, _fieldValue.makeFieldValue)(value === undefined || value && value.initial === undefined ? {} : { initial: value.initial, value: value.initial });
@@ -29335,7 +29616,7 @@
 	exports.default = resetState;
 
 /***/ },
-/* 267 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29344,7 +29625,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
 	var isMetaKey = function isMetaKey(key) {
 	  return key[0] === '_';
@@ -29426,7 +29707,7 @@
 	exports.default = setErrors;
 
 /***/ },
-/* 268 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29437,7 +29718,7 @@
 
 	exports.default = normalizeFields;
 
-	var _fieldValue = __webpack_require__(264);
+	var _fieldValue = __webpack_require__(268);
 
 	function extractKey(field) {
 	  var dotIndex = field.indexOf('.');
@@ -29523,7 +29804,7 @@
 	}
 
 /***/ },
-/* 269 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29532,7 +29813,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _createReduxFormConnector = __webpack_require__(270);
+	var _createReduxFormConnector = __webpack_require__(274);
 
 	var _createReduxFormConnector2 = _interopRequireDefault(_createReduxFormConnector);
 
@@ -29593,22 +29874,22 @@
 	exports.default = createReduxForm;
 
 /***/ },
-/* 270 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _noGetters = __webpack_require__(271);
+	var _noGetters = __webpack_require__(275);
 
 	var _noGetters2 = _interopRequireDefault(_noGetters);
 
-	var _getDisplayName = __webpack_require__(273);
+	var _getDisplayName = __webpack_require__(277);
 
 	var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
-	var _createHigherOrderComponent = __webpack_require__(274);
+	var _createHigherOrderComponent = __webpack_require__(278);
 
 	var _createHigherOrderComponent2 = _interopRequireDefault(_createHigherOrderComponent);
 
@@ -29698,14 +29979,14 @@
 	exports.default = createReduxFormConnector;
 
 /***/ },
-/* 271 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(272);
+	module.exports = __webpack_require__(276);
 
 
 /***/ },
-/* 272 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29800,7 +30081,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 273 */
+/* 277 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29812,7 +30093,7 @@
 	}
 
 /***/ },
-/* 274 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29821,57 +30102,57 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _actions = __webpack_require__(275);
+	var _actions = __webpack_require__(279);
 
 	var importedActions = _interopRequireWildcard(_actions);
 
-	var _getDisplayName = __webpack_require__(273);
+	var _getDisplayName = __webpack_require__(277);
 
 	var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
-	var _reducer = __webpack_require__(258);
+	var _reducer = __webpack_require__(262);
 
 	var _deepEqual = __webpack_require__(176);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _bindActionData = __webpack_require__(276);
+	var _bindActionData = __webpack_require__(280);
 
 	var _bindActionData2 = _interopRequireDefault(_bindActionData);
 
-	var _getValues = __webpack_require__(277);
+	var _getValues = __webpack_require__(281);
 
 	var _getValues2 = _interopRequireDefault(_getValues);
 
-	var _isValid = __webpack_require__(278);
+	var _isValid = __webpack_require__(282);
 
 	var _isValid2 = _interopRequireDefault(_isValid);
 
-	var _readFields = __webpack_require__(279);
+	var _readFields = __webpack_require__(283);
 
 	var _readFields2 = _interopRequireDefault(_readFields);
 
-	var _handleSubmit2 = __webpack_require__(293);
+	var _handleSubmit2 = __webpack_require__(297);
 
 	var _handleSubmit3 = _interopRequireDefault(_handleSubmit2);
 
-	var _asyncValidation = __webpack_require__(294);
+	var _asyncValidation = __webpack_require__(298);
 
 	var _asyncValidation2 = _interopRequireDefault(_asyncValidation);
 
-	var _silenceEvents = __webpack_require__(295);
+	var _silenceEvents = __webpack_require__(299);
 
 	var _silenceEvents2 = _interopRequireDefault(_silenceEvents);
 
-	var _silenceEvent = __webpack_require__(296);
+	var _silenceEvent = __webpack_require__(300);
 
 	var _silenceEvent2 = _interopRequireDefault(_silenceEvent);
 
-	var _wrapMapDispatchToProps = __webpack_require__(297);
+	var _wrapMapDispatchToProps = __webpack_require__(301);
 
 	var _wrapMapDispatchToProps2 = _interopRequireDefault(_wrapMapDispatchToProps);
 
-	var _wrapMapStateToProps = __webpack_require__(298);
+	var _wrapMapStateToProps = __webpack_require__(302);
 
 	var _wrapMapStateToProps2 = _interopRequireDefault(_wrapMapStateToProps);
 
@@ -30175,7 +30456,7 @@
 	exports.default = createHigherOrderComponent;
 
 /***/ },
-/* 275 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30183,7 +30464,7 @@
 	exports.__esModule = true;
 	exports.untouch = exports.touch = exports.swapArrayValues = exports.submitFailed = exports.stopSubmit = exports.stopAsyncValidation = exports.startSubmit = exports.startAsyncValidation = exports.reset = exports.removeArrayValue = exports.initialize = exports.focus = exports.destroy = exports.change = exports.blur = exports.addArrayValue = undefined;
 
-	var _actionTypes = __webpack_require__(259);
+	var _actionTypes = __webpack_require__(263);
 
 	var addArrayValue = exports.addArrayValue = function addArrayValue(path, value, index, fields) {
 	  return { type: _actionTypes.ADD_ARRAY_VALUE, path: path, value: value, index: index, fields: fields };
@@ -30261,7 +30542,7 @@
 	};
 
 /***/ },
-/* 276 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30272,7 +30553,7 @@
 
 	exports.default = bindActionData;
 
-	var _mapValues = __webpack_require__(260);
+	var _mapValues = __webpack_require__(264);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
@@ -30296,7 +30577,7 @@
 	}
 
 /***/ },
-/* 277 */
+/* 281 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30357,7 +30638,7 @@
 	exports.default = getValues;
 
 /***/ },
-/* 278 */
+/* 282 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30379,7 +30660,7 @@
 	}
 
 /***/ },
-/* 279 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30388,19 +30669,19 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _readField = __webpack_require__(280);
+	var _readField = __webpack_require__(284);
 
 	var _readField2 = _interopRequireDefault(_readField);
 
-	var _write = __webpack_require__(262);
+	var _write = __webpack_require__(266);
 
 	var _write2 = _interopRequireDefault(_write);
 
-	var _getValues = __webpack_require__(277);
+	var _getValues = __webpack_require__(281);
 
 	var _getValues2 = _interopRequireDefault(_getValues);
 
-	var _removeField = __webpack_require__(292);
+	var _removeField = __webpack_require__(296);
 
 	var _removeField2 = _interopRequireDefault(_removeField);
 
@@ -30450,7 +30731,7 @@
 	exports.default = readFields;
 
 /***/ },
-/* 280 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30459,35 +30740,35 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _createOnBlur = __webpack_require__(281);
+	var _createOnBlur = __webpack_require__(285);
 
 	var _createOnBlur2 = _interopRequireDefault(_createOnBlur);
 
-	var _createOnChange = __webpack_require__(284);
+	var _createOnChange = __webpack_require__(288);
 
 	var _createOnChange2 = _interopRequireDefault(_createOnChange);
 
-	var _createOnDragStart = __webpack_require__(285);
+	var _createOnDragStart = __webpack_require__(289);
 
 	var _createOnDragStart2 = _interopRequireDefault(_createOnDragStart);
 
-	var _createOnDrop = __webpack_require__(286);
+	var _createOnDrop = __webpack_require__(290);
 
 	var _createOnDrop2 = _interopRequireDefault(_createOnDrop);
 
-	var _createOnFocus = __webpack_require__(287);
+	var _createOnFocus = __webpack_require__(291);
 
 	var _createOnFocus2 = _interopRequireDefault(_createOnFocus);
 
-	var _silencePromise = __webpack_require__(288);
+	var _silencePromise = __webpack_require__(292);
 
 	var _silencePromise2 = _interopRequireDefault(_silencePromise);
 
-	var _read = __webpack_require__(261);
+	var _read = __webpack_require__(265);
 
 	var _read2 = _interopRequireDefault(_read);
 
-	var _updateField = __webpack_require__(290);
+	var _updateField = __webpack_require__(294);
 
 	var _updateField2 = _interopRequireDefault(_updateField);
 
@@ -30662,14 +30943,14 @@
 	exports.default = readField;
 
 /***/ },
-/* 281 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _getValue = __webpack_require__(282);
+	var _getValue = __webpack_require__(286);
 
 	var _getValue2 = _interopRequireDefault(_getValue);
 
@@ -30687,14 +30968,14 @@
 	exports.default = createOnBlur;
 
 /***/ },
-/* 282 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isEvent = __webpack_require__(283);
+	var _isEvent = __webpack_require__(287);
 
 	var _isEvent2 = _interopRequireDefault(_isEvent);
 
@@ -30747,7 +31028,7 @@
 	exports.default = getValue;
 
 /***/ },
-/* 283 */
+/* 287 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30760,14 +31041,14 @@
 	exports.default = isEvent;
 
 /***/ },
-/* 284 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _getValue = __webpack_require__(282);
+	var _getValue = __webpack_require__(286);
 
 	var _getValue2 = _interopRequireDefault(_getValue);
 
@@ -30781,7 +31062,7 @@
 	exports.default = createOnChange;
 
 /***/ },
-/* 285 */
+/* 289 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30797,14 +31078,14 @@
 	exports.default = createOnDragStart;
 
 /***/ },
-/* 286 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _createOnDragStart = __webpack_require__(285);
+	var _createOnDragStart = __webpack_require__(289);
 
 	var createOnDrop = function createOnDrop(name, change) {
 	  return function (event) {
@@ -30814,7 +31095,7 @@
 	exports.default = createOnDrop;
 
 /***/ },
-/* 287 */
+/* 291 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30828,14 +31109,14 @@
 	exports.default = createOnFocus;
 
 /***/ },
-/* 288 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isPromise = __webpack_require__(289);
+	var _isPromise = __webpack_require__(293);
 
 	var _isPromise2 = _interopRequireDefault(_isPromise);
 
@@ -30852,7 +31133,7 @@
 	exports.default = silencePromise;
 
 /***/ },
-/* 289 */
+/* 293 */
 /***/ function(module, exports) {
 
 	module.exports = isPromise;
@@ -30863,7 +31144,7 @@
 
 
 /***/ },
-/* 290 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30872,11 +31153,11 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _isPristine = __webpack_require__(291);
+	var _isPristine = __webpack_require__(295);
 
 	var _isPristine2 = _interopRequireDefault(_isPristine);
 
-	var _isValid = __webpack_require__(278);
+	var _isValid = __webpack_require__(282);
 
 	var _isValid2 = _interopRequireDefault(_isValid);
 
@@ -30935,7 +31216,7 @@
 	exports.default = updateField;
 
 /***/ },
-/* 291 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30973,7 +31254,7 @@
 	}
 
 /***/ },
-/* 292 */
+/* 296 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31053,18 +31334,18 @@
 	exports.default = removeField;
 
 /***/ },
-/* 293 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isPromise = __webpack_require__(289);
+	var _isPromise = __webpack_require__(293);
 
 	var _isPromise2 = _interopRequireDefault(_isPromise);
 
-	var _isValid = __webpack_require__(278);
+	var _isValid = __webpack_require__(282);
 
 	var _isValid2 = _interopRequireDefault(_isValid);
 
@@ -31117,18 +31398,18 @@
 	exports.default = handleSubmit;
 
 /***/ },
-/* 294 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isPromise = __webpack_require__(289);
+	var _isPromise = __webpack_require__(293);
 
 	var _isPromise2 = _interopRequireDefault(_isPromise);
 
-	var _isValid = __webpack_require__(278);
+	var _isValid = __webpack_require__(282);
 
 	var _isValid2 = _interopRequireDefault(_isValid);
 
@@ -31159,14 +31440,14 @@
 	exports.default = asyncValidation;
 
 /***/ },
-/* 295 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _silenceEvent = __webpack_require__(296);
+	var _silenceEvent = __webpack_require__(300);
 
 	var _silenceEvent2 = _interopRequireDefault(_silenceEvent);
 
@@ -31185,14 +31466,14 @@
 	exports.default = silenceEvents;
 
 /***/ },
-/* 296 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _isEvent = __webpack_require__(283);
+	var _isEvent = __webpack_require__(287);
 
 	var _isEvent2 = _interopRequireDefault(_isEvent);
 
@@ -31209,7 +31490,7 @@
 	exports.default = silenceEvent;
 
 /***/ },
-/* 297 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31252,7 +31533,7 @@
 	exports.default = wrapMapDispatchToProps;
 
 /***/ },
-/* 298 */
+/* 302 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31289,7 +31570,7 @@
 	exports.default = wrapMapStateToProps;
 
 /***/ },
-/* 299 */
+/* 303 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31334,7 +31615,7 @@
 	exports.default = createPropTypes;
 
 /***/ },
-/* 300 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31351,7 +31632,238 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _FieldOptionsForm = __webpack_require__(301);
+	var _reduxForm = __webpack_require__(260);
+
+	var _FieldForm = __webpack_require__(305);
+
+	var _FieldForm2 = _interopRequireDefault(_FieldForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var requireFields = function requireFields() {
+	  for (var _len = arguments.length, names = Array(_len), _key = 0; _key < _len; _key++) {
+	    names[_key] = arguments[_key];
+	  }
+
+	  return function (data) {
+	    return names.reduce(function (errors, name) {
+	      if (!data[name]) {
+	        errors[name] = 'Required';
+	      }
+	      return errors;
+	    }, {});
+	  };
+	};
+
+	var validateFields = requireFields('type', 'label');
+	var validate = function validate(values) {
+	  var errors = requireFields('name', 'description')(values);
+	  errors.fields = values.fields.map(validateFields);
+
+	  return errors;
+	};
+
+	var fields = ['name', 'description', 'showCompany', 'showBrands', 'showPeople', 'showTags', 'showPhotos', 'showTransactions', 'allowAdditionalParts', 'fields[].type', 'fields[].label', 'fields[].options[].label', 'fields[].options[].value'];
+
+	var PlatformForm = function (_Component) {
+	  _inherits(PlatformForm, _Component);
+
+	  function PlatformForm() {
+	    _classCallCheck(this, PlatformForm);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PlatformForm).apply(this, arguments));
+	  }
+
+	  _createClass(PlatformForm, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props$fields = this.props.fields;
+	      var name = _props$fields.name;
+	      var description = _props$fields.description;
+	      var fields = _props$fields.fields;
+
+
+	      return _react2.default.createElement(
+	        'form',
+	        null,
+	        _react2.default.createElement(
+	          'fieldset',
+	          { className: 'form-group' },
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: '' },
+	            'Name'
+	          ),
+	          _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control' }, name)),
+	          name.touched && name.error && _react2.default.createElement(
+	            'span',
+	            { id: 'helpBlock2', className: 'help-block' },
+	            name.error
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'fieldset',
+	          { className: 'form-group' },
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: '' },
+	            'Description'
+	          ),
+	          _react2.default.createElement('textarea', _extends({ className: 'form-control' }, description)),
+	          description.touched && description.error && _react2.default.createElement(
+	            'span',
+	            { id: 'helpBlock2', className: 'help-block' },
+	            description.error
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'fieldset',
+	          { className: 'form-group' },
+	          _react2.default.createElement(
+	            'legend',
+	            null,
+	            'Configuration'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showCompany)),
+	              'Allow company'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showBrands)),
+	              'Allow brands'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showPeople)),
+	              'Allow people'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showTags)),
+	              'Allow tags'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showPhotos)),
+	              'Allow photos'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.showTransactions)),
+	              'Allow transactions'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'checkbox' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              _react2.default.createElement('input', _extends({ type: 'checkbox' }, this.props.fields.allowAdditionalParts)),
+	              'Allow additional parts'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Custom Fields'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-secondary btn-sm', type: 'button', onClick: function onClick() {
+	              fields.addField({ options: [] });
+	            }
+	          },
+	          _react2.default.createElement('i', null),
+	          ' Add Field'
+	        ),
+	        fields.map(function (field, index) {
+	          return _react2.default.createElement(_FieldForm2.default, _extends({ key: index }, field));
+	        })
+	      );
+	    }
+	  }]);
+
+	  return PlatformForm;
+	}(_react.Component);
+
+	PlatformForm.propTypes = {
+	  platform: _react.PropTypes.object.isRequired,
+	  fields: _react.PropTypes.object.isRequired
+	};
+
+
+	PlatformForm = (0, _reduxForm.reduxForm)({
+	  form: 'platform',
+	  fields: fields,
+	  validate: validate
+	}, function (state, ownProps) {
+	  return {
+	    initialValues: ownProps.platform
+	  };
+	}, {
+	  addValue: _reduxForm.addArrayValue
+	})(PlatformForm);
+
+	exports.default = PlatformForm;
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(7);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _FieldOptionsForm = __webpack_require__(306);
 
 	var _FieldOptionsForm2 = _interopRequireDefault(_FieldOptionsForm);
 
@@ -31461,7 +31973,7 @@
 	exports.default = FieldForm;
 
 /***/ },
-/* 301 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31539,472 +32051,7 @@
 	exports.default = FieldOptionsForm;
 
 /***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Part = __webpack_require__(303);
-
-	var _Part2 = _interopRequireDefault(_Part);
-
-	var _Button = __webpack_require__(254);
-
-	var _Button2 = _interopRequireDefault(_Button);
-
-	var _reactRouter = __webpack_require__(164);
-
-	var _PartGroupForm = __webpack_require__(305);
-
-	var _PartGroupForm2 = _interopRequireDefault(_PartGroupForm);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Parts = function (_Component) {
-	  _inherits(Parts, _Component);
-
-	  function Parts(props) {
-	    _classCallCheck(this, Parts);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Parts).call(this, props));
-
-	    _this.createPartLink = '/platform/' + _this.props.platformId + '/part';
-	    _this.close = _this.close.bind(_this);
-	    _this.open = _this.open.bind(_this);
-	    _this.state = {
-	      showModal: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Parts, [{
-	    key: 'close',
-	    value: function close() {
-	      this.setState({ showModal: false });
-	    }
-	  }, {
-	    key: 'open',
-	    value: function open() {
-	      this.setState({ showModal: true });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'row parts-container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-md-12' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Parts'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'clearfix' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'btn-group pull-lg-right' },
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { className: 'btn btn-secondary', to: this.createPartLink },
-	                'Create New Part'
-	              ),
-	              _react2.default.createElement(
-	                _Button2.default,
-	                { onClick: this.open },
-	                'Create Part Group'
-	              )
-	            )
-	          ),
-	          this.state.showModal ? _react2.default.createElement(_PartGroupForm2.default, { onCancel: this.close, onSave: this.onAddPartGroup }) : null,
-	          this.props.parts.length === 0 ? _react2.default.createElement(
-	            'p',
-	            null,
-	            'No parts have been added.'
-	          ) : null,
-	          this.props.parts.length > 0 ? _react2.default.createElement(
-	            'ul',
-	            { className: 'parts list-group' },
-	            ' ',
-	            this.props.parts.map(function (result) {
-	              return _react2.default.createElement(_Part2.default, { key: result._id, data: result, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
-	            }),
-	            ' '
-	          ) : null
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Parts;
-	}(_react.Component);
-
-	Parts.propTypes = {
-	  parts: _react.PropTypes.array.isRequired,
-	  onRemovePart: _react.PropTypes.func.isRequired,
-	  onEditPart: _react.PropTypes.func.isRequired,
-	  platformId: _react.PropTypes.string.isRequired,
-	  onAddPartGroup: _react.PropTypes.func.isRequired
-	};
-	Parts.defaultProps = {
-	  parts: []
-	};
-	exports.default = Parts;
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Button = __webpack_require__(254);
-
-	var _Button2 = _interopRequireDefault(_Button);
-
-	var _Field = __webpack_require__(304);
-
-	var _Field2 = _interopRequireDefault(_Field);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Part = function (_Component) {
-	  _inherits(Part, _Component);
-
-	  function Part(props) {
-	    _classCallCheck(this, Part);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Part).call(this, props));
-
-	    _this.handleRemove = _this.handleRemove.bind(_this);
-	    _this.handleEdit = _this.handleEdit.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(Part, [{
-	    key: 'handleRemove',
-	    value: function handleRemove(event) {
-	      event.stopPropagation();
-	      this.props.onRemove(this.props.data._id);
-	    }
-	  }, {
-	    key: 'handleEdit',
-	    value: function handleEdit(event) {
-	      event.stopPropagation();
-	      this.props.onEdit(this.props.data._id);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'list-group-item clearfix part' },
-	        _react2.default.createElement(
-	          'h5',
-	          { className: 'list-group-item-heading' },
-	          this.props.data.name
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'list-group-item-text' },
-	          this.props.data.description
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'fields-header' },
-	          _react2.default.createElement(
-	            'strong',
-	            null,
-	            'Fields'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'fields' },
-	          this.props.data.fields.map(function (result) {
-	            return _react2.default.createElement(_Field2.default, { key: result._id, data: result });
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'btn-group pull-lg-right', role: 'group', 'aria-label': 'Basic example' },
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { buttonClass: 'btn-secondary', onClick: this.handleEdit },
-	            'Edit'
-	          ),
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { buttonClass: 'btn-secondary', onClick: this.handleRemove },
-	            'Remove'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Part;
-	}(_react.Component);
-
-	Part.propTypes = {
-	  data: _react.PropTypes.object.isRequired,
-	  onRemove: _react.PropTypes.func.isRequired,
-	  onEdit: _react.PropTypes.func.isRequired
-	};
-	exports.default = Part;
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Field = function Field(props) {
-	  return _react2.default.createElement(
-	    'li',
-	    null,
-	    props.data.type,
-	    ' - ',
-	    props.data.label,
-	    _react2.default.createElement(
-	      'ul',
-	      null,
-	      props.data.options.map(function (result) {
-	        return _react2.default.createElement(
-	          'li',
-	          { key: result._id },
-	          result.label,
-	          ' - ',
-	          result.type
-	        );
-	      })
-	    )
-	  );
-	};
-
-	Field.propTypes = {
-	  data: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = Field;
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.fields = exports.validate = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Button = __webpack_require__(254);
-
-	var _Button2 = _interopRequireDefault(_Button);
-
-	var _reduxForm = __webpack_require__(256);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var requireFields = function requireFields() {
-	  for (var _len = arguments.length, names = Array(_len), _key = 0; _key < _len; _key++) {
-	    names[_key] = arguments[_key];
-	  }
-
-	  return function (data) {
-	    return names.reduce(function (errors, name) {
-	      if (!data[name]) {
-	        errors[name] = 'Required';
-	      }
-	      return errors;
-	    }, {});
-	  };
-	};
-
-	var validate = exports.validate = function validate(values) {
-	  var errors = requireFields('name', 'description')(values);
-	  return errors;
-	};
-
-	var fields = exports.fields = ['name', 'description'];
-
-	var PartGroupForm = function (_Component) {
-	  _inherits(PartGroupForm, _Component);
-
-	  function PartGroupForm(props) {
-	    _classCallCheck(this, PartGroupForm);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PartGroupForm).call(this, props));
-
-	    _this.handleSave = _this.handleSave.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(PartGroupForm, [{
-	    key: 'handleSave',
-	    value: function handleSave(model) {
-	      this.props.onSave(model);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var _props$fields = _props.fields;
-	      var name = _props$fields.name;
-	      var description = _props$fields.description;
-	      var handleSubmit = _props.handleSubmit;
-	      var submitting = _props.submitting;
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h5',
-	          null,
-	          'Create Part Group'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'A part group is a way to organize parts into logical groupings.  Groupings can contain parts or other groupings.  Products can also be created from groupings.'
-	        ),
-	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: handleSubmit(this.handleSave) },
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: '' },
-	              'Name'
-	            ),
-	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control' }, name)),
-	            name.touched && name.error && _react2.default.createElement(
-	              'span',
-	              { id: 'helpBlock2', className: 'help-block' },
-	              name.error
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'fieldset',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: '' },
-	              'Description'
-	            ),
-	            _react2.default.createElement('textarea', _extends({ className: 'form-control' }, description)),
-	            description.touched && description.error && _react2.default.createElement(
-	              'span',
-	              { id: 'helpBlock2', className: 'help-block' },
-	              description.error
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'btn-group' },
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'input', className: 'btn btn-primary', onClick: this.handleSave, disabled: submitting },
-	              submitting ? 'Saving' : 'Save'
-	            ),
-	            _react2.default.createElement(
-	              _Button2.default,
-	              { buttonClass: 'btn-secondary', onClick: this.props.onCancel },
-	              'Cancel'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return PartGroupForm;
-	}(_react.Component);
-
-	PartGroupForm.propTypes = {
-	  onCancel: _react.PropTypes.func.isRequired,
-	  validate: _react.PropTypes.func.isRequired,
-	  onSave: _react.PropTypes.func.isRequired,
-	  fields: _react.PropTypes.object.isRequired,
-	  handleSubmit: _react.PropTypes.func.isRequired,
-	  submitting: _react.PropTypes.bool
-	};
-
-
-	PartGroupForm = (0, _reduxForm.reduxForm)({
-	  form: 'partGroup',
-	  fields: fields,
-	  validate: validate
-	})(PartGroupForm);
-
-	exports.default = PartGroupForm;
-
-/***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32023,7 +32070,7 @@
 
 	var _reactRedux = __webpack_require__(226);
 
-	var _PartForm = __webpack_require__(307);
+	var _PartForm = __webpack_require__(308);
 
 	var _PartForm2 = _interopRequireDefault(_PartForm);
 
@@ -32033,7 +32080,7 @@
 
 	var _reactRouter = __webpack_require__(164);
 
-	var _reduxForm = __webpack_require__(256);
+	var _reduxForm = __webpack_require__(260);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32123,7 +32170,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(CreatePart);
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32145,7 +32192,7 @@
 
 	var _Button2 = _interopRequireDefault(_Button);
 
-	var _FieldForm = __webpack_require__(300);
+	var _FieldForm = __webpack_require__(305);
 
 	var _FieldForm2 = _interopRequireDefault(_FieldForm);
 
@@ -32272,7 +32319,7 @@
 	exports.default = PartForm;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32291,7 +32338,7 @@
 
 	var _reactRedux = __webpack_require__(226);
 
-	var _PartForm = __webpack_require__(307);
+	var _PartForm = __webpack_require__(308);
 
 	var _PartForm2 = _interopRequireDefault(_PartForm);
 
@@ -32301,9 +32348,9 @@
 
 	var _reactRouter = __webpack_require__(164);
 
-	var _reduxForm = __webpack_require__(256);
+	var _reduxForm = __webpack_require__(260);
 
-	var _lodash = __webpack_require__(309);
+	var _lodash = __webpack_require__(310);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -32402,7 +32449,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(UpdatePart);
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32413,10 +32460,10 @@
 	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseEach = __webpack_require__(310),
-	    baseFind = __webpack_require__(311),
-	    baseFindIndex = __webpack_require__(312),
-	    baseIteratee = __webpack_require__(313);
+	var baseEach = __webpack_require__(311),
+	    baseFind = __webpack_require__(312),
+	    baseFindIndex = __webpack_require__(313),
+	    baseIteratee = __webpack_require__(314);
 
 	/**
 	 * Iterates over elements of `collection`, returning the first element
@@ -32490,7 +32537,7 @@
 
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports) {
 
 	/**
@@ -33021,7 +33068,7 @@
 
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports) {
 
 	/**
@@ -33061,7 +33108,7 @@
 
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports) {
 
 	/**
@@ -33099,7 +33146,7 @@
 
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -35098,10 +35145,10 @@
 
 	module.exports = baseIteratee;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(314)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(315)(module), (function() { return this; }())))
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -35117,7 +35164,7 @@
 
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35136,7 +35183,7 @@
 
 	var _platform = __webpack_require__(247);
 
-	var _PlatformListItem = __webpack_require__(316);
+	var _PlatformListItem = __webpack_require__(317);
 
 	var _PlatformListItem2 = _interopRequireDefault(_PlatformListItem);
 
@@ -35230,7 +35277,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(PlatformList);
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35319,7 +35366,7 @@
 	exports.default = PlatformListItem;
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35328,7 +35375,7 @@
 
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35340,19 +35387,19 @@
 
 	var _redux = __webpack_require__(232);
 
-	var _reduxThunk = __webpack_require__(319);
+	var _reduxThunk = __webpack_require__(320);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reduxLogger = __webpack_require__(320);
+	var _reduxLogger = __webpack_require__(321);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _index = __webpack_require__(321);
+	var _index = __webpack_require__(322);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _reduxHistoryTransitions = __webpack_require__(326);
+	var _reduxHistoryTransitions = __webpack_require__(327);
 
 	var _reduxHistoryTransitions2 = _interopRequireDefault(_reduxHistoryTransitions);
 
@@ -35369,7 +35416,7 @@
 	}
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35388,7 +35435,7 @@
 	module.exports = thunkMiddleware;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35621,7 +35668,7 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35632,11 +35679,11 @@
 
 	var _redux = __webpack_require__(232);
 
-	var _reduxForm = __webpack_require__(256);
+	var _reduxForm = __webpack_require__(260);
 
-	var _platforms = __webpack_require__(322);
+	var _platforms = __webpack_require__(323);
 
-	var _categories = __webpack_require__(325);
+	var _categories = __webpack_require__(326);
 
 	var _categories2 = _interopRequireDefault(_categories);
 
@@ -35655,7 +35702,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35670,15 +35717,15 @@
 
 	exports.platformsById = platformsById;
 
-	var _lodash = __webpack_require__(309);
+	var _lodash = __webpack_require__(310);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _lodash3 = __webpack_require__(323);
+	var _lodash3 = __webpack_require__(324);
 
 	var _lodash4 = _interopRequireDefault(_lodash3);
 
-	var _update = __webpack_require__(324);
+	var _update = __webpack_require__(325);
 
 	var _update2 = _interopRequireDefault(_update);
 
@@ -35801,7 +35848,7 @@
 	}
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -35812,8 +35859,8 @@
 	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFindIndex = __webpack_require__(312),
-	    baseIteratee = __webpack_require__(313);
+	var baseFindIndex = __webpack_require__(313),
+	    baseIteratee = __webpack_require__(314);
 
 	/**
 	 * This method is like `_.find` except that it returns the index of the first
@@ -35858,7 +35905,7 @@
 
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -35971,7 +36018,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36014,7 +36061,7 @@
 	exports.default = categories;
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36066,7 +36113,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36088,7 +36135,7 @@
 	}
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
