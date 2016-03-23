@@ -6,7 +6,8 @@ class Part extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     onRemove: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired
+    onEdit: PropTypes.func.isRequired,
+    selectable: PropTypes.bool
   }
 
   constructor(props) {
@@ -28,7 +29,10 @@ class Part extends Component {
   render() {
     return (
       <li className="list-group-item clearfix part">
-        <h5 className="list-group-item-heading"><i className="fa fa-cube" title="This is a part."></i> {this.props.data.name}</h5>
+        <h5 className="list-group-item-heading">
+          <i className="fa fa-cube" title="This is a part."></i> {this.props.data.name}
+          {this.props.selectable ? <button className="btn btn-success pull-xs-right"><i className="fa fa-crosshairs"></i></button> : null }
+        </h5>
         <p className="list-group-item-text">{this.props.data.description}</p>
         <span className="fields-header"><strong>Fields</strong></span>
         <ul className="fields">

@@ -28272,6 +28272,11 @@
 	      this.props.dispatch((0, _platform.addPartGroup)(this.props.platform._id, partGroup));
 	    }
 	  }, {
+	    key: 'handleSelectPartForGroup',
+	    value: function handleSelectPartForGroup(partGroupdId) {
+	      // this will enable part selector mode
+	    }
+	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit() {
 	      this.refs.form.submit();
@@ -28285,7 +28290,8 @@
 	        partGroups: this.props.platform.partGroups,
 	        onRemovePart: this.handleRemovePart,
 	        onEditPart: this.handleEditPart,
-	        onAddPartGroup: this.handleAddPartGroup
+	        onAddPartGroup: this.handleAddPartGroup,
+	        onSelectPartForGroup: this.handleSelectPartForGroup
 	      };
 
 	      return _react2.default.createElement(
@@ -28380,8 +28386,10 @@
 	    _this.createPartLink = '/platform/' + _this.props.platformId + '/part';
 	    _this.close = _this.close.bind(_this);
 	    _this.open = _this.open.bind(_this);
+	    _this.handleToggleSelectPart = _this.handleToggleSelectPart.bind(_this);
 	    _this.state = {
-	      showModal: false
+	      showModal: false,
+	      showSelectPart: false
 	    };
 	    return _this;
 	  }
@@ -28395,6 +28403,12 @@
 	    key: 'open',
 	    value: function open() {
 	      this.setState({ showModal: true });
+	    }
+	  }, {
+	    key: 'handleToggleSelectPart',
+	    value: function handleToggleSelectPart() {
+	      // toggle showing of select part
+	      this.setState({ showSelectPart: !this.state.showSelectPart });
 	    }
 	  }, {
 	    key: 'render',
@@ -28441,7 +28455,7 @@
 	            { className: 'part-groups list-group' },
 	            ' ',
 	            this.props.partGroups.map(function (result) {
-	              return _react2.default.createElement(_PartGroup2.default, { key: result._id, partGroup: result, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
+	              return _react2.default.createElement(_PartGroup2.default, { key: result._id, partGroup: result, onToggleSelectPart: _this2.handleToggleSelectPart, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
 	            }),
 	            ' '
 	          ) : null,
@@ -28450,7 +28464,7 @@
 	            { className: 'parts list-group' },
 	            ' ',
 	            this.props.parts.map(function (result) {
-	              return _react2.default.createElement(_Part2.default, { key: result._id, data: result, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
+	              return _react2.default.createElement(_Part2.default, { key: result._id, data: result, selectable: _this2.state.showSelectPart, onRemove: _this2.props.onRemovePart, onEdit: _this2.props.onEditPart });
 	            }),
 	            ' '
 	          ) : null
@@ -28468,7 +28482,8 @@
 	  onRemovePart: _react.PropTypes.func.isRequired,
 	  onEditPart: _react.PropTypes.func.isRequired,
 	  platformId: _react.PropTypes.string.isRequired,
-	  onAddPartGroup: _react.PropTypes.func.isRequired
+	  onAddPartGroup: _react.PropTypes.func.isRequired,
+	  onSelectPartForGroup: _react.PropTypes.func.isRequired
 	};
 	Parts.defaultProps = {
 	  parts: []
@@ -28541,9 +28556,14 @@
 	        _react2.default.createElement(
 	          'h5',
 	          { className: 'list-group-item-heading' },
-	          _react2.default.createElement('i', { className: 'fa fa-cube' }),
+	          _react2.default.createElement('i', { className: 'fa fa-cube', title: 'This is a part.' }),
 	          ' ',
-	          this.props.data.name
+	          this.props.data.name,
+	          this.props.selectable ? _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-success pull-xs-right' },
+	            _react2.default.createElement('i', { className: 'fa fa-crosshairs' })
+	          ) : null
 	        ),
 	        _react2.default.createElement(
 	          'p',
@@ -28590,7 +28610,8 @@
 	Part.propTypes = {
 	  data: _react.PropTypes.object.isRequired,
 	  onRemove: _react.PropTypes.func.isRequired,
-	  onEdit: _react.PropTypes.func.isRequired
+	  onEdit: _react.PropTypes.func.isRequired,
+	  selectable: _react.PropTypes.bool
 	};
 	exports.default = Part;
 
@@ -28643,7 +28664,7 @@
 /* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28654,14 +28675,6 @@
 	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _Button = __webpack_require__(262);
-
-	var _Button2 = _interopRequireDefault(_Button);
-
-	var _Field = __webpack_require__(266);
-
-	var _Field2 = _interopRequireDefault(_Field);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28681,60 +28694,61 @@
 
 	    _this.handleRemove = _this.handleRemove.bind(_this);
 	    _this.handleEdit = _this.handleEdit.bind(_this);
+	    _this.handleToggleSelectPart = _this.handleToggleSelectPart.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(PartGroup, [{
-	    key: 'handleRemove',
+	    key: "handleRemove",
 	    value: function handleRemove(event) {
 	      event.stopPropagation();
 	      this.props.onRemove(this.props.partGroup._id);
 	    }
 	  }, {
-	    key: 'handleEdit',
+	    key: "handleEdit",
 	    value: function handleEdit(event) {
 	      event.stopPropagation();
 	      this.props.onEdit(this.props.partGroup._id);
 	    }
 	  }, {
-	    key: 'render',
+	    key: "handleToggleSelectPart",
+	    value: function handleToggleSelectPart() {
+	      this.props.onToggleSelectPart(this.props.partGroup._id);
+	    }
+	  }, {
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'li',
-	        { className: 'list-group-item clearfix partGroup' },
+	        "li",
+	        { className: "list-group-item clearfix partGroup" },
 	        _react2.default.createElement(
-	          'h5',
-	          { className: 'list-group-item-heading' },
-	          _react2.default.createElement('i', { className: 'fa fa-cubes' }),
-	          ' ',
+	          "h5",
+	          { className: "list-group-item-heading" },
+	          _react2.default.createElement("i", { className: "fa fa-cubes", title: "This is a part group." }),
+	          " ",
 	          this.props.partGroup.name
 	        ),
 	        _react2.default.createElement(
-	          'p',
-	          { className: 'list-group-item-text' },
+	          "p",
+	          { className: "list-group-item-text" },
 	          this.props.partGroup.description
 	        ),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'parts-header' },
+	          "span",
+	          { className: "parts-header" },
 	          _react2.default.createElement(
-	            'strong',
+	            "strong",
 	            null,
-	            'Parts'
+	            "Parts"
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'btn-group pull-lg-right', role: 'group', 'aria-label': 'Basic example' },
+	          "div",
+	          { className: "btn-group pull-lg-right", role: "group", "aria-label": "" },
 	          _react2.default.createElement(
-	            _Button2.default,
-	            { buttonClass: 'btn-secondary', onClick: this.handleEdit },
-	            'Edit'
-	          ),
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { buttonClass: 'btn-secondary', onClick: this.handleRemove },
-	            'Remove'
+	            "button",
+	            { className: "btn btn-secondary", onClick: this.handleToggleSelectPart },
+	            "Add Part"
 	          )
 	        )
 	      );
@@ -28747,7 +28761,8 @@
 	PartGroup.propTypes = {
 	  partGroup: _react.PropTypes.object.isRequired,
 	  onRemove: _react.PropTypes.func.isRequired,
-	  onEdit: _react.PropTypes.func.isRequired
+	  onEdit: _react.PropTypes.func.isRequired,
+	  onToggleSelectPart: _react.PropTypes.func.isRequired
 	};
 	exports.default = PartGroup;
 
