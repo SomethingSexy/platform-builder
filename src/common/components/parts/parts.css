@@ -6,25 +6,20 @@
 }
 
 .part {
-  -moz-box-shadow: 2px 2px 2px #ebebeb;
-  -webkit-box-shadow: 2px 2px 2px #ebebeb;
   box-shadow: 2px 2px 2px #ebebeb;
   background-color: #f7f7f7;
   padding: 30px 30px;
   margin: 25px 0px;
 }
 
-.mint-card > header {
-  position: relative;
+.partGroup {
+  box-shadow: 2px 2px 2px #ebebeb;
   background-color: #e4e4e4;
-  opacity: 0;
-  max-height: 0;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  padding: 30px 30px;
+  margin: 25px 0px;
 }
 
+.partGroup. > .parts-header,
 .part > .fields-header {
   margin-top: 5px;
 }

@@ -1,5 +1,6 @@
 // Not sure how to handle CSS yet but I can't included via component files because it fails to load on the server-side
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 import '../../common/components/parts/parts.css';
 import React from 'react';
 import { Router, browserHistory } from 'react-router';

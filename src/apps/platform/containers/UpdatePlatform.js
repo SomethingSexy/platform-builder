@@ -59,10 +59,19 @@ class UpdatePlatform extends Component {
   }
 
   render() {
+    const partsProps = {
+      platformId: this.props.platform._id,
+      parts: this.props.platform.parts,
+      partGroups: this.props.platform.partGroups,
+      onRemovePart: this.handleRemovePart,
+      onEditPart: this.handleEditPart,
+      onAddPartGroup: this.handleAddPartGroup
+    };
+
     return (
       <div>
         <PlatformForm platform={this.props.platform} onSubmit={this.handleSave} ref="form" />
-        <Parts platformId={this.props.platform._id} parts={this.props.platform.parts} onRemovePart={this.handleRemovePart} onEditPart={this.handleEditPart} onAddPartGroup={this.handleAddPartGroup} />
+        <Parts {...partsProps} />
         <div className="btn-group">
           <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
           <button className="btn btn-secondary" onClick={this.onActivate}>Activate</button>
