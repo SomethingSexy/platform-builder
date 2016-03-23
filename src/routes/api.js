@@ -155,6 +155,25 @@ export default (app) => {
     }
   });
 
+  router.post('/api/platform/:id/group', async (ctx, next) => {
+    try {
+      await next();
+      const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}/group`, {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ctx.request.body)
+      });
+      ctx.body = await response.json();
+      ctx.status = 200;
+    } catch (err) {
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
+    }
+  });
+
   router.del('/api/platform/:id', async (ctx, next) => {
     try {
       await next();

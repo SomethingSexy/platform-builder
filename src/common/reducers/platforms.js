@@ -2,10 +2,21 @@ import _find from 'lodash.find';
 import _findindex from 'lodash.findindex';
 import update from 'react/lib/update';
 import {
-  CREATING_PLATFORM, CREATED_PLATFORM, SAVING_PLATFORM, SAVED_PLATFORM, FETCHED_PLATFORM, CREATED_PART, DELETED_PART, FETCHED_PLATFORMS, DELETED_PLATFORM, SAVED_PART
+  CREATING_PLATFORM,
+  CREATED_PLATFORM,
+  SAVING_PLATFORM,
+  SAVED_PLATFORM,
+  FETCHED_PLATFORM,
+  CREATED_PART,
+  DELETED_PART,
+  FETCHED_PLATFORMS,
+  DELETED_PLATFORM,
+  SAVED_PART,
+  CREATED_PART_GROUP
 } from '../actions/platform.js';
 
-function platforms(state = {}, action) {
+// helper function to hanle single platform updates
+function platform(state = {}, action) {
   switch (action.type) {
     case CREATED_PLATFORM:
       return Object.assign({}, state, {
@@ -58,11 +69,10 @@ function platforms(state = {}, action) {
       }
 
       return state;
-
-    case DELETED_PLATFORM: {
-      const deletedState = Object.assign({}, state);
-      delete deletedState[action.platform._id];
-      return deletedState;
+    case CREATED_PART_GROUP: {
+      return update(state, {
+        partGroups: { $push: [action.group] }
+      });
     }
     default:
       return state;
@@ -75,42 +85,50 @@ export function platformsById(state = { }, action) {
       return state;
     case CREATED_PLATFORM:
       return Object.assign({}, state, {
-        [action.platform._id]: platforms(state[action.platform._id], action)
+        [action.platform._id]: platform(state[action.platform._id], action)
       });
     case SAVING_PLATFORM:
       return state;
     case SAVED_PLATFORM:
       return Object.assign({}, state, {
-        [action.platform._id]: platforms(state[action.platform._id], action)
+        [action.platform._id]: platform(state[action.platform._id], action)
       });
     case FETCHED_PLATFORM:
       return Object.assign({}, state, {
-        [action.platform._id]: platforms(state[action.platform._id], action)
+        [action.platform._id]: platform(state[action.platform._id], action)
       });
     case FETCHED_PLATFORMS: {
-      const platorms = {};
-      action.platforms.forEach(platform => {
-        platorms[platform._id] = platform;
+      const platforms = {};
+      action.platforms.forEach(plat => {
+        platforms[plat._id] = plat;
       });
-      return Object.assign({}, state, platorms);
+      return Object.assign({}, state, platforms);
     }
     case CREATED_PART: {
       const platformId = action.part._createdPlatformId;
       return Object.assign({}, state, {
-        [platformId]: platforms(state[platformId], action)
+        [platformId]: platform(state[platformId], action)
       });
     }
     case SAVED_PART:
       return Object.assign({}, state, {
-        [action.part._createdPlatformId]: platforms(state[action.part._createdPlatformId], action)
+        [action.part._createdPlatformId]: platform(state[action.part._createdPlatformId], action)
       });
     case DELETED_PART: {
       return Object.assign({}, state, {
-        [action.platformId]: platforms(state[action.platformId], action)
+        [action.platformId]: platform(state[action.platformId], action)
       });
     }
-    case DELETED_PLATFORM:
-      return platforms(state, action);
+    case CREATED_PART_GROUP: {
+      return Object.assign({}, state, {
+        [action.platformId]: platform(state[action.platformId], action)
+      });
+    }
+    case DELETED_PLATFORM: {
+      const deletedState = Object.assign({}, state);
+      delete deletedState[action.platform._id];
+      return deletedState;
+    }
     default:
       return state;
   }

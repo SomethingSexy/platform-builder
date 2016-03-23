@@ -24,7 +24,8 @@ class PartGroupForm extends Component {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired, // callback for dispatching
+    handleSubmit: PropTypes.func.isRequired, // this comes from redux form
     submitting: PropTypes.bool
   }
 
@@ -39,7 +40,7 @@ class PartGroupForm extends Component {
         <h5>Create Part Group</h5>
         <p>A part group is a way to organize parts into logical groupings.  Groupings can contain parts or other groupings.  Products can also be created from groupings.</p>
         <hr />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(this.props.onSave)}>
           <fieldset className="form-group">
             <label htmlFor="">Name</label>
             <input type="text" className ="form-control" {...name} />

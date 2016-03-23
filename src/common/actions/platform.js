@@ -14,6 +14,8 @@ export const DELETING_PART = 'DELETING_PART';
 export const DELETED_PART = 'DELETED_PART';
 export const DELETING_PLATFORM = 'DELETING_PLATFORM';
 export const DELETED_PLATFORM = 'DELETED_PLATFORM';
+export const CREATING_PART_GROUP = 'CREATING_PART_GROUP';
+export const CREATED_PART_GROUP = 'CREATED_PART_GROUP';
 
 function creatingPlatform(platform) {
   return {
@@ -30,12 +32,6 @@ function createdPlatform(platform) {
     meta: {
       transition: (prevState, nextState, action) => ({
         path: `/platform/${action.platform._id}/build`
-        // query: {
-        //   some: 'queryParam'
-        // },
-        // state: {
-        //   some: 'state'
-        // }
       })
     }
   };
@@ -306,6 +302,17 @@ export function activatePlatform(platformId) {
   return (dispatch) => dispatch(putPlatform({ _id: platformId, active: true }));
 }
 
-export function addPartGroup(platformId, partGroup) {
-  
+export function addPartGroup(platformId, group) {
+  return dispatch => {
+    dispatch({ type: CREATING_PART_GROUP, platformId, group });
+    return fetch(`/api/platform/${platformId}/group`, {
+      method: 'post',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(group)
+    })
+      .then(response => response.json())
+      .then(json => dispatch({ type: CREATED_PART_GROUP, platformId, group: json }));
+  };
 }

@@ -26992,7 +26992,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.DELETED_PLATFORM = exports.DELETING_PLATFORM = exports.DELETED_PART = exports.DELETING_PART = exports.SAVING_PART = exports.SAVED_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORMS = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
+	exports.CREATED_PART_GROUP = exports.CREATING_PART_GROUP = exports.DELETED_PLATFORM = exports.DELETING_PLATFORM = exports.DELETED_PART = exports.DELETING_PART = exports.SAVING_PART = exports.SAVED_PART = exports.CREATING_PART = exports.CREATED_PART = exports.FETCHED_PLATFORMS = exports.FETCHED_PLATFORM = exports.SAVING_PLATFORM = exports.SAVED_PLATFORM = exports.CREATING_PLATFORM = exports.CREATED_PLATFORM = undefined;
 	exports.createPlatform = createPlatform;
 	exports.savePlatform = savePlatform;
 	exports.createPart = createPart;
@@ -27026,6 +27026,8 @@
 	var DELETED_PART = exports.DELETED_PART = 'DELETED_PART';
 	var DELETING_PLATFORM = exports.DELETING_PLATFORM = 'DELETING_PLATFORM';
 	var DELETED_PLATFORM = exports.DELETED_PLATFORM = 'DELETED_PLATFORM';
+	var CREATING_PART_GROUP = exports.CREATING_PART_GROUP = 'CREATING_PART_GROUP';
+	var CREATED_PART_GROUP = exports.CREATED_PART_GROUP = 'CREATED_PART_GROUP';
 
 	function creatingPlatform(platform) {
 	  return {
@@ -27043,12 +27045,6 @@
 	      transition: function transition(prevState, nextState, action) {
 	        return {
 	          path: '/platform/' + action.platform._id + '/build'
-	          // query: {
-	          //   some: 'queryParam'
-	          // },
-	          // state: {
-	          //   some: 'state'
-	          // }
 	        };
 	      }
 	    }
@@ -27353,7 +27349,22 @@
 	  };
 	}
 
-	function addPartGroup(platformId, partGroup) {}
+	function addPartGroup(platformId, group) {
+	  return function (dispatch) {
+	    dispatch({ type: CREATING_PART_GROUP, platformId: platformId, group: group });
+	    return (0, _isomorphicFetch2.default)('/api/platform/' + platformId + '/group', {
+	      method: 'post',
+	      headers: new Headers({
+	        'Content-Type': 'application/json'
+	      }),
+	      body: JSON.stringify(group)
+	    }).then(function (response) {
+	      return response.json();
+	    }).then(function (json) {
+	      return dispatch({ type: CREATED_PART_GROUP, platformId: platformId, group: json });
+	    });
+	  };
+	}
 
 /***/ },
 /* 248 */
@@ -28334,7 +28345,7 @@
 	              )
 	            )
 	          ),
-	          this.state.showModal ? _react2.default.createElement(_PartGroupForm2.default, { onCancel: this.close, onSave: this.onAddPartGroup }) : null,
+	          this.state.showModal ? _react2.default.createElement(_PartGroupForm2.default, { onCancel: this.close, onSave: this.props.onAddPartGroup }) : null,
 	          this.props.parts.length === 0 ? _react2.default.createElement(
 	            'p',
 	            null,
@@ -28621,7 +28632,7 @@
 	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(
 	          'form',
-	          { onSubmit: handleSubmit },
+	          { onSubmit: handleSubmit(this.props.onSave) },
 	          _react2.default.createElement(
 	            'fieldset',
 	            { className: 'form-group' },
@@ -28677,7 +28688,8 @@
 	PartGroupForm.propTypes = {
 	  onCancel: _react.PropTypes.func.isRequired,
 	  fields: _react.PropTypes.object.isRequired,
-	  handleSubmit: _react.PropTypes.func.isRequired,
+	  onSave: _react.PropTypes.func.isRequired, // callback for dispatching
+	  handleSubmit: _react.PropTypes.func.isRequired, // this comes from redux form
 	  submitting: _react.PropTypes.bool
 	};
 
@@ -35735,7 +35747,8 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	function platforms() {
+	// helper function to hanle single platform updates
+	function platform() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
@@ -35788,12 +35801,11 @@
 	      }
 
 	      return state;
-
-	    case _platform.DELETED_PLATFORM:
+	    case _platform.CREATED_PART_GROUP:
 	      {
-	        var deletedState = Object.assign({}, state);
-	        delete deletedState[action.platform._id];
-	        return deletedState;
+	        return (0, _update2.default)(state, {
+	          partGroups: { $push: [action.part] }
+	        });
 	      }
 	    default:
 	      return state;
@@ -35808,22 +35820,22 @@
 	    case _platform.CREATING_PLATFORM:
 	      return state;
 	    case _platform.CREATED_PLATFORM:
-	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
+	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platform(state[action.platform._id], action)));
 	    case _platform.SAVING_PLATFORM:
 	      return state;
 	    case _platform.SAVED_PLATFORM:
-	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
+	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platform(state[action.platform._id], action)));
 	    case _platform.FETCHED_PLATFORM:
-	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platforms(state[action.platform._id], action)));
+	      return Object.assign({}, state, _defineProperty({}, action.platform._id, platform(state[action.platform._id], action)));
 	    case _platform.FETCHED_PLATFORMS:
 	      {
 	        var _ret = function () {
-	          var platorms = {};
-	          action.platforms.forEach(function (platform) {
-	            platorms[platform._id] = platform;
+	          var platforms = {};
+	          action.platforms.forEach(function (plat) {
+	            platforms[plat._id] = plat;
 	          });
 	          return {
-	            v: Object.assign({}, state, platorms)
+	            v: Object.assign({}, state, platforms)
 	          };
 	        }();
 
@@ -35832,16 +35844,24 @@
 	    case _platform.CREATED_PART:
 	      {
 	        var platformId = action.part._createdPlatformId;
-	        return Object.assign({}, state, _defineProperty({}, platformId, platforms(state[platformId], action)));
+	        return Object.assign({}, state, _defineProperty({}, platformId, platform(state[platformId], action)));
 	      }
 	    case _platform.SAVED_PART:
-	      return Object.assign({}, state, _defineProperty({}, action.part._createdPlatformId, platforms(state[action.part._createdPlatformId], action)));
+	      return Object.assign({}, state, _defineProperty({}, action.part._createdPlatformId, platform(state[action.part._createdPlatformId], action)));
 	    case _platform.DELETED_PART:
 	      {
-	        return Object.assign({}, state, _defineProperty({}, action.platformId, platforms(state[action.platformId], action)));
+	        return Object.assign({}, state, _defineProperty({}, action.platformId, platform(state[action.platformId], action)));
+	      }
+	    case _platform.CREATED_PART_GROUP:
+	      {
+	        return Object.assign({}, state, _defineProperty({}, action.platformId, platform(state[action.platformId], action)));
 	      }
 	    case _platform.DELETED_PLATFORM:
-	      return platforms(state, action);
+	      {
+	        var deletedState = Object.assign({}, state);
+	        delete deletedState[action.platform._id];
+	        return deletedState;
+	      }
 	    default:
 	      return state;
 	  }
