@@ -21,8 +21,8 @@ class UpdatePlatform extends Component {
 
   constructor(props) {
     super(props);
-    this.handleActivateBind = this.handleActivate.bind(this);
-    this.handleDeactivateBind = this.handleDeactivate.bind(this);
+    this.handleActivate = this.handleActivate.bind(this);
+    this.handleDeactivate = this.handleDeactivate.bind(this);
     this.handleAddPartGroup = this.handleAddPartGroup.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleEditPart = this.handleEditPart.bind(this);
@@ -79,7 +79,7 @@ class UpdatePlatform extends Component {
         <Parts {...partsProps} />
         <div className="btn-group">
           <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
-          <button className="btn btn-secondary" onClick={this.onActivate}>Activate</button>
+          <button className="btn btn-secondary" onClick={this.handleActivate}>Activate</button>
         </div>
       </div>
     );

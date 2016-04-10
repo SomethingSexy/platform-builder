@@ -32,6 +32,12 @@ class Parts extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.partGroups.length > this.props.partGroups.length) {
+      this.setState({ showModal: false });
+    }
+  }
+
   close() {
     this.setState({ showModal: false });
   }
@@ -50,15 +56,46 @@ class Parts extends Component {
   }
 
   render() {
+    let partGroupForm;
+    if (this.state.showModal) {
+      partGroupForm = <PartGroupForm onCancel={this.close} onSave={this.props.onAddPartGroup} />;
+    }
+
+    let partGroups = this.props.partGroups.map((result) =>
+      <PartGroup
+        key={result._id}
+        partGroup={result}
+        onToggleSelectPart={this.handleToggleSelectPart}
+        onRemove={this.props.onRemovePart}
+        onEdit={this.props.onEditPart}
+      />
+    );
+
+    let parts = this.props.parts.map((result) =>
+      <Part
+        key={result._id}
+        data={result}
+        selectable={this.state.showSelectPart}
+        onRemove={this.props.onRemovePart}
+        onEdit={this.props.onEditPart}
+        onSelectPart={this.handleSelectPart}
+      />
+    );
+
     return (
       <div className="row parts-container">
         <div className="col-md-12">
           <h4>Parts</h4>
-          <div className="clearfix"><div className="btn-group pull-lg-right"><Link className="btn btn-secondary" to={this.createPartLink}>Create New Part</Link><button className="btn btn-secondary" onClick={this.open}>Create Part Group</button></div></div>
-          {this.state.showModal ? <PartGroupForm onCancel={this.close} onSave={this.props.onAddPartGroup} /> : null}
+          <div className="clearfix">
+            <div className="btn-group pull-lg-right">
+              <Link className="btn btn-secondary" to={this.createPartLink}>Create New Part</Link>
+              <button className="btn btn-secondary" onClick={this.open}>Create Part Group</button>
+            </div>
+          </div>
+          {partGroupForm}
           {this.props.parts.length === 0 && this.props.partGroups.length === 0 ? <p>No parts have been added.</p> : null}
-          {this.props.partGroups.length > 0 ? <ul className="part-groups list-group"> {this.props.partGroups.map((result) => <PartGroup key={result._id} partGroup={result} onToggleSelectPart={this.handleToggleSelectPart} onRemove={this.props.onRemovePart} onEdit={this.props.onEditPart} />)} </ul> : null}
-          {this.props.parts.length > 0 ? <ul className="parts list-group"> {this.props.parts.map((result) => <Part key={result._id} data={result} selectable={this.state.showSelectPart} onRemove={this.props.onRemovePart} onEdit={this.props.onEditPart} onSelectPart={this.props.handleSelectPart} />)} </ul> : null}
+          <ul className="part-groups list-group">{partGroups}</ul>
+          <ul className="parts list-group">{parts}</ul>
         </div>
       </div>
     );

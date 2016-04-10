@@ -44,8 +44,19 @@ class PlatformForm extends Component {
       fields: { name, description, fields }
       } = this.props;
 
+    let category;
+    if (this.props.platform._parentCategory) {
+      category = (
+        <div className="form-group">
+          <label className="form-control-label">Belongs To</label>
+          <p className="form-control-static">{this.props.platform._parentCategory.name}</p>
+        </div>
+      );
+    }
+
     return (
       <form>
+        {category}
         <fieldset className="form-group">
           <label htmlFor="">Name</label>
           <input type="text" className ="form-control" {...name} />

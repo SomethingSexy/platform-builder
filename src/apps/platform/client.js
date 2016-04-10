@@ -27,4 +27,13 @@ function testRender(props) {
   return <LoadingContainer {...props} />;
 }
 
-ReactDOM.render(<Provider store={store}><Router children={routes} store={store} history={browserHistory} createElement={createElement} render={testRender} /></Provider>, document.getElementById('app'));
+ReactDOM.render(
+	<Provider store={store}>
+		<Router
+      children={routes}
+      store={store}
+      history={browserHistory}
+      createElement={createElement}
+      render={testRender}
+    />
+  </Provider>, document.getElementById('app'));
