@@ -8,7 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node -r dotenv/config app.js",
-    "dev": "gulp build && gulp watch",
+    "start:dev": "npm run compile && npm run start",
     "compile": "webpack"
   },
   "license": "MIT",

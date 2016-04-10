@@ -7,6 +7,7 @@ class Part extends Component {
     data: PropTypes.object.isRequired,
     onRemove: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
+    onSelectPart: PropTypes.func.isRequired,
     selectable: PropTypes.bool
   }
 
@@ -14,6 +15,7 @@ class Part extends Component {
     super(props);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleSelectPart = this.handleSelectPart.bind(this);
   }
 
   handleRemove(event) {
@@ -26,12 +28,16 @@ class Part extends Component {
     this.props.onEdit(this.props.data._id);
   }
 
+  handleSelectPart() {
+    this.props.onSelectPart(this.props.data._id);
+  }
+
   render() {
     return (
       <li className="list-group-item clearfix part">
         <h5 className="list-group-item-heading">
           <i className="fa fa-cube" title="This is a part."></i> {this.props.data.name}
-          {this.props.selectable ? <button className="btn btn-success pull-xs-right"><i className="fa fa-crosshairs"></i></button> : null }
+          {this.props.selectable ? <button className="btn btn-success pull-xs-right" onClick={this.handleSelectPart}><i className="fa fa-crosshairs"></i></button> : null }
         </h5>
         <p className="list-group-item-text">{this.props.data.description}</p>
         <span className="fields-header"><strong>Fields</strong></span>

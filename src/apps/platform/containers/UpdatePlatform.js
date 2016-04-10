@@ -54,8 +54,8 @@ class UpdatePlatform extends Component {
     this.props.dispatch(addPartGroup(this.props.platform._id, partGroup));
   }
 
-  handleSelectPartForGroup(partGroupdId) {
-    // this will enable part selector mode
+  handleSelectPartForGroup(partGroupdId, partId) {
+    
   }
 
   handleSubmit() {

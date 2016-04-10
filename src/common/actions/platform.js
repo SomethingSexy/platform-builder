@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import _find from 'lodash.find';
 
 export const CREATED_PLATFORM = 'CREATED_PLATFORM';
 export const CREATING_PLATFORM = 'CREATING_PLATFORM';
@@ -16,6 +17,8 @@ export const DELETING_PLATFORM = 'DELETING_PLATFORM';
 export const DELETED_PLATFORM = 'DELETED_PLATFORM';
 export const CREATING_PART_GROUP = 'CREATING_PART_GROUP';
 export const CREATED_PART_GROUP = 'CREATED_PART_GROUP';
+export const ADDING_PART_TO_GROUP = 'ADDING_PART_TO_GROUP';
+export const ADDED_PART_TO_GROUP = 'ADDED_PART_TO_GROUP';
 
 function creatingPlatform(platform) {
   return {
@@ -314,5 +317,23 @@ export function addPartGroup(platformId, group) {
     })
       .then(response => response.json())
       .then(json => dispatch({ type: CREATED_PART_GROUP, platformId, group: json }));
+  };
+}
+
+export function addPartToGroup(platformId, groupId, partId) {
+  return (dispatch, getState) => {
+    dispatch({ type: ADDING_PART_TO_GROUP, platformId, groupId, partId });
+    const partGroup = _find(getState().platformsById[platformId].partGroups, { _id: groupId });
+    // Does getState return a clone or the actual state object? Probably shouldn't be doing this then
+    partGroup.parts.push(partId);
+    return fetch(`/api/platform/${platformId}/group/${groupId}`, {
+      method: 'put',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(partGroup)
+    })
+      .then(response => response.json())
+      .then(json => dispatch({ type: ADDED_PART_TO_GROUP, platformId, group: json }));
   };
 }
