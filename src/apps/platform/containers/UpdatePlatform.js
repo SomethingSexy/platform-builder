@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { fetchPlatform, removePartAndSavePlatform, savePlatform, activatePlatform, addPartGroup } from '../../../common/actions/platform.js';
+import {
+  fetchPlatform,
+  removePartAndSavePlatform,
+  savePlatform,
+  activatePlatform,
+  addPartGroup,
+  addPartToGroup } from '../../../common/actions/platform.js';
 import { getCategories } from '../../../common/actions/categories.js';
 import Parts from '../../../common/components/parts/Parts.js';
 import PlatformForm from '../components/PlatformForm.js';
@@ -11,7 +17,6 @@ import PlatformForm from '../components/PlatformForm.js';
 class UpdatePlatform extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired,
     platform: PropTypes.object.isRequired
   }
 
@@ -28,6 +33,7 @@ class UpdatePlatform extends Component {
     this.handleEditPart = this.handleEditPart.bind(this);
     this.handleRemovePart = this.handleRemovePart.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectPartForGroup = this.handleSelectPartForGroup.bind(this);
   }
 
   handleRemovePart(partId) {
@@ -55,7 +61,7 @@ class UpdatePlatform extends Component {
   }
 
   handleSelectPartForGroup(partGroupdId, partId) {
-    
+    this.props.dispatch(addPartToGroup(this.props.platform._id, partGroupdId, partId));
   }
 
   handleSubmit() {
@@ -88,7 +94,6 @@ class UpdatePlatform extends Component {
 
 function select(state, ownProps) {
   return {
-    categories: state.categories.categories,
     platform: state.platforms.platformsById[ownProps.params.platformId]
   };
 }

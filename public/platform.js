@@ -27516,8 +27516,11 @@
 
 	function addPartToGroup(platformId, groupId, partId) {
 	  return function (dispatch, getState) {
+	    // Should we add the part group to the store first?
+	    // then sync?
+	    // or sync then add to the store for this case?
 	    dispatch({ type: ADDING_PART_TO_GROUP, platformId: platformId, groupId: groupId, partId: partId });
-	    var partGroup = (0, _lodash2.default)(getState().platformsById[platformId].partGroups, { _id: groupId });
+	    var partGroup = (0, _lodash2.default)(getState().platforms.platformsById[platformId].partGroups, { _id: groupId });
 	    // Does getState return a clone or the actual state object? Probably shouldn't be doing this then
 	    partGroup.parts.push(partId);
 	    return (0, _isomorphicFetch2.default)('/api/platform/' + platformId + '/group/' + groupId, {
@@ -31822,6 +31825,7 @@
 	    _this.handleEditPart = _this.handleEditPart.bind(_this);
 	    _this.handleRemovePart = _this.handleRemovePart.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.handleSelectPartForGroup = _this.handleSelectPartForGroup.bind(_this);
 	    return _this;
 	  }
 
@@ -31855,7 +31859,9 @@
 	    }
 	  }, {
 	    key: 'handleSelectPartForGroup',
-	    value: function handleSelectPartForGroup(partGroupdId, partId) {}
+	    value: function handleSelectPartForGroup(partGroupdId, partId) {
+	      this.props.dispatch((0, _platform.addPartToGroup)(this.props.platform._id, partGroupdId, partId));
+	    }
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit() {
@@ -31902,14 +31908,12 @@
 
 	UpdatePlatform.propTypes = {
 	  dispatch: _react.PropTypes.func.isRequired,
-	  categories: _react.PropTypes.array.isRequired,
 	  platform: _react.PropTypes.object.isRequired
 	};
 
 
 	function select(state, ownProps) {
 	  return {
-	    categories: state.categories.categories,
 	    platform: state.platforms.platformsById[ownProps.params.platformId]
 	  };
 	}
@@ -31954,6 +31958,18 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// Determine if part is in group
+	function inPartGroup(partId) {
+	  var partGroups = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+
+	  if (!partId) {
+	    return false;
+	  }
+	  return partGroups.find(function (partGroup) {
+	    return partGroup.parts.indexOf(partId) > -1;
+	  });
+	}
 
 	var Parts = function (_Component) {
 	  _inherits(Parts, _Component);
@@ -32001,7 +32017,7 @@
 	  }, {
 	    key: 'handleSelectPart',
 	    value: function handleSelectPart(partId) {
-	      this.onSelectPartForGroup(this.state.selectedPartGroup, partId);
+	      this.props.onSelectPartForGroup(this.state.selectedPartGroup, partId);
 	    }
 	  }, {
 	    key: 'render',
@@ -32017,21 +32033,26 @@
 	        return _react2.default.createElement(_PartGroup2.default, {
 	          key: result._id,
 	          partGroup: result,
+	          parts: _this2.props.parts,
 	          onToggleSelectPart: _this2.handleToggleSelectPart,
-	          onRemove: _this2.props.onRemovePart,
-	          onEdit: _this2.props.onEditPart
+	          onRemovePart: _this2.props.onRemovePart,
+	          onEditPart: _this2.props.onEditPart
 	        });
 	      });
 
 	      var parts = this.props.parts.map(function (result) {
-	        return _react2.default.createElement(_Part2.default, {
-	          key: result._id,
-	          data: result,
-	          selectable: _this2.state.showSelectPart,
-	          onRemove: _this2.props.onRemovePart,
-	          onEdit: _this2.props.onEditPart,
-	          onSelectPart: _this2.handleSelectPart
-	        });
+	        if (!inPartGroup(result._id, _this2.props.partGroups)) {
+	          return _react2.default.createElement(_Part2.default, {
+	            key: result._id,
+	            data: result,
+	            selectable: _this2.state.showSelectPart,
+	            onRemove: _this2.props.onRemovePart,
+	            onEdit: _this2.props.onEditPart,
+	            onSelectPart: _this2.handleSelectPart
+	          });
+	        }
+
+	        return null;
 	      });
 
 	      return _react2.default.createElement(
@@ -32282,7 +32303,7 @@
 /* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -32293,6 +32314,14 @@
 	var _react = __webpack_require__(15);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _lodash = __webpack_require__(260);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _Part = __webpack_require__(274);
+
+	var _Part2 = _interopRequireDefault(_Part);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32317,57 +32346,76 @@
 	  }
 
 	  _createClass(PartGroup, [{
-	    key: "handleRemove",
+	    key: 'handleRemove',
 	    value: function handleRemove(event) {
 	      event.stopPropagation();
 	      this.props.onRemove(this.props.partGroup._id);
 	    }
 	  }, {
-	    key: "handleEdit",
+	    key: 'handleEdit',
 	    value: function handleEdit(event) {
 	      event.stopPropagation();
 	      this.props.onEdit(this.props.partGroup._id);
 	    }
 	  }, {
-	    key: "handleToggleSelectPart",
+	    key: 'handleToggleSelectPart',
 	    value: function handleToggleSelectPart() {
 	      this.props.onToggleSelectPart(this.props.partGroup._id);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
+	      var parts = this.props.partGroup.parts.map(function (result) {
+	        var part = (0, _lodash2.default)(_this2.props.parts, { _id: result });
+	        return _react2.default.createElement(_Part2.default, {
+	          key: result._id,
+	          data: part
+	          // selectable={this.state.showSelectPart}
+	          , onRemove: _this2.props.onRemovePart,
+	          onEdit: _this2.props.onEditPart
+	          // onSelectPart={this.handleSelectPart}
+	        });
+	      });
+
 	      return _react2.default.createElement(
-	        "li",
-	        { className: "list-group-item clearfix partGroup" },
+	        'li',
+	        { className: 'list-group-item clearfix partGroup' },
 	        _react2.default.createElement(
-	          "h5",
-	          { className: "list-group-item-heading" },
-	          _react2.default.createElement("i", { className: "fa fa-cubes", title: "This is a part group." }),
-	          " ",
+	          'h5',
+	          { className: 'list-group-item-heading' },
+	          _react2.default.createElement('i', { className: 'fa fa-cubes', title: 'This is a part group.' }),
+	          ' ',
 	          this.props.partGroup.name
 	        ),
 	        _react2.default.createElement(
-	          "p",
-	          { className: "list-group-item-text" },
+	          'p',
+	          { className: 'list-group-item-text' },
 	          this.props.partGroup.description
 	        ),
 	        _react2.default.createElement(
-	          "span",
-	          { className: "parts-header" },
+	          'span',
+	          { className: 'parts-header' },
 	          _react2.default.createElement(
-	            "strong",
+	            'strong',
 	            null,
-	            "Parts"
+	            'Parts'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "btn-group pull-lg-right", role: "group", "aria-label": "" },
+	          'div',
+	          { className: 'btn-group pull-xs-right', role: 'group', 'aria-label': '' },
 	          _react2.default.createElement(
-	            "button",
-	            { className: "btn btn-secondary", onClick: this.handleToggleSelectPart },
-	            "Add Part"
+	            'button',
+	            { className: 'btn btn-secondary', onClick: this.handleToggleSelectPart },
+	            'Add Part'
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'parts list-group' },
+	          parts
 	        )
 	      );
 	    }
@@ -32378,9 +32426,12 @@
 
 	PartGroup.propTypes = {
 	  partGroup: _react.PropTypes.object.isRequired,
-	  onRemove: _react.PropTypes.func.isRequired,
-	  onEdit: _react.PropTypes.func.isRequired,
-	  onToggleSelectPart: _react.PropTypes.func.isRequired
+	  parts: _react.PropTypes.array.isRequired,
+	  // onRemove: PropTypes.func.isRequired,
+	  // onEdit: PropTypes.func.isRequired,
+	  onToggleSelectPart: _react.PropTypes.func.isRequired,
+	  onRemovePart: _react.PropTypes.func.isRequired,
+	  onEditPart: _react.PropTypes.func.isRequired
 	};
 	exports.default = PartGroup;
 

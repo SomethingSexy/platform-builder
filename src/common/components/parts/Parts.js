@@ -4,6 +4,14 @@ import PartGroup from './PartGroup.js';
 import { Link } from 'react-router';
 import PartGroupForm from './PartGroupForm.js';
 
+// Determine if part is in group
+function inPartGroup(partId, partGroups = []) {
+  if (!partId) {
+    return false;
+  }
+  return partGroups.find(partGroup => partGroup.parts.indexOf(partId) > -1);
+}
+
 class Parts extends Component {
   static propTypes = {
     parts: PropTypes.array.isRequired,
@@ -52,7 +60,7 @@ class Parts extends Component {
   }
 
   handleSelectPart(partId) {
-    this.onSelectPartForGroup(this.state.selectedPartGroup, partId);
+    this.props.onSelectPartForGroup(this.state.selectedPartGroup, partId);
   }
 
   render() {
@@ -65,22 +73,27 @@ class Parts extends Component {
       <PartGroup
         key={result._id}
         partGroup={result}
+        parts={this.props.parts}
         onToggleSelectPart={this.handleToggleSelectPart}
-        onRemove={this.props.onRemovePart}
-        onEdit={this.props.onEditPart}
+        onRemovePart={this.props.onRemovePart}
+        onEditPart={this.props.onEditPart}
       />
     );
 
-    let parts = this.props.parts.map((result) =>
-      <Part
-        key={result._id}
-        data={result}
-        selectable={this.state.showSelectPart}
-        onRemove={this.props.onRemovePart}
-        onEdit={this.props.onEditPart}
-        onSelectPart={this.handleSelectPart}
-      />
-    );
+    let parts = this.props.parts.map((result) => {
+      if (!inPartGroup(result._id, this.props.partGroups)) {
+        return (<Part
+          key={result._id}
+          data={result}
+          selectable={this.state.showSelectPart}
+          onRemove={this.props.onRemovePart}
+          onEdit={this.props.onEditPart}
+          onSelectPart={this.handleSelectPart}
+        />);
+      }
+
+      return null;
+    });
 
     return (
       <div className="row parts-container">

@@ -178,7 +178,7 @@ export default (app) => {
     try {
       await next();
       const response = await fetch(`${process.env.API_SRV_URL}/api/platforms/${ctx.params.id}/group/${ctx.params.groupId}`, {
-        method: 'post',
+        method: 'put',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'

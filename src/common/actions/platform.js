@@ -322,8 +322,11 @@ export function addPartGroup(platformId, group) {
 
 export function addPartToGroup(platformId, groupId, partId) {
   return (dispatch, getState) => {
+    // Should we add the part group to the store first?
+    // then sync?
+    // or sync then add to the store for this case?
     dispatch({ type: ADDING_PART_TO_GROUP, platformId, groupId, partId });
-    const partGroup = _find(getState().platformsById[platformId].partGroups, { _id: groupId });
+    const partGroup = _find(getState().platforms.platformsById[platformId].partGroups, { _id: groupId });
     // Does getState return a clone or the actual state object? Probably shouldn't be doing this then
     partGroup.parts.push(partId);
     return fetch(`/api/platform/${platformId}/group/${groupId}`, {
